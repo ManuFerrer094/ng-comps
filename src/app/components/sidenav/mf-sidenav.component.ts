@@ -26,6 +26,7 @@ export type MfSidenavPosition = 'start' | 'end';
         [mode]="mode()"
         [position]="position()"
         [opened]="opened()"
+        [style.width]="sidenavWidth()"
         (openedChange)="mfOpenedChange.emit($event)"
       >
         <ng-content select="[mfSidenavContent]" />

@@ -2,8 +2,10 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  effect,
   input,
   output,
+  signal,
 } from '@angular/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -41,7 +43,7 @@ export type MfDatepickerSize = 'sm' | 'md' | 'lg';
         [disabled]="disabled()"
         [min]="min()"
         [max]="max()"
-        [(ngModel)]="currentValue"
+        [ngModel]="currentValue()"
         (dateChange)="onDateChange($event)"
         (blur)="mfBlur.emit()"
       />
@@ -69,6 +71,8 @@ export class MfDatepickerComponent {
   readonly size = input<MfDatepickerSize>('md');
   /** Deshabilitado */
   readonly disabled = input(false);
+  /** Valor inicial del datepicker */
+  readonly value = input<Date | null>(null);
   /** Texto de ayuda debajo del campo */
   readonly hint = input<string | undefined>(undefined);
   /** Mensaje de error */
@@ -83,7 +87,13 @@ export class MfDatepickerComponent {
   readonly mfChange = output<Date | null>();
   readonly mfBlur = output<void>();
 
-  protected currentValue: Date | null = null;
+  protected readonly currentValue = signal<Date | null>(null);
+
+  constructor() {
+    effect(() => {
+      this.currentValue.set(this.value());
+    });
+  }
 
   readonly hostClasses = computed(() => {
     const classes = ['mf-datepicker', `mf-datepicker--${this.size()}`];
@@ -93,7 +103,7 @@ export class MfDatepickerComponent {
   });
 
   onDateChange(event: { value: Date | null }): void {
-    this.currentValue = event.value;
+    this.currentValue.set(event.value);
     this.mfChange.emit(event.value);
   }
 }

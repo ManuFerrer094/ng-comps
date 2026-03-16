@@ -2,8 +2,10 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  effect,
   input,
   output,
+  signal,
 } from '@angular/core';
 import { MatRadioModule } from '@angular/material/radio';
 import { FormsModule } from '@angular/forms';
@@ -31,7 +33,7 @@ export type MfRadioDirection = 'horizontal' | 'vertical';
     <mat-radio-group
       [class]="hostClasses()"
       [disabled]="disabled()"
-      [(ngModel)]="currentValue"
+      [ngModel]="currentValue()"
       (change)="onChange($event)"
       [attr.aria-label]="ariaLabel() || null"
     >
@@ -63,14 +65,20 @@ export class MfRadioButtonComponent {
 
   readonly mfChange = output<string>();
 
-  protected currentValue: string | undefined = undefined;
+  protected readonly currentValue = signal<string | undefined>(undefined);
+
+  constructor() {
+    effect(() => {
+      this.currentValue.set(this.value());
+    });
+  }
 
   readonly hostClasses = computed(() => {
     return `mf-radio mf-radio--${this.direction()}`;
   });
 
   onChange(event: { value: string }): void {
-    this.currentValue = event.value;
+    this.currentValue.set(event.value);
     this.mfChange.emit(event.value);
   }
 }
