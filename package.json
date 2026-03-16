@@ -1,12 +1,14 @@
 {
-  "name": "mi-app",
+  "name": "mf-components",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "storybook": "ng run mf-components:storybook",
+    "build-storybook": "ng run mf-components:build-storybook"
   },
   "private": true,
   "packageManager": "npm@10.8.2",
@@ -27,6 +29,15 @@
     "jsdom": "^28.0.0",
     "prettier": "^3.8.1",
     "typescript": "~5.9.2",
-    "vitest": "^4.0.8"
+    "vitest": "^4.0.8",
+    "storybook": "^10.2.19",
+    "@storybook/angular": "^10.2.19",
+    "@storybook/addon-a11y": "^10.2.19",
+    "@storybook/addon-docs": "^10.2.19",
+    "@angular-devkit/build-angular": "^21.2.0",
+    "@angular-devkit/architect": "^0.2102.0",
+    "@angular-devkit/core": "^21.2.0",
+    "@angular/platform-browser-dynamic": "^21.2.0",
+    "@compodoc/compodoc": "^1.2.1"
   }
 }
