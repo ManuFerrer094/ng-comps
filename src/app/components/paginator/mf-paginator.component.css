@@ -1,0 +1,32 @@
+:host {
+  display: block;
+}
+
+.mf-paginator.mat-mdc-paginator {
+  font-family: var(--mf-font-base) !important;
+  font-size: var(--mf-text-sm) !important;
+  background-color: transparent !important;
+}
+
+.mf-paginator .mat-mdc-paginator-container {
+  padding: var(--mf-space-2) 0 !important;
+}
+
+.mf-paginator .mat-mdc-paginator-range-label {
+  color: var(--mf-color-neutral-600) !important;
+  font-family: var(--mf-font-base) !important;
+}
+
+.mf-paginator .mat-mdc-paginator-navigation-previous,
+.mf-paginator .mat-mdc-paginator-navigation-next,
+.mf-paginator .mat-mdc-paginator-navigation-first,
+.mf-paginator .mat-mdc-paginator-navigation-last {
+  color: var(--mf-color-brand) !important;
+}
+
+.mf-paginator .mat-mdc-paginator-navigation-previous:disabled,
+.mf-paginator .mat-mdc-paginator-navigation-next:disabled,
+.mf-paginator .mat-mdc-paginator-navigation-first:disabled,
+.mf-paginator .mat-mdc-paginator-navigation-last:disabled {
+  color: var(--mf-color-neutral-300) !important;
+}

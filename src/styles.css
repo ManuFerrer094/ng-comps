@@ -65,3 +65,35 @@ body {
 .cdk-overlay-dark-backdrop {
   background: rgba(15, 23, 34, 0.5) !important;
 }
+
+/* ── Snackbar global overrides ─────────────────────────────────── */
+.mf-snackbar.mat-mdc-snack-bar-container .mdc-snackbar__surface {
+  border-radius: var(--mf-radius-md) !important;
+  font-family: var(--mf-font-base) !important;
+}
+
+.mf-snackbar--info.mat-mdc-snack-bar-container .mdc-snackbar__surface {
+  background-color: var(--mf-color-secondary-700) !important;
+  color: var(--mf-color-neutral-0) !important;
+}
+
+.mf-snackbar--success.mat-mdc-snack-bar-container .mdc-snackbar__surface {
+  background-color: var(--mf-color-primary-700) !important;
+  color: var(--mf-color-on-brand) !important;
+}
+
+.mf-snackbar--warning.mat-mdc-snack-bar-container .mdc-snackbar__surface {
+  background-color: var(--mf-color-accent-500) !important;
+  color: var(--mf-color-neutral-900) !important;
+}
+
+.mf-snackbar--error.mat-mdc-snack-bar-container .mdc-snackbar__surface {
+  background-color: var(--mf-color-error-500) !important;
+  color: var(--mf-color-neutral-0) !important;
+}
+
+.mf-snackbar .mat-mdc-snack-bar-action .mdc-button__label {
+  color: inherit !important;
+  font-weight: var(--mf-weight-bold) !important;
+  opacity: 0.9;
+}

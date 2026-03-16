@@ -1,0 +1,100 @@
+:host {
+  display: block;
+}
+
+.mf-alert {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--mf-space-3);
+  padding: var(--mf-space-3) var(--mf-space-4);
+  border-radius: var(--mf-radius-md);
+  font-family: var(--mf-font-base);
+  font-size: var(--mf-text-sm);
+  line-height: var(--mf-leading-normal);
+}
+
+/* ── Info ──────────────────────────────────────────────────────── */
+.mf-alert--info {
+  background-color: var(--mf-color-secondary-50);
+  border-left: 4px solid var(--mf-color-secondary-500);
+  color: var(--mf-color-secondary-900);
+}
+
+.mf-alert--info .mf-alert__icon {
+  color: var(--mf-color-secondary-500);
+}
+
+/* ── Success ──────────────────────────────────────────────────── */
+.mf-alert--success {
+  background-color: var(--mf-color-primary-50);
+  border-left: 4px solid var(--mf-color-primary-500);
+  color: var(--mf-color-primary-900);
+}
+
+.mf-alert--success .mf-alert__icon {
+  color: var(--mf-color-primary-500);
+}
+
+/* ── Warning ──────────────────────────────────────────────────── */
+.mf-alert--warning {
+  background-color: #fffbeb;
+  border-left: 4px solid var(--mf-color-accent-500);
+  color: var(--mf-color-accent-700);
+}
+
+.mf-alert--warning .mf-alert__icon {
+  color: var(--mf-color-accent-500);
+}
+
+/* ── Error ─────────────────────────────────────────────────────── */
+.mf-alert--error {
+  background-color: #fef2f2;
+  border-left: 4px solid var(--mf-color-error-500);
+  color: var(--mf-color-error-700);
+}
+
+.mf-alert--error .mf-alert__icon {
+  color: var(--mf-color-error-500);
+}
+
+/* ── Content ──────────────────────────────────────────────────── */
+.mf-alert__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--mf-space-1);
+}
+
+.mf-alert__title {
+  font-weight: var(--mf-weight-bold);
+}
+
+.mf-alert__icon {
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* ── Close button ─────────────────────────────────────────────── */
+.mf-alert__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: var(--mf-space-1);
+  border-radius: var(--mf-radius-sm);
+  color: inherit;
+  opacity: 0.6;
+  transition: opacity var(--mf-duration-fast) var(--mf-ease-standard);
+}
+
+.mf-alert__close:hover {
+  opacity: 1;
+}
+
+.mf-alert__close .mat-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+}

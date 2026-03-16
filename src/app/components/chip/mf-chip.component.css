@@ -1,0 +1,69 @@
+:host {
+  display: inline-block;
+}
+
+/* ── Base ──────────────────────────────────────────────────────── */
+.mf-chip.mat-mdc-chip {
+  font-family: var(--mf-font-base) !important;
+  font-size: var(--mf-text-sm) !important;
+  font-weight: var(--mf-weight-medium) !important;
+  border-radius: var(--mf-radius-full) !important;
+  transition:
+    background-color var(--mf-duration-base) var(--mf-ease-standard),
+    box-shadow var(--mf-duration-base) var(--mf-ease-standard);
+}
+
+/* ── Filled — Brand ───────────────────────────────────────────── */
+.mf-chip--filled.mf-chip--brand.mat-mdc-chip {
+  background-color: var(--mf-color-primary-100) !important;
+  color: var(--mf-color-primary-800) !important;
+}
+
+/* ── Filled — Accent ──────────────────────────────────────────── */
+.mf-chip--filled.mf-chip--accent.mat-mdc-chip {
+  background-color: var(--mf-color-accent-300) !important;
+  color: var(--mf-color-accent-700) !important;
+}
+
+/* ── Filled — Error ───────────────────────────────────────────── */
+.mf-chip--filled.mf-chip--error.mat-mdc-chip {
+  background-color: #fee2e2 !important;
+  color: var(--mf-color-error-700) !important;
+}
+
+/* ── Filled — Neutral ─────────────────────────────────────────── */
+.mf-chip--filled.mf-chip--neutral.mat-mdc-chip {
+  background-color: var(--mf-color-neutral-100) !important;
+  color: var(--mf-color-neutral-600) !important;
+}
+
+/* ── Outlined ─────────────────────────────────────────────────── */
+.mf-chip--outlined.mat-mdc-chip {
+  background-color: transparent !important;
+  border: 1px solid var(--mf-color-border) !important;
+}
+
+.mf-chip--outlined.mf-chip--brand.mat-mdc-chip {
+  color: var(--mf-color-primary-700) !important;
+  border-color: var(--mf-color-primary-200) !important;
+}
+
+.mf-chip--outlined.mf-chip--accent.mat-mdc-chip {
+  color: var(--mf-color-accent-700) !important;
+  border-color: var(--mf-color-accent-300) !important;
+}
+
+.mf-chip--outlined.mf-chip--error.mat-mdc-chip {
+  color: var(--mf-color-error-700) !important;
+  border-color: var(--mf-color-error-500) !important;
+}
+
+/* ── Selected ─────────────────────────────────────────────────── */
+.mf-chip--selected.mat-mdc-chip {
+  box-shadow: var(--mf-shadow-sm);
+}
+
+/* ── Disabled ─────────────────────────────────────────────────── */
+.mf-chip.mat-mdc-chip.mat-mdc-chip-disabled {
+  opacity: 0.42;
+}

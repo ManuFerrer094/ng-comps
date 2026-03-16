@@ -1,0 +1,56 @@
+:host {
+  display: block;
+}
+
+.mf-table__wrapper {
+  overflow-x: auto;
+  border-radius: var(--mf-radius-md);
+  border: 1px solid var(--mf-color-border);
+}
+
+.mf-table .mat-mdc-table {
+  width: 100%;
+  font-family: var(--mf-font-base) !important;
+}
+
+.mf-table .mat-mdc-header-cell {
+  font-family: var(--mf-font-base) !important;
+  font-weight: var(--mf-weight-bold) !important;
+  font-size: var(--mf-text-sm) !important;
+  color: var(--mf-color-neutral-600) !important;
+  background-color: var(--mf-color-neutral-50) !important;
+  border-bottom-color: var(--mf-color-border) !important;
+}
+
+.mf-table .mat-mdc-cell {
+  font-family: var(--mf-font-base) !important;
+  font-size: var(--mf-text-sm) !important;
+  color: var(--mf-color-on-surface) !important;
+  border-bottom-color: var(--mf-color-border) !important;
+}
+
+.mf-table .mat-mdc-row:hover {
+  background-color: var(--mf-color-brand-light) !important;
+  cursor: pointer;
+}
+
+/* ── Striped ──────────────────────────────────────────────────── */
+.mf-table--striped .mat-mdc-row:nth-child(even) {
+  background-color: var(--mf-color-neutral-50);
+}
+
+/* ── Bordered ─────────────────────────────────────────────────── */
+.mf-table--bordered .mat-mdc-cell,
+.mf-table--bordered .mat-mdc-header-cell {
+  border-right: 1px solid var(--mf-color-border) !important;
+}
+
+.mf-table--bordered .mat-mdc-cell:last-child,
+.mf-table--bordered .mat-mdc-header-cell:last-child {
+  border-right: none !important;
+}
+
+/* ── Sort header ──────────────────────────────────────────────── */
+.mf-table .mat-sort-header-arrow {
+  color: var(--mf-color-brand) !important;
+}

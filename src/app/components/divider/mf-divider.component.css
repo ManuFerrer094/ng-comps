@@ -1,0 +1,38 @@
+:host {
+  display: block;
+}
+
+:host:has(.mf-divider--vertical) {
+  display: inline-block;
+  height: 100%;
+}
+
+.mf-divider .mat-divider {
+  border-top-color: var(--mf-color-border) !important;
+}
+
+.mf-divider--vertical .mat-divider {
+  border-left-color: var(--mf-color-border) !important;
+}
+
+/* ── Middle inset ─────────────────────────────────────────────── */
+.mf-divider--middle .mat-divider {
+  margin-left: var(--mf-space-4) !important;
+  margin-right: var(--mf-space-4) !important;
+}
+
+/* ── Spacing ──────────────────────────────────────────────────── */
+.mf-divider--spacing-sm {
+  padding-top: var(--mf-space-2);
+  padding-bottom: var(--mf-space-2);
+}
+
+.mf-divider--spacing-md {
+  padding-top: var(--mf-space-4);
+  padding-bottom: var(--mf-space-4);
+}
+
+.mf-divider--spacing-lg {
+  padding-top: var(--mf-space-6);
+  padding-bottom: var(--mf-space-6);
+}
