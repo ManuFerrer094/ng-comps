@@ -1,0 +1,82 @@
+:host {
+  display: block;
+}
+
+/* ── Base ──────────────────────────────────────────────────────── */
+.mf-card {
+  font-family: var(--mf-font-base) !important;
+  border-radius: var(--mf-radius-xl) !important;
+  overflow: hidden;
+  transition:
+    box-shadow var(--mf-duration-base) var(--mf-ease-standard),
+    transform var(--mf-duration-base) var(--mf-ease-standard);
+}
+
+/* ── Variants ──────────────────────────────────────────────────── */
+.mf-card--elevated {
+  background-color: var(--mf-color-surface) !important;
+  box-shadow: var(--mf-shadow-md) !important;
+  border: none !important;
+}
+
+.mf-card--outlined {
+  background-color: var(--mf-color-surface) !important;
+  box-shadow: none !important;
+  border: 1px solid var(--mf-color-border) !important;
+}
+
+.mf-card--flat {
+  background-color: var(--mf-color-surface-raised) !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* ── Interactive ───────────────────────────────────────────────── */
+.mf-card--interactive {
+  cursor: pointer;
+}
+
+.mf-card--interactive:hover {
+  box-shadow: var(--mf-shadow-lg) !important;
+  transform: translateY(-2px);
+}
+
+.mf-card--interactive:active {
+  transform: translateY(0);
+}
+
+/* ── Padding ───────────────────────────────────────────────────── */
+.mf-card--pad-none .mat-mdc-card-content {
+  padding: 0 !important;
+}
+
+.mf-card--pad-sm .mat-mdc-card-content {
+  padding: var(--mf-space-3) !important;
+}
+
+.mf-card--pad-md .mat-mdc-card-content {
+  padding: var(--mf-space-5) !important;
+}
+
+.mf-card--pad-lg .mat-mdc-card-content {
+  padding: var(--mf-space-8) !important;
+}
+
+/* ── Header ────────────────────────────────────────────────────── */
+.mf-card .mat-mdc-card-header {
+  padding: var(--mf-space-5) var(--mf-space-5) 0 !important;
+}
+
+.mf-card__title {
+  font-family: var(--mf-font-display) !important;
+  font-size: var(--mf-text-lg) !important;
+  font-weight: var(--mf-weight-bold) !important;
+  color: var(--mf-color-on-surface) !important;
+  margin: 0 !important;
+}
+
+.mf-card__subtitle {
+  font-size: var(--mf-text-sm) !important;
+  color: var(--mf-color-neutral-400) !important;
+  margin-top: var(--mf-space-1) !important;
+}
