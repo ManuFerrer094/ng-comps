@@ -1,0 +1,51 @@
+:host {
+  display: block;
+}
+
+/* ── Base ──────────────────────────────────────────────────────── */
+.mf-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mf-space-1);
+}
+
+/* ── Label ─────────────────────────────────────────────────────── */
+.mf-form-field__label {
+  font-family: var(--mf-font-base);
+  font-size: var(--mf-text-sm);
+  font-weight: var(--mf-weight-medium);
+  color: var(--mf-color-on-surface);
+  line-height: var(--mf-leading-normal);
+  cursor: default;
+}
+
+.mf-form-field__label--error {
+  color: var(--mf-color-error-500);
+}
+
+.mf-form-field__required {
+  color: var(--mf-color-error-500);
+}
+
+/* ── Control container ────────────────────────────────────────── */
+.mf-form-field__control {
+  width: 100%;
+}
+
+/* ── Hint ──────────────────────────────────────────────────────── */
+.mf-form-field__hint {
+  font-family: var(--mf-font-base);
+  font-size: var(--mf-text-xs);
+  color: var(--mf-color-neutral-400);
+  margin: 0;
+  padding-left: var(--mf-space-1);
+}
+
+/* ── Error ─────────────────────────────────────────────────────── */
+.mf-form-field__error {
+  font-family: var(--mf-font-base);
+  font-size: var(--mf-text-xs);
+  color: var(--mf-color-error-500);
+  margin: 0;
+  padding-left: var(--mf-space-1);
+}

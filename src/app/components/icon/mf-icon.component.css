@@ -1,0 +1,56 @@
+:host {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Base ──────────────────────────────────────────────────────── */
+.mf-icon {
+  transition: color var(--mf-duration-base) var(--mf-ease-standard);
+}
+
+/* ── Sizes ─────────────────────────────────────────────────────── */
+.mf-icon--sm {
+  font-size: 16px !important;
+  width: 16px !important;
+  height: 16px !important;
+}
+
+.mf-icon--md {
+  font-size: 20px !important;
+  width: 20px !important;
+  height: 20px !important;
+}
+
+.mf-icon--lg {
+  font-size: 24px !important;
+  width: 24px !important;
+  height: 24px !important;
+}
+
+.mf-icon--xl {
+  font-size: 32px !important;
+  width: 32px !important;
+  height: 32px !important;
+}
+
+/* ── Colors ────────────────────────────────────────────────────── */
+.mf-icon--default {
+  color: var(--mf-color-on-surface);
+}
+
+.mf-icon--brand {
+  color: var(--mf-color-brand);
+}
+
+.mf-icon--muted {
+  color: var(--mf-color-neutral-400);
+}
+
+.mf-icon--error {
+  color: var(--mf-color-error-500);
+}
+
+.mf-icon--inherit {
+  color: inherit;
+}

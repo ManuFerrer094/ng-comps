@@ -1,0 +1,77 @@
+:host {
+  display: block;
+}
+
+/* ── Base ──────────────────────────────────────────────────────── */
+.mf-toolbar.mat-toolbar {
+  font-family: var(--mf-font-base) !important;
+  padding: 0 var(--mf-space-6) !important;
+  min-height: 56px !important;
+  display: flex !important;
+  align-items: center !important;
+  transition:
+    background-color var(--mf-duration-base) var(--mf-ease-standard),
+    box-shadow var(--mf-duration-base) var(--mf-ease-standard);
+}
+
+/* ── Variants ──────────────────────────────────────────────────── */
+.mf-toolbar--surface.mat-toolbar {
+  background-color: var(--mf-color-surface) !important;
+  color: var(--mf-color-on-surface) !important;
+}
+
+.mf-toolbar--brand.mat-toolbar {
+  background-color: var(--mf-color-brand) !important;
+  color: var(--mf-color-on-brand) !important;
+}
+
+.mf-toolbar--transparent.mat-toolbar {
+  background-color: transparent !important;
+  color: var(--mf-color-on-surface) !important;
+}
+
+/* ── Bordered ──────────────────────────────────────────────────── */
+.mf-toolbar--bordered.mat-toolbar {
+  border-bottom: 1px solid var(--mf-color-border);
+}
+
+.mf-toolbar--brand.mf-toolbar--bordered.mat-toolbar {
+  border-bottom-color: rgba(255, 255, 255, 0.15);
+}
+
+/* ── Sticky ────────────────────────────────────────────────────── */
+.mf-toolbar--sticky.mat-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+/* ── Elevated ──────────────────────────────────────────────────── */
+.mf-toolbar--elevated.mat-toolbar {
+  box-shadow: var(--mf-shadow-sm) !important;
+}
+
+/* ── Layout ────────────────────────────────────────────────────── */
+.mf-toolbar__start {
+  display: flex;
+  align-items: center;
+  gap: var(--mf-space-3);
+}
+
+.mf-toolbar__spacer {
+  flex: 1;
+}
+
+.mf-toolbar__end {
+  display: flex;
+  align-items: center;
+  gap: var(--mf-space-2);
+}
+
+/* ── Title ─────────────────────────────────────────────────────── */
+.mf-toolbar__title {
+  font-family: var(--mf-font-display) !important;
+  font-size: var(--mf-text-lg) !important;
+  font-weight: var(--mf-weight-bold) !important;
+  letter-spacing: -0.01em;
+}

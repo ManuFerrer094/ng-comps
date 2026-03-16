@@ -1,0 +1,81 @@
+/* ── Base ──────────────────────────────────────────────────────── */
+.mf-dialog {
+  font-family: var(--mf-font-base);
+  min-width: 360px;
+  max-width: 560px;
+}
+
+/* ── Header ────────────────────────────────────────────────────── */
+.mf-dialog__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--mf-space-6) var(--mf-space-6) var(--mf-space-3);
+}
+
+.mf-dialog__title {
+  font-family: var(--mf-font-display);
+  font-size: var(--mf-text-xl);
+  font-weight: var(--mf-weight-bold);
+  color: var(--mf-color-on-surface);
+  margin: 0;
+  line-height: var(--mf-leading-tight);
+}
+
+/* ── Close button ─────────────────────────────────────────────── */
+.mf-dialog__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  border-radius: var(--mf-radius-sm, 6px);
+  color: var(--mf-color-neutral-400);
+  cursor: pointer;
+  transition:
+    background-color var(--mf-duration-fast) var(--mf-ease-standard),
+    color var(--mf-duration-fast) var(--mf-ease-standard);
+}
+
+.mf-dialog__close:hover {
+  background-color: var(--mf-color-neutral-100);
+  color: var(--mf-color-on-surface);
+}
+
+.mf-dialog__close .mat-icon {
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+}
+
+/* ── Body ──────────────────────────────────────────────────────── */
+.mf-dialog__body {
+  padding: 0 var(--mf-space-6);
+}
+
+.mf-dialog__message {
+  font-size: var(--mf-text-sm);
+  color: var(--mf-color-neutral-600);
+  line-height: var(--mf-leading-normal);
+  margin: 0;
+}
+
+/* ── Content ───────────────────────────────────────────────────── */
+.mf-dialog__content {
+  padding: var(--mf-space-3) var(--mf-space-6);
+}
+
+.mf-dialog__content:empty {
+  display: none;
+}
+
+/* ── Actions (footer) ─────────────────────────────────────────── */
+.mf-dialog__actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--mf-space-3);
+  padding: var(--mf-space-3) var(--mf-space-6) var(--mf-space-6);
+}

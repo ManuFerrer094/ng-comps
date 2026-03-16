@@ -1,0 +1,56 @@
+:host {
+  display: inline-block;
+}
+
+/* ── Base ──────────────────────────────────────────────────────── */
+.mf-checkbox {
+  font-family: var(--mf-font-base) !important;
+}
+
+/* ── Label styling ────────────────────────────────────────────── */
+.mf-checkbox .mdc-label,
+.mf-checkbox .mat-mdc-checkbox-label {
+  font-family: var(--mf-font-base) !important;
+  font-size: var(--mf-text-sm) !important;
+  color: var(--mf-color-on-surface) !important;
+  cursor: pointer;
+}
+
+/* ── Unchecked state ──────────────────────────────────────────── */
+.mf-checkbox .mdc-checkbox__background {
+  border-color: var(--mf-color-neutral-300) !important;
+  border-radius: var(--mf-radius-sm) !important;
+  border-width: 1.5px !important;
+  transition:
+    border-color var(--mf-duration-base) var(--mf-ease-standard),
+    background-color var(--mf-duration-base) var(--mf-ease-standard);
+}
+
+/* ── Checked state ────────────────────────────────────────────── */
+.mf-checkbox .mdc-checkbox__native-control:checked ~ .mdc-checkbox__background,
+.mf-checkbox .mdc-checkbox__native-control:indeterminate ~ .mdc-checkbox__background {
+  background-color: var(--mf-color-brand) !important;
+  border-color: var(--mf-color-brand) !important;
+}
+
+/* ── Hover ─────────────────────────────────────────────────────── */
+.mf-checkbox:hover .mdc-checkbox__background {
+  border-color: var(--mf-color-brand) !important;
+}
+
+/* ── Ripple override ──────────────────────────────────────────── */
+.mf-checkbox .mat-mdc-checkbox-ripple,
+.mf-checkbox .mdc-checkbox__ripple {
+  display: none !important;
+}
+
+/* ── Focus ring ───────────────────────────────────────────────── */
+.mf-checkbox .mdc-checkbox__native-control:focus ~ .mdc-checkbox__background {
+  box-shadow: 0 0 0 3px var(--mf-color-primary-100);
+}
+
+/* ── Disabled ──────────────────────────────────────────────────── */
+.mf-checkbox--disabled {
+  opacity: 0.42;
+  pointer-events: none;
+}
