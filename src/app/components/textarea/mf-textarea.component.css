@@ -1,0 +1,48 @@
+:host {
+  display: block;
+}
+
+.mf-textarea.mat-mdc-form-field {
+  font-family: var(--mf-font-base) !important;
+  width: 100%;
+}
+
+.mf-textarea textarea.mat-mdc-input-element {
+  font-family: var(--mf-font-base) !important;
+  line-height: var(--mf-leading-normal) !important;
+}
+
+.mf-textarea .mdc-notched-outline__leading,
+.mf-textarea .mdc-notched-outline__notch,
+.mf-textarea .mdc-notched-outline__trailing {
+  border-color: var(--mf-color-border) !important;
+}
+
+.mf-textarea.mat-mdc-form-field.mat-focused .mdc-notched-outline__leading,
+.mf-textarea.mat-mdc-form-field.mat-focused .mdc-notched-outline__notch,
+.mf-textarea.mat-mdc-form-field.mat-focused .mdc-notched-outline__trailing {
+  border-color: var(--mf-color-brand) !important;
+}
+
+.mf-textarea .mdc-notched-outline {
+  border-radius: var(--mf-radius-md) !important;
+}
+
+/* ── Tamaños ───────────────────────────────────────────────────── */
+.mf-textarea--sm textarea.mat-mdc-input-element {
+  font-size: var(--mf-text-sm) !important;
+}
+
+.mf-textarea--md textarea.mat-mdc-input-element {
+  font-size: var(--mf-text-base) !important;
+}
+
+.mf-textarea--lg textarea.mat-mdc-input-element {
+  font-size: var(--mf-text-lg) !important;
+}
+
+/* ── Resize ────────────────────────────────────────────────────── */
+.mf-textarea--resize-none textarea { resize: none; }
+.mf-textarea--resize-vertical textarea { resize: vertical; }
+.mf-textarea--resize-horizontal textarea { resize: horizontal; }
+.mf-textarea--resize-both textarea { resize: both; }
