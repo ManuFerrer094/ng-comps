@@ -1,0 +1,32 @@
+:host {
+  display: inline-block;
+}
+
+/* ── Brand ────────────────────────────────────────────────────── */
+.mf-badge--brand .mat-badge-content {
+  background-color: var(--mf-color-brand) !important;
+  color: var(--mf-color-on-brand) !important;
+}
+
+/* ── Accent ───────────────────────────────────────────────────── */
+.mf-badge--accent .mat-badge-content {
+  background-color: var(--mf-color-accent-500) !important;
+  color: var(--mf-color-neutral-900) !important;
+}
+
+/* ── Error ────────────────────────────────────────────────────── */
+.mf-badge--error .mat-badge-content {
+  background-color: var(--mf-color-error-500) !important;
+  color: var(--mf-color-neutral-0) !important;
+}
+
+/* ── Neutral ──────────────────────────────────────────────────── */
+.mf-badge--neutral .mat-badge-content {
+  background-color: var(--mf-color-neutral-400) !important;
+  color: var(--mf-color-neutral-0) !important;
+}
+
+.mat-badge-content {
+  font-family: var(--mf-font-base) !important;
+  font-weight: var(--mf-weight-bold) !important;
+}
