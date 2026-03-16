@@ -1,0 +1,102 @@
+:host {
+  display: inline-block;
+}
+
+/* ── Base ──────────────────────────────────────────────────────── */
+.mf-datepicker {
+  font-family: var(--mf-font-base) !important;
+  width: 100%;
+}
+
+.mf-datepicker--full {
+  width: 100%;
+}
+
+/* ── Mat-form-field overrides ─────────────────────────────────── */
+.mf-datepicker .mat-mdc-text-field-wrapper {
+  border-radius: var(--mf-radius-md) !important;
+}
+
+.mf-datepicker .mdc-notched-outline__leading,
+.mf-datepicker .mdc-notched-outline__notch,
+.mf-datepicker .mdc-notched-outline__trailing {
+  border-color: var(--mf-color-border) !important;
+  transition: border-color var(--mf-duration-base) var(--mf-ease-standard);
+}
+
+.mf-datepicker .mat-mdc-form-field-focus-overlay {
+  background-color: transparent !important;
+}
+
+/* ── Focus state ──────────────────────────────────────────────── */
+.mf-datepicker.mat-focused .mdc-notched-outline__leading,
+.mf-datepicker.mat-focused .mdc-notched-outline__notch,
+.mf-datepicker.mat-focused .mdc-notched-outline__trailing {
+  border-color: var(--mf-color-brand) !important;
+  border-width: 1.5px !important;
+}
+
+/* ── Error state ──────────────────────────────────────────────── */
+.mf-datepicker--error .mdc-notched-outline__leading,
+.mf-datepicker--error .mdc-notched-outline__notch,
+.mf-datepicker--error .mdc-notched-outline__trailing {
+  border-color: var(--mf-color-error-500) !important;
+}
+
+/* ── Label styles ─────────────────────────────────────────────── */
+.mf-datepicker .mat-mdc-floating-label {
+  font-family: var(--mf-font-base) !important;
+  font-weight: var(--mf-weight-medium) !important;
+  color: var(--mf-color-neutral-400) !important;
+}
+
+.mf-datepicker.mat-focused .mat-mdc-floating-label {
+  color: var(--mf-color-brand) !important;
+}
+
+/* ── Input text ───────────────────────────────────────────────── */
+.mf-datepicker .mat-mdc-input-element {
+  font-family: var(--mf-font-base) !important;
+  color: var(--mf-color-on-surface) !important;
+  caret-color: var(--mf-color-brand);
+}
+
+/* ── Toggle icon ──────────────────────────────────────────────── */
+.mf-datepicker .mat-datepicker-toggle .mat-icon {
+  color: var(--mf-color-neutral-400) !important;
+  transition: color var(--mf-duration-base) var(--mf-ease-standard);
+}
+
+.mf-datepicker.mat-focused .mat-datepicker-toggle .mat-icon {
+  color: var(--mf-color-brand) !important;
+}
+
+/* ── Hint & Error ─────────────────────────────────────────────── */
+.mf-datepicker .mat-mdc-form-field-hint {
+  font-size: var(--mf-text-xs) !important;
+  color: var(--mf-color-neutral-400) !important;
+}
+
+.mf-datepicker .mat-mdc-form-field-error {
+  font-size: var(--mf-text-xs) !important;
+}
+
+/* ── Sizes ─────────────────────────────────────────────────────── */
+.mf-datepicker--sm .mat-mdc-input-element {
+  font-size: var(--mf-text-sm) !important;
+}
+
+.mf-datepicker--md .mat-mdc-input-element {
+  font-size: var(--mf-text-base) !important;
+}
+
+.mf-datepicker--lg .mat-mdc-input-element {
+  font-size: var(--mf-text-lg) !important;
+  padding-top: var(--mf-space-1) !important;
+  padding-bottom: var(--mf-space-1) !important;
+}
+
+/* ── Disabled ──────────────────────────────────────────────────── */
+.mf-datepicker .mat-mdc-input-element:disabled {
+  color: var(--mf-color-neutral-300) !important;
+}

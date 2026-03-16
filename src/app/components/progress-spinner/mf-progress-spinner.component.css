@@ -1,0 +1,38 @@
+:host {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Wrapper ───────────────────────────────────────────────────── */
+.mf-progress-spinner__wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--mf-space-3);
+}
+
+.mf-progress-spinner__wrapper--labeled {
+  flex-direction: row;
+}
+
+.mf-progress-spinner__label {
+  font-family: var(--mf-font-base);
+  font-size: var(--mf-text-sm);
+  font-weight: var(--mf-weight-medium);
+  color: var(--mf-color-on-surface);
+}
+
+/* ── Color: brand ─────────────────────────────────────────────── */
+.mf-progress-spinner--brand.mat-mdc-progress-spinner {
+  --mdc-circular-progress-active-indicator-color: var(--mf-color-brand) !important;
+}
+
+/* ── Color: accent ────────────────────────────────────────────── */
+.mf-progress-spinner--accent.mat-mdc-progress-spinner {
+  --mdc-circular-progress-active-indicator-color: var(--mf-color-accent-500) !important;
+}
+
+/* ── Color: warn ──────────────────────────────────────────────── */
+.mf-progress-spinner--warn.mat-mdc-progress-spinner {
+  --mdc-circular-progress-active-indicator-color: var(--mf-color-error-500) !important;
+}

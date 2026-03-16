@@ -1,0 +1,58 @@
+:host {
+  display: block;
+}
+
+/* ── Group layout ──────────────────────────────────────────────── */
+.mf-radio {
+  display: flex;
+}
+
+.mf-radio--vertical {
+  flex-direction: column;
+  gap: var(--mf-space-2);
+}
+
+.mf-radio--horizontal {
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: var(--mf-space-4);
+}
+
+/* ── Option ────────────────────────────────────────────────────── */
+.mf-radio__option {
+  font-family: var(--mf-font-base) !important;
+  font-size: var(--mf-text-sm) !important;
+  color: var(--mf-color-on-surface) !important;
+}
+
+/* ── Radio button circle ──────────────────────────────────────── */
+.mf-radio__option .mdc-radio .mdc-radio__outer-circle {
+  border-color: var(--mf-color-border) !important;
+  transition: border-color var(--mf-duration-base) var(--mf-ease-standard);
+}
+
+.mf-radio__option.mat-mdc-radio-checked .mdc-radio .mdc-radio__outer-circle {
+  border-color: var(--mf-color-brand) !important;
+}
+
+.mf-radio__option.mat-mdc-radio-checked .mdc-radio .mdc-radio__inner-circle {
+  border-color: var(--mf-color-brand) !important;
+}
+
+/* ── Ripple ────────────────────────────────────────────────────── */
+.mf-radio__option .mat-ripple-element {
+  background-color: var(--mf-color-brand-light) !important;
+}
+
+/* ── Label text ────────────────────────────────────────────────── */
+.mf-radio__option .mdc-label {
+  font-family: var(--mf-font-base) !important;
+  color: var(--mf-color-on-surface) !important;
+  cursor: pointer;
+}
+
+/* ── Disabled ──────────────────────────────────────────────────── */
+.mf-radio__option.mat-mdc-radio-disabled .mdc-label {
+  color: var(--mf-color-neutral-400) !important;
+  cursor: default;
+}

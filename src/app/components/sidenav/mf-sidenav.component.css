@@ -1,0 +1,40 @@
+:host {
+  display: block;
+  height: 100%;
+}
+
+/* ── Container ─────────────────────────────────────────────────── */
+.mf-sidenav-container {
+  height: 100%;
+  background-color: var(--mf-color-surface) !important;
+}
+
+/* ── Sidenav panel ─────────────────────────────────────────────── */
+.mf-sidenav {
+  background-color: var(--mf-color-surface) !important;
+  border-right: 1px solid var(--mf-color-border) !important;
+  font-family: var(--mf-font-base) !important;
+  box-shadow: var(--mf-shadow-md);
+}
+
+.mf-sidenav--over,
+.mf-sidenav--push {
+  box-shadow: var(--mf-shadow-lg) !important;
+}
+
+.mf-sidenav--side {
+  box-shadow: none;
+  border-right: 1px solid var(--mf-color-border) !important;
+}
+
+/* ── Main content ──────────────────────────────────────────────── */
+.mf-sidenav__main {
+  background-color: var(--mf-color-surface);
+  padding: var(--mf-space-6);
+  font-family: var(--mf-font-base);
+}
+
+/* ── Backdrop ──────────────────────────────────────────────────── */
+.mf-sidenav-container .mat-drawer-backdrop.mat-drawer-shown {
+  background-color: rgba(15, 23, 42, 0.32) !important;
+}

@@ -1,0 +1,53 @@
+:host {
+  display: block;
+}
+
+/* ── Wrapper ───────────────────────────────────────────────────── */
+.mf-progress-bar__wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mf-space-2);
+}
+
+.mf-progress-bar__label {
+  font-family: var(--mf-font-base);
+  font-size: var(--mf-text-sm);
+  font-weight: var(--mf-weight-medium);
+  color: var(--mf-color-on-surface);
+}
+
+.mf-progress-bar__value {
+  font-family: var(--mf-font-base);
+  font-size: var(--mf-text-xs);
+  font-weight: var(--mf-weight-medium);
+  color: var(--mf-color-neutral-600);
+  align-self: flex-end;
+}
+
+/* ── Base ──────────────────────────────────────────────────────── */
+.mf-progress-bar {
+  border-radius: var(--mf-radius-full) !important;
+  overflow: hidden;
+}
+
+.mf-progress-bar.mat-mdc-progress-bar {
+  --mdc-linear-progress-track-shape: 9999px;
+}
+
+/* ── Color: brand ─────────────────────────────────────────────── */
+.mf-progress-bar--brand.mat-mdc-progress-bar {
+  --mdc-linear-progress-active-indicator-color: var(--mf-color-brand) !important;
+  --mdc-linear-progress-track-color: var(--mf-color-primary-100) !important;
+}
+
+/* ── Color: accent ────────────────────────────────────────────── */
+.mf-progress-bar--accent.mat-mdc-progress-bar {
+  --mdc-linear-progress-active-indicator-color: var(--mf-color-accent-500) !important;
+  --mdc-linear-progress-track-color: var(--mf-color-accent-300) !important;
+}
+
+/* ── Color: warn ──────────────────────────────────────────────── */
+.mf-progress-bar--warn.mat-mdc-progress-bar {
+  --mdc-linear-progress-active-indicator-color: var(--mf-color-error-500) !important;
+  --mdc-linear-progress-track-color: #fecaca !important;
+}

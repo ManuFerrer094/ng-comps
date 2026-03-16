@@ -1,0 +1,58 @@
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  input,
+} from '@angular/core';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+
+export type MfProgressBarMode = 'determinate' | 'indeterminate' | 'buffer' | 'query';
+export type MfProgressBarColor = 'brand' | 'accent' | 'warn';
+
+/**
+ * Barra de progreso de la librería mf-components.
+ * Envuelve Angular Material `mat-progress-bar` y expone una API uniforme
+ * con look and feel de marca.
+ */
+@Component({
+  selector: 'mf-progress-bar',
+  imports: [MatProgressBarModule],
+  template: `
+    <div class="mf-progress-bar__wrapper" [attr.aria-label]="label() || null">
+      @if (label()) {
+        <span class="mf-progress-bar__label">{{ label() }}</span>
+      }
+      <mat-progress-bar
+        [class]="hostClasses()"
+        [mode]="mode()"
+        [value]="value()"
+        [bufferValue]="bufferValue()"
+      />
+      @if (showValue() && mode() === 'determinate') {
+        <span class="mf-progress-bar__value" aria-hidden="true">{{ value() }}%</span>
+      }
+    </div>
+  `,
+  styleUrl: './mf-progress-bar.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class MfProgressBarComponent {
+  /** Modo de la barra de progreso */
+  readonly mode = input<MfProgressBarMode>('determinate');
+  /** Valor actual (0–100) */
+  readonly value = input(0);
+  /** Valor del buffer (0–100, solo en modo buffer) */
+  readonly bufferValue = input(0);
+  /** Color de la barra */
+  readonly color = input<MfProgressBarColor>('brand');
+  /** Etiqueta accesible */
+  readonly label = input<string | undefined>(undefined);
+  /** Muestra el porcentaje junto a la barra */
+  readonly showValue = input(false);
+  /** Altura de la barra en px */
+  readonly height = input(4);
+
+  readonly hostClasses = computed(() => {
+    return `mf-progress-bar mf-progress-bar--${this.color()}`;
+  });
+}

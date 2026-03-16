@@ -1,0 +1,47 @@
+:host {
+  display: block;
+}
+
+/* ── Grid list ─────────────────────────────────────────────────── */
+.mf-grid-list {
+  font-family: var(--mf-font-base) !important;
+}
+
+/* ── Tile ──────────────────────────────────────────────────────── */
+.mf-grid-list__tile {
+  background-color: var(--mf-color-surface-raised);
+  border-radius: var(--mf-radius-md) !important;
+  overflow: hidden;
+  transition: box-shadow var(--mf-duration-base) var(--mf-ease-standard);
+}
+
+.mf-grid-list__tile:hover {
+  box-shadow: var(--mf-shadow-md);
+}
+
+/* ── Tile header ───────────────────────────────────────────────── */
+.mf-grid-list__tile mat-grid-tile-header,
+.mf-grid-list__tile .mat-grid-tile-header {
+  background: linear-gradient(
+    to top,
+    rgba(15, 23, 42, 0.64) 0%,
+    rgba(15, 23, 42, 0) 100%
+  ) !important;
+  padding: var(--mf-space-3) var(--mf-space-4) !important;
+}
+
+.mf-grid-list__tile-title {
+  font-family: var(--mf-font-base);
+  font-size: var(--mf-text-sm);
+  font-weight: var(--mf-weight-bold);
+  color: var(--mf-color-neutral-0);
+  display: block;
+}
+
+.mf-grid-list__tile-subtitle {
+  font-family: var(--mf-font-base);
+  font-size: var(--mf-text-xs);
+  font-weight: var(--mf-weight-regular);
+  color: var(--mf-color-neutral-200);
+  display: block;
+}
