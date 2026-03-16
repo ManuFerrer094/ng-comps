@@ -1,0 +1,107 @@
+/**
+ * MF Components Design Tokens
+ * Tokens de diseño centralizados para la librería.
+ * Estos tokens son la fuente única de verdad para colores, tipografía,
+ * radios y elevaciones. Los componentes deben usar siempre estas variables.
+ */
+
+:root {
+  /* ── Paleta de color ─────────────────────────────────────────── */
+  --mf-color-primary-50:  #f0fdfa;
+  --mf-color-primary-100: #ccfbf1;
+  --mf-color-primary-200: #99f6e4;
+  --mf-color-primary-300: #5eead4;
+  --mf-color-primary-400: #2dd4bf;
+  --mf-color-primary-500: #14b8a6;
+  --mf-color-primary-600: #0d9488;
+  --mf-color-primary-700: #0f766e;   /* default */
+  --mf-color-primary-800: #115e59;
+  --mf-color-primary-900: #134e4a;
+
+  --mf-color-secondary-50:  #eff6ff;
+  --mf-color-secondary-100: #dbeafe;
+  --mf-color-secondary-200: #bfdbfe;
+  --mf-color-secondary-500: #3b82f6;
+  --mf-color-secondary-700: #1d4ed8;
+  --mf-color-secondary-900: #0b3d5c;
+
+  --mf-color-accent-300: #fde68a;
+  --mf-color-accent-400: #fbbf24;
+  --mf-color-accent-500: #f59e0b;   /* default */
+  --mf-color-accent-700: #b45309;
+
+  --mf-color-error-500:   #ef4444;
+  --mf-color-error-700:   #b91c1c;
+
+  --mf-color-neutral-0:   #ffffff;
+  --mf-color-neutral-50:  #f7fafc;
+  --mf-color-neutral-100: #f1f5f9;
+  --mf-color-neutral-200: #e2e8f0;
+  --mf-color-neutral-300: #cbd5e1;
+  --mf-color-neutral-400: #94a3b8;
+  --mf-color-neutral-600: #475569;
+  --mf-color-neutral-800: #1e293b;
+  --mf-color-neutral-900: #0f1722;
+
+  /* ── Semánticos ──────────────────────────────────────────────── */
+  --mf-color-brand:          var(--mf-color-primary-700);
+  --mf-color-brand-hover:    var(--mf-color-primary-800);
+  --mf-color-brand-light:    var(--mf-color-primary-50);
+  --mf-color-on-brand:       #f8fffd;
+  --mf-color-on-surface:     var(--mf-color-neutral-800);
+  --mf-color-surface:        var(--mf-color-neutral-0);
+  --mf-color-surface-raised: var(--mf-color-neutral-50);
+  --mf-color-border:         var(--mf-color-neutral-200);
+
+  /* ── Tipografía ─────────────────────────────────────────────── */
+  --mf-font-base: 'Manrope', 'Segoe UI', system-ui, sans-serif;
+  --mf-font-display: 'Sora', 'Segoe UI', system-ui, sans-serif;
+  --mf-font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  --mf-text-xs:   0.75rem;
+  --mf-text-sm:   0.875rem;
+  --mf-text-base: 1rem;
+  --mf-text-lg:   1.125rem;
+  --mf-text-xl:   1.25rem;
+  --mf-text-2xl:  1.5rem;
+  --mf-text-3xl:  1.875rem;
+
+  --mf-weight-regular: 400;
+  --mf-weight-medium:  500;
+  --mf-weight-bold:    700;
+
+  --mf-leading-tight:  1.25;
+  --mf-leading-normal: 1.5;
+  --mf-leading-loose:  1.75;
+
+  /* ── Espaciado ──────────────────────────────────────────────── */
+  --mf-space-1:  0.25rem;
+  --mf-space-2:  0.5rem;
+  --mf-space-3:  0.75rem;
+  --mf-space-4:  1rem;
+  --mf-space-5:  1.25rem;
+  --mf-space-6:  1.5rem;
+  --mf-space-8:  2rem;
+  --mf-space-10: 2.5rem;
+  --mf-space-12: 3rem;
+  --mf-space-16: 4rem;
+
+  /* ── Radios ──────────────────────────────────────────────────── */
+  --mf-radius-sm:   6px;
+  --mf-radius-md:   10px;
+  --mf-radius-lg:   16px;
+  --mf-radius-xl:   20px;
+  --mf-radius-full: 9999px;
+
+  /* ── Elevación / sombra ─────────────────────────────────────── */
+  --mf-shadow-none: none;
+  --mf-shadow-sm:   0 1px 2px 0 rgb(15 23 42 / 0.06);
+  --mf-shadow-md:   0 4px 12px 0 rgb(15 23 42 / 0.08), 0 1px 3px 0 rgb(15 23 42 / 0.04);
+  --mf-shadow-lg:   0 10px 24px 0 rgb(15 23 42 / 0.10), 0 2px 6px 0 rgb(15 23 42 / 0.06);
+
+  /* ── Transiciones ────────────────────────────────────────────── */
+  --mf-duration-fast:   120ms;
+  --mf-duration-base:   200ms;
+  --mf-duration-slow:   350ms;
+  --mf-ease-standard:   cubic-bezier(0.4, 0, 0.2, 1);
+}

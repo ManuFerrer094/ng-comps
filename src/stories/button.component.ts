@@ -1,48 +1,46 @@
-import { CommonModule } from '@angular/common';
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+
+type ButtonSize = 'small' | 'medium' | 'large';
 
 @Component({
   selector: 'storybook-button',
-  standalone: true,
-  imports: [CommonModule],
-  template: ` <button
-  type="button"
-  (click)="onClick.emit($event)"
-  [ngClass]="classes"
-  [ngStyle]="{ 'background-color': backgroundColor }"
->
-  {{ label }}
-</button>`,
-  styleUrls: ['./button.css'],
+  imports: [MatButtonModule],
+  template: `
+    @if (primary()) {
+      <button
+        mat-flat-button
+        type="button"
+        class="mf-button mf-button--primary"
+        [class.mf-button--small]="size() === 'small'"
+        [class.mf-button--medium]="size() === 'medium'"
+        [class.mf-button--large]="size() === 'large'"
+        [style.--mf-button-bg]="backgroundColor() ?? null"
+        (click)="onClick.emit($event)"
+      >
+        {{ label() }}
+      </button>
+    } @else {
+      <button
+        mat-stroked-button
+        type="button"
+        class="mf-button mf-button--secondary"
+        [class.mf-button--small]="size() === 'small'"
+        [class.mf-button--medium]="size() === 'medium'"
+        [class.mf-button--large]="size() === 'large'"
+        (click)="onClick.emit($event)"
+      >
+        {{ label() }}
+      </button>
+    }
+  `,
+  styleUrl: './button.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ButtonComponent {
-  /** Is this the principal call to action on the page? */
-  @Input()
-  primary = false;
-
-  /** What background color to use */
-  @Input()
-  backgroundColor?: string;
-
-  /** How large should the button be? */
-  @Input()
-  size: 'small' | 'medium' | 'large' = 'medium';
-
-  /**
-   * Button contents
-   *
-   * @required
-   */
-  @Input()
-  label = 'Button';
-
-  /** Optional click handler */
-  @Output()
-  onClick = new EventEmitter<Event>();
-
-  public get classes(): string[] {
-    const mode = this.primary ? 'storybook-button--primary' : 'storybook-button--secondary';
-
-    return ['storybook-button', `storybook-button--${this.size}`, mode];
-  }
+  readonly primary = input(false);
+  readonly backgroundColor = input<string | undefined>(undefined);
+  readonly size = input<ButtonSize>('medium');
+  readonly label = input('Button');
+  readonly onClick = output<MouseEvent>();
 }

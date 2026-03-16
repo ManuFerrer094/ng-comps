@@ -1,68 +1,53 @@
-.storybook-page {
+:host {
+  --mf-page-bg: radial-gradient(circle at 15% 0%, #dff7f5 0%, #f7fafc 40%, #fff7e8 100%);
+  --mf-ink: #0f2133;
+  --mf-border: color-mix(in srgb, #0f2133 10%, white);
+}
+
+.mf-shell {
+  min-height: 100%;
+  background: var(--mf-page-bg);
+}
+
+.mf-page {
+  max-width: 1040px;
   margin: 0 auto;
-  padding: 48px 20px;
-  max-width: 600px;
-  color: #333;
-  font-size: 14px;
-  line-height: 24px;
-  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  padding: 28px 20px 40px;
+  font-family: 'Manrope', 'Segoe UI', sans-serif;
+  color: var(--mf-ink);
+  display: grid;
+  gap: 18px;
 }
 
-.storybook-page h2 {
-  display: inline-block;
-  vertical-align: top;
-  margin: 0 0 4px;
-  font-weight: 700;
-  font-size: 32px;
-  line-height: 1;
+.mf-hero,
+.mf-feature {
+  border: 1px solid var(--mf-border);
+  border-radius: 18px;
+  box-shadow: none;
 }
 
-.storybook-page p {
-  margin: 1em 0;
+.mf-hero {
+  background: linear-gradient(130deg, #ffffff 0%, #f0fdfa 60%, #ecfeff 100%);
 }
 
-.storybook-page a {
-  color: inherit;
+.mf-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
 }
 
-.storybook-page ul {
-  margin: 1em 0;
-  padding-left: 30px;
+.mf-feature {
+  background: #fff;
 }
 
-.storybook-page li {
-  margin-bottom: 8px;
+@media (max-width: 900px) {
+  .mf-grid {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
-.storybook-page .tip {
-  display: inline-block;
-  vertical-align: top;
-  margin-right: 10px;
-  border-radius: 1em;
-  background: #e7fdd8;
-  padding: 4px 12px;
-  color: #357a14;
-  font-weight: 700;
-  font-size: 11px;
-  line-height: 12px;
-}
-
-.storybook-page .tip-wrapper {
-  margin-top: 40px;
-  margin-bottom: 40px;
-  font-size: 13px;
-  line-height: 20px;
-}
-
-.storybook-page .tip-wrapper svg {
-  display: inline-block;
-  vertical-align: top;
-  margin-top: 3px;
-  margin-right: 4px;
-  width: 12px;
-  height: 12px;
-}
-
-.storybook-page .tip-wrapper svg path {
-  fill: #1ea7fd;
+@media (max-width: 640px) {
+  .mf-grid {
+    grid-template-columns: 1fr;
+  }
 }
