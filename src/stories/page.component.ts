@@ -1,82 +1,78 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { MatCardModule } from '@angular/material/card';
 
 import { HeaderComponent } from './header.component';
 import type { User } from './user';
 
 @Component({
   selector: 'storybook-page',
-  standalone: true,
-  imports: [CommonModule, HeaderComponent],
-  template: `<article>
-  <storybook-header
-    [user]="user"
-    (onLogout)="doLogout()"
-    (onLogin)="doLogin()"
-    (onCreateAccount)="doCreateAccount()"
-  ></storybook-header>
-  <section class="storybook-page">
-    <h2>Pages in Storybook</h2>
-    <p>
-      We recommend building UIs with a
-      <a href="https://componentdriven.org" target="_blank" rel="noopener noreferrer">
-        <strong>component-driven</strong>
-      </a>
-      process starting with atomic components and ending with pages.
-    </p>
-    <p>
-      Render pages with mock data. This makes it easy to build and review page states without
-      needing to navigate to them in your app. Here are some handy patterns for managing page data
-      in Storybook:
-    </p>
-    <ul>
-      <li>
-        Use a higher-level connected component. Storybook helps you compose such data from the
-        "args" of child component stories
-      </li>
-      <li>
-        Assemble data in the page component from your services. You can mock these services out
-        using Storybook.
-      </li>
-    </ul>
-    <p>
-      Get a guided tutorial on component-driven development at
-      <a href="https://storybook.js.org/tutorials/" target="_blank" rel="noopener noreferrer">
-        Storybook tutorials
-      </a>
-      . Read more in the
-      <a href="https://storybook.js.org/docs" target="_blank" rel="noopener noreferrer"> docs </a>
-      .
-    </p>
-    <div class="tip-wrapper">
-      <span class="tip">Tip</span> Adjust the width of the canvas with the
-      <svg width="10" height="10" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
-        <g fill="none" fillRule="evenodd">
-          <path
-            d="M1.5 5.2h4.8c.3 0 .5.2.5.4v5.1c-.1.2-.3.3-.4.3H1.4a.5.5 0 01-.5-.4V5.7c0-.3.2-.5.5-.5zm0-2.1h6.9c.3 0 .5.2.5.4v7a.5.5 0 01-1 0V4H1.5a.5.5 0 010-1zm0-2.1h9c.3 0 .5.2.5.4v9.1a.5.5 0 01-1 0V2H1.5a.5.5 0 010-1zm4.3 5.2H2V10h3.8V6.2z"
-            id="a"
-            fill="#999"
-          />
-        </g>
-      </svg>
-      Viewports addon in the toolbar
-    </div>
-  </section>
-</article>`,
-  styleUrls: ['./page.css'],
+  imports: [HeaderComponent, MatCardModule],
+  template: `
+    <article class="mf-shell">
+      <storybook-header
+        [user]="user()"
+        (onLogout)="doLogout()"
+        (onLogin)="doLogin()"
+        (onCreateAccount)="doCreateAccount()"
+      />
+
+      <section class="mf-page" aria-label="Vista principal de componentes">
+        <mat-card class="mf-hero">
+          <mat-card-title>Design system sobre Angular Material</mat-card-title>
+          <mat-card-content>
+            <p>
+              Esta página muestra cómo usar Angular Material como base y aplicar nuestro propio
+              lenguaje visual para construir componentes consistentes.
+            </p>
+          </mat-card-content>
+        </mat-card>
+
+        <div class="mf-grid">
+          @for (feature of features; track feature.title) {
+            <mat-card class="mf-feature">
+              <mat-card-title>{{ feature.title }}</mat-card-title>
+              <mat-card-content>
+                <p>{{ feature.description }}</p>
+              </mat-card-content>
+            </mat-card>
+          }
+        </div>
+      </section>
+    </article>
+  `,
+  styleUrl: './page.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PageComponent {
-  user: User | null = null;
+  readonly user = signal<User | null>(null);
+
+  readonly features = [
+    {
+      title: 'API consistente',
+      description:
+        'Encapsulamos componentes Material para exponer una API uniforme para todos los equipos.',
+    },
+    {
+      title: 'Look and feel propio',
+      description:
+        'Sobrescribimos tokens visuales, tipografía y elevaciones para mantener identidad de marca.',
+    },
+    {
+      title: 'Accesibilidad por defecto',
+      description:
+        'Partimos de componentes accesibles de Material y validamos contraste, foco y navegación.',
+    },
+  ] as const;
 
   doLogout() {
-    this.user = null;
+    this.user.set(null);
   }
 
   doLogin() {
-    this.user = { name: 'Jane Doe' };
+    this.user.set({ name: 'Jane Doe' });
   }
 
   doCreateAccount() {
-    this.user = { name: 'Jane Doe' };
+    this.user.set({ name: 'Jane Doe' });
   }
 }

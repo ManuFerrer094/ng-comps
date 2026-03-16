@@ -1,76 +1,43 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { ButtonComponent } from './button.component';
 import type { User } from './user';
 
 @Component({
   selector: 'storybook-header',
-  standalone: true,
-  imports: [CommonModule, ButtonComponent],
-  template: `<header>
-  <div class="storybook-header">
-    <div>
-      <svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-        <g fill="none" fillRule="evenodd">
-          <path
-            d="M10 0h12a10 10 0 0110 10v12a10 10 0 01-10 10H10A10 10 0 010 22V10A10 10 0 0110 0z"
-            fill="#FFF"
-          />
-          <path
-            d="M5.3 10.6l10.4 6v11.1l-10.4-6v-11zm11.4-6.2l9.7 5.5-9.7 5.6V4.4z"
-            fill="#555AB9"
-          />
-          <path d="M27.2 10.6v11.2l-10.5 6V16.5l10.5-6zM15.7 4.4v11L6 10l9.7-5.5z" fill="#91BAF8" />
-        </g>
-      </svg>
-      <h1>Acme</h1>
-    </div>
-    <div>
-      <div *ngIf="user">
-        <span class="welcome">
-          Welcome, <b>{{ user.name }}</b
-          >!
-        </span>
-        <storybook-button
-          *ngIf="user"
-          size="small"
-          (onClick)="onLogout.emit($event)"
-          label="Log out"
-        ></storybook-button>
-      </div>
-      <div *ngIf="!user">
-        <storybook-button
-          *ngIf="!user"
-          size="small"
-          class="margin-left"
-          (onClick)="onLogin.emit($event)"
-          label="Log in"
-        ></storybook-button>
-        <storybook-button
-          *ngIf="!user"
-          size="small"
-          [primary]="true"
-          class="margin-left"
-          (onClick)="onCreateAccount.emit($event)"
-          label="Sign up"
-        ></storybook-button>
-      </div>
-    </div>
-  </div>
-</header>`,
-  styleUrls: ['./header.css'],
+  imports: [MatToolbarModule, ButtonComponent],
+  template: `
+    <header class="mf-header">
+      <mat-toolbar class="mf-toolbar" role="banner">
+        <div class="mf-brand">
+          <span class="mf-brand-mark" aria-hidden="true"></span>
+          <h1>Acme Components</h1>
+        </div>
+
+        <div class="mf-actions">
+          @if (user(); as currentUser) {
+            <span class="welcome">Bienvenida, <b>{{ currentUser.name }}</b></span>
+            <storybook-button size="small" label="Cerrar sesión" (onClick)="onLogout.emit($event)" />
+          } @else {
+            <storybook-button size="small" label="Iniciar sesión" (onClick)="onLogin.emit($event)" />
+            <storybook-button
+              size="small"
+              [primary]="true"
+              label="Crear cuenta"
+              (onClick)="onCreateAccount.emit($event)"
+            />
+          }
+        </div>
+      </mat-toolbar>
+    </header>
+  `,
+  styleUrl: './header.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent {
-  @Input()
-  user: User | null = null;
-
-  @Output()
-  onLogin = new EventEmitter<Event>();
-
-  @Output()
-  onLogout = new EventEmitter<Event>();
-
-  @Output()
-  onCreateAccount = new EventEmitter<Event>();
+  readonly user = input<User | null>(null);
+  readonly onLogin = output<MouseEvent>();
+  readonly onLogout = output<MouseEvent>();
+  readonly onCreateAccount = output<MouseEvent>();
 }
