@@ -2,6 +2,124 @@
     "pipes": [],
     "interfaces": [
         {
+            "name": "MfGridTile",
+            "id": "interface-MfGridTile-1d9a7651cbdb8d20d2285f7db8e813d712055a2bc84ee0812b5cf11a0e02243ebb28a1c60d7644d61ccba651a65864ccc54242be2ac9b64699f80ffac0bbcf02",
+            "file": "src/app/components/grid-list/mf-grid-list.component.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "import {\r\n  ChangeDetectionStrategy,\r\n  Component,\r\n  input,\r\n} from '@angular/core';\r\nimport { MatGridListModule } from '@angular/material/grid-list';\r\n\r\nexport interface MfGridTile {\r\n  /** Título de la tile */\r\n  title?: string;\r\n  /** Subtítulo de la tile */\r\n  subtitle?: string;\r\n  /** Número de columnas que ocupa */\r\n  colspan?: number;\r\n  /** Número de filas que ocupa */\r\n  rowspan?: number;\r\n  /** Color de fondo */\r\n  background?: string;\r\n}\r\n\r\n/**\r\n * Lista en cuadrícula de la librería mf-components.\r\n * Envuelve Angular Material `mat-grid-list` y expone una API uniforme\r\n * con look and feel de marca. Soporta tiles estáticas y content projection.\r\n */\r\n@Component({\r\n  selector: 'mf-grid-list',\r\n  imports: [MatGridListModule],\r\n  template: `\r\n    <mat-grid-list\r\n      class=\"mf-grid-list\"\r\n      [cols]=\"cols()\"\r\n      [rowHeight]=\"rowHeight()\"\r\n      [gutterSize]=\"gutterSize()\"\r\n    >\r\n      @for (tile of tiles(); track $index) {\r\n        <mat-grid-tile\r\n          class=\"mf-grid-list__tile\"\r\n          [colspan]=\"tile.colspan ?? 1\"\r\n          [rowspan]=\"tile.rowspan ?? 1\"\r\n          [style.background]=\"tile.background || null\"\r\n        >\r\n          <mat-grid-tile-header>\r\n            @if (tile.title) {\r\n              <span class=\"mf-grid-list__tile-title\">{{ tile.title }}</span>\r\n            }\r\n            @if (tile.subtitle) {\r\n              <span class=\"mf-grid-list__tile-subtitle\">{{ tile.subtitle }}</span>\r\n            }\r\n          </mat-grid-tile-header>\r\n        </mat-grid-tile>\r\n      }\r\n      <ng-content />\r\n    </mat-grid-list>\r\n  `,\r\n  styleUrl: './mf-grid-list.component.css',\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\nexport class MfGridListComponent {\r\n  /** Número de columnas */\r\n  readonly cols = input(2);\r\n  /** Altura de cada fila */\r\n  readonly rowHeight = input<string | number>('1:1');\r\n  /** Espacio entre tiles */\r\n  readonly gutterSize = input('8px');\r\n  /** Tiles a renderizar */\r\n  readonly tiles = input<MfGridTile[]>([]);\r\n}\r\n",
+            "properties": [
+                {
+                    "name": "background",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "<p>Color de fondo</p>\n",
+                    "line": 18,
+                    "rawdescription": "\nColor de fondo"
+                },
+                {
+                    "name": "colspan",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "<p>Número de columnas que ocupa</p>\n",
+                    "line": 14,
+                    "rawdescription": "\nNúmero de columnas que ocupa"
+                },
+                {
+                    "name": "rowspan",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "<p>Número de filas que ocupa</p>\n",
+                    "line": 16,
+                    "rawdescription": "\nNúmero de filas que ocupa"
+                },
+                {
+                    "name": "subtitle",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "<p>Subtítulo de la tile</p>\n",
+                    "line": 12,
+                    "rawdescription": "\nSubtítulo de la tile"
+                },
+                {
+                    "name": "title",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "<p>Título de la tile</p>\n",
+                    "line": 10,
+                    "rawdescription": "\nTítulo de la tile"
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 172,
+            "methods": [],
+            "extends": []
+        },
+        {
+            "name": "MfRadioOption",
+            "id": "interface-MfRadioOption-8da933257dc1a5ef39f73d627f3a5ff5358b5d51a12acc7bb899e3e1991e56b533b11e6e2c8290dfc232b03d055986e5318e2a8f883f39a5e7c34bc2216b7362",
+            "file": "src/app/components/radio-button/mf-radio-button.component.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "import {\r\n  ChangeDetectionStrategy,\r\n  Component,\r\n  computed,\r\n  effect,\r\n  input,\r\n  output,\r\n  signal,\r\n} from '@angular/core';\r\nimport { MatRadioModule } from '@angular/material/radio';\r\nimport { FormsModule } from '@angular/forms';\r\n\r\nexport interface MfRadioOption {\r\n  /** Valor de la opción */\r\n  value: string;\r\n  /** Texto visible */\r\n  label: string;\r\n  /** Deshabilitada individualmente */\r\n  disabled?: boolean;\r\n}\r\n\r\nexport type MfRadioDirection = 'horizontal' | 'vertical';\r\n\r\n/**\r\n * Grupo de radio buttons de la librería mf-components.\r\n * Envuelve Angular Material `mat-radio-group` + `mat-radio-button`\r\n * y expone una API uniforme con look and feel de marca.\r\n */\r\n@Component({\r\n  selector: 'mf-radio-button',\r\n  imports: [MatRadioModule, FormsModule],\r\n  template: `\r\n    <mat-radio-group\r\n      [class]=\"hostClasses()\"\r\n      [disabled]=\"disabled()\"\r\n      [ngModel]=\"currentValue()\"\r\n      (change)=\"onChange($event)\"\r\n      [attr.aria-label]=\"ariaLabel() || null\"\r\n    >\r\n      @for (option of options(); track option.value) {\r\n        <mat-radio-button\r\n          class=\"mf-radio__option\"\r\n          [value]=\"option.value\"\r\n          [disabled]=\"option.disabled ?? false\"\r\n        >\r\n          {{ option.label }}\r\n        </mat-radio-button>\r\n      }\r\n    </mat-radio-group>\r\n  `,\r\n  styleUrl: './mf-radio-button.component.css',\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\nexport class MfRadioButtonComponent {\r\n  /** Opciones del grupo */\r\n  readonly options = input.required<MfRadioOption[]>();\r\n  /** Valor seleccionado */\r\n  readonly value = input<string | undefined>(undefined);\r\n  /** Deshabilitado */\r\n  readonly disabled = input(false);\r\n  /** Dirección del grupo */\r\n  readonly direction = input<MfRadioDirection>('vertical');\r\n  /** Etiqueta accesible para el grupo */\r\n  readonly ariaLabel = input<string | undefined>(undefined);\r\n\r\n  readonly mfChange = output<string>();\r\n\r\n  protected readonly currentValue = signal<string | undefined>(undefined);\r\n\r\n  constructor() {\r\n    effect(() => {\r\n      this.currentValue.set(this.value());\r\n    });\r\n  }\r\n\r\n  readonly hostClasses = computed(() => {\r\n    return `mf-radio mf-radio--${this.direction()}`;\r\n  });\r\n\r\n  onChange(event: { value: string }): void {\r\n    this.currentValue.set(event.value);\r\n    this.mfChange.emit(event.value);\r\n  }\r\n}\r\n",
+            "properties": [
+                {
+                    "name": "disabled",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "boolean",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "<p>Deshabilitada individualmente</p>\n",
+                    "line": 19,
+                    "rawdescription": "\nDeshabilitada individualmente"
+                },
+                {
+                    "name": "label",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Texto visible</p>\n",
+                    "line": 17,
+                    "rawdescription": "\nTexto visible"
+                },
+                {
+                    "name": "value",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Valor de la opción</p>\n",
+                    "line": 15,
+                    "rawdescription": "\nValor de la opción"
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 172,
+            "methods": [],
+            "extends": []
+        },
+        {
             "name": "User",
             "id": "interface-User-d4821beac0e4a852e513391b7470981c4353fdd95a18628bb68136c8695b489ee15b926e2e5031bc26cf30e1508e0a362c3ee13a06734702b4d15af140e485d5",
             "file": "src/stories/user.ts",
@@ -93,7 +211,7 @@
         },
         {
             "name": "ButtonComponent",
-            "id": "component-ButtonComponent-43ae2a03424d71f68c380d6186bf22e046dc9ce64525bc98b0888c74f14edce7eab6376d63c33b9fe9756ae2e3f92a5f10ca914e3bc8a3d45d2a0cb19accf53e",
+            "id": "component-ButtonComponent-ecdbbde4ad30bbbace5f5461cfb9618e5a5376ee4dc3d57561b789df27917124ffd209c424e877cea4eed1b0122f1cfb77640d3f213b4aa654b4118454957424",
             "file": "src/stories/button.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
@@ -200,7 +318,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';\nimport { MatButtonModule } from '@angular/material/button';\n\ntype ButtonSize = 'small' | 'medium' | 'large';\n\n@Component({\n  selector: 'storybook-button',\n  imports: [MatButtonModule],\n  template: `\n    @if (primary()) {\n      <button\n        mat-flat-button\n        type=\"button\"\n        class=\"mf-button mf-button--primary\"\n        [class.mf-button--small]=\"size() === 'small'\"\n        [class.mf-button--medium]=\"size() === 'medium'\"\n        [class.mf-button--large]=\"size() === 'large'\"\n        [style.--mf-button-bg]=\"backgroundColor() ?? null\"\n        (click)=\"onClick.emit($event)\"\n      >\n        {{ label() }}\n      </button>\n    } @else {\n      <button\n        mat-stroked-button\n        type=\"button\"\n        class=\"mf-button mf-button--secondary\"\n        [class.mf-button--small]=\"size() === 'small'\"\n        [class.mf-button--medium]=\"size() === 'medium'\"\n        [class.mf-button--large]=\"size() === 'large'\"\n        (click)=\"onClick.emit($event)\"\n      >\n        {{ label() }}\n      </button>\n    }\n  `,\n  styleUrl: './button.css',\n  changeDetection: ChangeDetectionStrategy.OnPush,\n})\nexport class ButtonComponent {\n  readonly primary = input(false);\n  readonly backgroundColor = input<string | undefined>(undefined);\n  readonly size = input<ButtonSize>('medium');\n  readonly label = input('Button');\n  readonly onClick = output<MouseEvent>();\n}\n",
+            "sourceCode": "import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';\r\nimport { MatButtonModule } from '@angular/material/button';\r\n\r\ntype ButtonSize = 'small' | 'medium' | 'large';\r\n\r\n@Component({\r\n  selector: 'storybook-button',\r\n  imports: [MatButtonModule],\r\n  template: `\r\n    @if (primary()) {\r\n      <button\r\n        mat-flat-button\r\n        type=\"button\"\r\n        class=\"mf-button mf-button--primary\"\r\n        [class.mf-button--small]=\"size() === 'small'\"\r\n        [class.mf-button--medium]=\"size() === 'medium'\"\r\n        [class.mf-button--large]=\"size() === 'large'\"\r\n        [style.--mf-button-bg]=\"backgroundColor() ?? null\"\r\n        (click)=\"onClick.emit($event)\"\r\n      >\r\n        {{ label() }}\r\n      </button>\r\n    } @else {\r\n      <button\r\n        mat-stroked-button\r\n        type=\"button\"\r\n        class=\"mf-button mf-button--secondary\"\r\n        [class.mf-button--small]=\"size() === 'small'\"\r\n        [class.mf-button--medium]=\"size() === 'medium'\"\r\n        [class.mf-button--large]=\"size() === 'large'\"\r\n        (click)=\"onClick.emit($event)\"\r\n      >\r\n        {{ label() }}\r\n      </button>\r\n    }\r\n  `,\r\n  styleUrl: './button.css',\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\nexport class ButtonComponent {\r\n  readonly primary = input(false);\r\n  readonly backgroundColor = input<string | undefined>(undefined);\r\n  readonly size = input<ButtonSize>('medium');\r\n  readonly label = input('Button');\r\n  readonly onClick = output<MouseEvent>();\r\n}\r\n",
             "styleUrl": "./button.css",
             "assetsDirs": [],
             "styleUrlsData": "",
@@ -209,7 +327,7 @@
         },
         {
             "name": "HeaderComponent",
-            "id": "component-HeaderComponent-7271421d211d783cf00b688d4221239c0a7a9e84eb3b569dbb51b97fb53112b1904566e8a064e01f235d98345bd37ee6be2743c46bfdc01903dfea39b65877c9",
+            "id": "component-HeaderComponent-3d7ea2bdaa1a5250533b6ac35e2bc6782e71b46abda350c9df3acf13071f9a107c4cdae9c6af82b9836cb51a4754f35a8c69b8fa89f56ae7fd41aeb94b75993a",
             "file": "src/stories/header.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
@@ -305,7 +423,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';\nimport { MatToolbarModule } from '@angular/material/toolbar';\n\nimport { ButtonComponent } from './button.component';\nimport type { User } from './user';\n\n@Component({\n  selector: 'storybook-header',\n  imports: [MatToolbarModule, ButtonComponent],\n  template: `\n    <header class=\"mf-header\">\n      <mat-toolbar class=\"mf-toolbar\" role=\"banner\">\n        <div class=\"mf-brand\">\n          <span class=\"mf-brand-mark\" aria-hidden=\"true\"></span>\n          <h1>Acme Components</h1>\n        </div>\n\n        <div class=\"mf-actions\">\n          @if (user(); as currentUser) {\n            <span class=\"welcome\">Bienvenida, <b>{{ currentUser.name }}</b></span>\n            <storybook-button size=\"small\" label=\"Cerrar sesión\" (onClick)=\"onLogout.emit($event)\" />\n          } @else {\n            <storybook-button size=\"small\" label=\"Iniciar sesión\" (onClick)=\"onLogin.emit($event)\" />\n            <storybook-button\n              size=\"small\"\n              [primary]=\"true\"\n              label=\"Crear cuenta\"\n              (onClick)=\"onCreateAccount.emit($event)\"\n            />\n          }\n        </div>\n      </mat-toolbar>\n    </header>\n  `,\n  styleUrl: './header.css',\n  changeDetection: ChangeDetectionStrategy.OnPush,\n})\nexport class HeaderComponent {\n  readonly user = input<User | null>(null);\n  readonly onLogin = output<MouseEvent>();\n  readonly onLogout = output<MouseEvent>();\n  readonly onCreateAccount = output<MouseEvent>();\n}\n",
+            "sourceCode": "import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';\r\nimport { MatToolbarModule } from '@angular/material/toolbar';\r\n\r\nimport { ButtonComponent } from './button.component';\r\nimport type { User } from './user';\r\n\r\n@Component({\r\n  selector: 'storybook-header',\r\n  imports: [MatToolbarModule, ButtonComponent],\r\n  template: `\r\n    <header class=\"mf-header\">\r\n      <mat-toolbar class=\"mf-toolbar\" role=\"banner\">\r\n        <div class=\"mf-brand\">\r\n          <span class=\"mf-brand-mark\" aria-hidden=\"true\"></span>\r\n          <h1>Acme Components</h1>\r\n        </div>\r\n\r\n        <div class=\"mf-actions\">\r\n          @if (user(); as currentUser) {\r\n            <span class=\"welcome\">Bienvenida, <b>{{ currentUser.name }}</b></span>\r\n            <storybook-button size=\"small\" label=\"Cerrar sesión\" (onClick)=\"onLogout.emit($event)\" />\r\n          } @else {\r\n            <storybook-button size=\"small\" label=\"Iniciar sesión\" (onClick)=\"onLogin.emit($event)\" />\r\n            <storybook-button\r\n              size=\"small\"\r\n              [primary]=\"true\"\r\n              label=\"Crear cuenta\"\r\n              (onClick)=\"onCreateAccount.emit($event)\"\r\n            />\r\n          }\r\n        </div>\r\n      </mat-toolbar>\r\n    </header>\r\n  `,\r\n  styleUrl: './header.css',\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\nexport class HeaderComponent {\r\n  readonly user = input<User | null>(null);\r\n  readonly onLogin = output<MouseEvent>();\r\n  readonly onLogout = output<MouseEvent>();\r\n  readonly onCreateAccount = output<MouseEvent>();\r\n}\r\n",
             "styleUrl": "./header.css",
             "assetsDirs": [],
             "styleUrlsData": "",
@@ -507,8 +625,2353 @@
             "extends": []
         },
         {
+            "name": "MfCardComponent",
+            "id": "component-MfCardComponent-5b00bf5b26a624caf0b7d751d91b832ffcdf15260d22fa180b630436a1466f154ca0fec850dd8f6ff59ffa16ac37461fb064d584c66e74e4db2a3d7def8550e3",
+            "file": "src/app/components/card/mf-card.component.ts",
+            "changeDetection": "ChangeDetectionStrategy.OnPush",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "mf-card",
+            "styleUrls": [],
+            "styles": [],
+            "template": "<mat-card [class]=\"hostClasses()\">\n  @if (hasHeader()) {\n    <mat-card-header>\n      @if (title()) {\n        <mat-card-title class=\"mf-card__title\">{{ title() }}</mat-card-title>\n      }\n      @if (subtitle()) {\n        <mat-card-subtitle class=\"mf-card__subtitle\">{{ subtitle() }}</mat-card-subtitle>\n      }\n    </mat-card-header>\n  }\n  <mat-card-content>\n    <ng-content />\n  </mat-card-content>\n  <ng-content select=\"[mfCardFooter]\" />\n</mat-card>\n",
+            "templateUrl": [],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "interactive",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Interactiva (hover effect)</p>\n",
+                    "line": 50,
+                    "rawdescription": "\nInteractiva (hover effect)",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "padding",
+                    "defaultValue": "'md'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "\"none\" | \"sm\" | \"md\" | \"lg\"",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Padding interno</p>\n",
+                    "line": 48,
+                    "rawdescription": "\nPadding interno",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "subtitle",
+                    "defaultValue": "undefined",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string | undefined",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Subtítulo de la card</p>\n",
+                    "line": 44,
+                    "rawdescription": "\nSubtítulo de la card",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "title",
+                    "defaultValue": "undefined",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string | undefined",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Título de la card</p>\n",
+                    "line": 42,
+                    "rawdescription": "\nTítulo de la card",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "variant",
+                    "defaultValue": "'elevated'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "MfCardVariant",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Variante visual</p>\n",
+                    "line": 46,
+                    "rawdescription": "\nVariante visual",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "hasHeader",
+                    "defaultValue": "computed(() => !!this.title() || !!this.subtitle())",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 52,
+                    "modifierKind": [
+                        148
+                    ]
+                },
+                {
+                    "name": "hostClasses",
+                    "defaultValue": "computed(() => {\r\n    const classes = ['mf-card', `mf-card--${this.variant()}`, `mf-card--pad-${this.padding()}`];\r\n    if (this.interactive()) classes.push('mf-card--interactive');\r\n    return classes.join(' ');\r\n  })",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 54,
+                    "modifierKind": [
+                        148
+                    ]
+                }
+            ],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [
+                {
+                    "name": "MatCardModule",
+                    "type": "module"
+                }
+            ],
+            "description": "<p>Card de la librería mf-components.\nEnvuelve Angular Material <code>mat-card</code> y expone una API uniforme\ncon look and feel de marca. Admite contenido proyectado mediante slots.</p>\n",
+            "rawdescription": "\n\nCard de la librería mf-components.\nEnvuelve Angular Material `mat-card` y expone una API uniforme\ncon look and feel de marca. Admite contenido proyectado mediante slots.\n",
+            "type": "component",
+            "sourceCode": "import {\r\n  ChangeDetectionStrategy,\r\n  Component,\r\n  computed,\r\n  input,\r\n} from '@angular/core';\r\nimport { MatCardModule } from '@angular/material/card';\r\n\r\nexport type MfCardVariant = 'elevated' | 'outlined' | 'flat';\r\n\r\n/**\r\n * Card de la librería mf-components.\r\n * Envuelve Angular Material `mat-card` y expone una API uniforme\r\n * con look and feel de marca. Admite contenido proyectado mediante slots.\r\n */\r\n@Component({\r\n  selector: 'mf-card',\r\n  imports: [MatCardModule],\r\n  template: `\r\n    <mat-card [class]=\"hostClasses()\">\r\n      @if (hasHeader()) {\r\n        <mat-card-header>\r\n          @if (title()) {\r\n            <mat-card-title class=\"mf-card__title\">{{ title() }}</mat-card-title>\r\n          }\r\n          @if (subtitle()) {\r\n            <mat-card-subtitle class=\"mf-card__subtitle\">{{ subtitle() }}</mat-card-subtitle>\r\n          }\r\n        </mat-card-header>\r\n      }\r\n      <mat-card-content>\r\n        <ng-content />\r\n      </mat-card-content>\r\n      <ng-content select=\"[mfCardFooter]\" />\r\n    </mat-card>\r\n  `,\r\n  styleUrl: './mf-card.component.css',\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\nexport class MfCardComponent {\r\n  /** Título de la card */\r\n  readonly title = input<string | undefined>(undefined);\r\n  /** Subtítulo de la card */\r\n  readonly subtitle = input<string | undefined>(undefined);\r\n  /** Variante visual */\r\n  readonly variant = input<MfCardVariant>('elevated');\r\n  /** Padding interno */\r\n  readonly padding = input<'none' | 'sm' | 'md' | 'lg'>('md');\r\n  /** Interactiva (hover effect) */\r\n  readonly interactive = input(false);\r\n\r\n  readonly hasHeader = computed(() => !!this.title() || !!this.subtitle());\r\n\r\n  readonly hostClasses = computed(() => {\r\n    const classes = ['mf-card', `mf-card--${this.variant()}`, `mf-card--pad-${this.padding()}`];\r\n    if (this.interactive()) classes.push('mf-card--interactive');\r\n    return classes.join(' ');\r\n  });\r\n}\r\n",
+            "styleUrl": "./mf-card.component.css",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": []
+        },
+        {
+            "name": "MfCheckboxComponent",
+            "id": "component-MfCheckboxComponent-c56f047843026a02c3b3ed1243898133330af73a4bc71a162565ef3bf409d03eed8675ce2d509a1136d54e1d558a857a417e3388e58599efc3a19bc095d3c3cb",
+            "file": "src/app/components/checkbox/mf-checkbox.component.ts",
+            "changeDetection": "ChangeDetectionStrategy.OnPush",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "mf-checkbox",
+            "styleUrls": [],
+            "styles": [],
+            "template": "<mat-checkbox\n  [checked]=\"checked()\"\n  [disabled]=\"disabled()\"\n  [indeterminate]=\"indeterminate()\"\n  [class]=\"hostClasses()\"\n  (change)=\"onChange($event)\"\n>\n  {{ label() }}\n</mat-checkbox>\n",
+            "templateUrl": [],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "checked",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Estado marcado</p>\n",
+                    "line": 36,
+                    "rawdescription": "\nEstado marcado",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "disabled",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Deshabilitado</p>\n",
+                    "line": 40,
+                    "rawdescription": "\nDeshabilitado",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "indeterminate",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Estado indeterminado</p>\n",
+                    "line": 38,
+                    "rawdescription": "\nEstado indeterminado",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "label",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Texto del checkbox</p>\n",
+                    "line": 34,
+                    "rawdescription": "\nTexto del checkbox",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": true
+                }
+            ],
+            "outputsClass": [
+                {
+                    "name": "mfChange",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "boolean",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 42,
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                }
+            ],
+            "propertiesClass": [
+                {
+                    "name": "hostClasses",
+                    "defaultValue": "computed(() => {\r\n    const classes = ['mf-checkbox'];\r\n    if (this.disabled()) classes.push('mf-checkbox--disabled');\r\n    return classes.join(' ');\r\n  })",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 44,
+                    "modifierKind": [
+                        148
+                    ]
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "onChange",
+                    "args": [
+                        {
+                            "name": "event",
+                            "type": "literal type",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 50,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "event",
+                            "type": "literal type",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [
+                {
+                    "name": "MatCheckboxModule",
+                    "type": "module"
+                }
+            ],
+            "description": "<p>Checkbox de la librería mf-components.\nEnvuelve Angular Material <code>mat-checkbox</code> y expone una API uniforme\ncon look and feel de marca.</p>\n",
+            "rawdescription": "\n\nCheckbox de la librería mf-components.\nEnvuelve Angular Material `mat-checkbox` y expone una API uniforme\ncon look and feel de marca.\n",
+            "type": "component",
+            "sourceCode": "import {\r\n  ChangeDetectionStrategy,\r\n  Component,\r\n  computed,\r\n  input,\r\n  output,\r\n} from '@angular/core';\r\nimport { MatCheckboxModule } from '@angular/material/checkbox';\r\n\r\n/**\r\n * Checkbox de la librería mf-components.\r\n * Envuelve Angular Material `mat-checkbox` y expone una API uniforme\r\n * con look and feel de marca.\r\n */\r\n@Component({\r\n  selector: 'mf-checkbox',\r\n  imports: [MatCheckboxModule],\r\n  template: `\r\n    <mat-checkbox\r\n      [checked]=\"checked()\"\r\n      [disabled]=\"disabled()\"\r\n      [indeterminate]=\"indeterminate()\"\r\n      [class]=\"hostClasses()\"\r\n      (change)=\"onChange($event)\"\r\n    >\r\n      {{ label() }}\r\n    </mat-checkbox>\r\n  `,\r\n  styleUrl: './mf-checkbox.component.css',\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\nexport class MfCheckboxComponent {\r\n  /** Texto del checkbox */\r\n  readonly label = input.required<string>();\r\n  /** Estado marcado */\r\n  readonly checked = input(false);\r\n  /** Estado indeterminado */\r\n  readonly indeterminate = input(false);\r\n  /** Deshabilitado */\r\n  readonly disabled = input(false);\r\n\r\n  readonly mfChange = output<boolean>();\r\n\r\n  readonly hostClasses = computed(() => {\r\n    const classes = ['mf-checkbox'];\r\n    if (this.disabled()) classes.push('mf-checkbox--disabled');\r\n    return classes.join(' ');\r\n  });\r\n\r\n  onChange(event: { checked: boolean }): void {\r\n    this.mfChange.emit(event.checked);\r\n  }\r\n}\r\n",
+            "styleUrl": "./mf-checkbox.component.css",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": []
+        },
+        {
+            "name": "MfDatepickerComponent",
+            "id": "component-MfDatepickerComponent-d64314971bb7a56f4eaa785f3fff175fedaa1e91406d68f13615c85a93b2ce4291d5415581ae6bf0bc1f87d00bed1683aaa01b67c47d9757a087a80bc69dd59a",
+            "file": "src/app/components/datepicker/mf-datepicker.component.ts",
+            "changeDetection": "ChangeDetectionStrategy.OnPush",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "mf-datepicker",
+            "styleUrls": [],
+            "styles": [],
+            "template": "<mat-form-field [appearance]=\"'outline'\" [class]=\"hostClasses()\">\n  @if (label()) {\n    <mat-label>{{ label() }}</mat-label>\n  }\n  <input\n    matInput\n    [matDatepicker]=\"picker\"\n    [placeholder]=\"placeholder()\"\n    [disabled]=\"disabled()\"\n    [min]=\"min()\"\n    [max]=\"max()\"\n    [ngModel]=\"currentValue()\"\n    (dateChange)=\"onDateChange($event)\"\n    (blur)=\"mfBlur.emit()\"\n  />\n  <mat-datepicker-toggle matIconSuffix [for]=\"picker\" [disabled]=\"disabled()\">\n    <mat-icon matDatepickerToggleIcon aria-hidden=\"true\">calendar_month</mat-icon>\n  </mat-datepicker-toggle>\n  <mat-datepicker #picker />\n  @if (hint()) {\n    <mat-hint>{{ hint() }}</mat-hint>\n  }\n  @if (error()) {\n    <mat-error>{{ error() }}</mat-error>\n  }\n</mat-form-field>\n",
+            "templateUrl": [],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "disabled",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Deshabilitado</p>\n",
+                    "line": 73,
+                    "rawdescription": "\nDeshabilitado",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "error",
+                    "defaultValue": "undefined",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string | undefined",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Mensaje de error</p>\n",
+                    "line": 79,
+                    "rawdescription": "\nMensaje de error",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "fullWidth",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Ancho completo</p>\n",
+                    "line": 85,
+                    "rawdescription": "\nAncho completo",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "hint",
+                    "defaultValue": "undefined",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string | undefined",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Texto de ayuda debajo del campo</p>\n",
+                    "line": 77,
+                    "rawdescription": "\nTexto de ayuda debajo del campo",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "label",
+                    "defaultValue": "undefined",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string | undefined",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Etiqueta flotante del campo</p>\n",
+                    "line": 67,
+                    "rawdescription": "\nEtiqueta flotante del campo",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "max",
+                    "defaultValue": "null",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Date | null",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Fecha máxima seleccionable</p>\n",
+                    "line": 83,
+                    "rawdescription": "\nFecha máxima seleccionable",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "min",
+                    "defaultValue": "null",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Date | null",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Fecha mínima seleccionable</p>\n",
+                    "line": 81,
+                    "rawdescription": "\nFecha mínima seleccionable",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "placeholder",
+                    "defaultValue": "'DD/MM/YYYY'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Placeholder del input</p>\n",
+                    "line": 69,
+                    "rawdescription": "\nPlaceholder del input",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "size",
+                    "defaultValue": "'md'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "MfDatepickerSize",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Tamaño del campo</p>\n",
+                    "line": 71,
+                    "rawdescription": "\nTamaño del campo",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "value",
+                    "defaultValue": "null",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Date | null",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Valor inicial del datepicker</p>\n",
+                    "line": 75,
+                    "rawdescription": "\nValor inicial del datepicker",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                }
+            ],
+            "outputsClass": [
+                {
+                    "name": "mfBlur",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "void",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 88,
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "mfChange",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Date | null",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 87,
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                }
+            ],
+            "propertiesClass": [
+                {
+                    "name": "currentValue",
+                    "defaultValue": "signal<Date | null>(null)",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 90,
+                    "modifierKind": [
+                        124,
+                        148
+                    ]
+                },
+                {
+                    "name": "hostClasses",
+                    "defaultValue": "computed(() => {\r\n    const classes = ['mf-datepicker', `mf-datepicker--${this.size()}`];\r\n    if (this.fullWidth()) classes.push('mf-datepicker--full');\r\n    if (this.error()) classes.push('mf-datepicker--error');\r\n    return classes.join(' ');\r\n  })",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 98,
+                    "modifierKind": [
+                        148
+                    ]
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "onDateChange",
+                    "args": [
+                        {
+                            "name": "event",
+                            "type": "literal type",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 105,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "event",
+                            "type": "literal type",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [
+                {
+                    "name": "MatDatepickerModule",
+                    "type": "module"
+                },
+                {
+                    "name": "MatFormFieldModule",
+                    "type": "module"
+                },
+                {
+                    "name": "MatInputModule",
+                    "type": "module"
+                },
+                {
+                    "name": "MatNativeDateModule",
+                    "type": "module"
+                },
+                {
+                    "name": "MatIconModule",
+                    "type": "module"
+                },
+                {
+                    "name": "FormsModule",
+                    "type": "module"
+                }
+            ],
+            "description": "<p>Selector de fecha de la librería mf-components.\nEnvuelve Angular Material <code>mat-datepicker</code> y expone una API uniforme\ncon look and feel de marca.</p>\n",
+            "rawdescription": "\n\nSelector de fecha de la librería mf-components.\nEnvuelve Angular Material `mat-datepicker` y expone una API uniforme\ncon look and feel de marca.\n",
+            "type": "component",
+            "sourceCode": "import {\r\n  ChangeDetectionStrategy,\r\n  Component,\r\n  computed,\r\n  effect,\r\n  input,\r\n  output,\r\n  signal,\r\n} from '@angular/core';\r\nimport { MatDatepickerModule } from '@angular/material/datepicker';\r\nimport { MatFormFieldModule } from '@angular/material/form-field';\r\nimport { MatInputModule } from '@angular/material/input';\r\nimport { MatNativeDateModule } from '@angular/material/core';\r\nimport { MatIconModule } from '@angular/material/icon';\r\nimport { FormsModule } from '@angular/forms';\r\n\r\nexport type MfDatepickerSize = 'sm' | 'md' | 'lg';\r\n\r\n/**\r\n * Selector de fecha de la librería mf-components.\r\n * Envuelve Angular Material `mat-datepicker` y expone una API uniforme\r\n * con look and feel de marca.\r\n */\r\n@Component({\r\n  selector: 'mf-datepicker',\r\n  imports: [\r\n    MatDatepickerModule,\r\n    MatFormFieldModule,\r\n    MatInputModule,\r\n    MatNativeDateModule,\r\n    MatIconModule,\r\n    FormsModule,\r\n  ],\r\n  template: `\r\n    <mat-form-field [appearance]=\"'outline'\" [class]=\"hostClasses()\">\r\n      @if (label()) {\r\n        <mat-label>{{ label() }}</mat-label>\r\n      }\r\n      <input\r\n        matInput\r\n        [matDatepicker]=\"picker\"\r\n        [placeholder]=\"placeholder()\"\r\n        [disabled]=\"disabled()\"\r\n        [min]=\"min()\"\r\n        [max]=\"max()\"\r\n        [ngModel]=\"currentValue()\"\r\n        (dateChange)=\"onDateChange($event)\"\r\n        (blur)=\"mfBlur.emit()\"\r\n      />\r\n      <mat-datepicker-toggle matIconSuffix [for]=\"picker\" [disabled]=\"disabled()\">\r\n        <mat-icon matDatepickerToggleIcon aria-hidden=\"true\">calendar_month</mat-icon>\r\n      </mat-datepicker-toggle>\r\n      <mat-datepicker #picker />\r\n      @if (hint()) {\r\n        <mat-hint>{{ hint() }}</mat-hint>\r\n      }\r\n      @if (error()) {\r\n        <mat-error>{{ error() }}</mat-error>\r\n      }\r\n    </mat-form-field>\r\n  `,\r\n  styleUrl: './mf-datepicker.component.css',\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\nexport class MfDatepickerComponent {\r\n  /** Etiqueta flotante del campo */\r\n  readonly label = input<string | undefined>(undefined);\r\n  /** Placeholder del input */\r\n  readonly placeholder = input('DD/MM/YYYY');\r\n  /** Tamaño del campo */\r\n  readonly size = input<MfDatepickerSize>('md');\r\n  /** Deshabilitado */\r\n  readonly disabled = input(false);\r\n  /** Valor inicial del datepicker */\r\n  readonly value = input<Date | null>(null);\r\n  /** Texto de ayuda debajo del campo */\r\n  readonly hint = input<string | undefined>(undefined);\r\n  /** Mensaje de error */\r\n  readonly error = input<string | undefined>(undefined);\r\n  /** Fecha mínima seleccionable */\r\n  readonly min = input<Date | null>(null);\r\n  /** Fecha máxima seleccionable */\r\n  readonly max = input<Date | null>(null);\r\n  /** Ancho completo */\r\n  readonly fullWidth = input(false);\r\n\r\n  readonly mfChange = output<Date | null>();\r\n  readonly mfBlur = output<void>();\r\n\r\n  protected readonly currentValue = signal<Date | null>(null);\r\n\r\n  constructor() {\r\n    effect(() => {\r\n      this.currentValue.set(this.value());\r\n    });\r\n  }\r\n\r\n  readonly hostClasses = computed(() => {\r\n    const classes = ['mf-datepicker', `mf-datepicker--${this.size()}`];\r\n    if (this.fullWidth()) classes.push('mf-datepicker--full');\r\n    if (this.error()) classes.push('mf-datepicker--error');\r\n    return classes.join(' ');\r\n  });\r\n\r\n  onDateChange(event: { value: Date | null }): void {\r\n    this.currentValue.set(event.value);\r\n    this.mfChange.emit(event.value);\r\n  }\r\n}\r\n",
+            "styleUrl": "./mf-datepicker.component.css",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [],
+                "line": 90
+            },
+            "extends": []
+        },
+        {
+            "name": "MfDialogComponent",
+            "id": "component-MfDialogComponent-4e348f53f7c8bed82008d3ca04fac0d2b72fcaa349a9d1c8b99dc9c5679cf3568823f9cb1369a128e21703fa6fde98490bd6e9da95ff86bd74246e77971aa61a",
+            "file": "src/app/components/dialog/mf-dialog.component.ts",
+            "changeDetection": "ChangeDetectionStrategy.OnPush",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "mf-dialog",
+            "styleUrls": [],
+            "styles": [],
+            "template": "<div [class]=\"hostClasses()\">\n  <div class=\"mf-dialog__header\">\n    <h2 class=\"mf-dialog__title\">{{ title() }}</h2>\n    @if (showClose()) {\n      <button\n        class=\"mf-dialog__close\"\n        (click)=\"onClose()\"\n        aria-label=\"Cerrar diálogo\"\n        type=\"button\"\n      >\n        <mat-icon>close</mat-icon>\n      </button>\n    }\n  </div>\n\n  @if (message()) {\n    <div class=\"mf-dialog__body\">\n      <p class=\"mf-dialog__message\">{{ message() }}</p>\n    </div>\n  }\n\n  <div class=\"mf-dialog__content\">\n    <ng-content />\n  </div>\n\n  @if (showActions()) {\n    <div class=\"mf-dialog__actions\">\n      <ng-content select=\"[mfDialogActions]\" />\n    </div>\n  }\n</div>\n",
+            "templateUrl": [],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "message",
+                    "defaultValue": "undefined",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string | undefined",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Mensaje descriptivo</p>\n",
+                    "line": 71,
+                    "rawdescription": "\nMensaje descriptivo",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "showActions",
+                    "defaultValue": "true",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Mostrar área de acciones (footer)</p>\n",
+                    "line": 75,
+                    "rawdescription": "\nMostrar área de acciones (footer)",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "showClose",
+                    "defaultValue": "true",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Mostrar botón de cerrar</p>\n",
+                    "line": 73,
+                    "rawdescription": "\nMostrar botón de cerrar",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "title",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Título del diálogo</p>\n",
+                    "line": 69,
+                    "rawdescription": "\nTítulo del diálogo",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": true
+                }
+            ],
+            "outputsClass": [
+                {
+                    "name": "mfClose",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "void",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 77,
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                }
+            ],
+            "propertiesClass": [
+                {
+                    "name": "dialogRef",
+                    "defaultValue": "inject(MatDialogRef<MfDialogComponent>, {\r\n    optional: true,\r\n  })",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 64,
+                    "modifierKind": [
+                        123,
+                        148
+                    ]
+                },
+                {
+                    "name": "hostClasses",
+                    "defaultValue": "computed(() => {\r\n    return 'mf-dialog';\r\n  })",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 79,
+                    "modifierKind": [
+                        148
+                    ]
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "onClose",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 83,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [
+                {
+                    "name": "MatDialogModule",
+                    "type": "module"
+                },
+                {
+                    "name": "MatIconModule",
+                    "type": "module"
+                }
+            ],
+            "description": "<p>Contenido de diálogo de la librería mf-components.\nEnvuelve las directivas de Angular Material <code>mat-dialog-*</code> y expone\nuna API uniforme con look and feel de marca.</p>\n<p>Uso:</p>\n<b>Example :</b><div><pre class=\"line-numbers\"><code class=\"language-none\">dialog.open(MfDialogComponent, {\n  data: { title: &#39;Confirmar&#39;, message: &#39;¿Deseas continuar?&#39; }\n});</code></pre></div>",
+            "rawdescription": "\n\nContenido de diálogo de la librería mf-components.\nEnvuelve las directivas de Angular Material `mat-dialog-*` y expone\nuna API uniforme con look and feel de marca.\n\nUso:\n```\ndialog.open(MfDialogComponent, {\n  data: { title: 'Confirmar', message: '¿Deseas continuar?' }\n});\n```\n",
+            "type": "component",
+            "sourceCode": "import {\r\n  ChangeDetectionStrategy,\r\n  Component,\r\n  computed,\r\n  inject,\r\n  input,\r\n  output,\r\n} from '@angular/core';\r\nimport { MatDialogModule, MatDialogRef } from '@angular/material/dialog';\r\nimport { MatIconModule } from '@angular/material/icon';\r\n\r\n/**\r\n * Contenido de diálogo de la librería mf-components.\r\n * Envuelve las directivas de Angular Material `mat-dialog-*` y expone\r\n * una API uniforme con look and feel de marca.\r\n *\r\n * Uso:\r\n * ```\r\n * dialog.open(MfDialogComponent, {\r\n *   data: { title: 'Confirmar', message: '¿Deseas continuar?' }\r\n * });\r\n * ```\r\n */\r\n@Component({\r\n  selector: 'mf-dialog',\r\n  imports: [MatDialogModule, MatIconModule],\r\n  template: `\r\n    <div [class]=\"hostClasses()\">\r\n      <div class=\"mf-dialog__header\">\r\n        <h2 class=\"mf-dialog__title\">{{ title() }}</h2>\r\n        @if (showClose()) {\r\n          <button\r\n            class=\"mf-dialog__close\"\r\n            (click)=\"onClose()\"\r\n            aria-label=\"Cerrar diálogo\"\r\n            type=\"button\"\r\n          >\r\n            <mat-icon>close</mat-icon>\r\n          </button>\r\n        }\r\n      </div>\r\n\r\n      @if (message()) {\r\n        <div class=\"mf-dialog__body\">\r\n          <p class=\"mf-dialog__message\">{{ message() }}</p>\r\n        </div>\r\n      }\r\n\r\n      <div class=\"mf-dialog__content\">\r\n        <ng-content />\r\n      </div>\r\n\r\n      @if (showActions()) {\r\n        <div class=\"mf-dialog__actions\">\r\n          <ng-content select=\"[mfDialogActions]\" />\r\n        </div>\r\n      }\r\n    </div>\r\n  `,\r\n  styleUrl: './mf-dialog.component.css',\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\nexport class MfDialogComponent {\r\n  private readonly dialogRef = inject(MatDialogRef<MfDialogComponent>, {\r\n    optional: true,\r\n  });\r\n\r\n  /** Título del diálogo */\r\n  readonly title = input.required<string>();\r\n  /** Mensaje descriptivo */\r\n  readonly message = input<string | undefined>(undefined);\r\n  /** Mostrar botón de cerrar */\r\n  readonly showClose = input(true);\r\n  /** Mostrar área de acciones (footer) */\r\n  readonly showActions = input(true);\r\n\r\n  readonly mfClose = output<void>();\r\n\r\n  readonly hostClasses = computed(() => {\r\n    return 'mf-dialog';\r\n  });\r\n\r\n  onClose(): void {\r\n    this.mfClose.emit();\r\n    this.dialogRef?.close();\r\n  }\r\n}\r\n",
+            "styleUrl": "./mf-dialog.component.css",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": []
+        },
+        {
+            "name": "MfFormFieldComponent",
+            "id": "component-MfFormFieldComponent-6f6ec969d328e092141bd8e00c88f5b9cd5b8e0314c57cb22090939c4788d3ca5be0f76c50e83da7147b31192c2e3775677571865a96fb6f6ada184c0652f95a",
+            "file": "src/app/components/form-field/mf-form-field.component.ts",
+            "changeDetection": "ChangeDetectionStrategy.OnPush",
+            "encapsulation": [],
+            "entryComponents": [],
+            "host": {},
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "mf-form-field",
+            "styleUrls": [],
+            "styles": [],
+            "template": "@if (label()) {\n  <label [class]=\"labelClasses()\" [attr.for]=\"fieldId()\">{{ label() }}\n    @if (required()) {\n      <span class=\"mf-form-field__required\" aria-hidden=\"true\"> *</span>\n    }\n  </label>\n}\n<div class=\"mf-form-field__control\">\n  <ng-content />\n</div>\n@if (error()) {\n  <p class=\"mf-form-field__error\" role=\"alert\">{{ error() }}</p>\n} @else if (hint()) {\n  <p class=\"mf-form-field__hint\">{{ hint() }}</p>\n}\n",
+            "templateUrl": [],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "error",
+                    "defaultValue": "undefined",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string | undefined",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Mensaje de error</p>\n",
+                    "line": 47,
+                    "rawdescription": "\nMensaje de error",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "fieldId",
+                    "defaultValue": "undefined",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string | undefined",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>ID para asociar el label con el control</p>\n",
+                    "line": 43,
+                    "rawdescription": "\nID para asociar el label con el control",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "hint",
+                    "defaultValue": "undefined",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string | undefined",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Texto de ayuda</p>\n",
+                    "line": 45,
+                    "rawdescription": "\nTexto de ayuda",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "label",
+                    "defaultValue": "undefined",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string | undefined",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Etiqueta del campo</p>\n",
+                    "line": 41,
+                    "rawdescription": "\nEtiqueta del campo",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "required",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Campo requerido (muestra asterisco)</p>\n",
+                    "line": 49,
+                    "rawdescription": "\nCampo requerido (muestra asterisco)",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "hostClasses",
+                    "defaultValue": "computed(() => {\r\n    const classes = ['mf-form-field'];\r\n    if (this.error()) classes.push('mf-form-field--error');\r\n    return classes.join(' ');\r\n  })",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 57,
+                    "modifierKind": [
+                        148
+                    ]
+                },
+                {
+                    "name": "labelClasses",
+                    "defaultValue": "computed(() => {\r\n    const classes = ['mf-form-field__label'];\r\n    if (this.error()) classes.push('mf-form-field__label--error');\r\n    return classes.join(' ');\r\n  })",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 51,
+                    "modifierKind": [
+                        148
+                    ]
+                }
+            ],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [],
+            "description": "<p>Contenedor de campo de formulario de la librería mf-components.\nProporciona estructura de layout consistente con label, contenido proyectado,\ny mensajes opcionales de ayuda o error.</p>\n",
+            "rawdescription": "\n\nContenedor de campo de formulario de la librería mf-components.\nProporciona estructura de layout consistente con label, contenido proyectado,\ny mensajes opcionales de ayuda o error.\n",
+            "type": "component",
+            "sourceCode": "import {\r\n  ChangeDetectionStrategy,\r\n  Component,\r\n  computed,\r\n  input,\r\n} from '@angular/core';\r\n\r\n/**\r\n * Contenedor de campo de formulario de la librería mf-components.\r\n * Proporciona estructura de layout consistente con label, contenido proyectado,\r\n * y mensajes opcionales de ayuda o error.\r\n */\r\n@Component({\r\n  selector: 'mf-form-field',\r\n  imports: [],\r\n  template: `\r\n    @if (label()) {\r\n      <label [class]=\"labelClasses()\" [attr.for]=\"fieldId()\">{{ label() }}\r\n        @if (required()) {\r\n          <span class=\"mf-form-field__required\" aria-hidden=\"true\"> *</span>\r\n        }\r\n      </label>\r\n    }\r\n    <div class=\"mf-form-field__control\">\r\n      <ng-content />\r\n    </div>\r\n    @if (error()) {\r\n      <p class=\"mf-form-field__error\" role=\"alert\">{{ error() }}</p>\r\n    } @else if (hint()) {\r\n      <p class=\"mf-form-field__hint\">{{ hint() }}</p>\r\n    }\r\n  `,\r\n  styleUrl: './mf-form-field.component.css',\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n  host: {\r\n    '[class]': 'hostClasses()',\r\n  },\r\n})\r\nexport class MfFormFieldComponent {\r\n  /** Etiqueta del campo */\r\n  readonly label = input<string | undefined>(undefined);\r\n  /** ID para asociar el label con el control */\r\n  readonly fieldId = input<string | undefined>(undefined);\r\n  /** Texto de ayuda */\r\n  readonly hint = input<string | undefined>(undefined);\r\n  /** Mensaje de error */\r\n  readonly error = input<string | undefined>(undefined);\r\n  /** Campo requerido (muestra asterisco) */\r\n  readonly required = input(false);\r\n\r\n  readonly labelClasses = computed(() => {\r\n    const classes = ['mf-form-field__label'];\r\n    if (this.error()) classes.push('mf-form-field__label--error');\r\n    return classes.join(' ');\r\n  });\r\n\r\n  readonly hostClasses = computed(() => {\r\n    const classes = ['mf-form-field'];\r\n    if (this.error()) classes.push('mf-form-field--error');\r\n    return classes.join(' ');\r\n  });\r\n}\r\n",
+            "styleUrl": "./mf-form-field.component.css",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": []
+        },
+        {
+            "name": "MfGridListComponent",
+            "id": "component-MfGridListComponent-1d9a7651cbdb8d20d2285f7db8e813d712055a2bc84ee0812b5cf11a0e02243ebb28a1c60d7644d61ccba651a65864ccc54242be2ac9b64699f80ffac0bbcf02",
+            "file": "src/app/components/grid-list/mf-grid-list.component.ts",
+            "changeDetection": "ChangeDetectionStrategy.OnPush",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "mf-grid-list",
+            "styleUrls": [],
+            "styles": [],
+            "template": "<mat-grid-list\n  class=\"mf-grid-list\"\n  [cols]=\"cols()\"\n  [rowHeight]=\"rowHeight()\"\n  [gutterSize]=\"gutterSize()\"\n>\n  @for (tile of tiles(); track $index) {\n    <mat-grid-tile\n      class=\"mf-grid-list__tile\"\n      [colspan]=\"tile.colspan ?? 1\"\n      [rowspan]=\"tile.rowspan ?? 1\"\n      [style.background]=\"tile.background || null\"\n    >\n      <mat-grid-tile-header>\n        @if (tile.title) {\n          <span class=\"mf-grid-list__tile-title\">{{ tile.title }}</span>\n        }\n        @if (tile.subtitle) {\n          <span class=\"mf-grid-list__tile-subtitle\">{{ tile.subtitle }}</span>\n        }\n      </mat-grid-tile-header>\n    </mat-grid-tile>\n  }\n  <ng-content />\n</mat-grid-list>\n",
+            "templateUrl": [],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "cols",
+                    "defaultValue": "2",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Número de columnas</p>\n",
+                    "line": 61,
+                    "rawdescription": "\nNúmero de columnas",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "gutterSize",
+                    "defaultValue": "'8px'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Espacio entre tiles</p>\n",
+                    "line": 65,
+                    "rawdescription": "\nEspacio entre tiles",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "rowHeight",
+                    "defaultValue": "'1:1'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string | number",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Altura de cada fila</p>\n",
+                    "line": 63,
+                    "rawdescription": "\nAltura de cada fila",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "tiles",
+                    "defaultValue": "[]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "MfGridTile[]",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Tiles a renderizar</p>\n",
+                    "line": 67,
+                    "rawdescription": "\nTiles a renderizar",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [
+                {
+                    "name": "MatGridListModule",
+                    "type": "module"
+                }
+            ],
+            "description": "<p>Lista en cuadrícula de la librería mf-components.\nEnvuelve Angular Material <code>mat-grid-list</code> y expone una API uniforme\ncon look and feel de marca. Soporta tiles estáticas y content projection.</p>\n",
+            "rawdescription": "\n\nLista en cuadrícula de la librería mf-components.\nEnvuelve Angular Material `mat-grid-list` y expone una API uniforme\ncon look and feel de marca. Soporta tiles estáticas y content projection.\n",
+            "type": "component",
+            "sourceCode": "import {\r\n  ChangeDetectionStrategy,\r\n  Component,\r\n  input,\r\n} from '@angular/core';\r\nimport { MatGridListModule } from '@angular/material/grid-list';\r\n\r\nexport interface MfGridTile {\r\n  /** Título de la tile */\r\n  title?: string;\r\n  /** Subtítulo de la tile */\r\n  subtitle?: string;\r\n  /** Número de columnas que ocupa */\r\n  colspan?: number;\r\n  /** Número de filas que ocupa */\r\n  rowspan?: number;\r\n  /** Color de fondo */\r\n  background?: string;\r\n}\r\n\r\n/**\r\n * Lista en cuadrícula de la librería mf-components.\r\n * Envuelve Angular Material `mat-grid-list` y expone una API uniforme\r\n * con look and feel de marca. Soporta tiles estáticas y content projection.\r\n */\r\n@Component({\r\n  selector: 'mf-grid-list',\r\n  imports: [MatGridListModule],\r\n  template: `\r\n    <mat-grid-list\r\n      class=\"mf-grid-list\"\r\n      [cols]=\"cols()\"\r\n      [rowHeight]=\"rowHeight()\"\r\n      [gutterSize]=\"gutterSize()\"\r\n    >\r\n      @for (tile of tiles(); track $index) {\r\n        <mat-grid-tile\r\n          class=\"mf-grid-list__tile\"\r\n          [colspan]=\"tile.colspan ?? 1\"\r\n          [rowspan]=\"tile.rowspan ?? 1\"\r\n          [style.background]=\"tile.background || null\"\r\n        >\r\n          <mat-grid-tile-header>\r\n            @if (tile.title) {\r\n              <span class=\"mf-grid-list__tile-title\">{{ tile.title }}</span>\r\n            }\r\n            @if (tile.subtitle) {\r\n              <span class=\"mf-grid-list__tile-subtitle\">{{ tile.subtitle }}</span>\r\n            }\r\n          </mat-grid-tile-header>\r\n        </mat-grid-tile>\r\n      }\r\n      <ng-content />\r\n    </mat-grid-list>\r\n  `,\r\n  styleUrl: './mf-grid-list.component.css',\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\nexport class MfGridListComponent {\r\n  /** Número de columnas */\r\n  readonly cols = input(2);\r\n  /** Altura de cada fila */\r\n  readonly rowHeight = input<string | number>('1:1');\r\n  /** Espacio entre tiles */\r\n  readonly gutterSize = input('8px');\r\n  /** Tiles a renderizar */\r\n  readonly tiles = input<MfGridTile[]>([]);\r\n}\r\n",
+            "styleUrl": "./mf-grid-list.component.css",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": []
+        },
+        {
+            "name": "MfIconComponent",
+            "id": "component-MfIconComponent-b4f8b174bb2b56ac56b402de3b0e3517b397b3ff72083a5bde2516443596f5799cd6d7930b8e6d703646772ebd11e7f22347a4930690bf3f87a4dc9e1d811384",
+            "file": "src/app/components/icon/mf-icon.component.ts",
+            "changeDetection": "ChangeDetectionStrategy.OnPush",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "mf-icon",
+            "styleUrls": [],
+            "styles": [],
+            "template": "<mat-icon [class]=\"hostClasses()\" [attr.aria-hidden]=\"ariaHidden()\" [attr.aria-label]=\"label()\">{{ name() }}</mat-icon>\n",
+            "templateUrl": [],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "color",
+                    "defaultValue": "'default'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "MfIconColor",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Color semántico del icono</p>\n",
+                    "line": 32,
+                    "rawdescription": "\nColor semántico del icono",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "label",
+                    "defaultValue": "undefined",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string | undefined",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Etiqueta accesible. Si se omite, el icono será decorativo (aria-hidden)</p>\n",
+                    "line": 34,
+                    "rawdescription": "\nEtiqueta accesible. Si se omite, el icono será decorativo (aria-hidden)",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "name",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Nombre del icono de Material Symbols / Material Icons</p>\n",
+                    "line": 28,
+                    "rawdescription": "\nNombre del icono de Material Symbols / Material Icons",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": true
+                },
+                {
+                    "name": "size",
+                    "defaultValue": "'md'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "MfIconSize",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Tamaño visual del icono</p>\n",
+                    "line": 30,
+                    "rawdescription": "\nTamaño visual del icono",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "ariaHidden",
+                    "defaultValue": "computed(() => (this.label() ? 'false' : 'true'))",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 36,
+                    "modifierKind": [
+                        148
+                    ]
+                },
+                {
+                    "name": "hostClasses",
+                    "defaultValue": "computed(() => {\r\n    return ['mf-icon', `mf-icon--${this.size()}`, `mf-icon--${this.color()}`].join(' ');\r\n  })",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 38,
+                    "modifierKind": [
+                        148
+                    ]
+                }
+            ],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [
+                {
+                    "name": "MatIconModule",
+                    "type": "module"
+                }
+            ],
+            "description": "<p>Icono de la librería mf-components.\nEnvuelve Angular Material <code>mat-icon</code> y expone una API uniforme\ncon tamaños y colores de marca.</p>\n",
+            "rawdescription": "\n\nIcono de la librería mf-components.\nEnvuelve Angular Material `mat-icon` y expone una API uniforme\ncon tamaños y colores de marca.\n",
+            "type": "component",
+            "sourceCode": "import {\r\n  ChangeDetectionStrategy,\r\n  Component,\r\n  computed,\r\n  input,\r\n} from '@angular/core';\r\nimport { MatIconModule } from '@angular/material/icon';\r\n\r\nexport type MfIconSize = 'sm' | 'md' | 'lg' | 'xl';\r\nexport type MfIconColor = 'default' | 'brand' | 'muted' | 'error' | 'inherit';\r\n\r\n/**\r\n * Icono de la librería mf-components.\r\n * Envuelve Angular Material `mat-icon` y expone una API uniforme\r\n * con tamaños y colores de marca.\r\n */\r\n@Component({\r\n  selector: 'mf-icon',\r\n  imports: [MatIconModule],\r\n  template: `\r\n    <mat-icon [class]=\"hostClasses()\" [attr.aria-hidden]=\"ariaHidden()\" [attr.aria-label]=\"label()\">{{ name() }}</mat-icon>\r\n  `,\r\n  styleUrl: './mf-icon.component.css',\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\nexport class MfIconComponent {\r\n  /** Nombre del icono de Material Symbols / Material Icons */\r\n  readonly name = input.required<string>();\r\n  /** Tamaño visual del icono */\r\n  readonly size = input<MfIconSize>('md');\r\n  /** Color semántico del icono */\r\n  readonly color = input<MfIconColor>('default');\r\n  /** Etiqueta accesible. Si se omite, el icono será decorativo (aria-hidden) */\r\n  readonly label = input<string | undefined>(undefined);\r\n\r\n  readonly ariaHidden = computed(() => (this.label() ? 'false' : 'true'));\r\n\r\n  readonly hostClasses = computed(() => {\r\n    return ['mf-icon', `mf-icon--${this.size()}`, `mf-icon--${this.color()}`].join(' ');\r\n  });\r\n}\r\n",
+            "styleUrl": "./mf-icon.component.css",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": []
+        },
+        {
+            "name": "MfInputComponent",
+            "id": "component-MfInputComponent-de8dbe537ea90074269f9f601c18ba445267618c8336ab5539e462080a383df7af761e33b61f4d84f91156c61d481398d95e000fc1ee8c1d357a708a956b7063",
+            "file": "src/app/components/input/mf-input.component.ts",
+            "changeDetection": "ChangeDetectionStrategy.OnPush",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "mf-input",
+            "styleUrls": [],
+            "styles": [],
+            "template": "<mat-form-field [appearance]=\"'outline'\" [class]=\"hostClasses()\">\n  @if (label()) {\n    <mat-label>{{ label() }}</mat-label>\n  }\n  @if (leadingIcon()) {\n    <mat-icon matPrefix aria-hidden=\"true\">{{ leadingIcon() }}</mat-icon>\n  }\n  <input\n    matInput\n    [type]=\"type()\"\n    [placeholder]=\"placeholder()\"\n    [disabled]=\"disabled()\"\n    [readonly]=\"readonly()\"\n    [value]=\"value()\"\n    (input)=\"onInput($event)\"\n    (blur)=\"mfBlur.emit()\"\n  />\n  @if (trailingIcon()) {\n    <mat-icon matSuffix aria-hidden=\"true\">{{ trailingIcon() }}</mat-icon>\n  }\n  @if (hint()) {\n    <mat-hint>{{ hint() }}</mat-hint>\n  }\n  @if (error()) {\n    <mat-error>{{ error() }}</mat-error>\n  }\n</mat-form-field>\n",
+            "templateUrl": [],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "disabled",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Deshabilitado</p>\n",
+                    "line": 68,
+                    "rawdescription": "\nDeshabilitado",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "error",
+                    "defaultValue": "undefined",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string | undefined",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Mensaje de error</p>\n",
+                    "line": 74,
+                    "rawdescription": "\nMensaje de error",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "fullWidth",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Ancho completo</p>\n",
+                    "line": 80,
+                    "rawdescription": "\nAncho completo",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "hint",
+                    "defaultValue": "undefined",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string | undefined",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Texto de ayuda debajo del campo</p>\n",
+                    "line": 72,
+                    "rawdescription": "\nTexto de ayuda debajo del campo",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "label",
+                    "defaultValue": "undefined",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string | undefined",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Etiqueta flotante del campo</p>\n",
+                    "line": 56,
+                    "rawdescription": "\nEtiqueta flotante del campo",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "leadingIcon",
+                    "defaultValue": "undefined",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string | undefined",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Icono al inicio</p>\n",
+                    "line": 76,
+                    "rawdescription": "\nIcono al inicio",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "placeholder",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Placeholder del input</p>\n",
+                    "line": 58,
+                    "rawdescription": "\nPlaceholder del input",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "readonly",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Solo lectura</p>\n",
+                    "line": 70,
+                    "rawdescription": "\nSolo lectura",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "size",
+                    "defaultValue": "'md'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "MfInputSize",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Tamaño del campo</p>\n",
+                    "line": 64,
+                    "rawdescription": "\nTamaño del campo",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "trailingIcon",
+                    "defaultValue": "undefined",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string | undefined",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Icono al final</p>\n",
+                    "line": 78,
+                    "rawdescription": "\nIcono al final",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "type",
+                    "defaultValue": "'text'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "\r    'text' | 'email' | 'password' | 'number' | 'search' | 'tel' | 'url'\r  ",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Tipo de input HTML</p>\n",
+                    "line": 60,
+                    "rawdescription": "\nTipo de input HTML",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "value",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Valor actual del campo</p>\n",
+                    "line": 66,
+                    "rawdescription": "\nValor actual del campo",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                }
+            ],
+            "outputsClass": [
+                {
+                    "name": "mfBlur",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "void",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 83,
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "mfInput",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 82,
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                }
+            ],
+            "propertiesClass": [
+                {
+                    "name": "hostClasses",
+                    "defaultValue": "computed(() => {\r\n    const classes = ['mf-input', `mf-input--${this.size()}`];\r\n    if (this.fullWidth()) classes.push('mf-input--full');\r\n    if (this.error()) classes.push('mf-input--error');\r\n    return classes.join(' ');\r\n  })",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 85,
+                    "modifierKind": [
+                        148
+                    ]
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "onInput",
+                    "args": [
+                        {
+                            "name": "event",
+                            "type": "Event",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 92,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "event",
+                            "type": "Event",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [
+                {
+                    "name": "MatFormFieldModule",
+                    "type": "module"
+                },
+                {
+                    "name": "MatInputModule",
+                    "type": "module"
+                },
+                {
+                    "name": "MatIconModule",
+                    "type": "module"
+                }
+            ],
+            "description": "<p>Campo de texto de la librería mf-components.\nEnvuelve Angular Material <code>mat-form-field</code> + <code>matInput</code>\ny expone una API uniforme con look and feel de marca.</p>\n",
+            "rawdescription": "\n\nCampo de texto de la librería mf-components.\nEnvuelve Angular Material `mat-form-field` + `matInput`\ny expone una API uniforme con look and feel de marca.\n",
+            "type": "component",
+            "sourceCode": "import {\r\n  ChangeDetectionStrategy,\r\n  Component,\r\n  computed,\r\n  input,\r\n  output,\r\n} from '@angular/core';\r\nimport { MatFormFieldModule } from '@angular/material/form-field';\r\nimport { MatInputModule } from '@angular/material/input';\r\nimport { MatIconModule } from '@angular/material/icon';\r\n\r\nexport type MfInputSize = 'sm' | 'md' | 'lg';\r\n\r\n/**\r\n * Campo de texto de la librería mf-components.\r\n * Envuelve Angular Material `mat-form-field` + `matInput`\r\n * y expone una API uniforme con look and feel de marca.\r\n */\r\n@Component({\r\n  selector: 'mf-input',\r\n  imports: [MatFormFieldModule, MatInputModule, MatIconModule],\r\n  template: `\r\n    <mat-form-field [appearance]=\"'outline'\" [class]=\"hostClasses()\">\r\n      @if (label()) {\r\n        <mat-label>{{ label() }}</mat-label>\r\n      }\r\n      @if (leadingIcon()) {\r\n        <mat-icon matPrefix aria-hidden=\"true\">{{ leadingIcon() }}</mat-icon>\r\n      }\r\n      <input\r\n        matInput\r\n        [type]=\"type()\"\r\n        [placeholder]=\"placeholder()\"\r\n        [disabled]=\"disabled()\"\r\n        [readonly]=\"readonly()\"\r\n        [value]=\"value()\"\r\n        (input)=\"onInput($event)\"\r\n        (blur)=\"mfBlur.emit()\"\r\n      />\r\n      @if (trailingIcon()) {\r\n        <mat-icon matSuffix aria-hidden=\"true\">{{ trailingIcon() }}</mat-icon>\r\n      }\r\n      @if (hint()) {\r\n        <mat-hint>{{ hint() }}</mat-hint>\r\n      }\r\n      @if (error()) {\r\n        <mat-error>{{ error() }}</mat-error>\r\n      }\r\n    </mat-form-field>\r\n  `,\r\n  styleUrl: './mf-input.component.css',\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\nexport class MfInputComponent {\r\n  /** Etiqueta flotante del campo */\r\n  readonly label = input<string | undefined>(undefined);\r\n  /** Placeholder del input */\r\n  readonly placeholder = input('');\r\n  /** Tipo de input HTML */\r\n  readonly type = input<\r\n    'text' | 'email' | 'password' | 'number' | 'search' | 'tel' | 'url'\r\n  >('text');\r\n  /** Tamaño del campo */\r\n  readonly size = input<MfInputSize>('md');\r\n  /** Valor actual del campo */\r\n  readonly value = input('');\r\n  /** Deshabilitado */\r\n  readonly disabled = input(false);\r\n  /** Solo lectura */\r\n  readonly readonly = input(false);\r\n  /** Texto de ayuda debajo del campo */\r\n  readonly hint = input<string | undefined>(undefined);\r\n  /** Mensaje de error */\r\n  readonly error = input<string | undefined>(undefined);\r\n  /** Icono al inicio */\r\n  readonly leadingIcon = input<string | undefined>(undefined);\r\n  /** Icono al final */\r\n  readonly trailingIcon = input<string | undefined>(undefined);\r\n  /** Ancho completo */\r\n  readonly fullWidth = input(false);\r\n\r\n  readonly mfInput = output<string>();\r\n  readonly mfBlur = output<void>();\r\n\r\n  readonly hostClasses = computed(() => {\r\n    const classes = ['mf-input', `mf-input--${this.size()}`];\r\n    if (this.fullWidth()) classes.push('mf-input--full');\r\n    if (this.error()) classes.push('mf-input--error');\r\n    return classes.join(' ');\r\n  });\r\n\r\n  onInput(event: Event): void {\r\n    const target = event.target as HTMLInputElement;\r\n    this.mfInput.emit(target.value);\r\n  }\r\n}\r\n",
+            "styleUrl": "./mf-input.component.css",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": []
+        },
+        {
+            "name": "MfProgressBarComponent",
+            "id": "component-MfProgressBarComponent-2145c1e7a6cf9913acec74414c0587f17ba31e807fe0c2a152631ceb1c4acb5af8cd132829ca1063839e4ea560753c168558db2dc427ce41f24e9c565dd15b92",
+            "file": "src/app/components/progress-bar/mf-progress-bar.component.ts",
+            "changeDetection": "ChangeDetectionStrategy.OnPush",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "mf-progress-bar",
+            "styleUrls": [],
+            "styles": [],
+            "template": "<div class=\"mf-progress-bar__wrapper\" [attr.aria-label]=\"label() || null\">\n  @if (label()) {\n    <span class=\"mf-progress-bar__label\">{{ label() }}</span>\n  }\n  <mat-progress-bar\n    [class]=\"hostClasses()\"\n    [mode]=\"mode()\"\n    [value]=\"value()\"\n    [bufferValue]=\"bufferValue()\"\n  />\n  @if (showValue() && mode() === 'determinate') {\n    <span class=\"mf-progress-bar__value\" aria-hidden=\"true\">{{ value() }}%</span>\n  }\n</div>\n",
+            "templateUrl": [],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "bufferValue",
+                    "defaultValue": "0",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Valor del buffer (0–100, solo en modo buffer)</p>\n",
+                    "line": 45,
+                    "rawdescription": "\nValor del buffer (0–100, solo en modo buffer)",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "color",
+                    "defaultValue": "'brand'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "MfProgressBarColor",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Color de la barra</p>\n",
+                    "line": 47,
+                    "rawdescription": "\nColor de la barra",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "height",
+                    "defaultValue": "4",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Altura de la barra en px</p>\n",
+                    "line": 53,
+                    "rawdescription": "\nAltura de la barra en px",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "label",
+                    "defaultValue": "undefined",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string | undefined",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Etiqueta accesible</p>\n",
+                    "line": 49,
+                    "rawdescription": "\nEtiqueta accesible",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "mode",
+                    "defaultValue": "'determinate'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "MfProgressBarMode",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Modo de la barra de progreso</p>\n",
+                    "line": 41,
+                    "rawdescription": "\nModo de la barra de progreso",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "showValue",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Muestra el porcentaje junto a la barra</p>\n",
+                    "line": 51,
+                    "rawdescription": "\nMuestra el porcentaje junto a la barra",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "value",
+                    "defaultValue": "0",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Valor actual (0–100)</p>\n",
+                    "line": 43,
+                    "rawdescription": "\nValor actual (0–100)",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "hostClasses",
+                    "defaultValue": "computed(() => {\r\n    return `mf-progress-bar mf-progress-bar--${this.color()}`;\r\n  })",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 55,
+                    "modifierKind": [
+                        148
+                    ]
+                }
+            ],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [
+                {
+                    "name": "MatProgressBarModule",
+                    "type": "module"
+                }
+            ],
+            "description": "<p>Barra de progreso de la librería mf-components.\nEnvuelve Angular Material <code>mat-progress-bar</code> y expone una API uniforme\ncon look and feel de marca.</p>\n",
+            "rawdescription": "\n\nBarra de progreso de la librería mf-components.\nEnvuelve Angular Material `mat-progress-bar` y expone una API uniforme\ncon look and feel de marca.\n",
+            "type": "component",
+            "sourceCode": "import {\r\n  ChangeDetectionStrategy,\r\n  Component,\r\n  computed,\r\n  input,\r\n} from '@angular/core';\r\nimport { MatProgressBarModule } from '@angular/material/progress-bar';\r\n\r\nexport type MfProgressBarMode = 'determinate' | 'indeterminate' | 'buffer' | 'query';\r\nexport type MfProgressBarColor = 'brand' | 'accent' | 'warn';\r\n\r\n/**\r\n * Barra de progreso de la librería mf-components.\r\n * Envuelve Angular Material `mat-progress-bar` y expone una API uniforme\r\n * con look and feel de marca.\r\n */\r\n@Component({\r\n  selector: 'mf-progress-bar',\r\n  imports: [MatProgressBarModule],\r\n  template: `\r\n    <div class=\"mf-progress-bar__wrapper\" [attr.aria-label]=\"label() || null\">\r\n      @if (label()) {\r\n        <span class=\"mf-progress-bar__label\">{{ label() }}</span>\r\n      }\r\n      <mat-progress-bar\r\n        [class]=\"hostClasses()\"\r\n        [mode]=\"mode()\"\r\n        [value]=\"value()\"\r\n        [bufferValue]=\"bufferValue()\"\r\n      />\r\n      @if (showValue() && mode() === 'determinate') {\r\n        <span class=\"mf-progress-bar__value\" aria-hidden=\"true\">{{ value() }}%</span>\r\n      }\r\n    </div>\r\n  `,\r\n  styleUrl: './mf-progress-bar.component.css',\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\nexport class MfProgressBarComponent {\r\n  /** Modo de la barra de progreso */\r\n  readonly mode = input<MfProgressBarMode>('determinate');\r\n  /** Valor actual (0–100) */\r\n  readonly value = input(0);\r\n  /** Valor del buffer (0–100, solo en modo buffer) */\r\n  readonly bufferValue = input(0);\r\n  /** Color de la barra */\r\n  readonly color = input<MfProgressBarColor>('brand');\r\n  /** Etiqueta accesible */\r\n  readonly label = input<string | undefined>(undefined);\r\n  /** Muestra el porcentaje junto a la barra */\r\n  readonly showValue = input(false);\r\n  /** Altura de la barra en px */\r\n  readonly height = input(4);\r\n\r\n  readonly hostClasses = computed(() => {\r\n    return `mf-progress-bar mf-progress-bar--${this.color()}`;\r\n  });\r\n}\r\n",
+            "styleUrl": "./mf-progress-bar.component.css",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": []
+        },
+        {
+            "name": "MfProgressSpinnerComponent",
+            "id": "component-MfProgressSpinnerComponent-e70a31a521fec93c847229f3bf6996b8c2ec3ade8ad34a4e4d06c5c42c65fa4ab4673dd0a853754c00193c87320d400a85a4bb62c8c941716203402a3d4cfff8",
+            "file": "src/app/components/progress-spinner/mf-progress-spinner.component.ts",
+            "changeDetection": "ChangeDetectionStrategy.OnPush",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "mf-progress-spinner",
+            "styleUrls": [],
+            "styles": [],
+            "template": "<div [class]=\"wrapperClasses()\" [attr.aria-label]=\"label() || 'Cargando'\">\n  <mat-progress-spinner\n    [class]=\"hostClasses()\"\n    [mode]=\"mode()\"\n    [value]=\"value()\"\n    [diameter]=\"diameter()\"\n    [strokeWidth]=\"strokeWidth()\"\n  />\n  @if (label()) {\n    <span class=\"mf-progress-spinner__label\">{{ label() }}</span>\n  }\n</div>\n",
+            "templateUrl": [],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "color",
+                    "defaultValue": "'brand'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "MfProgressSpinnerColor",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Color del spinner</p>\n",
+                    "line": 47,
+                    "rawdescription": "\nColor del spinner",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "diameter",
+                    "defaultValue": "40",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Diámetro en px</p>\n",
+                    "line": 43,
+                    "rawdescription": "\nDiámetro en px",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "label",
+                    "defaultValue": "undefined",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string | undefined",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Etiqueta accesible y visible</p>\n",
+                    "line": 49,
+                    "rawdescription": "\nEtiqueta accesible y visible",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "mode",
+                    "defaultValue": "'indeterminate'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "MfProgressSpinnerMode",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Modo del spinner</p>\n",
+                    "line": 39,
+                    "rawdescription": "\nModo del spinner",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "strokeWidth",
+                    "defaultValue": "4",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Grosor del trazo en px</p>\n",
+                    "line": 45,
+                    "rawdescription": "\nGrosor del trazo en px",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "value",
+                    "defaultValue": "0",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Valor actual (0–100, solo en modo determinate)</p>\n",
+                    "line": 41,
+                    "rawdescription": "\nValor actual (0–100, solo en modo determinate)",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "hostClasses",
+                    "defaultValue": "computed(() => {\r\n    return `mf-progress-spinner mf-progress-spinner--${this.color()}`;\r\n  })",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 51,
+                    "modifierKind": [
+                        148
+                    ]
+                },
+                {
+                    "name": "wrapperClasses",
+                    "defaultValue": "computed(() => {\r\n    const classes = ['mf-progress-spinner__wrapper'];\r\n    if (this.label()) classes.push('mf-progress-spinner__wrapper--labeled');\r\n    return classes.join(' ');\r\n  })",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 55,
+                    "modifierKind": [
+                        148
+                    ]
+                }
+            ],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [
+                {
+                    "name": "MatProgressSpinnerModule",
+                    "type": "module"
+                }
+            ],
+            "description": "<p>Spinner de progreso de la librería mf-components.\nEnvuelve Angular Material <code>mat-progress-spinner</code> y expone una API uniforme\ncon look and feel de marca.</p>\n",
+            "rawdescription": "\n\nSpinner de progreso de la librería mf-components.\nEnvuelve Angular Material `mat-progress-spinner` y expone una API uniforme\ncon look and feel de marca.\n",
+            "type": "component",
+            "sourceCode": "import {\r\n  ChangeDetectionStrategy,\r\n  Component,\r\n  computed,\r\n  input,\r\n} from '@angular/core';\r\nimport { MatProgressSpinnerModule } from '@angular/material/progress-spinner';\r\n\r\nexport type MfProgressSpinnerMode = 'determinate' | 'indeterminate';\r\nexport type MfProgressSpinnerColor = 'brand' | 'accent' | 'warn';\r\n\r\n/**\r\n * Spinner de progreso de la librería mf-components.\r\n * Envuelve Angular Material `mat-progress-spinner` y expone una API uniforme\r\n * con look and feel de marca.\r\n */\r\n@Component({\r\n  selector: 'mf-progress-spinner',\r\n  imports: [MatProgressSpinnerModule],\r\n  template: `\r\n    <div [class]=\"wrapperClasses()\" [attr.aria-label]=\"label() || 'Cargando'\">\r\n      <mat-progress-spinner\r\n        [class]=\"hostClasses()\"\r\n        [mode]=\"mode()\"\r\n        [value]=\"value()\"\r\n        [diameter]=\"diameter()\"\r\n        [strokeWidth]=\"strokeWidth()\"\r\n      />\r\n      @if (label()) {\r\n        <span class=\"mf-progress-spinner__label\">{{ label() }}</span>\r\n      }\r\n    </div>\r\n  `,\r\n  styleUrl: './mf-progress-spinner.component.css',\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\nexport class MfProgressSpinnerComponent {\r\n  /** Modo del spinner */\r\n  readonly mode = input<MfProgressSpinnerMode>('indeterminate');\r\n  /** Valor actual (0–100, solo en modo determinate) */\r\n  readonly value = input(0);\r\n  /** Diámetro en px */\r\n  readonly diameter = input(40);\r\n  /** Grosor del trazo en px */\r\n  readonly strokeWidth = input(4);\r\n  /** Color del spinner */\r\n  readonly color = input<MfProgressSpinnerColor>('brand');\r\n  /** Etiqueta accesible y visible */\r\n  readonly label = input<string | undefined>(undefined);\r\n\r\n  readonly hostClasses = computed(() => {\r\n    return `mf-progress-spinner mf-progress-spinner--${this.color()}`;\r\n  });\r\n\r\n  readonly wrapperClasses = computed(() => {\r\n    const classes = ['mf-progress-spinner__wrapper'];\r\n    if (this.label()) classes.push('mf-progress-spinner__wrapper--labeled');\r\n    return classes.join(' ');\r\n  });\r\n}\r\n",
+            "styleUrl": "./mf-progress-spinner.component.css",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": []
+        },
+        {
+            "name": "MfRadioButtonComponent",
+            "id": "component-MfRadioButtonComponent-8da933257dc1a5ef39f73d627f3a5ff5358b5d51a12acc7bb899e3e1991e56b533b11e6e2c8290dfc232b03d055986e5318e2a8f883f39a5e7c34bc2216b7362",
+            "file": "src/app/components/radio-button/mf-radio-button.component.ts",
+            "changeDetection": "ChangeDetectionStrategy.OnPush",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "mf-radio-button",
+            "styleUrls": [],
+            "styles": [],
+            "template": "<mat-radio-group\n  [class]=\"hostClasses()\"\n  [disabled]=\"disabled()\"\n  [ngModel]=\"currentValue()\"\n  (change)=\"onChange($event)\"\n  [attr.aria-label]=\"ariaLabel() || null\"\n>\n  @for (option of options(); track option.value) {\n    <mat-radio-button\n      class=\"mf-radio__option\"\n      [value]=\"option.value\"\n      [disabled]=\"option.disabled ?? false\"\n    >\n      {{ option.label }}\n    </mat-radio-button>\n  }\n</mat-radio-group>\n",
+            "templateUrl": [],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "ariaLabel",
+                    "defaultValue": "undefined",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string | undefined",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Etiqueta accesible para el grupo</p>\n",
+                    "line": 64,
+                    "rawdescription": "\nEtiqueta accesible para el grupo",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "direction",
+                    "defaultValue": "'vertical'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "MfRadioDirection",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Dirección del grupo</p>\n",
+                    "line": 62,
+                    "rawdescription": "\nDirección del grupo",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "disabled",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Deshabilitado</p>\n",
+                    "line": 60,
+                    "rawdescription": "\nDeshabilitado",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "options",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "MfRadioOption[]",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Opciones del grupo</p>\n",
+                    "line": 56,
+                    "rawdescription": "\nOpciones del grupo",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": true
+                },
+                {
+                    "name": "value",
+                    "defaultValue": "undefined",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string | undefined",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Valor seleccionado</p>\n",
+                    "line": 58,
+                    "rawdescription": "\nValor seleccionado",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                }
+            ],
+            "outputsClass": [
+                {
+                    "name": "mfChange",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 66,
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                }
+            ],
+            "propertiesClass": [
+                {
+                    "name": "currentValue",
+                    "defaultValue": "signal<string | undefined>(undefined)",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 68,
+                    "modifierKind": [
+                        124,
+                        148
+                    ]
+                },
+                {
+                    "name": "hostClasses",
+                    "defaultValue": "computed(() => {\r\n    return `mf-radio mf-radio--${this.direction()}`;\r\n  })",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 76,
+                    "modifierKind": [
+                        148
+                    ]
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "onChange",
+                    "args": [
+                        {
+                            "name": "event",
+                            "type": "literal type",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 80,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "event",
+                            "type": "literal type",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [
+                {
+                    "name": "MatRadioModule",
+                    "type": "module"
+                },
+                {
+                    "name": "FormsModule",
+                    "type": "module"
+                }
+            ],
+            "description": "<p>Grupo de radio buttons de la librería mf-components.\nEnvuelve Angular Material <code>mat-radio-group</code> + <code>mat-radio-button</code>\ny expone una API uniforme con look and feel de marca.</p>\n",
+            "rawdescription": "\n\nGrupo de radio buttons de la librería mf-components.\nEnvuelve Angular Material `mat-radio-group` + `mat-radio-button`\ny expone una API uniforme con look and feel de marca.\n",
+            "type": "component",
+            "sourceCode": "import {\r\n  ChangeDetectionStrategy,\r\n  Component,\r\n  computed,\r\n  effect,\r\n  input,\r\n  output,\r\n  signal,\r\n} from '@angular/core';\r\nimport { MatRadioModule } from '@angular/material/radio';\r\nimport { FormsModule } from '@angular/forms';\r\n\r\nexport interface MfRadioOption {\r\n  /** Valor de la opción */\r\n  value: string;\r\n  /** Texto visible */\r\n  label: string;\r\n  /** Deshabilitada individualmente */\r\n  disabled?: boolean;\r\n}\r\n\r\nexport type MfRadioDirection = 'horizontal' | 'vertical';\r\n\r\n/**\r\n * Grupo de radio buttons de la librería mf-components.\r\n * Envuelve Angular Material `mat-radio-group` + `mat-radio-button`\r\n * y expone una API uniforme con look and feel de marca.\r\n */\r\n@Component({\r\n  selector: 'mf-radio-button',\r\n  imports: [MatRadioModule, FormsModule],\r\n  template: `\r\n    <mat-radio-group\r\n      [class]=\"hostClasses()\"\r\n      [disabled]=\"disabled()\"\r\n      [ngModel]=\"currentValue()\"\r\n      (change)=\"onChange($event)\"\r\n      [attr.aria-label]=\"ariaLabel() || null\"\r\n    >\r\n      @for (option of options(); track option.value) {\r\n        <mat-radio-button\r\n          class=\"mf-radio__option\"\r\n          [value]=\"option.value\"\r\n          [disabled]=\"option.disabled ?? false\"\r\n        >\r\n          {{ option.label }}\r\n        </mat-radio-button>\r\n      }\r\n    </mat-radio-group>\r\n  `,\r\n  styleUrl: './mf-radio-button.component.css',\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\nexport class MfRadioButtonComponent {\r\n  /** Opciones del grupo */\r\n  readonly options = input.required<MfRadioOption[]>();\r\n  /** Valor seleccionado */\r\n  readonly value = input<string | undefined>(undefined);\r\n  /** Deshabilitado */\r\n  readonly disabled = input(false);\r\n  /** Dirección del grupo */\r\n  readonly direction = input<MfRadioDirection>('vertical');\r\n  /** Etiqueta accesible para el grupo */\r\n  readonly ariaLabel = input<string | undefined>(undefined);\r\n\r\n  readonly mfChange = output<string>();\r\n\r\n  protected readonly currentValue = signal<string | undefined>(undefined);\r\n\r\n  constructor() {\r\n    effect(() => {\r\n      this.currentValue.set(this.value());\r\n    });\r\n  }\r\n\r\n  readonly hostClasses = computed(() => {\r\n    return `mf-radio mf-radio--${this.direction()}`;\r\n  });\r\n\r\n  onChange(event: { value: string }): void {\r\n    this.currentValue.set(event.value);\r\n    this.mfChange.emit(event.value);\r\n  }\r\n}\r\n",
+            "styleUrl": "./mf-radio-button.component.css",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [],
+                "line": 68
+            },
+            "extends": []
+        },
+        {
+            "name": "MfSidenavComponent",
+            "id": "component-MfSidenavComponent-d112cf2cd01b87ea40e9c45316915d837bd77e423144fe835175dbaa369a39411223f05ba1cdca9de7b839b1f4828f058a6fbff1a63b691b2221b1b67f2c558c",
+            "file": "src/app/components/sidenav/mf-sidenav.component.ts",
+            "changeDetection": "ChangeDetectionStrategy.OnPush",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "mf-sidenav",
+            "styleUrls": [],
+            "styles": [],
+            "template": "<mat-sidenav-container [class]=\"containerClasses()\" [hasBackdrop]=\"hasBackdrop()\">\n  <mat-sidenav\n    [class]=\"sidenavClasses()\"\n    [mode]=\"mode()\"\n    [position]=\"position()\"\n    [opened]=\"opened()\"\n    [style.width]=\"sidenavWidth()\"\n    (openedChange)=\"mfOpenedChange.emit($event)\"\n  >\n    <ng-content select=\"[mfSidenavContent]\" />\n  </mat-sidenav>\n  <mat-sidenav-content class=\"mf-sidenav__main\">\n    <ng-content />\n  </mat-sidenav-content>\n</mat-sidenav-container>\n",
+            "templateUrl": [],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "hasBackdrop",
+                    "defaultValue": "null",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "boolean | null",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Muestra backdrop al abrir</p>\n",
+                    "line": 50,
+                    "rawdescription": "\nMuestra backdrop al abrir",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "mode",
+                    "defaultValue": "'side'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "MfSidenavMode",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Modo de apertura</p>\n",
+                    "line": 46,
+                    "rawdescription": "\nModo de apertura",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "opened",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Abierto o cerrado</p>\n",
+                    "line": 44,
+                    "rawdescription": "\nAbierto o cerrado",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "position",
+                    "defaultValue": "'start'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "MfSidenavPosition",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Posición del panel</p>\n",
+                    "line": 48,
+                    "rawdescription": "\nPosición del panel",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "sidenavWidth",
+                    "defaultValue": "'260px'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Ancho del panel lateral</p>\n",
+                    "line": 52,
+                    "rawdescription": "\nAncho del panel lateral",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                }
+            ],
+            "outputsClass": [
+                {
+                    "name": "mfOpenedChange",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "boolean",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 54,
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                }
+            ],
+            "propertiesClass": [
+                {
+                    "name": "containerClasses",
+                    "defaultValue": "computed(() => 'mf-sidenav-container')",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 56,
+                    "modifierKind": [
+                        148
+                    ]
+                },
+                {
+                    "name": "sidenavClasses",
+                    "defaultValue": "computed(() => {\r\n    return `mf-sidenav mf-sidenav--${this.mode()}`;\r\n  })",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 58,
+                    "modifierKind": [
+                        148
+                    ]
+                }
+            ],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [
+                {
+                    "name": "MatSidenavModule",
+                    "type": "module"
+                }
+            ],
+            "description": "<p>Panel lateral de la librería mf-components.\nEnvuelve Angular Material <code>mat-sidenav-container</code> y expone una API uniforme\ncon look and feel de marca. Usa content projection para el contenido del\nsidenav y el contenido principal.</p>\n",
+            "rawdescription": "\n\nPanel lateral de la librería mf-components.\nEnvuelve Angular Material `mat-sidenav-container` y expone una API uniforme\ncon look and feel de marca. Usa content projection para el contenido del\nsidenav y el contenido principal.\n",
+            "type": "component",
+            "sourceCode": "import {\r\n  ChangeDetectionStrategy,\r\n  Component,\r\n  computed,\r\n  input,\r\n  output,\r\n} from '@angular/core';\r\nimport { MatSidenavModule } from '@angular/material/sidenav';\r\n\r\nexport type MfSidenavMode = 'over' | 'push' | 'side';\r\nexport type MfSidenavPosition = 'start' | 'end';\r\n\r\n/**\r\n * Panel lateral de la librería mf-components.\r\n * Envuelve Angular Material `mat-sidenav-container` y expone una API uniforme\r\n * con look and feel de marca. Usa content projection para el contenido del\r\n * sidenav y el contenido principal.\r\n */\r\n@Component({\r\n  selector: 'mf-sidenav',\r\n  imports: [MatSidenavModule],\r\n  template: `\r\n    <mat-sidenav-container [class]=\"containerClasses()\" [hasBackdrop]=\"hasBackdrop()\">\r\n      <mat-sidenav\r\n        [class]=\"sidenavClasses()\"\r\n        [mode]=\"mode()\"\r\n        [position]=\"position()\"\r\n        [opened]=\"opened()\"\r\n        [style.width]=\"sidenavWidth()\"\r\n        (openedChange)=\"mfOpenedChange.emit($event)\"\r\n      >\r\n        <ng-content select=\"[mfSidenavContent]\" />\r\n      </mat-sidenav>\r\n      <mat-sidenav-content class=\"mf-sidenav__main\">\r\n        <ng-content />\r\n      </mat-sidenav-content>\r\n    </mat-sidenav-container>\r\n  `,\r\n  styleUrl: './mf-sidenav.component.css',\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\nexport class MfSidenavComponent {\r\n  /** Abierto o cerrado */\r\n  readonly opened = input(false);\r\n  /** Modo de apertura */\r\n  readonly mode = input<MfSidenavMode>('side');\r\n  /** Posición del panel */\r\n  readonly position = input<MfSidenavPosition>('start');\r\n  /** Muestra backdrop al abrir */\r\n  readonly hasBackdrop = input<boolean | null>(null);\r\n  /** Ancho del panel lateral */\r\n  readonly sidenavWidth = input('260px');\r\n\r\n  readonly mfOpenedChange = output<boolean>();\r\n\r\n  readonly containerClasses = computed(() => 'mf-sidenav-container');\r\n\r\n  readonly sidenavClasses = computed(() => {\r\n    return `mf-sidenav mf-sidenav--${this.mode()}`;\r\n  });\r\n}\r\n",
+            "styleUrl": "./mf-sidenav.component.css",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": []
+        },
+        {
+            "name": "MfToolbarComponent",
+            "id": "component-MfToolbarComponent-6096c96f7adb12ea929622624eb4b56a6f8196ed1d0699966a714a58f97c03d2b04b32ac092961068c98460534c68d541b545cabe6ae5281b36b12f2bf221b87",
+            "file": "src/app/components/toolbar/mf-toolbar.component.ts",
+            "changeDetection": "ChangeDetectionStrategy.OnPush",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "mf-toolbar",
+            "styleUrls": [],
+            "styles": [],
+            "template": "<mat-toolbar [class]=\"hostClasses()\">\n  <div class=\"mf-toolbar__start\">\n    @if (title()) {\n      <span class=\"mf-toolbar__title\">{{ title() }}</span>\n    }\n    <ng-content select=\"[mfToolbarStart]\" />\n  </div>\n  <div class=\"mf-toolbar__spacer\"></div>\n  <div class=\"mf-toolbar__end\">\n    <ng-content select=\"[mfToolbarEnd]\" />\n    <ng-content />\n  </div>\n</mat-toolbar>\n",
+            "templateUrl": [],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "bordered",
+                    "defaultValue": "true",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Muestra borde inferior</p>\n",
+                    "line": 43,
+                    "rawdescription": "\nMuestra borde inferior",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "elevated",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Elevación sutil</p>\n",
+                    "line": 47,
+                    "rawdescription": "\nElevación sutil",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "sticky",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Toolbar fija en la parte superior</p>\n",
+                    "line": 45,
+                    "rawdescription": "\nToolbar fija en la parte superior",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "title",
+                    "defaultValue": "undefined",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string | undefined",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Título que se muestra en la toolbar</p>\n",
+                    "line": 39,
+                    "rawdescription": "\nTítulo que se muestra en la toolbar",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "variant",
+                    "defaultValue": "'surface'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "MfToolbarVariant",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Variante visual</p>\n",
+                    "line": 41,
+                    "rawdescription": "\nVariante visual",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "hostClasses",
+                    "defaultValue": "computed(() => {\r\n    const classes = ['mf-toolbar', `mf-toolbar--${this.variant()}`];\r\n    if (this.bordered()) classes.push('mf-toolbar--bordered');\r\n    if (this.sticky()) classes.push('mf-toolbar--sticky');\r\n    if (this.elevated()) classes.push('mf-toolbar--elevated');\r\n    return classes.join(' ');\r\n  })",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 49,
+                    "modifierKind": [
+                        148
+                    ]
+                }
+            ],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [
+                {
+                    "name": "MatToolbarModule",
+                    "type": "module"
+                }
+            ],
+            "description": "<p>Toolbar de la librería mf-components.\nEnvuelve Angular Material <code>mat-toolbar</code> y expone una API uniforme\ncon look and feel de marca. Usa content projection para acciones.</p>\n",
+            "rawdescription": "\n\nToolbar de la librería mf-components.\nEnvuelve Angular Material `mat-toolbar` y expone una API uniforme\ncon look and feel de marca. Usa content projection para acciones.\n",
+            "type": "component",
+            "sourceCode": "import {\r\n  ChangeDetectionStrategy,\r\n  Component,\r\n  computed,\r\n  input,\r\n} from '@angular/core';\r\nimport { MatToolbarModule } from '@angular/material/toolbar';\r\n\r\nexport type MfToolbarVariant = 'surface' | 'brand' | 'transparent';\r\n\r\n/**\r\n * Toolbar de la librería mf-components.\r\n * Envuelve Angular Material `mat-toolbar` y expone una API uniforme\r\n * con look and feel de marca. Usa content projection para acciones.\r\n */\r\n@Component({\r\n  selector: 'mf-toolbar',\r\n  imports: [MatToolbarModule],\r\n  template: `\r\n    <mat-toolbar [class]=\"hostClasses()\">\r\n      <div class=\"mf-toolbar__start\">\r\n        @if (title()) {\r\n          <span class=\"mf-toolbar__title\">{{ title() }}</span>\r\n        }\r\n        <ng-content select=\"[mfToolbarStart]\" />\r\n      </div>\r\n      <div class=\"mf-toolbar__spacer\"></div>\r\n      <div class=\"mf-toolbar__end\">\r\n        <ng-content select=\"[mfToolbarEnd]\" />\r\n        <ng-content />\r\n      </div>\r\n    </mat-toolbar>\r\n  `,\r\n  styleUrl: './mf-toolbar.component.css',\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\nexport class MfToolbarComponent {\r\n  /** Título que se muestra en la toolbar */\r\n  readonly title = input<string | undefined>(undefined);\r\n  /** Variante visual */\r\n  readonly variant = input<MfToolbarVariant>('surface');\r\n  /** Muestra borde inferior */\r\n  readonly bordered = input(true);\r\n  /** Toolbar fija en la parte superior */\r\n  readonly sticky = input(false);\r\n  /** Elevación sutil */\r\n  readonly elevated = input(false);\r\n\r\n  readonly hostClasses = computed(() => {\r\n    const classes = ['mf-toolbar', `mf-toolbar--${this.variant()}`];\r\n    if (this.bordered()) classes.push('mf-toolbar--bordered');\r\n    if (this.sticky()) classes.push('mf-toolbar--sticky');\r\n    if (this.elevated()) classes.push('mf-toolbar--elevated');\r\n    return classes.join(' ');\r\n  });\r\n}\r\n",
+            "styleUrl": "./mf-toolbar.component.css",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": []
+        },
+        {
             "name": "PageComponent",
-            "id": "component-PageComponent-e81fd7a385f2e7e1a49adcff2b50c39f3fe50e9b590a00791bbf777948eaccb7c34d7b59955b8af6bedefbdcd25b2518657bf415c79b7b3d2fdf899d24381db5",
+            "id": "component-PageComponent-fc915b8f5e7704ec47c503eb3e21282c9eb8f02dccdd5c2284566ac6412a0661375a32652b9251dd0b9bf40461744149cad6431d42d5dbf59a3bd9dab0cd7054",
             "file": "src/stories/page.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
@@ -528,7 +2991,7 @@
             "propertiesClass": [
                 {
                     "name": "features",
-                    "defaultValue": "[\n    {\n      title: 'API consistente',\n      description:\n        'Encapsulamos componentes Material para exponer una API uniforme para todos los equipos.',\n    },\n    {\n      title: 'Look and feel propio',\n      description:\n        'Sobrescribimos tokens visuales, tipografía y elevaciones para mantener identidad de marca.',\n    },\n    {\n      title: 'Accesibilidad por defecto',\n      description:\n        'Partimos de componentes accesibles de Material y validamos contraste, foco y navegación.',\n    },\n  ] as const",
+                    "defaultValue": "[\r\n    {\r\n      title: 'API consistente',\r\n      description:\r\n        'Encapsulamos componentes Material para exponer una API uniforme para todos los equipos.',\r\n    },\r\n    {\r\n      title: 'Look and feel propio',\r\n      description:\r\n        'Sobrescribimos tokens visuales, tipografía y elevaciones para mantener identidad de marca.',\r\n    },\r\n    {\r\n      title: 'Accesibilidad por defecto',\r\n      description:\r\n        'Partimos de componentes accesibles de Material y validamos contraste, foco y navegación.',\r\n    },\r\n  ] as const",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "unknown",
@@ -605,7 +3068,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { ChangeDetectionStrategy, Component, signal } from '@angular/core';\nimport { MatCardModule } from '@angular/material/card';\n\nimport { HeaderComponent } from './header.component';\nimport type { User } from './user';\n\n@Component({\n  selector: 'storybook-page',\n  imports: [HeaderComponent, MatCardModule],\n  template: `\n    <article class=\"mf-shell\">\n      <storybook-header\n        [user]=\"user()\"\n        (onLogout)=\"doLogout()\"\n        (onLogin)=\"doLogin()\"\n        (onCreateAccount)=\"doCreateAccount()\"\n      />\n\n      <section class=\"mf-page\" aria-label=\"Vista principal de componentes\">\n        <mat-card class=\"mf-hero\">\n          <mat-card-title>Design system sobre Angular Material</mat-card-title>\n          <mat-card-content>\n            <p>\n              Esta página muestra cómo usar Angular Material como base y aplicar nuestro propio\n              lenguaje visual para construir componentes consistentes.\n            </p>\n          </mat-card-content>\n        </mat-card>\n\n        <div class=\"mf-grid\">\n          @for (feature of features; track feature.title) {\n            <mat-card class=\"mf-feature\">\n              <mat-card-title>{{ feature.title }}</mat-card-title>\n              <mat-card-content>\n                <p>{{ feature.description }}</p>\n              </mat-card-content>\n            </mat-card>\n          }\n        </div>\n      </section>\n    </article>\n  `,\n  styleUrl: './page.css',\n  changeDetection: ChangeDetectionStrategy.OnPush,\n})\nexport class PageComponent {\n  readonly user = signal<User | null>(null);\n\n  readonly features = [\n    {\n      title: 'API consistente',\n      description:\n        'Encapsulamos componentes Material para exponer una API uniforme para todos los equipos.',\n    },\n    {\n      title: 'Look and feel propio',\n      description:\n        'Sobrescribimos tokens visuales, tipografía y elevaciones para mantener identidad de marca.',\n    },\n    {\n      title: 'Accesibilidad por defecto',\n      description:\n        'Partimos de componentes accesibles de Material y validamos contraste, foco y navegación.',\n    },\n  ] as const;\n\n  doLogout() {\n    this.user.set(null);\n  }\n\n  doLogin() {\n    this.user.set({ name: 'Jane Doe' });\n  }\n\n  doCreateAccount() {\n    this.user.set({ name: 'Jane Doe' });\n  }\n}\n",
+            "sourceCode": "import { ChangeDetectionStrategy, Component, signal } from '@angular/core';\r\nimport { MatCardModule } from '@angular/material/card';\r\n\r\nimport { HeaderComponent } from './header.component';\r\nimport type { User } from './user';\r\n\r\n@Component({\r\n  selector: 'storybook-page',\r\n  imports: [HeaderComponent, MatCardModule],\r\n  template: `\r\n    <article class=\"mf-shell\">\r\n      <storybook-header\r\n        [user]=\"user()\"\r\n        (onLogout)=\"doLogout()\"\r\n        (onLogin)=\"doLogin()\"\r\n        (onCreateAccount)=\"doCreateAccount()\"\r\n      />\r\n\r\n      <section class=\"mf-page\" aria-label=\"Vista principal de componentes\">\r\n        <mat-card class=\"mf-hero\">\r\n          <mat-card-title>Design system sobre Angular Material</mat-card-title>\r\n          <mat-card-content>\r\n            <p>\r\n              Esta página muestra cómo usar Angular Material como base y aplicar nuestro propio\r\n              lenguaje visual para construir componentes consistentes.\r\n            </p>\r\n          </mat-card-content>\r\n        </mat-card>\r\n\r\n        <div class=\"mf-grid\">\r\n          @for (feature of features; track feature.title) {\r\n            <mat-card class=\"mf-feature\">\r\n              <mat-card-title>{{ feature.title }}</mat-card-title>\r\n              <mat-card-content>\r\n                <p>{{ feature.description }}</p>\r\n              </mat-card-content>\r\n            </mat-card>\r\n          }\r\n        </div>\r\n      </section>\r\n    </article>\r\n  `,\r\n  styleUrl: './page.css',\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\nexport class PageComponent {\r\n  readonly user = signal<User | null>(null);\r\n\r\n  readonly features = [\r\n    {\r\n      title: 'API consistente',\r\n      description:\r\n        'Encapsulamos componentes Material para exponer una API uniforme para todos los equipos.',\r\n    },\r\n    {\r\n      title: 'Look and feel propio',\r\n      description:\r\n        'Sobrescribimos tokens visuales, tipografía y elevaciones para mantener identidad de marca.',\r\n    },\r\n    {\r\n      title: 'Accesibilidad por defecto',\r\n      description:\r\n        'Partimos de componentes accesibles de Material y validamos contraste, foco y navegación.',\r\n    },\r\n  ] as const;\r\n\r\n  doLogout() {\r\n    this.user.set(null);\r\n  }\r\n\r\n  doLogin() {\r\n    this.user.set({ name: 'Jane Doe' });\r\n  }\r\n\r\n  doCreateAccount() {\r\n    this.user.set({ name: 'Jane Doe' });\r\n  }\r\n}\r\n",
             "styleUrl": "./page.css",
             "assetsDirs": [],
             "styleUrlsData": "",
@@ -667,6 +3130,149 @@
                 "subtype": "typealias",
                 "rawtype": "\"filled\" | \"outlined\" | \"text\"",
                 "file": "src/app/components/button/mf-button.component.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 193
+            },
+            {
+                "name": "MfCardVariant",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "\"elevated\" | \"outlined\" | \"flat\"",
+                "file": "src/app/components/card/mf-card.component.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 193
+            },
+            {
+                "name": "MfDatepickerSize",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "\"sm\" | \"md\" | \"lg\"",
+                "file": "src/app/components/datepicker/mf-datepicker.component.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 193
+            },
+            {
+                "name": "MfIconColor",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "\"default\" | \"brand\" | \"muted\" | \"error\" | \"inherit\"",
+                "file": "src/app/components/icon/mf-icon.component.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 193
+            },
+            {
+                "name": "MfIconSize",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "\"sm\" | \"md\" | \"lg\" | \"xl\"",
+                "file": "src/app/components/icon/mf-icon.component.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 193
+            },
+            {
+                "name": "MfInputSize",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "\"sm\" | \"md\" | \"lg\"",
+                "file": "src/app/components/input/mf-input.component.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 193
+            },
+            {
+                "name": "MfProgressBarColor",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "\"brand\" | \"accent\" | \"warn\"",
+                "file": "src/app/components/progress-bar/mf-progress-bar.component.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 193
+            },
+            {
+                "name": "MfProgressBarMode",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "\"determinate\" | \"indeterminate\" | \"buffer\" | \"query\"",
+                "file": "src/app/components/progress-bar/mf-progress-bar.component.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 193
+            },
+            {
+                "name": "MfProgressSpinnerColor",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "\"brand\" | \"accent\" | \"warn\"",
+                "file": "src/app/components/progress-spinner/mf-progress-spinner.component.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 193
+            },
+            {
+                "name": "MfProgressSpinnerMode",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "\"determinate\" | \"indeterminate\"",
+                "file": "src/app/components/progress-spinner/mf-progress-spinner.component.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 193
+            },
+            {
+                "name": "MfRadioDirection",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "\"horizontal\" | \"vertical\"",
+                "file": "src/app/components/radio-button/mf-radio-button.component.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 193
+            },
+            {
+                "name": "MfSidenavMode",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "\"over\" | \"push\" | \"side\"",
+                "file": "src/app/components/sidenav/mf-sidenav.component.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 193
+            },
+            {
+                "name": "MfSidenavPosition",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "\"start\" | \"end\"",
+                "file": "src/app/components/sidenav/mf-sidenav.component.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 193
+            },
+            {
+                "name": "MfToolbarVariant",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "\"surface\" | \"brand\" | \"transparent\"",
+                "file": "src/app/components/toolbar/mf-toolbar.component.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -739,6 +3345,167 @@
                     "description": "",
                     "kind": 193
                 }
+            ],
+            "src/app/components/card/mf-card.component.ts": [
+                {
+                    "name": "MfCardVariant",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "\"elevated\" | \"outlined\" | \"flat\"",
+                    "file": "src/app/components/card/mf-card.component.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 193
+                }
+            ],
+            "src/app/components/datepicker/mf-datepicker.component.ts": [
+                {
+                    "name": "MfDatepickerSize",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "\"sm\" | \"md\" | \"lg\"",
+                    "file": "src/app/components/datepicker/mf-datepicker.component.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 193
+                }
+            ],
+            "src/app/components/icon/mf-icon.component.ts": [
+                {
+                    "name": "MfIconColor",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "\"default\" | \"brand\" | \"muted\" | \"error\" | \"inherit\"",
+                    "file": "src/app/components/icon/mf-icon.component.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 193
+                },
+                {
+                    "name": "MfIconSize",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "\"sm\" | \"md\" | \"lg\" | \"xl\"",
+                    "file": "src/app/components/icon/mf-icon.component.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 193
+                }
+            ],
+            "src/app/components/input/mf-input.component.ts": [
+                {
+                    "name": "MfInputSize",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "\"sm\" | \"md\" | \"lg\"",
+                    "file": "src/app/components/input/mf-input.component.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 193
+                }
+            ],
+            "src/app/components/progress-bar/mf-progress-bar.component.ts": [
+                {
+                    "name": "MfProgressBarColor",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "\"brand\" | \"accent\" | \"warn\"",
+                    "file": "src/app/components/progress-bar/mf-progress-bar.component.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 193
+                },
+                {
+                    "name": "MfProgressBarMode",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "\"determinate\" | \"indeterminate\" | \"buffer\" | \"query\"",
+                    "file": "src/app/components/progress-bar/mf-progress-bar.component.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 193
+                }
+            ],
+            "src/app/components/progress-spinner/mf-progress-spinner.component.ts": [
+                {
+                    "name": "MfProgressSpinnerColor",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "\"brand\" | \"accent\" | \"warn\"",
+                    "file": "src/app/components/progress-spinner/mf-progress-spinner.component.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 193
+                },
+                {
+                    "name": "MfProgressSpinnerMode",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "\"determinate\" | \"indeterminate\"",
+                    "file": "src/app/components/progress-spinner/mf-progress-spinner.component.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 193
+                }
+            ],
+            "src/app/components/radio-button/mf-radio-button.component.ts": [
+                {
+                    "name": "MfRadioDirection",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "\"horizontal\" | \"vertical\"",
+                    "file": "src/app/components/radio-button/mf-radio-button.component.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 193
+                }
+            ],
+            "src/app/components/sidenav/mf-sidenav.component.ts": [
+                {
+                    "name": "MfSidenavMode",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "\"over\" | \"push\" | \"side\"",
+                    "file": "src/app/components/sidenav/mf-sidenav.component.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 193
+                },
+                {
+                    "name": "MfSidenavPosition",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "\"start\" | \"end\"",
+                    "file": "src/app/components/sidenav/mf-sidenav.component.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 193
+                }
+            ],
+            "src/app/components/toolbar/mf-toolbar.component.ts": [
+                {
+                    "name": "MfToolbarVariant",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "\"surface\" | \"brand\" | \"transparent\"",
+                    "file": "src/app/components/toolbar/mf-toolbar.component.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 193
+                }
             ]
         }
     },
@@ -748,8 +3515,8 @@
         "children": []
     },
     "coverage": {
-        "count": 0,
-        "status": "low",
+        "count": 28,
+        "status": "medium",
         "files": [
             {
                 "filePath": "src/app/app.config.ts",
@@ -805,6 +3572,271 @@
                 "linktype": "miscellaneous",
                 "linksubtype": "typealias",
                 "name": "MfButtonVariant",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/card/mf-card.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "MfCardComponent",
+                "coveragePercent": 75,
+                "coverageCount": "6/8",
+                "status": "good"
+            },
+            {
+                "filePath": "src/app/components/card/mf-card.component.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "MfCardVariant",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/checkbox/mf-checkbox.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "MfCheckboxComponent",
+                "coveragePercent": 62,
+                "coverageCount": "5/8",
+                "status": "good"
+            },
+            {
+                "filePath": "src/app/components/datepicker/mf-datepicker.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "MfDatepickerComponent",
+                "coveragePercent": 64,
+                "coverageCount": "11/17",
+                "status": "good"
+            },
+            {
+                "filePath": "src/app/components/datepicker/mf-datepicker.component.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "MfDatepickerSize",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/dialog/mf-dialog.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "MfDialogComponent",
+                "coveragePercent": 55,
+                "coverageCount": "5/9",
+                "status": "good"
+            },
+            {
+                "filePath": "src/app/components/form-field/mf-form-field.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "MfFormFieldComponent",
+                "coveragePercent": 75,
+                "coverageCount": "6/8",
+                "status": "good"
+            },
+            {
+                "filePath": "src/app/components/grid-list/mf-grid-list.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "MfGridListComponent",
+                "coveragePercent": 100,
+                "coverageCount": "5/5",
+                "status": "very-good"
+            },
+            {
+                "filePath": "src/app/components/grid-list/mf-grid-list.component.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "MfGridTile",
+                "coveragePercent": 83,
+                "coverageCount": "5/6",
+                "status": "very-good"
+            },
+            {
+                "filePath": "src/app/components/icon/mf-icon.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "MfIconComponent",
+                "coveragePercent": 71,
+                "coverageCount": "5/7",
+                "status": "good"
+            },
+            {
+                "filePath": "src/app/components/icon/mf-icon.component.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "MfIconColor",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/icon/mf-icon.component.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "MfIconSize",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/input/mf-input.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "MfInputComponent",
+                "coveragePercent": 76,
+                "coverageCount": "13/17",
+                "status": "very-good"
+            },
+            {
+                "filePath": "src/app/components/input/mf-input.component.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "MfInputSize",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/progress-bar/mf-progress-bar.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "MfProgressBarComponent",
+                "coveragePercent": 88,
+                "coverageCount": "8/9",
+                "status": "very-good"
+            },
+            {
+                "filePath": "src/app/components/progress-bar/mf-progress-bar.component.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "MfProgressBarColor",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/progress-bar/mf-progress-bar.component.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "MfProgressBarMode",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/progress-spinner/mf-progress-spinner.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "MfProgressSpinnerComponent",
+                "coveragePercent": 77,
+                "coverageCount": "7/9",
+                "status": "very-good"
+            },
+            {
+                "filePath": "src/app/components/progress-spinner/mf-progress-spinner.component.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "MfProgressSpinnerColor",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/progress-spinner/mf-progress-spinner.component.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "MfProgressSpinnerMode",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/radio-button/mf-radio-button.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "MfRadioButtonComponent",
+                "coveragePercent": 54,
+                "coverageCount": "6/11",
+                "status": "good"
+            },
+            {
+                "filePath": "src/app/components/radio-button/mf-radio-button.component.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "MfRadioOption",
+                "coveragePercent": 75,
+                "coverageCount": "3/4",
+                "status": "good"
+            },
+            {
+                "filePath": "src/app/components/radio-button/mf-radio-button.component.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "MfRadioDirection",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/sidenav/mf-sidenav.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "MfSidenavComponent",
+                "coveragePercent": 66,
+                "coverageCount": "6/9",
+                "status": "good"
+            },
+            {
+                "filePath": "src/app/components/sidenav/mf-sidenav.component.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "MfSidenavMode",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/sidenav/mf-sidenav.component.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "MfSidenavPosition",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/toolbar/mf-toolbar.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "MfToolbarComponent",
+                "coveragePercent": 85,
+                "coverageCount": "6/7",
+                "status": "very-good"
+            },
+            {
+                "filePath": "src/app/components/toolbar/mf-toolbar.component.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "MfToolbarVariant",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
