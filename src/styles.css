@@ -50,3 +50,18 @@ body {
   --mat-toolbar-container-background-color: var(--mf-color-surface);
   --mat-toolbar-container-text-color: var(--mf-color-on-surface);
 }
+
+/* ── Dialog panel override ─────────────────────────────────────── */
+.mf-dialog-panel .mat-mdc-dialog-container {
+  border-radius: var(--mf-radius-xl, 20px) !important;
+  overflow: hidden;
+}
+
+.mf-dialog-panel .mat-mdc-dialog-surface {
+  border-radius: var(--mf-radius-xl, 20px) !important;
+  box-shadow: var(--mf-shadow-lg) !important;
+}
+
+.cdk-overlay-dark-backdrop {
+  background: rgba(15, 23, 34, 0.5) !important;
+}
