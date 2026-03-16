@@ -313,6 +313,200 @@
             "extends": []
         },
         {
+            "name": "MfButtonComponent",
+            "id": "component-MfButtonComponent-d4acf013f4abb9af45edef7be952eb223776fb8a9cb2c00ac5b588a052020d3cd73378e967b64a2f3130bcef7ca1afaa328823475436972823b93b38435f655c",
+            "file": "src/app/components/button/mf-button.component.ts",
+            "changeDetection": "ChangeDetectionStrategy.OnPush",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "mf-button",
+            "styleUrls": [],
+            "styles": [],
+            "template": "@if (variant() === 'filled') {\n  <button\n    mat-flat-button\n    [type]=\"type()\"\n    [disabled]=\"disabled()\"\n    [class]=\"hostClasses()\"\n    (click)=\"mfClick.emit($event)\"\n  >\n    @if (leadingIcon()) {\n      <mat-icon aria-hidden=\"true\">{{ leadingIcon() }}</mat-icon>\n    }\n    <span>{{ label() }}</span>\n    @if (trailingIcon()) {\n      <mat-icon aria-hidden=\"true\">{{ trailingIcon() }}</mat-icon>\n    }\n  </button>\n} @else if (variant() === 'outlined') {\n  <button\n    mat-stroked-button\n    [type]=\"type()\"\n    [disabled]=\"disabled()\"\n    [class]=\"hostClasses()\"\n    (click)=\"mfClick.emit($event)\"\n  >\n    @if (leadingIcon()) {\n      <mat-icon aria-hidden=\"true\">{{ leadingIcon() }}</mat-icon>\n    }\n    <span>{{ label() }}</span>\n    @if (trailingIcon()) {\n      <mat-icon aria-hidden=\"true\">{{ trailingIcon() }}</mat-icon>\n    }\n  </button>\n} @else {\n  <button\n    mat-button\n    [type]=\"type()\"\n    [disabled]=\"disabled()\"\n    [class]=\"hostClasses()\"\n    (click)=\"mfClick.emit($event)\"\n  >\n    @if (leadingIcon()) {\n      <mat-icon aria-hidden=\"true\">{{ leadingIcon() }}</mat-icon>\n    }\n    <span>{{ label() }}</span>\n    @if (trailingIcon()) {\n      <mat-icon aria-hidden=\"true\">{{ trailingIcon() }}</mat-icon>\n    }\n  </button>\n}\n",
+            "templateUrl": [],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "disabled",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 81,
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "fullWidth",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 84,
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "label",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 77,
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": true
+                },
+                {
+                    "name": "leadingIcon",
+                    "defaultValue": "undefined",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string | undefined",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 82,
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "size",
+                    "defaultValue": "'md'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "MfButtonSize",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 79,
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "trailingIcon",
+                    "defaultValue": "undefined",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string | undefined",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 83,
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "type",
+                    "defaultValue": "'button'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "\"button\" | \"submit\" | \"reset\"",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 80,
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "variant",
+                    "defaultValue": "'filled'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "MfButtonVariant",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 78,
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                }
+            ],
+            "outputsClass": [
+                {
+                    "name": "mfClick",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "MouseEvent",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 86,
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                }
+            ],
+            "propertiesClass": [
+                {
+                    "name": "hostClasses",
+                    "defaultValue": "computed(() => {\r\n    const classes = ['mf-btn', `mf-btn--${this.variant()}`, `mf-btn--${this.size()}`];\r\n    if (this.fullWidth()) classes.push('mf-btn--full');\r\n    return classes.join(' ');\r\n  })",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 88,
+                    "modifierKind": [
+                        148
+                    ]
+                }
+            ],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [
+                {
+                    "name": "MatButtonModule",
+                    "type": "module"
+                },
+                {
+                    "name": "MatIconModule",
+                    "type": "module"
+                }
+            ],
+            "description": "<p>Botón de la librería mf-components.\nEnvuelve Angular Material <code>mat-button</code> / <code>mat-flat-button</code> / <code>mat-stroked-button</code>\ny expone una API uniforme con look and feel de marca.</p>\n",
+            "rawdescription": "\n\nBotón de la librería mf-components.\nEnvuelve Angular Material `mat-button` / `mat-flat-button` / `mat-stroked-button`\ny expone una API uniforme con look and feel de marca.\n",
+            "type": "component",
+            "sourceCode": "import {\r\n  ChangeDetectionStrategy,\r\n  Component,\r\n  computed,\r\n  input,\r\n  output,\r\n} from '@angular/core';\r\nimport { MatButtonModule } from '@angular/material/button';\r\nimport { MatIconModule } from '@angular/material/icon';\r\n\r\nexport type MfButtonVariant = 'filled' | 'outlined' | 'text';\r\nexport type MfButtonSize = 'sm' | 'md' | 'lg';\r\n\r\n/**\r\n * Botón de la librería mf-components.\r\n * Envuelve Angular Material `mat-button` / `mat-flat-button` / `mat-stroked-button`\r\n * y expone una API uniforme con look and feel de marca.\r\n */\r\n@Component({\r\n  selector: 'mf-button',\r\n  imports: [MatButtonModule, MatIconModule],\r\n  template: `\r\n    @if (variant() === 'filled') {\r\n      <button\r\n        mat-flat-button\r\n        [type]=\"type()\"\r\n        [disabled]=\"disabled()\"\r\n        [class]=\"hostClasses()\"\r\n        (click)=\"mfClick.emit($event)\"\r\n      >\r\n        @if (leadingIcon()) {\r\n          <mat-icon aria-hidden=\"true\">{{ leadingIcon() }}</mat-icon>\r\n        }\r\n        <span>{{ label() }}</span>\r\n        @if (trailingIcon()) {\r\n          <mat-icon aria-hidden=\"true\">{{ trailingIcon() }}</mat-icon>\r\n        }\r\n      </button>\r\n    } @else if (variant() === 'outlined') {\r\n      <button\r\n        mat-stroked-button\r\n        [type]=\"type()\"\r\n        [disabled]=\"disabled()\"\r\n        [class]=\"hostClasses()\"\r\n        (click)=\"mfClick.emit($event)\"\r\n      >\r\n        @if (leadingIcon()) {\r\n          <mat-icon aria-hidden=\"true\">{{ leadingIcon() }}</mat-icon>\r\n        }\r\n        <span>{{ label() }}</span>\r\n        @if (trailingIcon()) {\r\n          <mat-icon aria-hidden=\"true\">{{ trailingIcon() }}</mat-icon>\r\n        }\r\n      </button>\r\n    } @else {\r\n      <button\r\n        mat-button\r\n        [type]=\"type()\"\r\n        [disabled]=\"disabled()\"\r\n        [class]=\"hostClasses()\"\r\n        (click)=\"mfClick.emit($event)\"\r\n      >\r\n        @if (leadingIcon()) {\r\n          <mat-icon aria-hidden=\"true\">{{ leadingIcon() }}</mat-icon>\r\n        }\r\n        <span>{{ label() }}</span>\r\n        @if (trailingIcon()) {\r\n          <mat-icon aria-hidden=\"true\">{{ trailingIcon() }}</mat-icon>\r\n        }\r\n      </button>\r\n    }\r\n  `,\r\n  styleUrl: './mf-button.component.css',\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\nexport class MfButtonComponent {\r\n  readonly label = input.required<string>();\r\n  readonly variant = input<MfButtonVariant>('filled');\r\n  readonly size = input<MfButtonSize>('md');\r\n  readonly type = input<'button' | 'submit' | 'reset'>('button');\r\n  readonly disabled = input(false);\r\n  readonly leadingIcon = input<string | undefined>(undefined);\r\n  readonly trailingIcon = input<string | undefined>(undefined);\r\n  readonly fullWidth = input(false);\r\n\r\n  readonly mfClick = output<MouseEvent>();\r\n\r\n  readonly hostClasses = computed(() => {\r\n    const classes = ['mf-btn', `mf-btn--${this.variant()}`, `mf-btn--${this.size()}`];\r\n    if (this.fullWidth()) classes.push('mf-btn--full');\r\n    return classes.join(' ');\r\n  });\r\n}\r\n",
+            "styleUrl": "./mf-button.component.css",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": []
+        },
+        {
             "name": "PageComponent",
             "id": "component-PageComponent-e81fd7a385f2e7e1a49adcff2b50c39f3fe50e9b590a00791bbf777948eaccb7c34d7b59955b8af6bedefbdcd25b2518657bf415c79b7b3d2fdf899d24381db5",
             "file": "src/stories/page.component.ts",
@@ -455,6 +649,28 @@
                 "deprecationMessage": "",
                 "description": "",
                 "kind": 193
+            },
+            {
+                "name": "MfButtonSize",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "\"sm\" | \"md\" | \"lg\"",
+                "file": "src/app/components/button/mf-button.component.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 193
+            },
+            {
+                "name": "MfButtonVariant",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "\"filled\" | \"outlined\" | \"text\"",
+                "file": "src/app/components/button/mf-button.component.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 193
             }
         ],
         "enumerations": [],
@@ -499,6 +715,30 @@
                     "description": "",
                     "kind": 193
                 }
+            ],
+            "src/app/components/button/mf-button.component.ts": [
+                {
+                    "name": "MfButtonSize",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "\"sm\" | \"md\" | \"lg\"",
+                    "file": "src/app/components/button/mf-button.component.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 193
+                },
+                {
+                    "name": "MfButtonVariant",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "\"filled\" | \"outlined\" | \"text\"",
+                    "file": "src/app/components/button/mf-button.component.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 193
+                }
             ]
         }
     },
@@ -538,6 +778,35 @@
                 "name": "App",
                 "coveragePercent": 0,
                 "coverageCount": "0/2",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/button/mf-button.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "MfButtonComponent",
+                "coveragePercent": 9,
+                "coverageCount": "1/11",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/button/mf-button.component.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "MfButtonSize",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/button/mf-button.component.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "MfButtonVariant",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
                 "status": "low"
             },
             {

@@ -1,0 +1,98 @@
+:host {
+  display: inline-block;
+}
+
+:host([fullWidth]),
+:host-context(.mf-btn--full) {
+  display: block;
+}
+
+/* ── Base ──────────────────────────────────────────────────────── */
+.mf-btn {
+  border-radius: var(--mf-radius-full) !important;
+  font-family: var(--mf-font-base) !important;
+  font-weight: var(--mf-weight-bold) !important;
+  letter-spacing: 0.01em;
+  transition:
+    background-color var(--mf-duration-base) var(--mf-ease-standard),
+    box-shadow var(--mf-duration-base) var(--mf-ease-standard),
+    opacity var(--mf-duration-fast) var(--mf-ease-standard);
+}
+
+.mf-btn.mf-btn--full {
+  width: 100%;
+}
+
+/* ── Filled ────────────────────────────────────────────────────── */
+.mf-btn--filled.mdc-button,
+.mf-btn--filled.mat-mdc-unelevated-button {
+  background-color: var(--mf-color-brand) !important;
+  color: var(--mf-color-on-brand) !important;
+}
+
+.mf-btn--filled.mdc-button:hover:not([disabled]),
+.mf-btn--filled.mat-mdc-unelevated-button:hover:not([disabled]) {
+  background-color: var(--mf-color-brand-hover) !important;
+  box-shadow: var(--mf-shadow-md);
+}
+
+/* ── Outlined ──────────────────────────────────────────────────── */
+.mf-btn--outlined.mdc-button,
+.mf-btn--outlined.mat-mdc-outlined-button {
+  color: var(--mf-color-secondary-900) !important;
+  border-color: var(--mf-color-border) !important;
+  background-color: var(--mf-color-surface);
+}
+
+.mf-btn--outlined.mdc-button:hover:not([disabled]),
+.mf-btn--outlined.mat-mdc-outlined-button:hover:not([disabled]) {
+  background-color: var(--mf-color-surface-raised);
+  box-shadow: var(--mf-shadow-sm);
+}
+
+/* ── Text ──────────────────────────────────────────────────────── */
+.mf-btn--text.mdc-button,
+.mf-btn--text.mat-mdc-button {
+  color: var(--mf-color-brand) !important;
+}
+
+.mf-btn--text.mdc-button:hover:not([disabled]),
+.mf-btn--text.mat-mdc-button:hover:not([disabled]) {
+  background-color: var(--mf-color-brand-light);
+}
+
+/* ── Tamaños ───────────────────────────────────────────────────── */
+.mf-btn--sm.mdc-button {
+  height: 34px !important;
+  padding: 0 var(--mf-space-4) !important;
+  font-size: var(--mf-text-sm) !important;
+}
+
+.mf-btn--md.mdc-button {
+  height: 40px !important;
+  padding: 0 var(--mf-space-5) !important;
+  font-size: var(--mf-text-sm) !important;
+}
+
+.mf-btn--lg.mdc-button {
+  height: 48px !important;
+  padding: 0 var(--mf-space-6) !important;
+  font-size: var(--mf-text-base) !important;
+}
+
+/* ── Disabled ──────────────────────────────────────────────────── */
+.mf-btn[disabled],
+.mf-btn.mdc-button:disabled {
+  opacity: 0.42;
+  cursor: default;
+  pointer-events: none;
+}
+
+/* ── Iconos ────────────────────────────────────────────────────── */
+.mf-btn .mat-icon {
+  font-size: 1.1em;
+  height: 1.1em;
+  width: 1.1em;
+  vertical-align: middle;
+  line-height: 1;
+}
