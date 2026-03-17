@@ -9,7 +9,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 export type MfToolbarVariant = 'surface' | 'brand' | 'transparent';
 
 /**
- * Toolbar de la librería mf-components.
+ * Toolbar de la librería ng-comps.
  * Envuelve Angular Material `mat-toolbar` y expone una API uniforme
  * con look and feel de marca. Usa content projection para acciones.
  */

@@ -10,7 +10,7 @@ export type MfIconSize = 'sm' | 'md' | 'lg' | 'xl';
 export type MfIconColor = 'default' | 'brand' | 'muted' | 'error' | 'inherit';
 
 /**
- * Icono de la librería mf-components.
+ * Icono de la librería ng-comps.
  * Envuelve Angular Material `mat-icon` y expone una API uniforme
  * con tamaños y colores de marca.
  */

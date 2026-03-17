@@ -12,7 +12,7 @@ const meta: Meta<MfToolbarComponent> = {
     docs: {
       description: {
         component: `
-**MfToolbar** es la barra de herramientas de la librería mf-components.
+**MfToolbar** es la barra de herramientas de la librería ng-comps.
 Usa Angular Material \`mat-toolbar\` por debajo pero con estilo propio: minimalista y elegante.
 
 | Variante       | Cuándo usarla                                  |

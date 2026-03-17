@@ -10,7 +10,7 @@ const meta: Meta<MfCardComponent> = {
     docs: {
       description: {
         component: `
-**MfCard** es el componente de card de la librería mf-components.
+**MfCard** es el componente de card de la librería ng-comps.
 Usa Angular Material \`mat-card\` por debajo pero con un estilo propio: minimalista, elegante y moderno.
 
 | Variante    | Cuándo usarla                                   |

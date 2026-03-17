@@ -18,7 +18,7 @@ const meta: Meta<MfSelectComponent> = {
     docs: {
       description: {
         component: `
-**MfSelect** es el selector desplegable de la librería mf-components.
+**MfSelect** es el selector desplegable de la librería ng-comps.
 Usa Angular Material \`mat-select\` por debajo pero expone una API uniforme con look and feel de marca.
 
 El panel del dropdown se estiliza a través de la clase global \`mf-select-panel\`. Puedes inyectar clases adicionales con la propiedad \`panelClass\` para personalizar el dropdown a nivel de historia o componente.

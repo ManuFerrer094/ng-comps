@@ -61,7 +61,7 @@ const meta: Meta<MfDialogComponent> = {
     docs: {
       description: {
         component: `
-**MfDialog** es el componente de diálogo de la librería mf-components.
+**MfDialog** es el componente de diálogo de la librería ng-comps.
 Usa Angular Material \`MatDialog\` por debajo pero con estilo propio: minimalista y elegante.
 
 Puede usarse de dos formas:

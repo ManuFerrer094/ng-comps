@@ -10,7 +10,7 @@ const meta: Meta<MfProgressBarComponent> = {
     docs: {
       description: {
         component: `
-**MfProgressBar** es la barra de progreso de la librería mf-components.
+**MfProgressBar** es la barra de progreso de la librería ng-comps.
 Usa Angular Material \`mat-progress-bar\` por debajo pero expone una API uniforme con look and feel de marca.
 
 | Modo             | Descripción                                        |

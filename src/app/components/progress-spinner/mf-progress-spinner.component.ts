@@ -10,7 +10,7 @@ export type MfProgressSpinnerMode = 'determinate' | 'indeterminate';
 export type MfProgressSpinnerColor = 'brand' | 'accent' | 'warn';
 
 /**
- * Spinner de progreso de la librería mf-components.
+ * Spinner de progreso de la librería ng-comps.
  * Envuelve Angular Material `mat-progress-spinner` y expone una API uniforme
  * con look and feel de marca.
  */

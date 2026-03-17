@@ -9,7 +9,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 export type MfTooltipPosition = 'above' | 'below' | 'left' | 'right';
 
 /**
- * Tooltip de la librería mf-components.
+ * Tooltip de la librería ng-comps.
  * Envuelve Angular Material `matTooltip` y expone una API uniforme
  * con look and feel de marca.
  */

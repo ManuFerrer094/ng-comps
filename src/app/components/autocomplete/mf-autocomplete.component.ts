@@ -22,7 +22,7 @@ export interface MfAutocompleteOption {
 export type MfAutocompleteSize = 'sm' | 'md' | 'lg';
 
 /**
- * Autocompletar de la librería mf-components.
+ * Autocompletar de la librería ng-comps.
  * Envuelve Angular Material `mat-autocomplete` y expone una API uniforme
  * con look and feel de marca.
  *

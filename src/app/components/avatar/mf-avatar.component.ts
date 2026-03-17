@@ -9,7 +9,7 @@ export type MfAvatarSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 export type MfAvatarVariant = 'circle' | 'rounded';
 
 /**
- * Avatar de la librería mf-components.
+ * Avatar de la librería ng-comps.
  * Muestra una imagen de perfil, iniciales o un icono.
  * Componente puro sin dependencia de Angular Material.
  */

@@ -12,7 +12,7 @@ export type MfButtonVariant = 'filled' | 'outlined' | 'text';
 export type MfButtonSize = 'sm' | 'md' | 'lg';
 
 /**
- * Botón de la librería mf-components.
+ * Botón de la librería ng-comps.
  * Envuelve Angular Material `mat-button` / `mat-flat-button` / `mat-stroked-button`
  * y expone una API uniforme con look and feel de marca.
  */

@@ -17,7 +17,7 @@ export interface MfTableColumn {
 export type MfTableVariant = 'default' | 'striped' | 'bordered';
 
 /**
- * Table de la librería mf-components.
+ * Table de la librería ng-comps.
  * Envuelve Angular Material `mat-table` y expone una API uniforme
  * con look and feel de marca. Ideal para dashboards y paneles de datos.
  */

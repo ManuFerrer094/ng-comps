@@ -9,7 +9,7 @@ import { MatCardModule } from '@angular/material/card';
 export type MfCardVariant = 'elevated' | 'outlined' | 'flat';
 
 /**
- * Card de la librería mf-components.
+ * Card de la librería ng-comps.
  * Envuelve Angular Material `mat-card` y expone una API uniforme
  * con look and feel de marca. Admite contenido proyectado mediante slots.
  */

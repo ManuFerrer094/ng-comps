@@ -6,7 +6,7 @@ import {
 } from '@angular/core';
 
 /**
- * Contenedor de campo de formulario de la librería mf-components.
+ * Contenedor de campo de formulario de la librería ng-comps.
  * Proporciona estructura de layout consistente con label, contenido proyectado,
  * y mensajes opcionales de ayuda o error.
  */

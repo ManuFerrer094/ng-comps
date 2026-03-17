@@ -13,7 +13,7 @@ export interface MfSnackbarConfig {
 }
 
 /**
- * Servicio de Snackbar de la librería mf-components.
+ * Servicio de Snackbar de la librería ng-comps.
  * Envuelve Angular Material `MatSnackBar` y expone una API uniforme
  * con estilos de marca y tipos semánticos.
  */

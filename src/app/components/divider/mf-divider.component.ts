@@ -9,7 +9,7 @@ import { MatDividerModule } from '@angular/material/divider';
 export type MfDividerVariant = 'full' | 'inset' | 'middle';
 
 /**
- * Divider de la librería mf-components.
+ * Divider de la librería ng-comps.
  * Envuelve Angular Material `mat-divider` y expone una API uniforme
  * con look and feel de marca.
  */

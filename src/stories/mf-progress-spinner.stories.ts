@@ -10,7 +10,7 @@ const meta: Meta<MfProgressSpinnerComponent> = {
     docs: {
       description: {
         component: `
-**MfProgressSpinner** es el spinner de progreso de la librería mf-components.
+**MfProgressSpinner** es el spinner de progreso de la librería ng-comps.
 Usa Angular Material \`mat-progress-spinner\` por debajo y expone una API uniforme con look and feel de marca.
 
 | Modo              | Descripción                                |

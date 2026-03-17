@@ -10,7 +10,7 @@ const meta: Meta<MfDatepickerComponent> = {
     docs: {
       description: {
         component: `
-**MfDatepicker** es el selector de fecha de la librería mf-components.
+**MfDatepicker** es el selector de fecha de la librería ng-comps.
 Usa Angular Material \`mat-datepicker\` por debajo pero expone una API uniforme con look and feel de marca.
 
 | Propiedad   | Descripción                              |

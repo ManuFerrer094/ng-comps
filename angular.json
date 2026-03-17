@@ -7,7 +7,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "mf-components": {
+    "ng-comps": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -58,10 +58,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "mf-components:build:production"
+              "buildTarget": "ng-comps:build:production"
             },
             "development": {
-              "buildTarget": "mf-components:build:development"
+              "buildTarget": "ng-comps:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -73,7 +73,7 @@
           "builder": "@storybook/angular:start-storybook",
           "options": {
             "configDir": ".storybook",
-            "browserTarget": "mf-components:build",
+            "browserTarget": "ng-comps:build",
             "compodoc": true,
             "compodocArgs": [
               "-e",
@@ -88,7 +88,7 @@
           "builder": "@storybook/angular:build-storybook",
           "options": {
             "configDir": ".storybook",
-            "browserTarget": "mf-components:build",
+            "browserTarget": "ng-comps:build",
             "compodoc": true,
             "compodocArgs": [
               "-e",

@@ -17,7 +17,7 @@ import { FormsModule } from '@angular/forms';
 export type MfDatepickerSize = 'sm' | 'md' | 'lg';
 
 /**
- * Selector de fecha de la librería mf-components.
+ * Selector de fecha de la librería ng-comps.
  * Envuelve Angular Material `mat-datepicker` y expone una API uniforme
  * con look and feel de marca.
  */

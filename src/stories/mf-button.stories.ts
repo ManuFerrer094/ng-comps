@@ -10,7 +10,7 @@ const meta: Meta<MfButtonComponent> = {
     docs: {
       description: {
         component: `
-**MfButton** es el botón de la librería mf-components.
+**MfButton** es el botón de la librería ng-comps.
 Usa Angular Material por debajo pero expone una API uniforme con el look and feel de marca.
 
 | Variante   | Cuándo usarla                                       |

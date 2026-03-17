@@ -14,7 +14,7 @@ export interface MfBreadcrumbItem {
 }
 
 /**
- * Breadcrumb de la librería mf-components.
+ * Breadcrumb de la librería ng-comps.
  * Componente de navegación jerárquica para indicar la ubicación
  * del usuario en la aplicación.
  */

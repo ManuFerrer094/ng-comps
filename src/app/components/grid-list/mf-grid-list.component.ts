@@ -19,7 +19,7 @@ export interface MfGridTile {
 }
 
 /**
- * Lista en cuadrícula de la librería mf-components.
+ * Lista en cuadrícula de la librería ng-comps.
  * Envuelve Angular Material `mat-grid-list` y expone una API uniforme
  * con look and feel de marca. Soporta tiles estáticas y content projection.
  */

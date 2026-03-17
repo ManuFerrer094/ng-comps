@@ -1,14 +1,21 @@
 {
-  "name": "mf-components",
-  "version": "0.0.0",
+  "name": "ng-comps",
+  "version": "0.2.0",
+  "license": "MIT",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:lib": "ng-packagr -p ng-package.json",
+    "prepare:package": "node scripts/prepare-package.mjs",
+    "release:dry-run": "npm run build:lib && npm run prepare:package && npm pack ./dist/ng-comps --dry-run",
+    "publish:npm": "npm run build:lib && npm run prepare:package && npm publish ./dist/ng-comps --access public",
+    "version:patch": "npm version patch --no-git-tag-version",
+    "version:minor": "npm version minor --no-git-tag-version",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "storybook": "ng run mf-components:storybook",
-    "build-storybook": "ng run mf-components:build-storybook"
+    "storybook": "ng run ng-comps:storybook",
+    "build-storybook": "ng run ng-comps:build-storybook"
   },
   "private": true,
   "packageManager": "npm@10.8.2",
@@ -41,6 +48,7 @@
     "jsdom": "^28.0.0",
     "prettier": "^3.8.1",
     "storybook": "^10.2.19",
+    "ng-packagr": "^21.2.0",
     "typescript": "~5.9.2",
     "vitest": "^4.0.8"
   }

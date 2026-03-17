@@ -10,7 +10,7 @@ const meta: Meta<MfCheckboxComponent> = {
     docs: {
       description: {
         component: `
-**MfCheckbox** es el checkbox de la librería mf-components.
+**MfCheckbox** es el checkbox de la librería ng-comps.
 Usa Angular Material \`mat-checkbox\` por debajo pero expone una API uniforme con look and feel de marca.
 
 | Estado          | Descripción                                |

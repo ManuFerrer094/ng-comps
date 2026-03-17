@@ -11,7 +11,7 @@ export type MfBadgeSize = 'sm' | 'md' | 'lg';
 export type MfBadgePosition = 'above-after' | 'above-before' | 'below-after' | 'below-before';
 
 /**
- * Badge de la librería mf-components.
+ * Badge de la librería ng-comps.
  * Envuelve Angular Material `matBadge` y expone una API uniforme
  * con look and feel de marca.
  */

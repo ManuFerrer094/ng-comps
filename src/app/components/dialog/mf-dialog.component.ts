@@ -10,7 +10,7 @@ import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 
 /**
- * Contenido de diálogo de la librería mf-components.
+ * Contenido de diálogo de la librería ng-comps.
  * Envuelve las directivas de Angular Material `mat-dialog-*` y expone
  * una API uniforme con look and feel de marca.
  *

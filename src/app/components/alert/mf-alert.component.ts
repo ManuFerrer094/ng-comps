@@ -10,7 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
 export type MfAlertSeverity = 'info' | 'success' | 'warning' | 'error';
 
 /**
- * Alerta de la librería mf-components.
+ * Alerta de la librería ng-comps.
  * Componente de banner para mensajes de sistema, alertas y notificaciones.
  * Ideal para dashboards y paneles administrativos.
  */

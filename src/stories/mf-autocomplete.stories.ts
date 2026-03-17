@@ -23,7 +23,7 @@ const meta: Meta<MfAutocompleteComponent> = {
     docs: {
       description: {
         component: `
-**MfAutocomplete** es el campo de autocompletar de la librería mf-components.
+**MfAutocomplete** es el campo de autocompletar de la librería ng-comps.
 Usa Angular Material \`mat-autocomplete\` por debajo pero expone una API uniforme con look and feel de marca.
 
 El filtrado de opciones se realiza automáticamente por el texto escrito en el campo, buscando en la propiedad \`label\` de las opciones. Puedes proporcionar la lista completa de opciones y el componente se encarga del filtrado.

@@ -21,7 +21,7 @@ const meta: Meta<MfSidenavComponent> = {
     docs: {
       description: {
         component: `
-**MfSidenav** es el panel lateral de la librería mf-components.
+**MfSidenav** es el panel lateral de la librería ng-comps.
 Envuelve Angular Material \`mat-sidenav-container\` con estilo propio: iconos Material,
 estados activo/deshabilitado, badges de notificación y cabecera personalizable.
 
@@ -331,4 +331,4 @@ export const ContentProjection: Story = {
       },
     },
   },
-};
+};

@@ -10,7 +10,7 @@ const meta: Meta<MfInputComponent> = {
     docs: {
       description: {
         component: `
-**MfInput** es el campo de texto de la librería mf-components.
+**MfInput** es el campo de texto de la librería ng-comps.
 Usa Angular Material \`mat-form-field\` por debajo pero expone una API uniforme con look and feel de marca.
 
 | Propiedad     | Descripción                              |

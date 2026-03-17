@@ -27,7 +27,7 @@ export interface MfSidenavNavItem {
 }
 
 /**
- * Panel lateral de la librería mf-components.
+ * Panel lateral de la librería ng-comps.
  * Envuelve Angular Material `mat-sidenav-container` y expone una API uniforme
  * con look and feel de marca.
  *

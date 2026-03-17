@@ -10,7 +10,7 @@ export type MfProgressBarMode = 'determinate' | 'indeterminate' | 'buffer' | 'qu
 export type MfProgressBarColor = 'brand' | 'accent' | 'warn';
 
 /**
- * Barra de progreso de la librería mf-components.
+ * Barra de progreso de la librería ng-comps.
  * Envuelve Angular Material `mat-progress-bar` y expone una API uniforme
  * con look and feel de marca.
  */

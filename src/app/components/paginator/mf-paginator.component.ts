@@ -8,7 +8,7 @@ import {
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 
 /**
- * Paginator de la librería mf-components.
+ * Paginator de la librería ng-comps.
  * Envuelve Angular Material `mat-paginator` y expone una API uniforme
  * con look and feel de marca.
  */

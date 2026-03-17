@@ -1,59 +1,62 @@
-# MiApp
+# ng-comps
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.2.
+Libreria de componentes UI para Angular con enfoque en:
 
-## Development server
+- paquete NPM liviano
+- tree-shaking real
+- peers de Angular (sin duplicar framework en cada instalacion)
 
-To start a local development server, run:
-
-```bash
-ng serve
-```
-
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Instalacion (consumidor)
 
 ```bash
-ng generate component component-name
+npm i ng-comps
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Importa solo lo que usas:
+
+```ts
+import { MfButtonComponent } from 'ng-comps';
+```
+
+Si quieres usar los tokens/estilos base:
+
+```css
+@import 'ng-comps/theme/tokens.css';
+@import 'ng-comps/styles.css';
+```
+
+## Publicacion optimizada a NPM
+
+Este repo publica desde `dist/ng-comps`, no desde la raiz. De esta forma no se suben historias, tests ni archivos de desarrollo.
+
+1. Construir la libreria APF:
 
 ```bash
-ng generate --help
+npm run build:lib
 ```
 
-## Building
-
-To build the project run:
+2. Generar `package.json` optimizado para distribucion:
 
 ```bash
-ng build
+npm run prepare:package
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+3. Verificar contenido del paquete antes de publicar:
 
 ```bash
-ng test
+npm run release:dry-run
 ```
 
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
+4. Publicar:
 
 ```bash
-ng e2e
+npm run publish:npm
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## Estrategia de optimizacion aplicada
 
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- `sideEffects: false` para maximizar tree-shaking
+- `peerDependencies` para Angular y RxJS (evita bundles duplicados)
+- `dependencies` minimas (`tslib`)
+- `exports` explicitos para entrypoint y estilos
+- publicacion desde carpeta de build (`dist/ng-comps`)

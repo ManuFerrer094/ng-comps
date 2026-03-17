@@ -12,7 +12,7 @@ export type MfChipVariant = 'filled' | 'outlined';
 export type MfChipColor = 'brand' | 'accent' | 'error' | 'neutral';
 
 /**
- * Chip de la librería mf-components.
+ * Chip de la librería ng-comps.
  * Envuelve Angular Material `mat-chip` y expone una API uniforme
  * con look and feel de marca. Ideal para tags, filtros y etiquetas.
  */

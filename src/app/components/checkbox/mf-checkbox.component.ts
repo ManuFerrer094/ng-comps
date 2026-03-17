@@ -8,7 +8,7 @@ import {
 import { MatCheckboxModule } from '@angular/material/checkbox';
 
 /**
- * Checkbox de la librería mf-components.
+ * Checkbox de la librería ng-comps.
  * Envuelve Angular Material `mat-checkbox` y expone una API uniforme
  * con look and feel de marca.
  */

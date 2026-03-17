@@ -18,7 +18,7 @@ export interface MfSelectOption {
 export type MfSelectSize = 'sm' | 'md' | 'lg';
 
 /**
- * Select de la librería mf-components.
+ * Select de la librería ng-comps.
  * Envuelve Angular Material `mat-select` y expone una API uniforme
  * con look and feel de marca.
  *

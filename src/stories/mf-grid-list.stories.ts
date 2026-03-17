@@ -18,7 +18,7 @@ const meta: Meta<MfGridListComponent> = {
     docs: {
       description: {
         component: `
-**MfGridList** es la lista en cuadrícula de la librería mf-components.
+**MfGridList** es la lista en cuadrícula de la librería ng-comps.
 Envuelve Angular Material \`mat-grid-list\` y expone una API uniforme con look and feel de marca.
 
 Acepta tiles declarativas vía el input \`tiles\` (array de \`MfGridTile\`) o

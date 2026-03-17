@@ -22,7 +22,7 @@ export interface MfRadioOption {
 export type MfRadioDirection = 'horizontal' | 'vertical';
 
 /**
- * Grupo de radio buttons de la librería mf-components.
+ * Grupo de radio buttons de la librería ng-comps.
  * Envuelve Angular Material `mat-radio-group` + `mat-radio-button`
  * y expone una API uniforme con look and feel de marca.
  */

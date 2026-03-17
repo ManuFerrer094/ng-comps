@@ -17,7 +17,7 @@ export interface MfTab {
 export type MfTabsVariant = 'default' | 'stretched';
 
 /**
- * Tabs de la librería mf-components.
+ * Tabs de la librería ng-comps.
  * Envuelve Angular Material `mat-tab-group` y expone una API uniforme
  * con look and feel de marca.
  */

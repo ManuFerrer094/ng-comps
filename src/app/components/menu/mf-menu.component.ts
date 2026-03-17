@@ -17,7 +17,7 @@ export interface MfMenuItem {
 }
 
 /**
- * Menu de la librería mf-components.
+ * Menu de la librería ng-comps.
  * Envuelve Angular Material `mat-menu` y expone una API uniforme
  * con look and feel de marca.
  */

@@ -10,7 +10,7 @@ const meta: Meta<MfIconComponent> = {
     docs: {
       description: {
         component: `
-**MfIcon** es el componente de iconos de la librería mf-components.
+**MfIcon** es el componente de iconos de la librería ng-comps.
 Usa Material Icons por debajo y expone una API consistente con tamaños y colores de marca.
 
 | Tamaño | Pixeles | Cuándo usarlo                           |

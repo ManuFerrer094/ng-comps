@@ -12,7 +12,7 @@ const meta: Meta<MfFormFieldComponent> = {
     docs: {
       description: {
         component: `
-**MfFormField** es el contenedor de campo de formulario de la librería mf-components.
+**MfFormField** es el contenedor de campo de formulario de la librería ng-comps.
 Proporciona layout consistente con label, contenido proyectado y mensajes opcionales.
 
 Usar como wrapper de \`mf-input\`, \`mf-checkbox\` u otros controles para estructura uniforme.

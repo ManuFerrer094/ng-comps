@@ -12,7 +12,7 @@ import { MatIconModule } from '@angular/material/icon';
 export type MfInputSize = 'sm' | 'md' | 'lg';
 
 /**
- * Campo de texto de la librería mf-components.
+ * Campo de texto de la librería ng-comps.
  * Envuelve Angular Material `mat-form-field` + `matInput`
  * y expone una API uniforme con look and feel de marca.
  */

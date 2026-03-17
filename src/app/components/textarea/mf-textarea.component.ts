@@ -12,7 +12,7 @@ export type MfTextareaSize = 'sm' | 'md' | 'lg';
 export type MfTextareaResize = 'none' | 'vertical' | 'horizontal' | 'both';
 
 /**
- * Textarea de la librería mf-components.
+ * Textarea de la librería ng-comps.
  * Envuelve Angular Material `matInput` con textarea y expone una API uniforme
  * con look and feel de marca.
  */
