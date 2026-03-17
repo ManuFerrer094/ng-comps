@@ -72,21 +72,5 @@
 }
 
 /* ── Actions (footer) ─────────────────────────────────────────── */
-.mf-dialog__actions {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: var(--mf-space-3);
-  padding: var(--mf-space-3) var(--mf-space-6) var(--mf-space-6);
-}
-
-/* Cuando los botones se proyectan dentro de un div wrapper (mfDialogActions),
-   ese div se convierte en el único hijo de .mf-dialog__actions,
-   por lo que el gap no aplica entre botones. Este override lo corrige. */
-.mf-dialog__actions > div {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: var(--mf-space-3);
-  width: 100%;
-}
+/* La regla de gap está en styles.css (global) para que aplique también
+   al contenido proyectado, que escapa al scope de ViewEncapsulation. */

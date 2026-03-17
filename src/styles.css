@@ -51,6 +51,26 @@ body {
   --mat-toolbar-container-text-color: var(--mf-color-on-surface);
 }
 
+/* ── Dialog actions ───────────────────────────────────────────── */
+/* Angular's Emulated ViewEncapsulation prevents the component's own CSS
+   from styling projected children (they carry the parent's scope attr).
+   These global rules ensure the gap is always applied. */
+.mf-dialog__actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--mf-space-3);
+  padding: var(--mf-space-3) var(--mf-space-6) var(--mf-space-6);
+}
+
+.mf-dialog__actions > * {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--mf-space-3);
+  width: 100%;
+}
+
 /* ── Dialog panel override ─────────────────────────────────────── */
 .mf-dialog-panel .mat-mdc-dialog-container {
   border-radius: var(--mf-radius-xl, 20px) !important;
