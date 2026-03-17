@@ -1,12 +1,34 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 import { Component, inject } from '@angular/core';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 
 import { MfDialogComponent } from '../app/components/dialog';
 import { MfButtonComponent } from '../app/components/button';
 
-// ── Wrapper component para abrir el diálogo ────────────────────────────────
+// ── Contenido del diálogo que se abre programáticamente ────────────────────
+@Component({
+  selector: 'mf-dialog-content-demo',
+  imports: [MfDialogComponent, MfButtonComponent],
+  template: `
+    <mf-dialog
+      title="Confirmar acción"
+      message="¿Estás seguro de que deseas continuar? Esta acción no se puede deshacer."
+      [showClose]="true"
+      [showActions]="true"
+      (mfClose)="dialogRef.close()"
+    >
+      <div mfDialogActions>
+        <mf-button label="Cancelar" variant="outlined" size="sm" (mfClick)="dialogRef.close()" />
+        <mf-button label="Confirmar" variant="filled" size="sm" (mfClick)="dialogRef.close()" />
+      </div>
+    </mf-dialog>
+  `,
+})
+class MfDialogContentDemoComponent {
+  readonly dialogRef = inject(MatDialogRef<MfDialogContentDemoComponent>);
+}
 
+// ── Wrapper component para abrir el diálogo ────────────────────────────────
 @Component({
   selector: 'mf-dialog-demo',
   imports: [MfButtonComponent, MatDialogModule],
@@ -22,8 +44,7 @@ class MfDialogDemoComponent {
   private readonly dialog = inject(MatDialog);
 
   openDialog(): void {
-    this.dialog.open(MfDialogComponent, {
-      data: {},
+    this.dialog.open(MfDialogContentDemoComponent, {
       panelClass: 'mf-dialog-panel',
       autoFocus: true,
     });

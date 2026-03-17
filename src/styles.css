@@ -97,3 +97,66 @@ body {
   font-weight: var(--mf-weight-bold) !important;
   opacity: 0.9;
 }
+
+/* ── Select panel (dropdown overlay) global overrides ─────────── */
+.mf-select-panel.mat-mdc-select-panel {
+  border-radius: var(--mf-radius-md) !important;
+  box-shadow: var(--mf-shadow-md) !important;
+  font-family: var(--mf-font-base) !important;
+  border: 1px solid var(--mf-color-border);
+  padding: var(--mf-space-1) 0 !important;
+  background-color: var(--mf-color-surface) !important;
+}
+
+.mf-select-panel .mat-mdc-option {
+  font-family: var(--mf-font-base) !important;
+  font-size: var(--mf-text-base) !important;
+  color: var(--mf-color-on-surface) !important;
+  min-height: 40px;
+}
+
+.mf-select-panel .mat-mdc-option:hover:not(.mdc-list-item--disabled) {
+  background-color: var(--mf-color-brand-light) !important;
+  color: var(--mf-color-brand) !important;
+}
+
+.mf-select-panel .mat-mdc-option.mat-mdc-option-active,
+.mf-select-panel .mat-mdc-option.mdc-list-item--selected:not(.mat-mdc-option-multiple) {
+  background-color: var(--mf-color-brand-light) !important;
+  color: var(--mf-color-brand) !important;
+  font-weight: var(--mf-weight-medium) !important;
+}
+
+.mf-select-panel .mat-mdc-option .mat-pseudo-checkbox-checked,
+.mf-select-panel .mat-mdc-option .mat-pseudo-checkbox-indeterminate {
+  background-color: var(--mf-color-brand) !important;
+  border-color: var(--mf-color-brand) !important;
+}
+
+/* ── Autocomplete panel global overrides ──────────────────────── */
+.mf-autocomplete-panel.mat-mdc-autocomplete-panel {
+  border-radius: var(--mf-radius-md) !important;
+  box-shadow: var(--mf-shadow-md) !important;
+  font-family: var(--mf-font-base) !important;
+  border: 1px solid var(--mf-color-border);
+  padding: var(--mf-space-1) 0 !important;
+  background-color: var(--mf-color-surface) !important;
+}
+
+.mf-autocomplete-panel .mat-mdc-option {
+  font-family: var(--mf-font-base) !important;
+  font-size: var(--mf-text-base) !important;
+  color: var(--mf-color-on-surface) !important;
+  min-height: 40px;
+}
+
+.mf-autocomplete-panel .mat-mdc-option:hover:not(.mdc-list-item--disabled) {
+  background-color: var(--mf-color-brand-light) !important;
+  color: var(--mf-color-brand) !important;
+}
+
+.mf-autocomplete-panel .mat-mdc-option.mat-mdc-option-active {
+  background-color: var(--mf-color-brand-light) !important;
+  color: var(--mf-color-brand) !important;
+  font-weight: var(--mf-weight-medium) !important;
+}

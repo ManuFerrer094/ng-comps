@@ -14,7 +14,6 @@
   background-color: var(--mf-color-surface) !important;
   border-right: 1px solid var(--mf-color-border) !important;
   font-family: var(--mf-font-base) !important;
-  box-shadow: var(--mf-shadow-md);
 }
 
 .mf-sidenav--over,
@@ -25,6 +24,134 @@
 .mf-sidenav--side {
   box-shadow: none;
   border-right: 1px solid var(--mf-color-border) !important;
+}
+
+/* ── Nav wrapper ───────────────────────────────────────────────── */
+.mf-sidenav__nav {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* ── Header ────────────────────────────────────────────────────── */
+.mf-sidenav__header {
+  display: flex;
+  align-items: center;
+  gap: var(--mf-space-2);
+  padding: var(--mf-space-5) var(--mf-space-4) var(--mf-space-4);
+  border-bottom: 1px solid var(--mf-color-border);
+  flex-shrink: 0;
+}
+
+.mf-sidenav__header-icon {
+  color: var(--mf-color-brand) !important;
+  font-size: 22px;
+  width: 22px;
+  height: 22px;
+}
+
+.mf-sidenav__header-title {
+  font-family: var(--mf-font-display) !important;
+  font-size: var(--mf-text-base);
+  font-weight: var(--mf-weight-bold);
+  color: var(--mf-color-on-surface);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── Menu nav ──────────────────────────────────────────────────── */
+.mf-sidenav__menu {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mf-space-1);
+  padding: var(--mf-space-3) var(--mf-space-3);
+  flex: 1;
+  overflow-y: auto;
+}
+
+/* ── Nav item ──────────────────────────────────────────────────── */
+.mf-sidenav__item {
+  display: flex;
+  align-items: center;
+  gap: var(--mf-space-3);
+  width: 100%;
+  padding: var(--mf-space-2) var(--mf-space-3);
+  border: none;
+  border-radius: var(--mf-radius-md);
+  background: transparent;
+  color: var(--mf-color-neutral-600);
+  font-family: var(--mf-font-base);
+  font-size: var(--mf-text-sm);
+  font-weight: var(--mf-weight-medium);
+  cursor: pointer;
+  text-align: left;
+  transition:
+    background-color var(--mf-duration-fast) var(--mf-ease-standard),
+    color var(--mf-duration-fast) var(--mf-ease-standard);
+  position: relative;
+}
+
+.mf-sidenav__item:hover:not(.mf-sidenav__item--disabled) {
+  background-color: var(--mf-color-neutral-100);
+  color: var(--mf-color-on-surface);
+}
+
+.mf-sidenav__item:hover:not(.mf-sidenav__item--disabled) .mf-sidenav__item-icon {
+  color: var(--mf-color-brand) !important;
+}
+
+/* Active state */
+.mf-sidenav__item--active {
+  background-color: var(--mf-color-brand-light) !important;
+  color: var(--mf-color-brand) !important;
+  font-weight: var(--mf-weight-bold) !important;
+}
+
+.mf-sidenav__item--active .mf-sidenav__item-icon {
+  color: var(--mf-color-brand) !important;
+}
+
+/* Disabled state */
+.mf-sidenav__item--disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ── Icon ──────────────────────────────────────────────────────── */
+.mf-sidenav__item-icon {
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  color: var(--mf-color-neutral-400) !important;
+  transition: color var(--mf-duration-fast) var(--mf-ease-standard);
+}
+
+/* ── Label ─────────────────────────────────────────────────────── */
+.mf-sidenav__item-label {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── Badge ─────────────────────────────────────────────────────── */
+.mf-sidenav__item-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 var(--mf-space-1);
+  border-radius: var(--mf-radius-full);
+  background-color: var(--mf-color-brand);
+  color: var(--mf-color-on-brand);
+  font-size: 0.625rem;
+  font-weight: var(--mf-weight-bold);
+  line-height: 1;
+  flex-shrink: 0;
 }
 
 /* ── Main content ──────────────────────────────────────────────── */
@@ -38,3 +165,4 @@
 .mf-sidenav-container .mat-drawer-backdrop.mat-drawer-shown {
   background-color: rgba(15, 23, 42, 0.32) !important;
 }
+

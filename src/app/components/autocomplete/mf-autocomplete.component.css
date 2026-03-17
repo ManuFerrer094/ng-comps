@@ -3,83 +3,76 @@
 }
 
 /* ── Base ──────────────────────────────────────────────────────── */
-.mf-select {
+.mf-autocomplete {
   font-family: var(--mf-font-base) !important;
   width: 100%;
 }
 
-.mf-select--full {
+.mf-autocomplete--full {
   width: 100%;
 }
 
 /* ── Mat-form-field overrides ─────────────────────────────────── */
-.mf-select .mat-mdc-text-field-wrapper {
+.mf-autocomplete .mat-mdc-text-field-wrapper {
   border-radius: var(--mf-radius-md) !important;
 }
 
-.mf-select .mdc-notched-outline {
-  border-radius: var(--mf-radius-md) !important;
-}
-
-.mf-select .mdc-notched-outline__leading,
-.mf-select .mdc-notched-outline__notch,
-.mf-select .mdc-notched-outline__trailing {
+.mf-autocomplete .mdc-notched-outline__leading,
+.mf-autocomplete .mdc-notched-outline__notch,
+.mf-autocomplete .mdc-notched-outline__trailing {
   border-color: var(--mf-color-border) !important;
   transition: border-color var(--mf-duration-base) var(--mf-ease-standard);
 }
 
-.mf-select .mat-mdc-form-field-focus-overlay {
+.mf-autocomplete .mat-mdc-form-field-focus-overlay {
   background-color: transparent !important;
 }
 
 /* ── Focus state ──────────────────────────────────────────────── */
-.mf-select.mat-focused .mdc-notched-outline__leading,
-.mf-select.mat-focused .mdc-notched-outline__notch,
-.mf-select.mat-focused .mdc-notched-outline__trailing {
+.mf-autocomplete.mat-focused .mdc-notched-outline__leading,
+.mf-autocomplete.mat-focused .mdc-notched-outline__notch,
+.mf-autocomplete.mat-focused .mdc-notched-outline__trailing {
   border-color: var(--mf-color-brand) !important;
   border-width: 1.5px !important;
 }
 
 /* ── Error state ──────────────────────────────────────────────── */
-.mf-select--error .mdc-notched-outline__leading,
-.mf-select--error .mdc-notched-outline__notch,
-.mf-select--error .mdc-notched-outline__trailing {
+.mf-autocomplete--error .mdc-notched-outline__leading,
+.mf-autocomplete--error .mdc-notched-outline__notch,
+.mf-autocomplete--error .mdc-notched-outline__trailing {
   border-color: var(--mf-color-error-500) !important;
 }
 
 /* ── Label ────────────────────────────────────────────────────── */
-.mf-select .mat-mdc-floating-label {
+.mf-autocomplete .mat-mdc-floating-label {
   font-family: var(--mf-font-base) !important;
   font-weight: var(--mf-weight-medium) !important;
   color: var(--mf-color-neutral-400) !important;
 }
 
-.mf-select.mat-focused .mat-mdc-floating-label {
+.mf-autocomplete.mat-focused .mat-mdc-floating-label {
   color: var(--mf-color-brand) !important;
 }
 
-/* ── Trigger text ─────────────────────────────────────────────── */
-.mf-select .mat-mdc-select-trigger {
+/* ── Input text ───────────────────────────────────────────────── */
+.mf-autocomplete .mat-mdc-input-element {
   font-family: var(--mf-font-base) !important;
   color: var(--mf-color-on-surface) !important;
+  caret-color: var(--mf-color-brand);
 }
 
-.mf-select .mat-mdc-select-placeholder {
+/* ── Hint & Error ─────────────────────────────────────────────── */
+.mf-autocomplete .mat-mdc-form-field-hint {
+  font-size: var(--mf-text-xs) !important;
   color: var(--mf-color-neutral-400) !important;
 }
 
-/* ── Arrow icon ───────────────────────────────────────────────── */
-.mf-select .mat-mdc-select-arrow {
-  color: var(--mf-color-neutral-400) !important;
-  transition: color var(--mf-duration-base) var(--mf-ease-standard);
-}
-
-.mf-select.mat-focused .mat-mdc-select-arrow {
-  color: var(--mf-color-brand) !important;
+.mf-autocomplete .mat-mdc-form-field-error {
+  font-size: var(--mf-text-xs) !important;
 }
 
 /* ── Prefix / Suffix icons ────────────────────────────────────── */
-.mf-select .mat-icon {
+.mf-autocomplete .mat-icon {
   color: var(--mf-color-neutral-400) !important;
   font-size: 20px;
   width: 20px;
@@ -87,35 +80,26 @@
   transition: color var(--mf-duration-base) var(--mf-ease-standard);
 }
 
-.mf-select.mat-focused .mat-icon {
+.mf-autocomplete.mat-focused .mat-icon {
   color: var(--mf-color-brand) !important;
 }
 
-/* ── Hint & Error ─────────────────────────────────────────────── */
-.mf-select .mat-mdc-form-field-hint {
-  font-size: var(--mf-text-xs) !important;
-  color: var(--mf-color-neutral-400) !important;
-}
-
-.mf-select .mat-mdc-form-field-error {
-  font-size: var(--mf-text-xs) !important;
-}
-
 /* ── Sizes ─────────────────────────────────────────────────────── */
-.mf-select--sm .mat-mdc-select-trigger {
+.mf-autocomplete--sm .mat-mdc-input-element {
   font-size: var(--mf-text-sm) !important;
 }
 
-.mf-select--md .mat-mdc-select-trigger {
+.mf-autocomplete--md .mat-mdc-input-element {
   font-size: var(--mf-text-base) !important;
 }
 
-.mf-select--lg .mat-mdc-select-trigger {
+.mf-autocomplete--lg .mat-mdc-input-element {
   font-size: var(--mf-text-lg) !important;
+  padding-top: var(--mf-space-1) !important;
+  padding-bottom: var(--mf-space-1) !important;
 }
 
 /* ── Disabled ──────────────────────────────────────────────────── */
-.mf-select .mat-mdc-select-trigger[aria-disabled='true'],
-.mf-select .mat-mdc-select-trigger.mat-mdc-select-disabled {
+.mf-autocomplete .mat-mdc-input-element:disabled {
   color: var(--mf-color-neutral-300) !important;
 }
