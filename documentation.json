@@ -3,7 +3,7 @@
     "interfaces": [
         {
             "name": "MfAccordionPanel",
-            "id": "interface-MfAccordionPanel-11159856cd4f249739e88d006ad9529e0cebb1c2aca36fd448bdc9f436dd6e38cbbe08875bf7a308c5ef5bdfcc740db2606c00948752ede23bd8bb8076575d1f",
+            "id": "interface-MfAccordionPanel-471cdb254c6f40f87b835ae280b68ac22c1509131ebe4f1e0d8e01bde57f2fddc337e27585579ebfefa0bb7960097b072c498fd554d28bda37eb2ab114b442aa",
             "file": "src/app/components/accordion/mf-accordion.component.ts",
             "deprecated": false,
             "deprecationMessage": "",
@@ -68,7 +68,7 @@
         },
         {
             "name": "MfAutocompleteOption",
-            "id": "interface-MfAutocompleteOption-199b07b911d1fb4642fa098ffb2afd81b234bab952b71b4e3b697c080f72fb2383c6064aa76c75477403c7d422b5bc743f52d6cac3427995317a6e6043c236a8",
+            "id": "interface-MfAutocompleteOption-b95d41aa199963e5261e477bd68da4ddeab8bf38fc9e135fbd85dab1b7aa9955a2934e505202ff0e2c9363cbc6756dbfbc83b582dc001019e4fd8e2e9426ab0f",
             "file": "src/app/components/autocomplete/mf-autocomplete.component.ts",
             "deprecated": false,
             "deprecationMessage": "",
@@ -113,7 +113,7 @@
         },
         {
             "name": "MfBreadcrumbItem",
-            "id": "interface-MfBreadcrumbItem-603ec441dcf26aa9aabbb43e107302dfb39da11f916ce718d6d0acfd7a6a0191997cb126437c74d3dfd241ff2cf27eecc85ec1a8e76cd5a787ee95e729a9c31a",
+            "id": "interface-MfBreadcrumbItem-0ae47f13001a612095d42c72b69e356c6d7cd88e84103a98660552fd7c667274f71967206bae4a7b6b3c957569efda748398a252b77b06ff13f0fb2617a35f38",
             "file": "src/app/components/breadcrumb/mf-breadcrumb.component.ts",
             "deprecated": false,
             "deprecationMessage": "",
@@ -158,7 +158,7 @@
         },
         {
             "name": "MfGridTile",
-            "id": "interface-MfGridTile-1d9a7651cbdb8d20d2285f7db8e813d712055a2bc84ee0812b5cf11a0e02243ebb28a1c60d7644d61ccba651a65864ccc54242be2ac9b64699f80ffac0bbcf02",
+            "id": "interface-MfGridTile-32288409535913167923e84a76d43a21af097a2cabdd6444e130cced4ebfe6b1ba773e7b3246081dd150ce4e2b8924b9e21394ab270eafd9059157810a42fb12",
             "file": "src/app/components/grid-list/mf-grid-list.component.ts",
             "deprecated": false,
             "deprecationMessage": "",
@@ -228,7 +228,7 @@
         },
         {
             "name": "MfMenuItem",
-            "id": "interface-MfMenuItem-8e7ccfb831b5abef13164628dcc13d8a5808270cfd82bfb2940e73d882d51a1b0839419a35df25f108b7205cd8ca570a612e059bc0ad1abf5fd48c52656d1921",
+            "id": "interface-MfMenuItem-2ab0e6bba3e12551b1d0a04ee26db158584d9c9b69fec542fc39cde974db259600fec023bcc0b9538359516d017d1bb45253df4aa0090e2ed0b6370d90f377c3",
             "file": "src/app/components/menu/mf-menu.component.ts",
             "deprecated": false,
             "deprecationMessage": "",
@@ -283,7 +283,7 @@
         },
         {
             "name": "MfRadioOption",
-            "id": "interface-MfRadioOption-8da933257dc1a5ef39f73d627f3a5ff5358b5d51a12acc7bb899e3e1991e56b533b11e6e2c8290dfc232b03d055986e5318e2a8f883f39a5e7c34bc2216b7362",
+            "id": "interface-MfRadioOption-e271e818792f4ec6e8fdd6593c9d5189fa19baf1d2186e86585c87c8edeea1893e1dc06689ba41bf2f0c2efc0ffc6dd75f03f4c4ed17b4c02d4f31cc36967c59",
             "file": "src/app/components/radio-button/mf-radio-button.component.ts",
             "deprecated": false,
             "deprecationMessage": "",
@@ -331,7 +331,7 @@
         },
         {
             "name": "MfSelectOption",
-            "id": "interface-MfSelectOption-e8bf3067ec529a5abccdf2f75c822977879e166d94f31f5d887c7eff3eb3ea11162a0c1f47bdc634b370e669ff5d71546d83c9b6cd2058bbb6e3e142ef9e7464",
+            "id": "interface-MfSelectOption-d59522d3dbca413d4f9695b8b7d8d5b320a800bd1edff2cb97041776443819d1521d451b14fe6c5a02b81647b53585629be4e9bb9ec021cabdc888d6c9ad20fc",
             "file": "src/app/components/select/mf-select.component.ts",
             "deprecated": false,
             "deprecationMessage": "",
@@ -376,7 +376,7 @@
         },
         {
             "name": "MfSidenavNavItem",
-            "id": "interface-MfSidenavNavItem-1e219998c9d28c7dc6680518549f9516c063aec7537bc6af9138551e4d32f4827c6ee95d27d91810403182a4204ce32932cf8a91cbf05483318a2e3661b2bef9",
+            "id": "interface-MfSidenavNavItem-e2b0c565fd8f805172e38c73cecffa090cfc0c20c7ff80594baac4eb23172b97271762bf58becbf797196a18b95c481979181840c2e475c50089067c47f88644",
             "file": "src/app/components/sidenav/mf-sidenav.component.ts",
             "deprecated": false,
             "deprecationMessage": "",
@@ -457,7 +457,7 @@
         },
         {
             "name": "MfSnackbarConfig",
-            "id": "interface-MfSnackbarConfig-f0729ab0bf8dcd316f1686286c9fa6616ab22126e96676c3a834ed76ba12c0e5a465bb60ae3b1ebab6808a5090858e2343131915849ab3e78ed21c983c0e4870",
+            "id": "interface-MfSnackbarConfig-56f7c31a62d8032f802f32de13571302dc5264bd7b49d9f56070c8dd760499d474e62f0591a80cf40baca770d0f8db808349476b802b3ad025aa79a9886e017d",
             "file": "src/app/components/snackbar/mf-snackbar.service.ts",
             "deprecated": false,
             "deprecationMessage": "",
@@ -532,7 +532,7 @@
         },
         {
             "name": "MfTab",
-            "id": "interface-MfTab-2c16f0176acff32481ada885955ed749937f0a5c8a49fe2104f945db9766b7ef0ef24465a05cc96963d790ca1786a1d78fe97f1e2f84c13e76da1d30f0d7f06a",
+            "id": "interface-MfTab-4c2caed12872bdead8b953a0803098a1d55fd5ff4517b107f500633587d7e79c7634fd2f0d138cd5e5ce03803f4b7021ad85d1ce39101b8313d53a10a5dda23a",
             "file": "src/app/components/tabs/mf-tabs.component.ts",
             "deprecated": false,
             "deprecationMessage": "",
@@ -577,7 +577,7 @@
         },
         {
             "name": "MfTableColumn",
-            "id": "interface-MfTableColumn-9f901bbe906965f7fbc69fe5770b3e95f3ebb27ca84e40cd8c7a1c8dc0b31a2fbe0691a161b6a0bb8e769dece73f46bcf0a3a6ecdb3b3e95c69b928e9f22073b",
+            "id": "interface-MfTableColumn-66b4b29c2ff0b53343a177ee9d036e5899fb72421a26488c10a98b516a7fb4dcc2d8474c70c5fbba4598590380811dd5bdf491ec34a68e42535cb1a572d59e7b",
             "file": "src/app/components/table/mf-table.component.ts",
             "deprecated": false,
             "deprecationMessage": "",
@@ -649,7 +649,7 @@
     "injectables": [
         {
             "name": "MfSnackbarService",
-            "id": "injectable-MfSnackbarService-f0729ab0bf8dcd316f1686286c9fa6616ab22126e96676c3a834ed76ba12c0e5a465bb60ae3b1ebab6808a5090858e2343131915849ab3e78ed21c983c0e4870",
+            "id": "injectable-MfSnackbarService-56f7c31a62d8032f802f32de13571302dc5264bd7b49d9f56070c8dd760499d474e62f0591a80cf40baca770d0f8db808349476b802b3ad025aa79a9886e017d",
             "file": "src/app/components/snackbar/mf-snackbar.service.ts",
             "properties": [
                 {
@@ -922,7 +922,7 @@
     "components": [
         {
             "name": "App",
-            "id": "component-App-67ddc4dc4bbf99496bf704e9555f48c8a66d4b74be2255db1416b1f6830d6f4185f015c609d1d8f8ea5d1d0ab10d2d9908a66369f0320ed6a64a0cddbd666c2e",
+            "id": "component-App-2d1b60b67141e8ab6b54a7aabae4737b03d6f10ddbf60a01675bf3321680dd67af828c161203622b303c913964ec412386d767cbefa23f61c2ceedd6fe79e96c",
             "file": "src/app/app.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -976,11 +976,11 @@
             "styleUrlsData": "",
             "stylesData": "",
             "extends": [],
-            "templateData": "<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->\r\n<!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->\r\n<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->\r\n<!-- * * * * * * * * * * and can be replaced.  * * * * * * * * * * -->\r\n<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->\r\n<!-- * * * * * * * * * Delete the template below * * * * * * * * * -->\r\n<!-- * * * * * * * to get started with your project! * * * * * * * -->\r\n<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->\r\n\r\n<style>\r\n  :host {\r\n    --bright-blue: oklch(51.01% 0.274 263.83);\r\n    --electric-violet: oklch(53.18% 0.28 296.97);\r\n    --french-violet: oklch(47.66% 0.246 305.88);\r\n    --vivid-pink: oklch(69.02% 0.277 332.77);\r\n    --hot-red: oklch(61.42% 0.238 15.34);\r\n    --orange-red: oklch(63.32% 0.24 31.68);\r\n\r\n    --gray-900: oklch(19.37% 0.006 300.98);\r\n    --gray-700: oklch(36.98% 0.014 302.71);\r\n    --gray-400: oklch(70.9% 0.015 304.04);\r\n\r\n    --red-to-pink-to-purple-vertical-gradient: linear-gradient(\r\n      180deg,\r\n      var(--orange-red) 0%,\r\n      var(--vivid-pink) 50%,\r\n      var(--electric-violet) 100%\r\n    );\r\n\r\n    --red-to-pink-to-purple-horizontal-gradient: linear-gradient(\r\n      90deg,\r\n      var(--orange-red) 0%,\r\n      var(--vivid-pink) 50%,\r\n      var(--electric-violet) 100%\r\n    );\r\n\r\n    --pill-accent: var(--bright-blue);\r\n\r\n    font-family: \"Inter\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto,\r\n      Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\",\r\n      \"Segoe UI Symbol\";\r\n    box-sizing: border-box;\r\n    -webkit-font-smoothing: antialiased;\r\n    -moz-osx-font-smoothing: grayscale;\r\n    display: block;\r\n    height: 100dvh;\r\n  }\r\n\r\n  h1 {\r\n    font-size: 3.125rem;\r\n    color: var(--gray-900);\r\n    font-weight: 500;\r\n    line-height: 100%;\r\n    letter-spacing: -0.125rem;\r\n    margin: 0;\r\n    font-family: \"Inter Tight\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto,\r\n      Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\",\r\n      \"Segoe UI Symbol\";\r\n  }\r\n\r\n  p {\r\n    margin: 0;\r\n    color: var(--gray-700);\r\n  }\r\n\r\n  main {\r\n    width: 100%;\r\n    min-height: 100%;\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    padding: 1rem;\r\n    box-sizing: inherit;\r\n    position: relative;\r\n  }\r\n\r\n  .angular-logo {\r\n    max-width: 9.2rem;\r\n  }\r\n\r\n  .content {\r\n    display: flex;\r\n    justify-content: space-around;\r\n    width: 100%;\r\n    max-width: 700px;\r\n    margin-bottom: 3rem;\r\n  }\r\n\r\n  .content h1 {\r\n    margin-top: 1.75rem;\r\n  }\r\n\r\n  .content p {\r\n    margin-top: 1.5rem;\r\n  }\r\n\r\n  .divider {\r\n    width: 1px;\r\n    background: var(--red-to-pink-to-purple-vertical-gradient);\r\n    margin-inline: 0.5rem;\r\n  }\r\n\r\n  .pill-group {\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-items: start;\r\n    flex-wrap: wrap;\r\n    gap: 1.25rem;\r\n  }\r\n\r\n  .pill {\r\n    display: flex;\r\n    align-items: center;\r\n    --pill-accent: var(--bright-blue);\r\n    background: color-mix(in srgb, var(--pill-accent) 5%, transparent);\r\n    color: var(--pill-accent);\r\n    padding-inline: 0.75rem;\r\n    padding-block: 0.375rem;\r\n    border-radius: 2.75rem;\r\n    border: 0;\r\n    transition: background 0.3s ease;\r\n    font-family: var(--inter-font);\r\n    font-size: 0.875rem;\r\n    font-style: normal;\r\n    font-weight: 500;\r\n    line-height: 1.4rem;\r\n    letter-spacing: -0.00875rem;\r\n    text-decoration: none;\r\n    white-space: nowrap;\r\n  }\r\n\r\n  .pill:hover {\r\n    background: color-mix(in srgb, var(--pill-accent) 15%, transparent);\r\n  }\r\n\r\n  .pill-group .pill:nth-child(6n + 1) {\r\n    --pill-accent: var(--bright-blue);\r\n  }\r\n  .pill-group .pill:nth-child(6n + 2) {\r\n    --pill-accent: var(--electric-violet);\r\n  }\r\n  .pill-group .pill:nth-child(6n + 3) {\r\n    --pill-accent: var(--french-violet);\r\n  }\r\n\r\n  .pill-group .pill:nth-child(6n + 4),\r\n  .pill-group .pill:nth-child(6n + 5),\r\n  .pill-group .pill:nth-child(6n + 6) {\r\n    --pill-accent: var(--hot-red);\r\n  }\r\n\r\n  .pill-group svg {\r\n    margin-inline-start: 0.25rem;\r\n  }\r\n\r\n  .social-links {\r\n    display: flex;\r\n    align-items: center;\r\n    gap: 0.73rem;\r\n    margin-top: 1.5rem;\r\n  }\r\n\r\n  .social-links path {\r\n    transition: fill 0.3s ease;\r\n    fill: var(--gray-400);\r\n  }\r\n\r\n  .social-links a:hover svg path {\r\n    fill: var(--gray-900);\r\n  }\r\n\r\n  @media screen and (max-width: 650px) {\r\n    .content {\r\n      flex-direction: column;\r\n      width: max-content;\r\n    }\r\n\r\n    .divider {\r\n      height: 1px;\r\n      width: 100%;\r\n      background: var(--red-to-pink-to-purple-horizontal-gradient);\r\n      margin-block: 1.5rem;\r\n    }\r\n  }\r\n</style>\r\n\r\n<main class=\"main\">\r\n  <div class=\"content\">\r\n    <div class=\"left-side\">\r\n      <svg\r\n        xmlns=\"http://www.w3.org/2000/svg\"\r\n        viewBox=\"0 0 982 239\"\r\n        fill=\"none\"\r\n        class=\"angular-logo\"\r\n      >\r\n        <g clip-path=\"url(#a)\">\r\n          <path\r\n            fill=\"url(#b)\"\r\n            d=\"M388.676 191.625h30.849L363.31 31.828h-35.758l-56.215 159.797h30.848l13.174-39.356h60.061l13.256 39.356Zm-65.461-62.675 21.602-64.311h1.227l21.602 64.311h-44.431Zm126.831-7.527v70.202h-28.23V71.839h27.002v20.374h1.392c2.782-6.71 7.2-12.028 13.255-15.956 6.056-3.927 13.584-5.89 22.503-5.89 8.264 0 15.465 1.8 21.684 5.318 6.137 3.518 10.964 8.673 14.319 15.382 3.437 6.71 5.074 14.81 4.992 24.383v76.175h-28.23v-71.92c0-8.019-2.046-14.237-6.219-18.819-4.173-4.5-9.819-6.791-17.102-6.791-4.91 0-9.328 1.063-13.174 3.272-3.846 2.128-6.792 5.237-9.001 9.328-2.046 4.009-3.191 8.918-3.191 14.728ZM589.233 239c-10.147 0-18.82-1.391-26.103-4.091-7.282-2.7-13.092-6.382-17.511-10.964-4.418-4.582-7.528-9.655-9.164-15.219l25.448-6.136c1.145 2.372 2.782 4.663 4.991 6.954 2.209 2.291 5.155 4.255 8.837 5.81 3.683 1.554 8.428 2.291 14.074 2.291 8.019 0 14.647-1.964 19.884-5.81 5.237-3.845 7.856-10.227 7.856-19.064v-22.665h-1.391c-1.473 2.946-3.601 5.892-6.383 9.001-2.782 3.109-6.464 5.645-10.965 7.691-4.582 2.046-10.228 3.109-17.101 3.109-9.165 0-17.511-2.209-25.039-6.545-7.446-4.337-13.42-10.883-17.757-19.474-4.418-8.673-6.628-19.473-6.628-32.565 0-13.091 2.21-24.301 6.628-33.383 4.419-9.082 10.311-15.955 17.839-20.7 7.528-4.746 15.874-7.037 25.039-7.037 7.037 0 12.846 1.145 17.347 3.518 4.582 2.373 8.182 5.236 10.883 8.51 2.7 3.272 4.746 6.382 6.137 9.327h1.554v-19.8h27.821v121.749c0 10.228-2.454 18.737-7.364 25.447-4.91 6.709-11.538 11.7-20.048 15.055-8.509 3.355-18.165 4.991-28.884 4.991Zm.245-71.266c5.974 0 11.047-1.473 15.302-4.337 4.173-2.945 7.446-7.118 9.573-12.519 2.21-5.482 3.274-12.027 3.274-19.637 0-7.609-1.064-14.155-3.274-19.8-2.127-5.646-5.318-10.064-9.491-13.255-4.174-3.11-9.329-4.746-15.384-4.746s-11.537 1.636-15.792 4.91c-4.173 3.272-7.365 7.772-9.492 13.418-2.128 5.727-3.191 12.191-3.191 19.392 0 7.2 1.063 13.745 3.273 19.228 2.127 5.482 5.318 9.736 9.573 12.764 4.174 3.027 9.41 4.582 15.629 4.582Zm141.56-26.51V71.839h28.23v119.786h-27.412v-21.273h-1.227c-2.7 6.709-7.119 12.191-13.338 16.446-6.137 4.255-13.747 6.382-22.748 6.382-7.855 0-14.81-1.718-20.783-5.237-5.974-3.518-10.72-8.591-14.075-15.382-3.355-6.709-5.073-14.891-5.073-24.464V71.839h28.312v71.921c0 7.609 2.046 13.664 6.219 18.083 4.173 4.5 9.655 6.709 16.365 6.709 4.173 0 8.183-.982 12.111-3.028 3.927-2.045 7.118-5.072 9.655-9.082 2.537-4.091 3.764-9.164 3.764-15.218Zm65.707-109.395v159.796h-28.23V31.828h28.23Zm44.841 162.169c-7.61 0-14.402-1.391-20.457-4.091-6.055-2.7-10.883-6.791-14.32-12.109-3.518-5.319-5.237-11.946-5.237-19.801 0-6.791 1.228-12.355 3.765-16.773 2.536-4.419 5.891-7.937 10.228-10.637 4.337-2.618 9.164-4.664 14.647-6.055 5.4-1.391 11.046-2.373 16.856-3.027 7.037-.737 12.683-1.391 17.102-1.964 4.337-.573 7.528-1.555 9.574-2.782 1.963-1.309 3.027-3.273 3.027-5.973v-.491c0-5.891-1.718-10.391-5.237-13.664-3.518-3.191-8.51-4.828-15.056-4.828-6.955 0-12.356 1.473-16.447 4.5-4.009 3.028-6.71 6.546-8.183 10.719l-26.348-3.764c2.046-7.282 5.483-13.336 10.31-18.328 4.746-4.909 10.638-8.59 17.511-11.045 6.955-2.455 14.565-3.682 22.912-3.682 5.809 0 11.537.654 17.265 2.045s10.965 3.6 15.711 6.71c4.746 3.109 8.51 7.282 11.455 12.6 2.864 5.318 4.337 11.946 4.337 19.883v80.184h-27.166v-16.446h-.9c-1.719 3.355-4.092 6.464-7.201 9.328-3.109 2.864-6.955 5.237-11.619 6.955-4.828 1.718-10.229 2.536-16.529 2.536Zm7.364-20.701c5.646 0 10.556-1.145 14.729-3.354 4.173-2.291 7.364-5.237 9.655-9.001 2.292-3.763 3.355-7.854 3.355-12.273v-14.155c-.9.737-2.373 1.391-4.5 2.046-2.128.654-4.419 1.145-7.037 1.636-2.619.491-5.155.9-7.692 1.227-2.537.328-4.746.655-6.628.901-4.173.572-8.019 1.472-11.292 2.781-3.355 1.31-5.973 3.11-7.855 5.401-1.964 2.291-2.864 5.318-2.864 8.918 0 5.237 1.882 9.164 5.728 11.782 3.682 2.782 8.51 4.091 14.401 4.091Zm64.643 18.328V71.839h27.412v19.965h1.227c2.21-6.955 5.974-12.274 11.292-16.038 5.319-3.763 11.456-5.645 18.329-5.645 1.555 0 3.355.082 5.237.163 1.964.164 3.601.328 4.91.573v25.938c-1.227-.41-3.109-.819-5.646-1.146a58.814 58.814 0 0 0-7.446-.49c-5.155 0-9.738 1.145-13.829 3.354-4.091 2.209-7.282 5.236-9.655 9.164-2.373 3.927-3.519 8.427-3.519 13.5v70.448h-28.312ZM222.077 39.192l-8.019 125.923L137.387 0l84.69 39.192Zm-53.105 162.825-57.933 33.056-57.934-33.056 11.783-28.556h92.301l11.783 28.556ZM111.039 62.675l30.357 73.803H80.681l30.358-73.803ZM7.937 165.115 0 39.192 84.69 0 7.937 165.115Z\"\r\n          />\r\n          <path\r\n            fill=\"url(#c)\"\r\n            d=\"M388.676 191.625h30.849L363.31 31.828h-35.758l-56.215 159.797h30.848l13.174-39.356h60.061l13.256 39.356Zm-65.461-62.675 21.602-64.311h1.227l21.602 64.311h-44.431Zm126.831-7.527v70.202h-28.23V71.839h27.002v20.374h1.392c2.782-6.71 7.2-12.028 13.255-15.956 6.056-3.927 13.584-5.89 22.503-5.89 8.264 0 15.465 1.8 21.684 5.318 6.137 3.518 10.964 8.673 14.319 15.382 3.437 6.71 5.074 14.81 4.992 24.383v76.175h-28.23v-71.92c0-8.019-2.046-14.237-6.219-18.819-4.173-4.5-9.819-6.791-17.102-6.791-4.91 0-9.328 1.063-13.174 3.272-3.846 2.128-6.792 5.237-9.001 9.328-2.046 4.009-3.191 8.918-3.191 14.728ZM589.233 239c-10.147 0-18.82-1.391-26.103-4.091-7.282-2.7-13.092-6.382-17.511-10.964-4.418-4.582-7.528-9.655-9.164-15.219l25.448-6.136c1.145 2.372 2.782 4.663 4.991 6.954 2.209 2.291 5.155 4.255 8.837 5.81 3.683 1.554 8.428 2.291 14.074 2.291 8.019 0 14.647-1.964 19.884-5.81 5.237-3.845 7.856-10.227 7.856-19.064v-22.665h-1.391c-1.473 2.946-3.601 5.892-6.383 9.001-2.782 3.109-6.464 5.645-10.965 7.691-4.582 2.046-10.228 3.109-17.101 3.109-9.165 0-17.511-2.209-25.039-6.545-7.446-4.337-13.42-10.883-17.757-19.474-4.418-8.673-6.628-19.473-6.628-32.565 0-13.091 2.21-24.301 6.628-33.383 4.419-9.082 10.311-15.955 17.839-20.7 7.528-4.746 15.874-7.037 25.039-7.037 7.037 0 12.846 1.145 17.347 3.518 4.582 2.373 8.182 5.236 10.883 8.51 2.7 3.272 4.746 6.382 6.137 9.327h1.554v-19.8h27.821v121.749c0 10.228-2.454 18.737-7.364 25.447-4.91 6.709-11.538 11.7-20.048 15.055-8.509 3.355-18.165 4.991-28.884 4.991Zm.245-71.266c5.974 0 11.047-1.473 15.302-4.337 4.173-2.945 7.446-7.118 9.573-12.519 2.21-5.482 3.274-12.027 3.274-19.637 0-7.609-1.064-14.155-3.274-19.8-2.127-5.646-5.318-10.064-9.491-13.255-4.174-3.11-9.329-4.746-15.384-4.746s-11.537 1.636-15.792 4.91c-4.173 3.272-7.365 7.772-9.492 13.418-2.128 5.727-3.191 12.191-3.191 19.392 0 7.2 1.063 13.745 3.273 19.228 2.127 5.482 5.318 9.736 9.573 12.764 4.174 3.027 9.41 4.582 15.629 4.582Zm141.56-26.51V71.839h28.23v119.786h-27.412v-21.273h-1.227c-2.7 6.709-7.119 12.191-13.338 16.446-6.137 4.255-13.747 6.382-22.748 6.382-7.855 0-14.81-1.718-20.783-5.237-5.974-3.518-10.72-8.591-14.075-15.382-3.355-6.709-5.073-14.891-5.073-24.464V71.839h28.312v71.921c0 7.609 2.046 13.664 6.219 18.083 4.173 4.5 9.655 6.709 16.365 6.709 4.173 0 8.183-.982 12.111-3.028 3.927-2.045 7.118-5.072 9.655-9.082 2.537-4.091 3.764-9.164 3.764-15.218Zm65.707-109.395v159.796h-28.23V31.828h28.23Zm44.841 162.169c-7.61 0-14.402-1.391-20.457-4.091-6.055-2.7-10.883-6.791-14.32-12.109-3.518-5.319-5.237-11.946-5.237-19.801 0-6.791 1.228-12.355 3.765-16.773 2.536-4.419 5.891-7.937 10.228-10.637 4.337-2.618 9.164-4.664 14.647-6.055 5.4-1.391 11.046-2.373 16.856-3.027 7.037-.737 12.683-1.391 17.102-1.964 4.337-.573 7.528-1.555 9.574-2.782 1.963-1.309 3.027-3.273 3.027-5.973v-.491c0-5.891-1.718-10.391-5.237-13.664-3.518-3.191-8.51-4.828-15.056-4.828-6.955 0-12.356 1.473-16.447 4.5-4.009 3.028-6.71 6.546-8.183 10.719l-26.348-3.764c2.046-7.282 5.483-13.336 10.31-18.328 4.746-4.909 10.638-8.59 17.511-11.045 6.955-2.455 14.565-3.682 22.912-3.682 5.809 0 11.537.654 17.265 2.045s10.965 3.6 15.711 6.71c4.746 3.109 8.51 7.282 11.455 12.6 2.864 5.318 4.337 11.946 4.337 19.883v80.184h-27.166v-16.446h-.9c-1.719 3.355-4.092 6.464-7.201 9.328-3.109 2.864-6.955 5.237-11.619 6.955-4.828 1.718-10.229 2.536-16.529 2.536Zm7.364-20.701c5.646 0 10.556-1.145 14.729-3.354 4.173-2.291 7.364-5.237 9.655-9.001 2.292-3.763 3.355-7.854 3.355-12.273v-14.155c-.9.737-2.373 1.391-4.5 2.046-2.128.654-4.419 1.145-7.037 1.636-2.619.491-5.155.9-7.692 1.227-2.537.328-4.746.655-6.628.901-4.173.572-8.019 1.472-11.292 2.781-3.355 1.31-5.973 3.11-7.855 5.401-1.964 2.291-2.864 5.318-2.864 8.918 0 5.237 1.882 9.164 5.728 11.782 3.682 2.782 8.51 4.091 14.401 4.091Zm64.643 18.328V71.839h27.412v19.965h1.227c2.21-6.955 5.974-12.274 11.292-16.038 5.319-3.763 11.456-5.645 18.329-5.645 1.555 0 3.355.082 5.237.163 1.964.164 3.601.328 4.91.573v25.938c-1.227-.41-3.109-.819-5.646-1.146a58.814 58.814 0 0 0-7.446-.49c-5.155 0-9.738 1.145-13.829 3.354-4.091 2.209-7.282 5.236-9.655 9.164-2.373 3.927-3.519 8.427-3.519 13.5v70.448h-28.312ZM222.077 39.192l-8.019 125.923L137.387 0l84.69 39.192Zm-53.105 162.825-57.933 33.056-57.934-33.056 11.783-28.556h92.301l11.783 28.556ZM111.039 62.675l30.357 73.803H80.681l30.358-73.803ZM7.937 165.115 0 39.192 84.69 0 7.937 165.115Z\"\r\n          />\r\n        </g>\r\n        <defs>\r\n          <radialGradient\r\n            id=\"c\"\r\n            cx=\"0\"\r\n            cy=\"0\"\r\n            r=\"1\"\r\n            gradientTransform=\"rotate(118.122 171.182 60.81) scale(205.794)\"\r\n            gradientUnits=\"userSpaceOnUse\"\r\n          >\r\n            <stop stop-color=\"#FF41F8\" />\r\n            <stop offset=\".707\" stop-color=\"#FF41F8\" stop-opacity=\".5\" />\r\n            <stop offset=\"1\" stop-color=\"#FF41F8\" stop-opacity=\"0\" />\r\n          </radialGradient>\r\n          <linearGradient\r\n            id=\"b\"\r\n            x1=\"0\"\r\n            x2=\"982\"\r\n            y1=\"192\"\r\n            y2=\"192\"\r\n            gradientUnits=\"userSpaceOnUse\"\r\n          >\r\n            <stop stop-color=\"#F0060B\" />\r\n            <stop offset=\"0\" stop-color=\"#F0070C\" />\r\n            <stop offset=\".526\" stop-color=\"#CC26D5\" />\r\n            <stop offset=\"1\" stop-color=\"#7702FF\" />\r\n          </linearGradient>\r\n          <clipPath id=\"a\"><path fill=\"#fff\" d=\"M0 0h982v239H0z\" /></clipPath>\r\n        </defs>\r\n      </svg>\r\n      <h1>Hello, {{ title() }}</h1>\r\n      <p>Congratulations! Your app is running. 🎉</p>\r\n    </div>\r\n    <div class=\"divider\" role=\"separator\" aria-label=\"Divider\"></div>\r\n    <div class=\"right-side\">\r\n      <div class=\"pill-group\">\r\n        @for (item of [\r\n          { title: 'Explore the Docs', link: 'https://angular.dev' },\r\n          { title: 'Learn with Tutorials', link: 'https://angular.dev/tutorials' },\r\n          { title: 'Prompt and best practices for AI', link: 'https://angular.dev/ai/develop-with-ai'},\r\n          { title: 'CLI Docs', link: 'https://angular.dev/tools/cli' },\r\n          { title: 'Angular Language Service', link: 'https://angular.dev/tools/language-service' },\r\n          { title: 'Angular DevTools', link: 'https://angular.dev/tools/devtools' },\r\n        ]; track item.title) {\r\n          <a\r\n            class=\"pill\"\r\n            [href]=\"item.link\"\r\n            target=\"_blank\"\r\n            rel=\"noopener\"\r\n          >\r\n            <span>{{ item.title }}</span>\r\n            <svg\r\n              xmlns=\"http://www.w3.org/2000/svg\"\r\n              height=\"14\"\r\n              viewBox=\"0 -960 960 960\"\r\n              width=\"14\"\r\n              fill=\"currentColor\"\r\n            >\r\n              <path\r\n                d=\"M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z\"\r\n              />\r\n            </svg>\r\n          </a>\r\n        }\r\n      </div>\r\n      <div class=\"social-links\">\r\n        <a\r\n          href=\"https://github.com/angular/angular\"\r\n          aria-label=\"Github\"\r\n          target=\"_blank\"\r\n          rel=\"noopener\"\r\n        >\r\n          <svg\r\n            width=\"25\"\r\n            height=\"24\"\r\n            viewBox=\"0 0 25 24\"\r\n            fill=\"none\"\r\n            xmlns=\"http://www.w3.org/2000/svg\"\r\n            alt=\"Github\"\r\n          >\r\n            <path\r\n              d=\"M12.3047 0C5.50634 0 0 5.50942 0 12.3047C0 17.7423 3.52529 22.3535 8.41332 23.9787C9.02856 24.0946 9.25414 23.7142 9.25414 23.3871C9.25414 23.0949 9.24389 22.3207 9.23876 21.2953C5.81601 22.0377 5.09414 19.6444 5.09414 19.6444C4.53427 18.2243 3.72524 17.8449 3.72524 17.8449C2.61064 17.082 3.81137 17.0973 3.81137 17.0973C5.04697 17.1835 5.69604 18.3647 5.69604 18.3647C6.79321 20.2463 8.57636 19.7029 9.27978 19.3881C9.39052 18.5924 9.70736 18.0499 10.0591 17.7423C7.32641 17.4347 4.45429 16.3765 4.45429 11.6618C4.45429 10.3185 4.9311 9.22133 5.72065 8.36C5.58222 8.04931 5.16694 6.79833 5.82831 5.10337C5.82831 5.10337 6.85883 4.77319 9.2121 6.36459C10.1965 6.09082 11.2424 5.95546 12.2883 5.94931C13.3342 5.95546 14.3801 6.09082 15.3644 6.36459C17.7023 4.77319 18.7328 5.10337 18.7328 5.10337C19.3942 6.79833 18.9789 8.04931 18.8559 8.36C19.6403 9.22133 20.1171 10.3185 20.1171 11.6618C20.1171 16.3888 17.2409 17.4296 14.5031 17.7321C14.9338 18.1012 15.3337 18.8559 15.3337 20.0084C15.3337 21.6552 15.3183 22.978 15.3183 23.3779C15.3183 23.7009 15.5336 24.0854 16.1642 23.9623C21.0871 22.3484 24.6094 17.7341 24.6094 12.3047C24.6094 5.50942 19.0999 0 12.3047 0Z\"\r\n            />\r\n          </svg>\r\n        </a>\r\n        <a\r\n          href=\"https://x.com/angular\"\r\n          aria-label=\"X\"\r\n          target=\"_blank\"\r\n          rel=\"noopener\"\r\n        >\r\n          <svg\r\n            width=\"24\"\r\n            height=\"24\"\r\n            viewBox=\"0 0 24 24\"\r\n            fill=\"none\"\r\n            xmlns=\"http://www.w3.org/2000/svg\"\r\n            alt=\"X\"\r\n          >\r\n            <path\r\n              d=\"M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z\"\r\n            />\r\n          </svg>\r\n        </a>\r\n        <a\r\n          href=\"https://www.youtube.com/channel/UCbn1OgGei-DV7aSRo_HaAiw\"\r\n          aria-label=\"Youtube\"\r\n          target=\"_blank\"\r\n          rel=\"noopener\"\r\n        >\r\n          <svg\r\n            width=\"29\"\r\n            height=\"20\"\r\n            viewBox=\"0 0 29 20\"\r\n            fill=\"none\"\r\n            xmlns=\"http://www.w3.org/2000/svg\"\r\n            alt=\"Youtube\"\r\n          >\r\n            <path\r\n              fill-rule=\"evenodd\"\r\n              clip-rule=\"evenodd\"\r\n              d=\"M27.4896 1.52422C27.9301 1.96749 28.2463 2.51866 28.4068 3.12258C29.0004 5.35161 29.0004 10 29.0004 10C29.0004 10 29.0004 14.6484 28.4068 16.8774C28.2463 17.4813 27.9301 18.0325 27.4896 18.4758C27.0492 18.9191 26.5 19.2389 25.8972 19.4032C23.6778 20 14.8068 20 14.8068 20C14.8068 20 5.93586 20 3.71651 19.4032C3.11363 19.2389 2.56449 18.9191 2.12405 18.4758C1.68361 18.0325 1.36732 17.4813 1.20683 16.8774C0.613281 14.6484 0.613281 10 0.613281 10C0.613281 10 0.613281 5.35161 1.20683 3.12258C1.36732 2.51866 1.68361 1.96749 2.12405 1.52422C2.56449 1.08095 3.11363 0.76113 3.71651 0.596774C5.93586 0 14.8068 0 14.8068 0C14.8068 0 23.6778 0 25.8972 0.596774C26.5 0.76113 27.0492 1.08095 27.4896 1.52422ZM19.3229 10L11.9036 5.77905V14.221L19.3229 10Z\"\r\n            />\r\n          </svg>\r\n        </a>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</main>\r\n\r\n<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->\r\n<!-- * * * * * * * * * * * The content above * * * * * * * * * * * * -->\r\n<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * * -->\r\n<!-- * * * * * * * * * * and can be replaced.  * * * * * * * * * * * -->\r\n<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->\r\n<!-- * * * * * * * * * * End of Placeholder  * * * * * * * * * * * * -->\r\n<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->\r\n\r\n\r\n<router-outlet />\r\n"
+            "templateData": "<main class=\"welcome\">\n  <header class=\"hero\">\n    <p class=\"badge\">UI Library</p>\n    <h1>Welcome to {{ title() }}</h1>\n    <p class=\"lead\">\n      This page explains how to install and start using <strong>ng-comps</strong>\n      in any Angular project.\n    </p>\n  </header>\n\n  <section class=\"card\" aria-labelledby=\"install-title\">\n    <h2 id=\"install-title\">1) Install package</h2>\n    <pre><code>npm i ng-comps</code></pre>\n  </section>\n\n  <section class=\"card\" aria-labelledby=\"styles-title\">\n    <h2 id=\"styles-title\">2) Load base styles and design tokens</h2>\n    <p>Add these imports in your global styles file (for example <code>src/styles.css</code>):</p>\n    <pre><code>@import 'ng-comps/theme/tokens.css';\n@import 'ng-comps/styles.css';</code></pre>\n  </section>\n\n  <section class=\"card\" aria-labelledby=\"usage-title\">\n    <h2 id=\"usage-title\">3) Use components in standalone Angular pages</h2>\n    <p>Import only what you need for better tree-shaking.</p>\n    <pre><code>import &#123; Component &#125; from '@angular/core';\nimport &#123; MfButtonComponent, MfInputComponent &#125; from 'ng-comps';\n\n@Component(&#123;\n  selector: 'app-example',\n  imports: [MfButtonComponent, MfInputComponent],\n  template: `\n    &lt;mf-input label=\"Email\" placeholder=\"you@company.com\" /&gt;\n    &lt;mf-button label=\"Save\" variant=\"filled\" /&gt;\n  `,\n&#125;)\nexport class ExampleComponent &#123;&#125;</code></pre>\n  </section>\n\n  <section class=\"card\" aria-labelledby=\"notes-title\">\n    <h2 id=\"notes-title\">4) Notes for production projects</h2>\n    <ul>\n      <li>The package is published with <code>sideEffects: false</code> for max tree-shaking.</li>\n      <li>Angular and RxJS are peer dependencies to avoid duplicated framework installs.</li>\n      <li>Import components directly from <code>ng-comps</code>; avoid wildcard barrel files in your app.</li>\n    </ul>\n  </section>\n</main>\n"
         },
         {
             "name": "MfAccordionComponent",
-            "id": "component-MfAccordionComponent-11159856cd4f249739e88d006ad9529e0cebb1c2aca36fd448bdc9f436dd6e38cbbe08875bf7a308c5ef5bdfcc740db2606c00948752ede23bd8bb8076575d1f",
+            "id": "component-MfAccordionComponent-471cdb254c6f40f87b835ae280b68ac22c1509131ebe4f1e0d8e01bde57f2fddc337e27585579ebfefa0bb7960097b072c498fd554d28bda37eb2ab114b442aa",
             "file": "src/app/components/accordion/mf-accordion.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
@@ -1068,7 +1068,7 @@
         },
         {
             "name": "MfAlertComponent",
-            "id": "component-MfAlertComponent-9461ad290e88d67f8b65010fa543ab417a45993e4d2aeace9152d8f72cbb0aa0503e0b2f1b46df5d1a83bc8d5daab89911beb3b4d5181eb0fa8135e7cdc88756",
+            "id": "component-MfAlertComponent-fd7e9a5e0d1de2a5eb22e361c787ace30bd5bc28daf68eab2726991cd0d7467faf6ccf0fa79ac748f88d9fc3b3db598aba336816d11bbad28f33466d308d3802",
             "file": "src/app/components/alert/mf-alert.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
@@ -1217,7 +1217,7 @@
         },
         {
             "name": "MfAutocompleteComponent",
-            "id": "component-MfAutocompleteComponent-199b07b911d1fb4642fa098ffb2afd81b234bab952b71b4e3b697c080f72fb2383c6064aa76c75477403c7d422b5bc743f52d6cac3427995317a6e6043c236a8",
+            "id": "component-MfAutocompleteComponent-b95d41aa199963e5261e477bd68da4ddeab8bf38fc9e135fbd85dab1b7aa9955a2934e505202ff0e2c9363cbc6756dbfbc83b582dc001019e4fd8e2e9426ab0f",
             "file": "src/app/components/autocomplete/mf-autocomplete.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
@@ -1651,7 +1651,7 @@
         },
         {
             "name": "MfAvatarComponent",
-            "id": "component-MfAvatarComponent-2cb55c6bd1a000f1819a3729a5a746223cb619245a6a6f31f7a5f3bfd280723c8d05ba67e1e4f6cc9972c46ceea7d9824e02f94b2a7a596e83ba7edbd13202d6",
+            "id": "component-MfAvatarComponent-dd1c81d3327e52c6701ec3c13b411b320e01e01adc7262478fce8c6b8d4d05a177b46b0ace9a3f6dd3adbcda571e23b3587f912f0811fc06f057fc0c25677823",
             "file": "src/app/components/avatar/mf-avatar.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
@@ -1798,7 +1798,7 @@
         },
         {
             "name": "MfBadgeComponent",
-            "id": "component-MfBadgeComponent-733a8c3af17914dd6196a06923d5f733627b7eb727e1fe8cc284578187b1cee558768069134984773e4489253073ac7602a4b986b793c0ce2ba2769e00904c56",
+            "id": "component-MfBadgeComponent-0a24769b76696e79e2b812280d66e800eaba821ad90ed08d6e50b9f3d9c3325aadd3132bb61f985d47278f7580b31d575373a6066164ea9249ae43f07325c8bd",
             "file": "src/app/components/badge/mf-badge.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
@@ -1993,7 +1993,7 @@
         },
         {
             "name": "MfBreadcrumbComponent",
-            "id": "component-MfBreadcrumbComponent-603ec441dcf26aa9aabbb43e107302dfb39da11f916ce718d6d0acfd7a6a0191997cb126437c74d3dfd241ff2cf27eecc85ec1a8e76cd5a787ee95e729a9c31a",
+            "id": "component-MfBreadcrumbComponent-0ae47f13001a612095d42c72b69e356c6d7cd88e84103a98660552fd7c667274f71967206bae4a7b6b3c957569efda748398a252b77b06ff13f0fb2617a35f38",
             "file": "src/app/components/breadcrumb/mf-breadcrumb.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
@@ -2165,7 +2165,7 @@
         },
         {
             "name": "MfButtonComponent",
-            "id": "component-MfButtonComponent-d4acf013f4abb9af45edef7be952eb223776fb8a9cb2c00ac5b588a052020d3cd73378e967b64a2f3130bcef7ca1afaa328823475436972823b93b38435f655c",
+            "id": "component-MfButtonComponent-626445caa5a4dc67b9cc4f7ce2870bd900cd2077727fa445d7b04bbd705405c208d700e5b59307942be764146d2c8bd7520a3fd20ced7f64a1306caf62233ea8",
             "file": "src/app/components/button/mf-button.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
@@ -2359,7 +2359,7 @@
         },
         {
             "name": "MfCardComponent",
-            "id": "component-MfCardComponent-5b00bf5b26a624caf0b7d751d91b832ffcdf15260d22fa180b630436a1466f154ca0fec850dd8f6ff59ffa16ac37461fb064d584c66e74e4db2a3d7def8550e3",
+            "id": "component-MfCardComponent-aeab8e7f76b8b1c5149d342f03f3c9fe07dba9fc4e3662c310242dee163e710995a8939fa6cbe26e80354cb9ac7fb7fa32471578f326bfebf26635f3a95252bb",
             "file": "src/app/components/card/mf-card.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
@@ -2510,7 +2510,7 @@
         },
         {
             "name": "MfCheckboxComponent",
-            "id": "component-MfCheckboxComponent-c56f047843026a02c3b3ed1243898133330af73a4bc71a162565ef3bf409d03eed8675ce2d509a1136d54e1d558a857a417e3388e58599efc3a19bc095d3c3cb",
+            "id": "component-MfCheckboxComponent-4940d10f55f1183c29db63eb34051d0a52cbaf6a667f940e14a9f54c49810db4e4a7491facc08d57288140e5c6622ae5ff6ac510efd71d3894fa7619f371742a",
             "file": "src/app/components/checkbox/mf-checkbox.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
@@ -2676,7 +2676,7 @@
         },
         {
             "name": "MfChipComponent",
-            "id": "component-MfChipComponent-fb3b5970a82d062816915335cead712c3cf43b4ab737a3681b49874dd202623cb90113d1b24ab92d4e385967d16e690c476ad0df4b89cb9e430f01e8e16836b3",
+            "id": "component-MfChipComponent-1a540f622e87d9df27413078a9a0e18f71b40724e90dcf7a1fa701486d4ad30191dcca0ccd1701ddf89f014204d273685b9b9c29444d41337c7dc04633e4a0d9",
             "file": "src/app/components/chip/mf-chip.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
@@ -2861,7 +2861,7 @@
         },
         {
             "name": "MfDatepickerComponent",
-            "id": "component-MfDatepickerComponent-d64314971bb7a56f4eaa785f3fff175fedaa1e91406d68f13615c85a93b2ce4291d5415581ae6bf0bc1f87d00bed1683aaa01b67c47d9757a087a80bc69dd59a",
+            "id": "component-MfDatepickerComponent-cb879d9472f408cb849331eb082cb9c52b5c03496294f1eeb5a2cce1aabe99a763ff1cef8f48034d0b4dbd48c091656c925d0a60c1698a1b48e21015188c4d6b",
             "file": "src/app/components/datepicker/mf-datepicker.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
@@ -3181,7 +3181,7 @@
         },
         {
             "name": "MfDialogComponent",
-            "id": "component-MfDialogComponent-4e348f53f7c8bed82008d3ca04fac0d2b72fcaa349a9d1c8b99dc9c5679cf3568823f9cb1369a128e21703fa6fde98490bd6e9da95ff86bd74246e77971aa61a",
+            "id": "component-MfDialogComponent-0c61046860b134d347af2e497c90828b7f93d74494a895f81fed427985174ed2cea0b9f16b0341917345f56a2b6fe34dfdde14ebee7bd8bf4b787499a1681e55",
             "file": "src/app/components/dialog/mf-dialog.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
@@ -3345,7 +3345,7 @@
         },
         {
             "name": "MfDividerComponent",
-            "id": "component-MfDividerComponent-d415c3edc356f277427bf7d646ee0c2f593d66bb6c8d6b8c159f7bef37a48dd907a50d1c0d45127df06e4f6c9b00ba30cb73f0e869e63ec242a38950d38f67fb",
+            "id": "component-MfDividerComponent-cdf0a203ceb66b6f4bd57b5e80be48c682d26d4e67c35d0ba18c9b0cc650ce7eebe1064c4cba798386994250958d1dfea1ec42bf56104e9411c0f10b90551dcf",
             "file": "src/app/components/divider/mf-divider.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
@@ -3464,7 +3464,7 @@
         },
         {
             "name": "MfFormFieldComponent",
-            "id": "component-MfFormFieldComponent-6f6ec969d328e092141bd8e00c88f5b9cd5b8e0314c57cb22090939c4788d3ca5be0f76c50e83da7147b31192c2e3775677571865a96fb6f6ada184c0652f95a",
+            "id": "component-MfFormFieldComponent-784fffede78def62902985dec84573c11db5d0ad7d89b67243022b90ef6c066dc400be9ed7e72e481cacf6dd95c5ab896eb083030768339896641ea987a007ed",
             "file": "src/app/components/form-field/mf-form-field.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
@@ -3611,7 +3611,7 @@
         },
         {
             "name": "MfGridListComponent",
-            "id": "component-MfGridListComponent-1d9a7651cbdb8d20d2285f7db8e813d712055a2bc84ee0812b5cf11a0e02243ebb28a1c60d7644d61ccba651a65864ccc54242be2ac9b64699f80ffac0bbcf02",
+            "id": "component-MfGridListComponent-32288409535913167923e84a76d43a21af097a2cabdd6444e130cced4ebfe6b1ba773e7b3246081dd150ce4e2b8924b9e21394ab270eafd9059157810a42fb12",
             "file": "src/app/components/grid-list/mf-grid-list.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
@@ -3716,7 +3716,7 @@
         },
         {
             "name": "MfIconComponent",
-            "id": "component-MfIconComponent-b4f8b174bb2b56ac56b402de3b0e3517b397b3ff72083a5bde2516443596f5799cd6d7930b8e6d703646772ebd11e7f22347a4930690bf3f87a4dc9e1d811384",
+            "id": "component-MfIconComponent-b513be351da5aff3993e4b7886aa7239f2ed28057d486517275b667f54d338ab016341554e0ba1aebad2a3032939145a0f300d0728c7b18575d2398a2e88da19",
             "file": "src/app/components/icon/mf-icon.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
@@ -3851,7 +3851,7 @@
         },
         {
             "name": "MfInputComponent",
-            "id": "component-MfInputComponent-de8dbe537ea90074269f9f601c18ba445267618c8336ab5539e462080a383df7af761e33b61f4d84f91156c61d481398d95e000fc1ee8c1d357a708a956b7063",
+            "id": "component-MfInputComponent-777ccc9a0dd7b0afbcf502a55cb9edc709433f39b14153d927d605c48ecdf897f9efd0d46a7c166cdafdfcd26d6a281186ac4762cf80321295a3e4a55ce453b1",
             "file": "src/app/components/input/mf-input.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
@@ -4166,7 +4166,7 @@
         },
         {
             "name": "MfMenuComponent",
-            "id": "component-MfMenuComponent-8e7ccfb831b5abef13164628dcc13d8a5808270cfd82bfb2940e73d882d51a1b0839419a35df25f108b7205cd8ca570a612e059bc0ad1abf5fd48c52656d1921",
+            "id": "component-MfMenuComponent-2ab0e6bba3e12551b1d0a04ee26db158584d9c9b69fec542fc39cde974db259600fec023bcc0b9538359516d017d1bb45253df4aa0090e2ed0b6370d90f377c3",
             "file": "src/app/components/menu/mf-menu.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
@@ -4308,7 +4308,7 @@
         },
         {
             "name": "MfPaginatorComponent",
-            "id": "component-MfPaginatorComponent-ff34eddbdbed1edf628d978e50e3e2d6887fa9ca8b7519f57c7da1be5ee7db1fc915737ea52a0b073d159aec777904c1099d754b00c9b0df1bc97808c751e2e3",
+            "id": "component-MfPaginatorComponent-eb310714832cd3b5ec65ea7c4758cceb5ddd293e1f7b566949da386ae11baf3803e2740872e520aedccc49db9cf8eaf252a0a182bd110215de7378383d34f4ee",
             "file": "src/app/components/paginator/mf-paginator.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
@@ -4472,7 +4472,7 @@
         },
         {
             "name": "MfProgressBarComponent",
-            "id": "component-MfProgressBarComponent-2145c1e7a6cf9913acec74414c0587f17ba31e807fe0c2a152631ceb1c4acb5af8cd132829ca1063839e4ea560753c168558db2dc427ce41f24e9c565dd15b92",
+            "id": "component-MfProgressBarComponent-91d81ef7fcd7a86171a99461adf5395d126e6f88b1c00fa87a1fb548efd1c732d89c2a02d5d489a8e228604793825408b4dc71cde417a19e7665b6a07938f032",
             "file": "src/app/components/progress-bar/mf-progress-bar.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
@@ -4638,7 +4638,7 @@
         },
         {
             "name": "MfProgressSpinnerComponent",
-            "id": "component-MfProgressSpinnerComponent-e70a31a521fec93c847229f3bf6996b8c2ec3ade8ad34a4e4d06c5c42c65fa4ab4673dd0a853754c00193c87320d400a85a4bb62c8c941716203402a3d4cfff8",
+            "id": "component-MfProgressSpinnerComponent-d475d48746816415625212a64e0bb21021897e73a983937036bd96a2b53c2961d8b51b0a8e148e1239a73355ccddb3092a16b48a2eb23eab70d88b3ba3ce1cae",
             "file": "src/app/components/progress-spinner/mf-progress-spinner.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
@@ -4803,7 +4803,7 @@
         },
         {
             "name": "MfRadioButtonComponent",
-            "id": "component-MfRadioButtonComponent-8da933257dc1a5ef39f73d627f3a5ff5358b5d51a12acc7bb899e3e1991e56b533b11e6e2c8290dfc232b03d055986e5318e2a8f883f39a5e7c34bc2216b7362",
+            "id": "component-MfRadioButtonComponent-e271e818792f4ec6e8fdd6593c9d5189fa19baf1d2186e86585c87c8edeea1893e1dc06689ba41bf2f0c2efc0ffc6dd75f03f4c4ed17b4c02d4f31cc36967c59",
             "file": "src/app/components/radio-button/mf-radio-button.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
@@ -5014,7 +5014,7 @@
         },
         {
             "name": "MfSelectComponent",
-            "id": "component-MfSelectComponent-e8bf3067ec529a5abccdf2f75c822977879e166d94f31f5d887c7eff3eb3ea11162a0c1f47bdc634b370e669ff5d71546d83c9b6cd2058bbb6e3e142ef9e7464",
+            "id": "component-MfSelectComponent-d59522d3dbca413d4f9695b8b7d8d5b320a800bd1edff2cb97041776443819d1521d451b14fe6c5a02b81647b53585629be4e9bb9ec021cabdc888d6c9ad20fc",
             "file": "src/app/components/select/mf-select.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
@@ -5346,7 +5346,7 @@
         },
         {
             "name": "MfSidenavComponent",
-            "id": "component-MfSidenavComponent-1e219998c9d28c7dc6680518549f9516c063aec7537bc6af9138551e4d32f4827c6ee95d27d91810403182a4204ce32932cf8a91cbf05483318a2e3661b2bef9",
+            "id": "component-MfSidenavComponent-e2b0c565fd8f805172e38c73cecffa090cfc0c20c7ff80594baac4eb23172b97271762bf58becbf797196a18b95c481979181840c2e475c50089067c47f88644",
             "file": "src/app/components/sidenav/mf-sidenav.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
@@ -5593,7 +5593,7 @@
         },
         {
             "name": "MfSlideToggleComponent",
-            "id": "component-MfSlideToggleComponent-56eaadfe9c406b3c2eb6e01520cea510e1780e8f9a43d9cd3c5c541e4629bc4e706c6980b24727ee49d39516aee3cfb9b8c2404e2475c678ee4d40403e2fdf65",
+            "id": "component-MfSlideToggleComponent-90ac77c96e5a2fa119e1d0b1281583715ae1264914c29a33ebad945ea673fd67d772f7d2381f413d308d31a16ae03372fdeda45c870cc5da67028804d9d2ab13",
             "file": "src/app/components/slide-toggle/mf-slide-toggle.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
@@ -5745,7 +5745,7 @@
         },
         {
             "name": "MfTableComponent",
-            "id": "component-MfTableComponent-9f901bbe906965f7fbc69fe5770b3e95f3ebb27ca84e40cd8c7a1c8dc0b31a2fbe0691a161b6a0bb8e769dece73f46bcf0a3a6ecdb3b3e95c69b928e9f22073b",
+            "id": "component-MfTableComponent-66b4b29c2ff0b53343a177ee9d036e5899fb72421a26488c10a98b516a7fb4dcc2d8474c70c5fbba4598590380811dd5bdf491ec34a68e42535cb1a572d59e7b",
             "file": "src/app/components/table/mf-table.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
@@ -5896,7 +5896,7 @@
         },
         {
             "name": "MfTabsComponent",
-            "id": "component-MfTabsComponent-2c16f0176acff32481ada885955ed749937f0a5c8a49fe2104f945db9766b7ef0ef24465a05cc96963d790ca1786a1d78fe97f1e2f84c13e76da1d30f0d7f06a",
+            "id": "component-MfTabsComponent-4c2caed12872bdead8b953a0803098a1d55fd5ff4517b107f500633587d7e79c7634fd2f0d138cd5e5ce03803f4b7021ad85d1ce39101b8313d53a10a5dda23a",
             "file": "src/app/components/tabs/mf-tabs.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
@@ -6019,7 +6019,7 @@
         },
         {
             "name": "MfTextareaComponent",
-            "id": "component-MfTextareaComponent-0b428c7944ced43b725e098596e8ce868b1d36e49f77d6948a6b3d78665f1e48d28525f908707d0ef4b3d2466efec20f702e2ee74571a322d9232ae93ea6437f",
+            "id": "component-MfTextareaComponent-7e0444e87c3c8aa14036c60978b14d361061f45c4963ebc318d579b1a1199fe12dadd99aa66ec755ea18dae89aa52d048b524ca339469540f122c805e0e0027c",
             "file": "src/app/components/textarea/mf-textarea.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
@@ -6314,7 +6314,7 @@
         },
         {
             "name": "MfToolbarComponent",
-            "id": "component-MfToolbarComponent-6096c96f7adb12ea929622624eb4b56a6f8196ed1d0699966a714a58f97c03d2b04b32ac092961068c98460534c68d541b545cabe6ae5281b36b12f2bf221b87",
+            "id": "component-MfToolbarComponent-7978fe9655bd6fd5bd7de075fe991945efe4f456b0b70abe69c37ad1aaa9a3a997e562b7a63e5173e2e190ce9592eec36468887e5d9d7f1f38bcdeebee233a6a",
             "file": "src/app/components/toolbar/mf-toolbar.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
@@ -6449,7 +6449,7 @@
         },
         {
             "name": "MfTooltipComponent",
-            "id": "component-MfTooltipComponent-06b0f4532553b271a956ae9c60e8ebc4f14724f9aa7159fb4bc23d0c0744a8e00d80f377cc00376aee5fc1020006b9cb9ebd37a9b49554acd489072c4c689791",
+            "id": "component-MfTooltipComponent-9b7c917eb9f0680900860ca38896f82d1aa9222f44dee924153997aba20a4049aca88a22cc219d888462387d7abb2c7f4f4b13c81f4aa27829dd80d374d65162",
             "file": "src/app/components/tooltip/mf-tooltip.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],

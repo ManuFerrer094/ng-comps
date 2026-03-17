@@ -2,14 +2,61 @@ import { Meta } from '@storybook/addon-docs/blocks';
 
 <Meta title="About" />
 
-# Acerca de este proyecto
+# ng-comps: Guia rapida de uso
 
-Este repositorio expone una colección de componentes reutilizables con una capa de estilo propia sobre Angular Material.
+`ng-comps` es una libreria de componentes Angular con estilo propio sobre Angular Material.
 
-**Puntos clave:**
+## 1) Instalacion
 
-- Diseño: `src/theme/tokens.css` contiene las variables de diseño (colores, tipografías, espaciados).
-- Tema Material: `src/theme/material-theme.scss` contiene la configuración y mixins de Material.
-- Componente base: `src/app/components/button/mf-button.component.ts` es el `MfButton` listo para producción.
+```bash
+npm i ng-comps
+```
 
-Puedes inspeccionar y reutilizar los archivos mencionados en el repositorio.
+## 2) Cargar estilos globales
+
+En el archivo global de estilos de tu app (por ejemplo `src/styles.css`), importa:
+
+```css
+@import 'ng-comps/theme/tokens.css';
+@import 'ng-comps/styles.css';
+```
+
+## 3) Usar componentes (Standalone)
+
+Importa solo los componentes que realmente uses para maximizar tree-shaking:
+
+```ts
+import { Component } from '@angular/core';
+import { MfButtonComponent, MfInputComponent } from 'ng-comps';
+
+@Component({
+	selector: 'app-example',
+	imports: [MfButtonComponent, MfInputComponent],
+	template: `
+		<mf-input label="Email" placeholder="you@company.com" />
+		<mf-button label="Guardar" variant="filled" />
+	`,
+})
+export class ExampleComponent {}
+```
+
+## 4) Requisitos del proyecto consumidor
+
+`ng-comps` usa `peerDependencies`, por lo que tu proyecto debe tener Angular y RxJS instalados.
+
+Recomendado:
+
+- Angular `^21`
+- RxJS `~7.8`
+
+## 5) Buenas practicas de integracion
+
+- Importa componentes puntualmente desde `ng-comps`.
+- Mantén tus estilos globales con los `tokens.css` de la libreria.
+- Usa Storybook como referencia visual y de API para cada componente.
+
+## Referencias utiles dentro de este repo
+
+- Tokens de diseño: `src/theme/tokens.css`
+- Tema Material: `src/theme/material-theme.scss`
+- Ejemplo base: `src/app/components/button/mf-button.component.ts`
