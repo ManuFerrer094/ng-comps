@@ -10,34 +10,34 @@ const meta: Meta<MfDatepickerComponent> = {
     docs: {
       description: {
         component: `
-**MfDatepicker** es el selector de fecha de la librería ng-comps.
-Usa Angular Material \`mat-datepicker\` por debajo pero expone una API uniforme con look and feel de marca.
+**MfDatepicker** is the date picker component from the ng-comps library.
+It uses Angular Material \`mat-datepicker\` under the hood while exposing a consistent branded API.
 
-| Propiedad   | Descripción                              |
-|-------------|------------------------------------------|
-| \`label\`     | Etiqueta flotante del campo              |
-| \`placeholder\` | Texto de placeholder                   |
-| \`hint\`      | Texto de ayuda debajo del campo          |
-| \`error\`     | Mensaje de error                         |
-| \`min\`       | Fecha mínima seleccionable               |
-| \`max\`       | Fecha máxima seleccionable               |
-| \`disabled\`  | Deshabilita el campo                     |
-| \`fullWidth\` | Ocupa el ancho del contenedor            |
+| Property      | Description                        |
+|---------------|------------------------------------|
+| \`label\`       | Floating field label               |
+| \`placeholder\` | Placeholder text                   |
+| \`hint\`        | Helper text below the field        |
+| \`error\`       | Error message                      |
+| \`min\`         | Minimum selectable date            |
+| \`max\`         | Maximum selectable date            |
+| \`disabled\`    | Disables the field                 |
+| \`fullWidth\`   | Makes the field fill its container |
         `,
       },
     },
   },
   argTypes: {
-    label: { control: 'text', description: 'Etiqueta flotante' },
+    label: { control: 'text', description: 'Floating label' },
     placeholder: { control: 'text', description: 'Placeholder' },
     size: {
       control: 'select',
       options: ['sm', 'md', 'lg'],
-      description: 'Tamaño del campo',
+      description: 'Field size',
     },
     disabled: { control: 'boolean' },
-    hint: { control: 'text', description: 'Texto de ayuda' },
-    error: { control: 'text', description: 'Mensaje de error' },
+    hint: { control: 'text', description: 'Helper text' },
+    error: { control: 'text', description: 'Error message' },
     fullWidth: { control: 'boolean' },
     mfChange: { action: 'mfChange' },
     mfBlur: { action: 'mfBlur' },
@@ -49,52 +49,52 @@ type Story = StoryObj<MfDatepickerComponent>;
 
 export const Default: Story = {
   args: {
-    label: 'Fecha de nacimiento',
+    label: 'Birth date',
     placeholder: 'DD/MM/YYYY',
   },
 };
 
 export const WithHint: Story = {
-  name: 'Con texto de ayuda',
+  name: 'With helper text',
   args: {
-    label: 'Fecha de inicio',
-    hint: 'Selecciona una fecha posterior a hoy',
+    label: 'Start date',
+    hint: 'Select a date after today',
   },
 };
 
 export const WithError: Story = {
-  name: 'Con error',
+  name: 'With error',
   args: {
-    label: 'Fecha de vencimiento',
-    error: 'La fecha es obligatoria',
+    label: 'Due date',
+    error: 'Date is required',
   },
 };
 
 export const Disabled: Story = {
   args: {
-    label: 'Fecha (deshabilitada)',
+    label: 'Date (disabled)',
     disabled: true,
   },
 };
 
 export const Small: Story = {
   args: {
-    label: 'Pequeño',
+    label: 'Small',
     size: 'sm',
   },
 };
 
 export const Large: Story = {
   args: {
-    label: 'Grande',
+    label: 'Large',
     size: 'lg',
   },
 };
 
 export const FullWidth: Story = {
-  name: 'Ancho completo',
+  name: 'Full width',
   args: {
-    label: 'Fecha de entrega',
+    label: 'Delivery date',
     fullWidth: true,
   },
   parameters: {
@@ -103,14 +103,14 @@ export const FullWidth: Story = {
 };
 
 export const AllVariants: Story = {
-  name: 'Todas las variantes',
+  name: 'All variants',
   render: () => ({
     template: `
       <div style="display: flex; flex-direction: column; gap: 16px; max-width: 360px;">
-        <mf-datepicker label="Normal" />
-        <mf-datepicker label="Con ayuda" hint="Selecciona una fecha" />
-        <mf-datepicker label="Con error" error="Fecha requerida" />
-        <mf-datepicker label="Deshabilitado" [disabled]="true" />
+        <mf-datepicker label="Default" />
+        <mf-datepicker label="With help" hint="Select a date" />
+        <mf-datepicker label="With error" error="Date required" />
+        <mf-datepicker label="Disabled" [disabled]="true" />
       </div>
     `,
     moduleMetadata: { imports: [MfDatepickerComponent] },

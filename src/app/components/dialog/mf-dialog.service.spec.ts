@@ -29,7 +29,7 @@ describe('MfDialogService', () => {
     class DialogContentComponent {}
 
     service.open(DialogContentComponent, {
-      ariaLabel: 'Eliminar proyecto',
+      ariaLabel: 'Delete project',
     });
 
     expect(dialogSpy.open).toHaveBeenCalledWith(
@@ -38,7 +38,7 @@ describe('MfDialogService', () => {
         role: 'dialog',
         autoFocus: 'first-tabbable',
         restoreFocus: true,
-        ariaLabel: 'Eliminar proyecto',
+        ariaLabel: 'Delete project',
         panelClass: ['mf-dialog-panel'],
       }),
     );

@@ -3,15 +3,15 @@ import type { Meta, StoryObj } from '@storybook/angular';
 import { MfTableComponent } from '../app/components/table';
 
 const COLUMNS = [
-  { key: 'name', header: 'Nombre', sortable: true },
-  { key: 'role', header: 'Rol' },
-  { key: 'status', header: 'Estado' },
+  { key: 'name', header: 'Name', sortable: true },
+  { key: 'role', header: 'Role' },
+  { key: 'status', header: 'Status' },
 ];
 
 const DATA = [
-  { name: 'Ana Torres', role: 'Frontend', status: 'Activa' },
-  { name: 'Luis Vega', role: 'Design Ops', status: 'Pendiente' },
-  { name: 'Marta Solis', role: 'QA', status: 'Activa' },
+  { name: 'Ana Torres', role: 'Frontend', status: 'Active' },
+  { name: 'Luis Vega', role: 'Design Ops', status: 'Pending' },
+  { name: 'Marta Solis', role: 'QA', status: 'Active' },
 ];
 
 const meta: Meta<MfTableComponent> = {
@@ -56,9 +56,9 @@ export const WithExplicitActions: Story = {
   args: {
     columns: COLUMNS,
     data: DATA,
-    rowActionLabel: 'Ver detalle',
-    rowActionHeader: 'Acciones',
-    rowActionAriaLabel: (row) => `Ver detalle de ${String(row['name'])}`,
+    rowActionLabel: 'View details',
+    rowActionHeader: 'Actions',
+    rowActionAriaLabel: (row) => `View details for ${String(row['name'])}`,
   },
 };
 
@@ -67,11 +67,11 @@ export const IncorrectUsage: Story = {
   render: () => ({
     template: `
       <section style="max-width: 720px; border: 1px solid var(--mf-color-border); border-radius: 16px; padding: 20px; background: var(--mf-color-surface);">
-        <h2 style="margin: 0 0 12px; font-size: 1rem;">Anti-patrones</h2>
+        <h2 style="margin: 0 0 12px; font-size: 1rem;">Anti-patterns</h2>
         <ul style="margin: 0 0 16px; padding-left: 18px;">
-          <li>Hacer clickable toda la fila con \`(click)\` en \`tr\`.</li>
-          <li>Usar color como unica senal de estado.</li>
-          <li>Repetir el mismo nombre accesible en todas las acciones de fila.</li>
+          <li>Making the entire row clickable with \`(click)\` on \`tr\`.</li>
+          <li>Using color as the only status indicator.</li>
+          <li>Repeating the same accessible name for every row action.</li>
         </ul>
         <pre style="margin: 0; padding: 16px; border-radius: 12px; background: #111827; color: #f9fafb; overflow: auto;"><code>&lt;tr (click)="openDetail(row)"&gt;...&lt;/tr&gt;</code></pre>
       </section>

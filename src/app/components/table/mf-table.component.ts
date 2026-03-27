@@ -84,7 +84,7 @@ export class MfTableComponent {
   /** Texto visible del botÃ³n de acciÃ³n por fila */
   readonly rowActionLabel = input<string | undefined>(undefined);
   /** Cabecera visible de la columna de acciÃ³n */
-  readonly rowActionHeader = input('Acciones');
+  readonly rowActionHeader = input('Actions');
   readonly rowActionAriaLabel = input<
     ((row: Record<string, unknown>) => string) | undefined
   >(undefined);

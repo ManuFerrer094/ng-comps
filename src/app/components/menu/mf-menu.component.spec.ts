@@ -37,7 +37,7 @@ describe('MfMenuComponent', () => {
   });
 
   it('should have accessible trigger label', () => {
-    expect(component.triggerLabel()).toBe('Abrir menú');
+    expect(component.triggerLabel()).toBe('Open menu');
   });
 
   it('should emit item click', () => {

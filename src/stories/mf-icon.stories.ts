@@ -10,32 +10,35 @@ const meta: Meta<MfIconComponent> = {
     docs: {
       description: {
         component: `
-**MfIcon** es el componente de iconos de la librería ng-comps.
-Usa Material Icons por debajo y expone una API consistente con tamaños y colores de marca.
+**MfIcon** is the icon component from the ng-comps library.
+It uses Material Icons under the hood and exposes a consistent API with branded sizes and colors.
 
-| Tamaño | Pixeles | Cuándo usarlo                           |
-|--------|---------|------------------------------------------|
-| \`sm\`   | 16px    | Dentro de botones, chips o acciones      |
-| \`md\`   | 20px    | Uso general, listas, formularios         |
-| \`lg\`   | 24px    | Headers, navegación                      |
-| \`xl\`   | 32px    | Ilustraciones, estados vacíos            |
+| Size   | Pixels | When to use it                  |
+|--------|--------|---------------------------------|
+| \`sm\`   | 16px   | Inside buttons, chips, or actions |
+| \`md\`   | 20px   | General use, lists, forms       |
+| \`lg\`   | 24px   | Headers and navigation          |
+| \`xl\`   | 32px   | Illustrations and empty states  |
         `,
       },
     },
   },
   argTypes: {
-    name: { control: 'text', description: 'Nombre del icono Material' },
+    name: { control: 'text', description: 'Material icon name' },
     size: {
       control: 'select',
       options: ['sm', 'md', 'lg', 'xl'],
-      description: 'Tamaño del icono',
+      description: 'Icon size',
     },
     color: {
       control: 'select',
       options: ['default', 'brand', 'muted', 'error', 'inherit'],
-      description: 'Color semántico del icono',
+      description: 'Semantic icon color',
     },
-    label: { control: 'text', description: 'Etiqueta accesible (si es decorativo, dejar vacío)' },
+    label: {
+      control: 'text',
+      description: 'Accessible label (leave empty when decorative)',
+    },
   },
 };
 
@@ -100,7 +103,7 @@ export const ExtraLarge: Story = {
 };
 
 export const AllSizes: Story = {
-  name: 'Todos los tamaños',
+  name: 'All sizes',
   render: () => ({
     template: `
       <div style="display: flex; gap: 16px; align-items: center;">
@@ -115,7 +118,7 @@ export const AllSizes: Story = {
 };
 
 export const AllColors: Story = {
-  name: 'Todos los colores',
+  name: 'All colors',
   render: () => ({
     template: `
       <div style="display: flex; gap: 16px; align-items: center;">

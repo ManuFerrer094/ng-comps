@@ -41,19 +41,19 @@ describe('MfDatepickerComponent', () => {
   });
 
   it('should apply error class when error is provided', () => {
-    fixture.componentRef.setInput('error', 'Fecha requerida');
+    fixture.componentRef.setInput('error', 'Date required');
     expect(component.hostClasses()).toContain('mf-datepicker--error');
   });
 
   it('should render label when provided', () => {
-    fixture.componentRef.setInput('label', 'Fecha de inicio');
+    fixture.componentRef.setInput('label', 'Start date');
     fixture.detectChanges();
     const label = fixture.nativeElement.querySelector('mat-label');
-    expect(label?.textContent).toContain('Fecha de inicio');
+    expect(label?.textContent).toContain('Start date');
   });
 
   it('should render hint when provided', () => {
-    fixture.componentRef.setInput('hint', 'Selecciona una fecha');
+    fixture.componentRef.setInput('hint', 'Select a date');
     fixture.detectChanges();
     const hint = fixture.nativeElement.querySelector('mat-hint');
     expect(hint).toBeTruthy();

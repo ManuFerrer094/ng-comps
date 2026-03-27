@@ -145,7 +145,7 @@ export class MfDatepickerComponent implements ControlValueAccessor {
   /** Ancho completo */
   readonly fullWidth = input(false);
   /** Etiqueta accesible del botÃ³n para abrir el calendario */
-  readonly toggleAriaLabel = input('Abrir calendario');
+  readonly toggleAriaLabel = input('Open calendar');
 
   readonly mfChange = output<Date | null>();
   readonly mfBlur = output<void>();

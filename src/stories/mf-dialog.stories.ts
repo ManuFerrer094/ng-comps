@@ -5,21 +5,20 @@ import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dial
 import { MfDialogComponent } from '../app/components/dialog';
 import { MfButtonComponent } from '../app/components/button';
 
-// ── Contenido del diálogo que se abre programáticamente ────────────────────
 @Component({
   selector: 'mf-dialog-content-demo',
   imports: [MfDialogComponent, MfButtonComponent],
   template: `
     <mf-dialog
-      title="Confirmar acción"
-      message="¿Estás seguro de que deseas continuar? Esta acción no se puede deshacer."
+      title="Confirm action"
+      message="Are you sure you want to continue? This action cannot be undone."
       [showClose]="true"
       [showActions]="true"
       (mfClose)="dialogRef.close()"
     >
       <div mfDialogActions>
-        <mf-button label="Cancelar" variant="outlined" size="sm" (mfClick)="dialogRef.close()" />
-        <mf-button label="Confirmar" variant="filled" size="sm" (mfClick)="dialogRef.close()" />
+        <mf-button label="Cancel" variant="outlined" size="sm" (mfClick)="dialogRef.close()" />
+        <mf-button label="Confirm" variant="filled" size="sm" (mfClick)="dialogRef.close()" />
       </div>
     </mf-dialog>
   `,
@@ -28,13 +27,12 @@ class MfDialogContentDemoComponent {
   readonly dialogRef = inject(MatDialogRef<MfDialogContentDemoComponent>);
 }
 
-// ── Wrapper component para abrir el diálogo ────────────────────────────────
 @Component({
   selector: 'mf-dialog-demo',
   imports: [MfButtonComponent, MatDialogModule],
   template: `
     <mf-button
-      label="Abrir diálogo"
+      label="Open dialog"
       variant="filled"
       (mfClick)="openDialog()"
     />
@@ -51,8 +49,6 @@ class MfDialogDemoComponent {
   }
 }
 
-// ── Meta ─────────────────────────────────────────────────────────────────────
-
 const meta: Meta<MfDialogComponent> = {
   title: 'Organisms/MfDialog',
   component: MfDialogComponent,
@@ -61,23 +57,23 @@ const meta: Meta<MfDialogComponent> = {
     docs: {
       description: {
         component: `
-**MfDialog** es el componente de diálogo de la librería ng-comps.
-Usa Angular Material \`MatDialog\` por debajo pero con estilo propio: minimalista y elegante.
+**MfDialog** is the dialog component from the ng-comps library.
+It uses Angular Material \`MatDialog\` under the hood with a clean, minimal presentation.
 
-Puede usarse de dos formas:
-1. **Inline** como parte de una plantilla (para contenido condicional)
-2. **Programáticamente** con \`MatDialog.open()\`
+It can be used in two ways:
+1. **Inline** as part of a template for conditional content
+2. **Programmatically** with \`MatDialog.open()\`
         `,
       },
     },
   },
   argTypes: {
-    title: { control: 'text', description: 'Título del diálogo' },
-    message: { control: 'text', description: 'Mensaje descriptivo' },
-    showClose: { control: 'boolean', description: 'Mostrar botón de cerrar' },
+    title: { control: 'text', description: 'Dialog title' },
+    message: { control: 'text', description: 'Descriptive message' },
+    showClose: { control: 'boolean', description: 'Show close button' },
     showActions: {
       control: 'boolean',
-      description: 'Mostrar área de acciones',
+      description: 'Show actions area',
     },
     mfClose: { action: 'mfClose' },
   },
@@ -86,8 +82,6 @@ Puede usarse de dos formas:
 export default meta;
 type Story = StoryObj<MfDialogComponent>;
 
-// ── Inline preview (renderizado directo para docs) ──────────────────────────
-
 export const Default: Story = {
   render: (args) => ({
     props: args,
@@ -95,8 +89,8 @@ export const Default: Story = {
       <div style="border: 1px solid var(--mf-color-border); border-radius: var(--mf-radius-xl, 20px); box-shadow: var(--mf-shadow-lg); max-width: 480px;">
         <mf-dialog [title]="title" [message]="message" [showClose]="showClose" [showActions]="showActions">
           <div mfDialogActions>
-            <mf-button label="Cancelar" variant="outlined" size="sm" />
-            <mf-button label="Confirmar" variant="filled" size="sm" />
+            <mf-button label="Cancel" variant="outlined" size="sm" />
+            <mf-button label="Confirm" variant="filled" size="sm" />
           </div>
         </mf-dialog>
       </div>
@@ -104,27 +98,25 @@ export const Default: Story = {
     moduleMetadata: { imports: [MfDialogComponent, MfButtonComponent] },
   }),
   args: {
-    title: 'Confirmar acción',
-    message:
-      '¿Estás seguro de que deseas continuar? Esta acción no se puede deshacer.',
+    title: 'Confirm action',
+    message: 'Are you sure you want to continue? This action cannot be undone.',
     showClose: true,
     showActions: true,
   },
 };
 
 export const WithoutMessage: Story = {
-  name: 'Solo título',
-  render: (args) => ({
-    props: args,
+  name: 'Title only',
+  render: () => ({
     template: `
       <div style="border: 1px solid var(--mf-color-border); border-radius: var(--mf-radius-xl, 20px); box-shadow: var(--mf-shadow-lg); max-width: 480px;">
-        <mf-dialog title="Configuración" [showClose]="true" [showActions]="true">
+        <mf-dialog title="Settings" [showClose]="true" [showActions]="true">
           <p style="margin: 0; color: var(--mf-color-neutral-600); font-size: var(--mf-text-sm);">
-            Aquí puedes personalizar las opciones de tu cuenta.
+            Here you can customize your account settings.
           </p>
           <div mfDialogActions>
-            <mf-button label="Cancelar" variant="text" size="sm" />
-            <mf-button label="Guardar" variant="filled" size="sm" />
+            <mf-button label="Cancel" variant="text" size="sm" />
+            <mf-button label="Save" variant="filled" size="sm" />
           </div>
         </mf-dialog>
       </div>
@@ -134,14 +126,14 @@ export const WithoutMessage: Story = {
 };
 
 export const Danger: Story = {
-  name: 'Destructivo',
+  name: 'Destructive',
   render: () => ({
     template: `
       <div style="border: 1px solid var(--mf-color-border); border-radius: var(--mf-radius-xl, 20px); box-shadow: var(--mf-shadow-lg); max-width: 480px;">
-        <mf-dialog title="Eliminar proyecto" message="Se eliminará permanentemente el proyecto y todos sus datos. Esta acción no se puede deshacer." [showClose]="true" [showActions]="true">
+        <mf-dialog title="Delete project" message="The project and all its data will be permanently deleted. This action cannot be undone." [showClose]="true" [showActions]="true">
           <div mfDialogActions>
-            <mf-button label="Cancelar" variant="outlined" size="sm" />
-            <mf-button label="Eliminar" variant="filled" size="sm" />
+            <mf-button label="Cancel" variant="outlined" size="sm" />
+            <mf-button label="Delete" variant="filled" size="sm" />
           </div>
         </mf-dialog>
       </div>
@@ -151,7 +143,7 @@ export const Danger: Story = {
 };
 
 export const OpenDialog: Story = {
-  name: 'Abrir con MatDialog',
+  name: 'Open with MatDialog',
   render: () => ({
     template: `<mf-dialog-demo />`,
     moduleMetadata: { imports: [MfDialogDemoComponent] },
@@ -160,7 +152,7 @@ export const OpenDialog: Story = {
     docs: {
       description: {
         story:
-          'Haz clic en el botón para abrir el diálogo usando `MatDialog.open()`.',
+          'Click the button to open the dialog using `MatDialog.open()`.',
       },
     },
   },

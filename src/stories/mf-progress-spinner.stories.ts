@@ -10,13 +10,13 @@ const meta: Meta<MfProgressSpinnerComponent> = {
     docs: {
       description: {
         component: `
-**MfProgressSpinner** es el spinner de progreso de la librería ng-comps.
-Usa Angular Material \`mat-progress-spinner\` por debajo y expone una API uniforme con look and feel de marca.
+**MfProgressSpinner** is the progress spinner component from the ng-comps library.
+It uses Angular Material \`mat-progress-spinner\` under the hood while exposing a consistent branded API.
 
-| Modo              | Descripción                                |
-|-------------------|--------------------------------------------|
-| \`indeterminate\`   | Animación continua sin valor conocido      |
-| \`determinate\`     | Muestra el progreso exacto (0–100)         |
+| Mode              | Description                          |
+|-------------------|--------------------------------------|
+| \`indeterminate\`   | Continuous animation, no known value |
+| \`determinate\`     | Shows exact progress (0-100)         |
         `,
       },
     },
@@ -25,26 +25,26 @@ Usa Angular Material \`mat-progress-spinner\` por debajo y expone una API unifor
     mode: {
       control: 'select',
       options: ['indeterminate', 'determinate'],
-      description: 'Modo del spinner',
+      description: 'Spinner mode',
     },
     value: {
       control: { type: 'range', min: 0, max: 100 },
-      description: 'Valor actual (0–100, solo en determinate)',
+      description: 'Current value (0-100, determinate only)',
     },
     diameter: {
       control: { type: 'range', min: 16, max: 120 },
-      description: 'Diámetro en px',
+      description: 'Diameter in px',
     },
     strokeWidth: {
       control: { type: 'range', min: 1, max: 12 },
-      description: 'Grosor del trazo',
+      description: 'Stroke width',
     },
     color: {
       control: 'select',
       options: ['brand', 'accent', 'warn'],
-      description: 'Color del spinner',
+      description: 'Spinner color',
     },
-    label: { control: 'text', description: 'Etiqueta visible junto al spinner' },
+    label: { control: 'text', description: 'Visible label next to the spinner' },
   },
 };
 
@@ -67,10 +67,10 @@ export const Determinate: Story = {
 };
 
 export const WithLabel: Story = {
-  name: 'Con etiqueta',
+  name: 'With label',
   args: {
     mode: 'indeterminate',
-    label: 'Cargando datos...',
+    label: 'Loading data...',
     diameter: 32,
   },
 };
@@ -94,7 +94,7 @@ export const ColorWarn: Story = {
 };
 
 export const Sizes: Story = {
-  name: 'Tamaños',
+  name: 'Sizes',
   render: () => ({
     template: `
       <div style="display: flex; gap: 24px; align-items: center;">
@@ -109,11 +109,11 @@ export const Sizes: Story = {
 };
 
 export const AllVariants: Story = {
-  name: 'Todas las variantes',
+  name: 'All variants',
   render: () => ({
     template: `
       <div style="display: flex; gap: 32px; align-items: center; flex-wrap: wrap;">
-        <mf-progress-spinner mode="indeterminate" label="Cargando..." />
+        <mf-progress-spinner mode="indeterminate" label="Loading..." />
         <mf-progress-spinner mode="determinate" [value]="60" label="60%" />
         <mf-progress-spinner mode="indeterminate" color="accent" label="Accent" />
         <mf-progress-spinner mode="indeterminate" color="warn" label="Warn" />

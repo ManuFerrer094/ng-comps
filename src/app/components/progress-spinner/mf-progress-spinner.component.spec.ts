@@ -40,10 +40,10 @@ describe('MfProgressSpinnerComponent', () => {
   });
 
   it('should render label when provided', () => {
-    fixture.componentRef.setInput('label', 'Procesando...');
+    fixture.componentRef.setInput('label', 'Processing...');
     fixture.detectChanges();
     const label = fixture.nativeElement.querySelector('.mf-progress-spinner__label');
-    expect(label?.textContent).toContain('Procesando...');
+    expect(label?.textContent).toContain('Processing...');
   });
 
   it('should not render label when not provided', () => {
@@ -53,7 +53,7 @@ describe('MfProgressSpinnerComponent', () => {
   });
 
   it('should add labeled class when label is provided', () => {
-    fixture.componentRef.setInput('label', 'Cargando');
+    fixture.componentRef.setInput('label', 'Loading');
     expect(component.wrapperClasses()).toContain('mf-progress-spinner__wrapper--labeled');
   });
 });

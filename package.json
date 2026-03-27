@@ -19,7 +19,7 @@
     "build-storybook": "ng run ng-comps:build-storybook",
     "ci": "npm run build:lib && npm run test:ci && npm run build-storybook"
   },
-  "private": true,
+  "private": false,
   "packageManager": "npm@10.8.2",
   "dependencies": {
     "@angular/animations": "^21.2.4",

@@ -39,10 +39,10 @@ describe('MfAlertComponent', () => {
   });
 
   it('should show title when provided', () => {
-    fixture.componentRef.setInput('title', 'Atención');
+    fixture.componentRef.setInput('title', 'Attention');
     fixture.detectChanges();
     const title = fixture.nativeElement.querySelector('.mf-alert__title');
-    expect(title?.textContent).toContain('Atención');
+    expect(title?.textContent).toContain('Attention');
   });
 
   it('should show close button when dismissible', () => {

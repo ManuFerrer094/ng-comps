@@ -10,20 +10,20 @@ const meta: Meta<MfCheckboxComponent> = {
     docs: {
       description: {
         component: `
-**MfCheckbox** es el checkbox de la librería ng-comps.
-Usa Angular Material \`mat-checkbox\` por debajo pero expone una API uniforme con look and feel de marca.
+**MfCheckbox** is the checkbox component from the ng-comps library.
+It uses Angular Material \`mat-checkbox\` under the hood while exposing a consistent branded API.
 
-| Estado          | Descripción                                |
-|-----------------|--------------------------------------------|
-| \`checked\`       | Marcado                                    |
-| \`indeterminate\` | Estado intermedio (selección parcial)      |
-| \`disabled\`      | No interactivo                             |
+| State           | Description             |
+|-----------------|-------------------------|
+| \`checked\`       | Selected                |
+| \`indeterminate\` | Partial selection state |
+| \`disabled\`      | Not interactive         |
         `,
       },
     },
   },
   argTypes: {
-    label: { control: 'text', description: 'Texto del checkbox' },
+    label: { control: 'text', description: 'Checkbox label text' },
     checked: { control: 'boolean' },
     indeterminate: { control: 'boolean' },
     disabled: { control: 'boolean' },
@@ -36,51 +36,51 @@ type Story = StoryObj<MfCheckboxComponent>;
 
 export const Default: Story = {
   args: {
-    label: 'Acepto los términos y condiciones',
+    label: 'I accept the terms and conditions',
     checked: false,
   },
 };
 
 export const Checked: Story = {
   args: {
-    label: 'Opción seleccionada',
+    label: 'Selected option',
     checked: true,
   },
 };
 
 export const Indeterminate: Story = {
   args: {
-    label: 'Selección parcial',
+    label: 'Partial selection',
     indeterminate: true,
   },
 };
 
 export const Disabled: Story = {
   args: {
-    label: 'Opción deshabilitada',
+    label: 'Disabled option',
     disabled: true,
   },
 };
 
 export const DisabledChecked: Story = {
-  name: 'Deshabilitado y marcado',
+  name: 'Disabled and checked',
   args: {
-    label: 'Marcado y deshabilitado',
+    label: 'Checked and disabled',
     checked: true,
     disabled: true,
   },
 };
 
 export const AllStates: Story = {
-  name: 'Todos los estados',
+  name: 'All states',
   render: () => ({
     template: `
       <div style="display: flex; flex-direction: column; gap: 12px;">
-        <mf-checkbox label="Sin marcar" />
-        <mf-checkbox label="Marcado" [checked]="true" />
-        <mf-checkbox label="Indeterminado" [indeterminate]="true" />
-        <mf-checkbox label="Deshabilitado" [disabled]="true" />
-        <mf-checkbox label="Marcado y deshabilitado" [checked]="true" [disabled]="true" />
+        <mf-checkbox label="Unchecked" />
+        <mf-checkbox label="Checked" [checked]="true" />
+        <mf-checkbox label="Indeterminate" [indeterminate]="true" />
+        <mf-checkbox label="Disabled" [disabled]="true" />
+        <mf-checkbox label="Checked and disabled" [checked]="true" [disabled]="true" />
       </div>
     `,
     moduleMetadata: { imports: [MfCheckboxComponent] },
