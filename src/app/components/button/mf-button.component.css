@@ -23,6 +23,10 @@
   width: 100%;
 }
 
+.mf-btn--icon {
+  border-radius: var(--mf-radius-full) !important;
+}
+
 /* ── Filled ────────────────────────────────────────────────────── */
 .mf-btn--filled.mdc-button,
 .mf-btn--filled.mat-mdc-unelevated-button {
@@ -61,6 +65,22 @@
   background-color: var(--mf-color-brand-light);
 }
 
+.mf-btn--text.mat-mdc-icon-button:hover:not([disabled]),
+.mf-btn--filled.mat-mdc-icon-button:hover:not([disabled]),
+.mf-btn--outlined.mat-mdc-icon-button:hover:not([disabled]) {
+  background-color: var(--mf-color-brand-light);
+}
+
+.mf-btn--filled.mat-mdc-icon-button {
+  color: var(--mf-color-brand) !important;
+  background-color: var(--mf-color-brand-light) !important;
+}
+
+.mf-btn--outlined.mat-mdc-icon-button {
+  color: var(--mf-color-secondary-900) !important;
+  border: 1px solid var(--mf-color-border) !important;
+}
+
 /* ── Tamaños ───────────────────────────────────────────────────── */
 .mf-btn--sm.mdc-button {
   height: 34px !important;
@@ -78,6 +98,24 @@
   height: 48px !important;
   padding: 0 var(--mf-space-6) !important;
   font-size: var(--mf-text-base) !important;
+}
+
+.mf-btn--icon.mf-btn--sm.mat-mdc-icon-button {
+  width: 34px;
+  height: 34px;
+  padding: 5px;
+}
+
+.mf-btn--icon.mf-btn--md.mat-mdc-icon-button {
+  width: 40px;
+  height: 40px;
+  padding: 8px;
+}
+
+.mf-btn--icon.mf-btn--lg.mat-mdc-icon-button {
+  width: 48px;
+  height: 48px;
+  padding: 11px;
 }
 
 /* ── Disabled ──────────────────────────────────────────────────── */

@@ -30,7 +30,7 @@
   --mf-color-accent-500: #f59e0b;   /* default */
   --mf-color-accent-700: #b45309;
 
-  --mf-color-error-500:   #ef4444;
+  --mf-color-error-500:   #dc2626;
   --mf-color-error-700:   #b91c1c;
 
   --mf-color-neutral-0:   #ffffff;
@@ -38,7 +38,7 @@
   --mf-color-neutral-100: #f1f5f9;
   --mf-color-neutral-200: #e2e8f0;
   --mf-color-neutral-300: #cbd5e1;
-  --mf-color-neutral-400: #94a3b8;
+  --mf-color-neutral-400: #64748b;
   --mf-color-neutral-600: #475569;
   --mf-color-neutral-800: #1e293b;
   --mf-color-neutral-900: #0f1722;
@@ -52,6 +52,9 @@
   --mf-color-surface:        var(--mf-color-neutral-0);
   --mf-color-surface-raised: var(--mf-color-neutral-50);
   --mf-color-border:         var(--mf-color-neutral-200);
+  --mf-focus-ring-color:     var(--mf-color-secondary-700);
+  --mf-focus-ring-offset:    2px;
+  --mf-focus-ring-width:     3px;
 
   /* ── Tipografía ─────────────────────────────────────────────── */
   --mf-font-base: 'Manrope', 'Segoe UI', system-ui, sans-serif;

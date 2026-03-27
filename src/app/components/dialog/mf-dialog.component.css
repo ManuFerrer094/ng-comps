@@ -10,7 +10,12 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: var(--mf-space-3);
   padding: var(--mf-space-6) var(--mf-space-6) var(--mf-space-3);
+}
+
+.mf-dialog__header--compact {
+  padding-bottom: 0;
 }
 
 .mf-dialog__title {
@@ -24,16 +29,8 @@
 
 /* ── Close button ─────────────────────────────────────────────── */
 .mf-dialog__close {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  border: none;
-  background: transparent;
-  border-radius: var(--mf-radius-sm, 6px);
+  flex-shrink: 0;
   color: var(--mf-color-neutral-400);
-  cursor: pointer;
   transition:
     background-color var(--mf-duration-fast) var(--mf-ease-standard),
     color var(--mf-duration-fast) var(--mf-ease-standard);

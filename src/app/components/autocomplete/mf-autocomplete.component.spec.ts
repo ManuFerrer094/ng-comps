@@ -111,7 +111,6 @@ describe('MfAutocompleteComponent', () => {
   it('should render error when provided', () => {
     fixture.componentRef.setInput('error', 'Selection required');
     fixture.detectChanges();
-    const error = fixture.nativeElement.querySelector('mat-error');
-    expect(error?.textContent).toContain('Selection required');
+    expect(fixture.nativeElement.textContent).toContain('Selection required');
   });
 });

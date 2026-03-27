@@ -4,9 +4,7 @@ import {
   computed,
   input,
 } from '@angular/core';
-import { MatTooltipModule } from '@angular/material/tooltip';
-
-export type MfTooltipPosition = 'above' | 'below' | 'left' | 'right';
+import { MfTooltipDirective, MfTooltipPosition } from './mf-tooltip.directive';
 
 /**
  * Tooltip de la librería ng-comps.
@@ -15,14 +13,14 @@ export type MfTooltipPosition = 'above' | 'below' | 'left' | 'right';
  */
 @Component({
   selector: 'mf-tooltip',
-  imports: [MatTooltipModule],
+  imports: [MfTooltipDirective],
   template: `
     <span
-      [matTooltip]="text()"
-      [matTooltipPosition]="position()"
-      [matTooltipDisabled]="disabled()"
-      [matTooltipShowDelay]="showDelay()"
-      [matTooltipHideDelay]="hideDelay()"
+      [mfTooltip]="text()"
+      [mfTooltipPosition]="position()"
+      [mfTooltipDisabled]="disabled()"
+      [mfTooltipShowDelay]="showDelay()"
+      [mfTooltipHideDelay]="hideDelay()"
       [class]="hostClasses()"
     >
       <ng-content />

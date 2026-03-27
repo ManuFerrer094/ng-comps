@@ -1,8 +1,14 @@
 :host {
-  display: inline-block;
+  display: block;
 }
 
-.mf-slide-toggle.mat-mdc-slide-toggle {
+.mf-slide-toggle {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mf-space-1);
+}
+
+.mf-slide-toggle .mat-mdc-slide-toggle {
   font-family: var(--mf-font-base) !important;
   font-size: var(--mf-text-sm) !important;
 }
@@ -17,4 +23,20 @@
 
 .mf-slide-toggle--disabled {
   opacity: 0.42;
+}
+
+.mf-slide-toggle__hint,
+.mf-slide-toggle__error {
+  margin: 0;
+  padding-left: calc(36px + var(--mf-space-2));
+  font-size: var(--mf-text-xs);
+  line-height: var(--mf-leading-normal);
+}
+
+.mf-slide-toggle__hint {
+  color: var(--mf-color-neutral-600);
+}
+
+.mf-slide-toggle__error {
+  color: var(--mf-color-error-500);
 }
