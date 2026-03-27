@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync, existsSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync, rmSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 const root = process.cwd();
@@ -17,6 +17,16 @@ const materialVersion = rootPkg.dependencies['@angular/material'];
 const rxjsVersion = rootPkg.dependencies.rxjs;
 const tslibVersion = rootPkg.dependencies.tslib;
 
+for (const extraPath of [
+  resolve(distDir, 'browser'),
+  resolve(distDir, '3rdpartylicenses.txt'),
+  resolve(distDir, 'prerendered-routes.json')
+]) {
+  if (existsSync(extraPath)) {
+    rmSync(extraPath, { recursive: true, force: true });
+  }
+}
+
 const packageJson = {
   name: rootPkg.name,
   version: rootPkg.version,
@@ -28,6 +38,15 @@ const packageJson = {
   main: './fesm2022/ng-comps.mjs',
   module: './fesm2022/ng-comps.mjs',
   typings: './types/ng-comps.d.ts',
+  files: [
+    'fesm2022/ng-comps.mjs',
+    'types/ng-comps.d.ts',
+    'src/styles.css',
+    'src/theme',
+    'README.md',
+    'LICENSE',
+    'package.json'
+  ],
   exports: {
     '.': {
       types: './types/ng-comps.d.ts',
