@@ -2,15 +2,17 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  effect,
   input,
 } from '@angular/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { hasAccessibleName, warnInDev } from '../../a11y';
 
 export type MfProgressSpinnerMode = 'determinate' | 'indeterminate';
 export type MfProgressSpinnerColor = 'brand' | 'accent' | 'warn';
 
 /**
- * Spinner de progreso de la librería ng-comps.
+ * Spinner de progreso de la librerÃ­a ng-comps.
  * Envuelve Angular Material `mat-progress-spinner` y expone una API uniforme
  * con look and feel de marca.
  */
@@ -18,13 +20,18 @@ export type MfProgressSpinnerColor = 'brand' | 'accent' | 'warn';
   selector: 'mf-progress-spinner',
   imports: [MatProgressSpinnerModule],
   template: `
-    <div [class]="wrapperClasses()" [attr.aria-label]="label() || 'Cargando'">
+    <div [class]="wrapperClasses()">
       <mat-progress-spinner
         [class]="hostClasses()"
         [mode]="mode()"
         [value]="value()"
         [diameter]="diameter()"
         [strokeWidth]="strokeWidth()"
+        [attr.aria-label]="label() || null"
+        [attr.aria-valuetext]="valueText() || null"
+        [attr.aria-valuenow]="showsNumericValue() ? value() : null"
+        aria-valuemin="0"
+        aria-valuemax="100"
       />
       @if (label()) {
         <span class="mf-progress-spinner__label">{{ label() }}</span>
@@ -37,9 +44,9 @@ export type MfProgressSpinnerColor = 'brand' | 'accent' | 'warn';
 export class MfProgressSpinnerComponent {
   /** Modo del spinner */
   readonly mode = input<MfProgressSpinnerMode>('indeterminate');
-  /** Valor actual (0–100, solo en modo determinate) */
+  /** Valor actual (0â€“100, solo en modo determinate) */
   readonly value = input(0);
-  /** Diámetro en px */
+  /** DiÃ¡metro en px */
   readonly diameter = input(40);
   /** Grosor del trazo en px */
   readonly strokeWidth = input(4);
@@ -47,6 +54,20 @@ export class MfProgressSpinnerComponent {
   readonly color = input<MfProgressSpinnerColor>('brand');
   /** Etiqueta accesible y visible */
   readonly label = input<string | undefined>(undefined);
+  /** Texto accesible opcional para lectores de pantalla */
+  readonly valueText = input<string | undefined>(undefined);
+
+  constructor() {
+    effect(() => {
+      if (!hasAccessibleName(this.label())) {
+        warnInDev(
+          'mf-progress-spinner debería incluir `label` para anunciar el estado de carga de forma accesible.',
+        );
+      }
+    });
+  }
+
+  readonly showsNumericValue = computed(() => this.mode() === 'determinate');
 
   readonly hostClasses = computed(() => {
     return `mf-progress-spinner mf-progress-spinner--${this.color()}`;

@@ -2,6 +2,19 @@
   display: block;
 }
 
+.mf-radio__fieldset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.mf-radio__legend {
+  margin-bottom: var(--mf-space-2);
+  font-size: var(--mf-text-sm);
+  font-weight: var(--mf-weight-medium);
+  color: var(--mf-color-on-surface);
+}
+
 /* ── Group layout ──────────────────────────────────────────────── */
 .mf-radio {
   display: flex;
@@ -55,4 +68,19 @@
 .mf-radio__option.mat-mdc-radio-disabled .mdc-label {
   color: var(--mf-color-neutral-400) !important;
   cursor: default;
+}
+
+.mf-radio__hint,
+.mf-radio__error {
+  margin: var(--mf-space-2) 0 0;
+  font-size: var(--mf-text-xs);
+  line-height: var(--mf-leading-normal);
+}
+
+.mf-radio__hint {
+  color: var(--mf-color-neutral-600);
+}
+
+.mf-radio__error {
+  color: var(--mf-color-error-500);
 }

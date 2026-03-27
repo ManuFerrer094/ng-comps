@@ -25,6 +25,32 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+:where(
+  button,
+  [href],
+  input,
+  select,
+  textarea,
+  summary,
+  [tabindex]:not([tabindex='-1'])
+):focus-visible {
+  outline: var(--mf-focus-ring-width) solid var(--mf-focus-ring-color) !important;
+  outline-offset: var(--mf-focus-ring-offset);
+}
+
+.mat-mdc-option.mdc-list-item--focused,
+.mat-mdc-option.mat-mdc-option-active,
+.mat-mdc-menu-item.cdk-keyboard-focused,
+.mat-mdc-menu-item.cdk-program-focused,
+.mat-mdc-paginator-navigation-previous:focus-visible,
+.mat-mdc-paginator-navigation-next:focus-visible,
+.mat-mdc-paginator-navigation-first:focus-visible,
+.mat-mdc-paginator-navigation-last:focus-visible,
+.mat-datepicker-toggle button:focus-visible {
+  outline: var(--mf-focus-ring-width) solid var(--mf-focus-ring-color) !important;
+  outline-offset: var(--mf-focus-ring-offset);
+}
+
 /* 4. Override de tokens de Material para usar nuestra paleta */
 :root {
   /* Botones */
@@ -179,4 +205,15 @@ body {
   background-color: var(--mf-color-brand-light) !important;
   color: var(--mf-color-brand) !important;
   font-weight: var(--mf-weight-medium) !important;
+}
+
+.mf-input__error,
+.mf-autocomplete__error,
+.mf-select__error,
+.mf-datepicker__error,
+.mf-textarea__error {
+  margin: var(--mf-space-1) var(--mf-space-4) 0;
+  font-size: var(--mf-text-xs);
+  line-height: var(--mf-leading-normal);
+  color: var(--mf-color-error-500);
 }

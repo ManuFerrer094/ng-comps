@@ -31,7 +31,6 @@
 
 .mf-table .mat-mdc-row:hover {
   background-color: var(--mf-color-brand-light) !important;
-  cursor: pointer;
 }
 
 /* ── Striped ──────────────────────────────────────────────────── */
@@ -53,4 +52,17 @@
 /* ── Sort header ──────────────────────────────────────────────── */
 .mf-table .mat-sort-header-arrow {
   color: var(--mf-color-brand) !important;
+}
+
+.mf-table__actions-header,
+.mf-table__actions-cell {
+  white-space: nowrap;
+  width: 1%;
+}
+
+.mf-table__action {
+  min-width: 0;
+  font-family: var(--mf-font-base) !important;
+  font-size: var(--mf-text-sm) !important;
+  font-weight: var(--mf-weight-medium) !important;
 }

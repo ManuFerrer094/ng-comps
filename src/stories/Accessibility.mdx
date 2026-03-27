@@ -1,0 +1,59 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Accessibility" />
+
+# Accessibility in ng-comps v1
+
+`ng-comps` v1 is documented as an accessibility-first component library, not as an automatic compliance shortcut.
+
+## Contract summary
+
+- Components are designed around WCAG 2.2 AA implementation targets.
+- Procurement evidence is documented against EN 301 549 v3.2.1 / WCAG 2.1 AA until the next EN revision is formally published.
+- Final application conformance still depends on consumer content, integration, routing, async state changes, and theme overrides.
+
+Read the full repository contract in `ACCESSIBILITY.md` at the project root.
+
+## Defaults enforced by the library
+
+- Accessible naming inputs on interactive controls.
+- Visible global `:focus-visible` styles.
+- Form controls wired to hints, counters, and errors through `aria-describedby`.
+- Safe dialog defaults through `MfDialogService`.
+- Explicit row actions in `MfTableComponent`.
+- Snackbar politeness and announcement options.
+- Tooltip directive usage on the real host element with `mfTooltip`.
+
+## What to review manually
+
+- Keyboard-only navigation
+- Focus visibility
+- 200% zoom
+- Reflow at 320 CSS px equivalent
+- NVDA on Windows
+- VoiceOver on macOS
+- Contrast after any token override
+
+## Storybook contract stories
+
+- [Dialog focus contract](?path=/story/accessibility-contracts--dialog-focus-contract)
+- [Menu keyboard contract](?path=/story/accessibility-contracts--menu-keyboard-contract)
+- [Select keyboard contract](?path=/story/accessibility-contracts--select-keyboard-contract)
+- [Autocomplete keyboard contract](?path=/story/accessibility-contracts--autocomplete-keyboard-contract)
+- [Datepicker keyboard contract](?path=/story/accessibility-contracts--datepicker-keyboard-contract)
+- [Table explicit action contract](?path=/story/accessibility-contracts--table-explicit-action-contract)
+- [Sidenav keyboard contract](?path=/story/accessibility-contracts--sidenav-keyboard-contract)
+
+## Correct and incorrect usage
+
+Use the contract stories as the reference implementation. Anti-pattern stories intentionally document what not to ship:
+
+- missing labels on icon-only triggers
+- placeholders used as labels
+- clickable rows instead of explicit actions
+- menus and dialogs that do not restore focus
+- theme overrides that remove focus rings or break contrast
+
+## Procurement note
+
+This library now provides a stronger technical base for WCAG and EN 301 549 claims, plus evidence-oriented docs and tests. It does not replace product-level accessibility validation or a formal VPAT process.

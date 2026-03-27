@@ -80,8 +80,7 @@ describe('MfSelectComponent', () => {
   it('should render error when provided', () => {
     fixture.componentRef.setInput('error', 'This field is required');
     fixture.detectChanges();
-    const error = fixture.nativeElement.querySelector('mat-error');
-    expect(error?.textContent).toContain('This field is required');
+    expect(fixture.nativeElement.textContent).toContain('This field is required');
   });
 
   it('should include mf-select-panel in panelClasses by default', () => {
@@ -105,8 +104,5 @@ describe('MfSelectComponent', () => {
     fixture.detectChanges();
     const icon = fixture.nativeElement.querySelector('[matprefix]');
     expect(icon).toBeTruthy();
-  });
-});
-
   });
 });

@@ -1,10 +1,13 @@
 :host {
-  display: inline-block;
+  display: block;
 }
 
 /* ── Base ──────────────────────────────────────────────────────── */
 .mf-checkbox {
   font-family: var(--mf-font-base) !important;
+  display: flex;
+  flex-direction: column;
+  gap: var(--mf-space-1);
 }
 
 /* ── Label styling ────────────────────────────────────────────── */
@@ -53,4 +56,20 @@
 .mf-checkbox--disabled {
   opacity: 0.42;
   pointer-events: none;
+}
+
+.mf-checkbox__hint,
+.mf-checkbox__error {
+  margin: 0;
+  padding-left: calc(18px + var(--mf-space-3));
+  font-size: var(--mf-text-xs);
+  line-height: var(--mf-leading-normal);
+}
+
+.mf-checkbox__hint {
+  color: var(--mf-color-neutral-600);
+}
+
+.mf-checkbox__error {
+  color: var(--mf-color-error-500);
 }

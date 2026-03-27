@@ -2,8 +2,10 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  effect,
   input,
 } from '@angular/core';
+import { warnInDev } from '../../a11y';
 
 /**
  * Contenedor de campo de formulario de la librería ng-comps.
@@ -47,6 +49,16 @@ export class MfFormFieldComponent {
   readonly error = input<string | undefined>(undefined);
   /** Campo requerido (muestra asterisco) */
   readonly required = input(false);
+
+  constructor() {
+    effect(() => {
+      if (this.label() && !this.fieldId()) {
+        warnInDev(
+          'mf-form-field requiere `fieldId` cuando renderiza `label` para poder asociarlo al control proyectado.',
+        );
+      }
+    });
+  }
 
   readonly labelClasses = computed(() => {
     const classes = ['mf-form-field__label'];

@@ -54,4 +54,23 @@ describe('MfTableComponent', () => {
   it('should apply default variant', () => {
     expect(component.hostClasses()).toContain('mf-table--default');
   });
+
+  it('should expose per-row aria labels for explicit actions', () => {
+    fixture.componentRef.setInput('rowActionLabel', 'Ver detalle');
+    fixture.componentRef.setInput(
+      'rowActionAriaLabel',
+      (row: Record<string, unknown>) => `Ver detalle de ${row['name']}`,
+    );
+    fixture.detectChanges();
+
+    const actionButtons =
+      fixture.nativeElement.querySelectorAll('.mf-table__action');
+
+    expect(actionButtons[0].getAttribute('aria-label')).toBe(
+      'Ver detalle de John',
+    );
+    expect(actionButtons[1].getAttribute('aria-label')).toBe(
+      'Ver detalle de Jane',
+    );
+  });
 });
