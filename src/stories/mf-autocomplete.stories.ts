@@ -3,16 +3,16 @@ import type { Meta, StoryObj } from '@storybook/angular';
 import { MfAutocompleteComponent } from '../app/components/autocomplete';
 
 const COUNTRIES = [
-  { value: 'es', label: 'España' },
-  { value: 'mx', label: 'México' },
+  { value: 'es', label: 'Spain' },
+  { value: 'mx', label: 'Mexico' },
   { value: 'ar', label: 'Argentina' },
   { value: 'co', label: 'Colombia' },
   { value: 'cl', label: 'Chile' },
-  { value: 'pe', label: 'Perú' },
-  { value: 'us', label: 'Estados Unidos' },
-  { value: 'uk', label: 'Reino Unido' },
-  { value: 'de', label: 'Alemania' },
-  { value: 'fr', label: 'Francia' },
+  { value: 'pe', label: 'Peru' },
+  { value: 'us', label: 'United States' },
+  { value: 'uk', label: 'United Kingdom' },
+  { value: 'de', label: 'Germany' },
+  { value: 'fr', label: 'France' },
 ];
 
 const meta: Meta<MfAutocompleteComponent> = {
@@ -23,45 +23,51 @@ const meta: Meta<MfAutocompleteComponent> = {
     docs: {
       description: {
         component: `
-**MfAutocomplete** es el campo de autocompletar de la librería ng-comps.
-Usa Angular Material \`mat-autocomplete\` por debajo pero expone una API uniforme con look and feel de marca.
+**MfAutocomplete** is the autocomplete field from the ng-comps library.
+It uses Angular Material \`mat-autocomplete\` under the hood while exposing a consistent branded API.
 
-El filtrado de opciones se realiza automáticamente por el texto escrito en el campo, buscando en la propiedad \`label\` de las opciones. Puedes proporcionar la lista completa de opciones y el componente se encarga del filtrado.
+Options are filtered automatically based on the text typed into the field, matching against the option \`label\` property. You can pass the full option list and let the component handle filtering.
 
-El panel desplegable se estiliza a través de la clase global \`mf-autocomplete-panel\`. Puedes inyectar clases adicionales con \`panelClass\`.
+The dropdown panel is styled through the global \`mf-autocomplete-panel\` class. You can inject additional classes with \`panelClass\`.
 
-| Propiedad          | Descripción                                              |
-|--------------------|----------------------------------------------------------|
-| \`options\`          | Array de opciones \`{ value, label, disabled? }\`         |
-| \`label\`            | Etiqueta flotante del campo                              |
-| \`placeholder\`      | Texto de placeholder                                     |
-| \`hint\`             | Texto de ayuda debajo del campo                          |
-| \`error\`            | Mensaje de error                                         |
-| \`leadingIcon\`      | Icono Material al inicio                                 |
-| \`trailingIcon\`     | Icono Material al final                                  |
-| \`panelWidth\`       | Ancho del panel (\`'auto'\` por defecto)                  |
-| \`panelClass\`       | Clases extra para el panel dropdown                      |
-| \`mfInput\`          | Evento: texto escrito en el campo                        |
-| \`mfOptionSelected\` | Evento: opción seleccionada (\`MfAutocompleteOption\`)    |
+| Property           | Description                                     |
+|--------------------|-------------------------------------------------|
+| \`options\`          | Array of options \`{ value, label, disabled? }\` |
+| \`label\`            | Floating field label                            |
+| \`placeholder\`      | Placeholder text                                |
+| \`hint\`             | Helper text shown below the field               |
+| \`error\`            | Error message                                   |
+| \`leadingIcon\`      | Material icon shown at the start                |
+| \`trailingIcon\`     | Material icon shown at the end                  |
+| \`panelWidth\`       | Panel width (\`'auto'\` by default)             |
+| \`panelClass\`       | Extra classes for the dropdown panel            |
+| \`mfInput\`          | Event emitted with the typed text               |
+| \`mfOptionSelected\` | Event emitted with the selected option          |
         `,
       },
     },
   },
   argTypes: {
-    label: { control: 'text', description: 'Etiqueta flotante' },
+    label: { control: 'text', description: 'Floating label' },
     placeholder: { control: 'text', description: 'Placeholder' },
     size: {
       control: 'select',
       options: ['sm', 'md', 'lg'],
-      description: 'Tamaño del campo',
+      description: 'Field size',
     },
     disabled: { control: 'boolean' },
-    hint: { control: 'text', description: 'Texto de ayuda' },
-    error: { control: 'text', description: 'Mensaje de error' },
-    leadingIcon: { control: 'text', description: 'Icono al inicio (nombre Material)' },
-    trailingIcon: { control: 'text', description: 'Icono al final (nombre Material)' },
-    fullWidth: { control: 'boolean', description: 'Ancho completo' },
-    panelWidth: { control: 'text', description: 'Ancho del panel dropdown' },
+    hint: { control: 'text', description: 'Helper text' },
+    error: { control: 'text', description: 'Error message' },
+    leadingIcon: {
+      control: 'text',
+      description: 'Leading icon (Material icon name)',
+    },
+    trailingIcon: {
+      control: 'text',
+      description: 'Trailing icon (Material icon name)',
+    },
+    fullWidth: { control: 'boolean', description: 'Full width' },
+    panelWidth: { control: 'text', description: 'Dropdown panel width' },
     mfInput: { action: 'mfInput' },
     mfOptionSelected: { action: 'mfOptionSelected' },
     mfBlur: { action: 'mfBlur' },
@@ -74,44 +80,44 @@ type Story = StoryObj<MfAutocompleteComponent>;
 export const Default: Story = {
   args: {
     options: COUNTRIES,
-    label: 'País',
-    placeholder: 'Escribe para buscar...',
+    label: 'Country',
+    placeholder: 'Type to search...',
   },
 };
 
 export const WithHint: Story = {
-  name: 'Con texto de ayuda',
+  name: 'With helper text',
   args: {
     options: COUNTRIES,
-    label: 'País de origen',
-    hint: 'Empieza a escribir para filtrar los resultados',
+    label: 'Country of origin',
+    hint: 'Start typing to filter the results',
   },
 };
 
 export const WithError: Story = {
-  name: 'Con error',
+  name: 'With error',
   args: {
     options: COUNTRIES,
-    label: 'País',
-    error: 'Selecciona un país válido',
+    label: 'Country',
+    error: 'Select a valid country',
   },
 };
 
 export const WithLeadingIcon: Story = {
-  name: 'Con icono al inicio',
+  name: 'With leading icon',
   args: {
     options: COUNTRIES,
-    label: 'País',
-    placeholder: 'Buscar país...',
+    label: 'Country',
+    placeholder: 'Search country...',
     leadingIcon: 'search',
   },
 };
 
 export const WithTrailingIcon: Story = {
-  name: 'Con icono al final',
+  name: 'With trailing icon',
   args: {
     options: COUNTRIES,
-    label: 'País',
+    label: 'Country',
     trailingIcon: 'public',
   },
 };
@@ -119,8 +125,8 @@ export const WithTrailingIcon: Story = {
 export const Disabled: Story = {
   args: {
     options: COUNTRIES,
-    label: 'País (deshabilitado)',
-    value: 'España',
+    label: 'Country (disabled)',
+    value: 'Spain',
     disabled: true,
   },
 };
@@ -128,7 +134,7 @@ export const Disabled: Story = {
 export const Small: Story = {
   args: {
     options: COUNTRIES,
-    label: 'Pequeño',
+    label: 'Small',
     size: 'sm',
   },
 };
@@ -136,16 +142,16 @@ export const Small: Story = {
 export const Large: Story = {
   args: {
     options: COUNTRIES,
-    label: 'Grande',
+    label: 'Large',
     size: 'lg',
   },
 };
 
 export const FullWidth: Story = {
-  name: 'Ancho completo',
+  name: 'Full width',
   args: {
     options: COUNTRIES,
-    label: 'País',
+    label: 'Country',
     fullWidth: true,
   },
   parameters: {
@@ -154,32 +160,32 @@ export const FullWidth: Story = {
 };
 
 export const CustomPanelClass: Story = {
-  name: 'Panel con clase personalizada',
+  name: 'Panel with custom class',
   args: {
     options: COUNTRIES,
-    label: 'País',
-    panelClass: 'mi-autocomplete-personalizado',
+    label: 'Country',
+    panelClass: 'my-custom-autocomplete',
   },
   parameters: {
     docs: {
       description: {
         story:
-          'Mediante `panelClass` puedes añadir clases CSS al panel del autocomplete para aplicar estilos propios.',
+          'Use `panelClass` to add CSS classes to the autocomplete panel and apply custom styling.',
       },
     },
   },
 };
 
 export const AllVariants: Story = {
-  name: 'Todas las variantes',
+  name: 'All variants',
   render: () => ({
     template: `
       <div style="display: flex; flex-direction: column; gap: 16px; max-width: 360px;">
-        <mf-autocomplete [options]="opts" label="Normal" placeholder="Escribe para buscar..." />
-        <mf-autocomplete [options]="opts" label="Con ayuda" hint="Filtra por nombre de país" />
-        <mf-autocomplete [options]="opts" label="Con error" error="Selecciona un país válido" />
-        <mf-autocomplete [options]="opts" label="Con icono" leadingIcon="search" placeholder="Buscar..." />
-        <mf-autocomplete [options]="opts" label="Deshabilitado" value="España" [disabled]="true" />
+        <mf-autocomplete [options]="opts" label="Default" placeholder="Type to search..." />
+        <mf-autocomplete [options]="opts" label="With help" hint="Filter by country name" />
+        <mf-autocomplete [options]="opts" label="With error" error="Select a valid country" />
+        <mf-autocomplete [options]="opts" label="With icon" leadingIcon="search" placeholder="Search..." />
+        <mf-autocomplete [options]="opts" label="Disabled" value="Spain" [disabled]="true" />
       </div>
     `,
     props: { opts: COUNTRIES },

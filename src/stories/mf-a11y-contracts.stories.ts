@@ -20,21 +20,21 @@ const FRAMEWORK_OPTIONS = [
 ];
 
 const COUNTRY_OPTIONS = [
-  { value: 'es', label: 'Espana' },
+  { value: 'es', label: 'Spain' },
   { value: 'mx', label: 'Mexico' },
   { value: 'ar', label: 'Argentina' },
   { value: 'co', label: 'Colombia' },
 ];
 
 const MENU_ITEMS: MfMenuItem[] = [
-  { value: 'edit', label: 'Editar', icon: 'edit' },
-  { value: 'duplicate', label: 'Duplicar', icon: 'content_copy' },
-  { value: 'archive', label: 'Archivar', icon: 'archive' },
+  { value: 'edit', label: 'Edit', icon: 'edit' },
+  { value: 'duplicate', label: 'Duplicate', icon: 'content_copy' },
+  { value: 'archive', label: 'Archive', icon: 'archive' },
 ];
 
 const TABLE_COLUMNS = [
-  { key: 'name', header: 'Nombre' },
-  { key: 'team', header: 'Equipo' },
+  { key: 'name', header: 'Name' },
+  { key: 'team', header: 'Team' },
 ];
 
 const TABLE_DATA = [
@@ -47,15 +47,15 @@ const TABLE_DATA = [
   imports: [MfDialogComponent, MfButtonComponent],
   template: `
     <mf-dialog
-      title="Eliminar proyecto"
-      message="Esta accion elimina el proyecto de forma permanente."
+      title="Delete project"
+      message="This action permanently deletes the project."
       role="alertdialog"
       [showClose]="false"
       [showActions]="true"
     >
       <div mfDialogActions>
-        <mf-button label="Cancelar" variant="outlined" size="sm" (mfClick)="close()" />
-        <mf-button label="Eliminar" variant="filled" size="sm" (mfClick)="close()" />
+        <mf-button label="Cancel" variant="outlined" size="sm" (mfClick)="close()" />
+        <mf-button label="Delete" variant="filled" size="sm" (mfClick)="close()" />
       </div>
     </mf-dialog>
   `,
@@ -75,7 +75,7 @@ class A11yDialogContentStoryComponent {
   imports: [MfButtonComponent],
   template: `
     <mf-button
-      label="Abrir dialogo de borrado"
+      label="Open delete dialog"
       variant="filled"
       (mfClick)="open()"
     />
@@ -107,7 +107,7 @@ class A11yDialogLauncherStoryComponent {
         (mfNavItemClick)="onNavItemClick($event)"
       >
         <div style="padding: 24px;">
-          <p style="margin: 0; font: inherit;">Seccion activa: {{ activeLabel() }}</p>
+          <p style="margin: 0; font: inherit;">Active section: {{ activeLabel() }}</p>
         </div>
       </mf-sidenav>
     </div>
@@ -117,14 +117,14 @@ class A11ySidenavContractStoryComponent {
   readonly activeId = signal('home');
 
   readonly items = signal<MfSidenavNavItem[]>([
-    { id: 'home', label: 'Inicio', icon: 'home', active: true },
+    { id: 'home', label: 'Home', icon: 'home', active: true },
     { id: 'dashboard', label: 'Dashboard', icon: 'dashboard' },
-    { id: 'analytics', label: 'Analiticas', icon: 'bar_chart' },
-    { id: 'users', label: 'Usuarios', icon: 'group' },
+    { id: 'analytics', label: 'Analytics', icon: 'bar_chart' },
+    { id: 'users', label: 'Users', icon: 'group' },
   ]);
 
   readonly activeLabel = () =>
-    this.items().find((item) => item.id === this.activeId())?.label ?? 'Inicio';
+    this.items().find((item) => item.id === this.activeId())?.label ?? 'Home';
 
   onNavItemClick(item: MfSidenavNavItem): void {
     this.activeId.set(item.id);
@@ -161,10 +161,10 @@ export const ButtonCorrectUsage: Story = {
   render: () => ({
     template: `
       <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
-        <mf-button label="Guardar cambios" variant="filled" />
+        <mf-button label="Save changes" variant="filled" />
         <mf-button
           [iconOnly]="true"
-          ariaLabel="Abrir filtros"
+          ariaLabel="Open filters"
           leadingIcon="filter_list"
           variant="outlined"
         />
@@ -179,14 +179,14 @@ export const ButtonIncorrectUsage: Story = {
   render: () => ({
     template: `
       <section style="max-width: 720px; border: 1px solid var(--mf-color-border); border-radius: 16px; padding: 20px; background: var(--mf-color-surface);">
-        <h2 style="margin: 0 0 12px; font-size: 1rem;">Anti-patrones</h2>
+        <h2 style="margin: 0 0 12px; font-size: 1rem;">Anti-patterns</h2>
         <ul style="margin: 0 0 16px; padding-left: 18px;">
-          <li>Icon-only button sin \`ariaLabel\`.</li>
-          <li>Usar un \`div\` clickable como boton.</li>
-          <li>Eliminar el focus outline sin reemplazo visible.</li>
+          <li>Icon-only button without \`ariaLabel\`.</li>
+          <li>Using a clickable \`div\` as a button.</li>
+          <li>Removing the focus outline without a visible replacement.</li>
         </ul>
         <pre style="margin: 0; padding: 16px; border-radius: 12px; background: #111827; color: #f9fafb; overflow: auto;"><code>&lt;mf-button [iconOnly]="true" leadingIcon="filter_list" /&gt;
-&lt;div (click)="save()"&gt;Guardar&lt;/div&gt;</code></pre>
+&lt;div (click)="save()"&gt;Save&lt;/div&gt;</code></pre>
       </section>
     `,
   }),
@@ -198,9 +198,9 @@ export const InputCorrectUsage: Story = {
     template: `
       <div style="max-width: 360px;">
         <mf-input
-          label="Correo de contacto"
-          hint="Usaremos este email para avisos importantes"
-          placeholder="nombre@empresa.com"
+          label="Contact email"
+          hint="We will use this email for important updates"
+          placeholder="name@company.com"
           [required]="true"
         />
       </div>
@@ -214,10 +214,10 @@ export const InputIncorrectUsage: Story = {
   render: () => ({
     template: `
       <section style="max-width: 720px; border: 1px solid var(--mf-color-border); border-radius: 16px; padding: 20px; background: var(--mf-color-surface);">
-        <h2 style="margin: 0 0 12px; font-size: 1rem;">Anti-patrones</h2>
+        <h2 style="margin: 0 0 12px; font-size: 1rem;">Anti-patterns</h2>
         <ul style="margin: 0 0 16px; padding-left: 18px;">
-          <li>Usar solo placeholder como nombre accesible.</li>
-          <li>No asociar errores o ayudas con el control.</li>
+          <li>Using only the placeholder as the accessible name.</li>
+          <li>Not wiring errors or helper text to the control.</li>
         </ul>
         <pre style="margin: 0; padding: 16px; border-radius: 12px; background: #111827; color: #f9fafb; overflow: auto;"><code>&lt;mf-input placeholder="Email" /&gt;</code></pre>
       </section>
@@ -243,7 +243,7 @@ export const DialogFocusContract: Story = {
 
     await userEvent.tab();
     const opener = canvas.getByRole('button', {
-      name: 'Abrir dialogo de borrado',
+      name: 'Open delete dialog',
     });
     await waitFor(() => expect(opener).toHaveFocus());
 
@@ -251,11 +251,11 @@ export const DialogFocusContract: Story = {
 
     await waitFor(() =>
       expect(
-        body.getByRole('alertdialog', { name: 'Eliminar proyecto' }),
+        body.getByRole('alertdialog', { name: 'Delete project' }),
       ).toBeTruthy(),
     );
 
-    const cancelButton = body.getByRole('button', { name: 'Cancelar' });
+    const cancelButton = body.getByRole('button', { name: 'Cancel' });
     await waitFor(() => expect(cancelButton).toHaveFocus());
 
     await userEvent.keyboard('{Enter}');
@@ -273,7 +273,7 @@ export const MenuKeyboardContract: Story = {
     props: {
       items: MENU_ITEMS,
     },
-    template: `<mf-menu [items]="items" triggerLabel="Abrir acciones" />`,
+    template: `<mf-menu [items]="items" triggerLabel="Open actions" />`,
     moduleMetadata: { imports: [MfMenuComponent] },
   }),
   play: async ({ canvasElement }) => {
@@ -282,13 +282,13 @@ export const MenuKeyboardContract: Story = {
     const body = within(doc.body);
 
     await userEvent.tab();
-    const trigger = canvas.getByRole('button', { name: 'Abrir acciones' });
+    const trigger = canvas.getByRole('button', { name: 'Open actions' });
     await waitFor(() => expect(trigger).toHaveFocus());
 
     await userEvent.keyboard('{Enter}');
 
     await waitFor(() => expect(body.getByRole('menu')).toBeTruthy());
-    expect(body.getByRole('menuitem', { name: 'Editar' })).toBeTruthy();
+    expect(body.getByRole('menuitem', { name: 'Edit' })).toBeTruthy();
 
     await userEvent.keyboard('{Escape}');
 
@@ -348,8 +348,8 @@ export const AutocompleteKeyboardContract: Story = {
       <div style="max-width: 360px;">
         <mf-autocomplete
           [options]="options"
-          label="Pais"
-          placeholder="Escribe un pais"
+          label="Country"
+          placeholder="Type a country"
         />
       </div>
     `,
@@ -361,13 +361,13 @@ export const AutocompleteKeyboardContract: Story = {
     const body = within(doc.body);
 
     await userEvent.tab();
-    const input = canvas.getByRole('textbox', { name: 'Pais' });
+    const input = canvas.getByRole('textbox', { name: 'Country' });
     await waitFor(() => expect(input).toHaveFocus());
 
-    await userEvent.keyboard('es');
+    await userEvent.keyboard('sp');
 
     await waitFor(() => expect(body.getByRole('listbox')).toBeTruthy());
-    expect(body.getByText('Espana')).toBeTruthy();
+    expect(body.getByText('Spain')).toBeTruthy();
 
     await userEvent.keyboard('{Escape}');
     await waitFor(() =>
@@ -381,7 +381,7 @@ export const DatepickerKeyboardContract: Story = {
   render: () => ({
     template: `
       <div style="max-width: 360px;">
-        <mf-datepicker label="Fecha de entrega" />
+        <mf-datepicker label="Delivery date" />
       </div>
     `,
     moduleMetadata: { imports: [MfDatepickerComponent] },
@@ -391,11 +391,11 @@ export const DatepickerKeyboardContract: Story = {
     const doc = canvasElement.ownerDocument;
 
     await userEvent.tab();
-    canvas.getByRole('textbox', { name: 'Fecha de entrega' });
+    canvas.getByRole('textbox', { name: 'Delivery date' });
 
     await userEvent.tab();
     const toggleButton = canvas.getByRole('button', {
-      name: 'Abrir calendario',
+      name: 'Open calendar',
     });
     await waitFor(() => expect(toggleButton).toHaveFocus());
 
@@ -420,13 +420,13 @@ export const TableExplicitActionContract: Story = {
       columns: TABLE_COLUMNS,
       data: TABLE_DATA,
       rowActionAriaLabel: (row: Record<string, unknown>) =>
-        `Ver detalle de ${row['name']}`,
+        `View details for ${row['name']}`,
     },
     template: `
       <mf-table
         [columns]="columns"
         [data]="data"
-        rowActionLabel="Ver detalle"
+        rowActionLabel="View details"
         [rowActionAriaLabel]="rowActionAriaLabel"
       />
     `,
@@ -435,7 +435,7 @@ export const TableExplicitActionContract: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const detailButtons = canvas.getAllByRole('button', {
-      name: /Ver detalle de/,
+      name: /View details for/,
     });
 
     expect(detailButtons).toHaveLength(2);
@@ -455,18 +455,18 @@ export const SidenavKeyboardContract: Story = {
     const canvas = within(canvasElement);
 
     await userEvent.tab();
-    const home = canvas.getByRole('button', { name: 'Inicio' });
+    const home = canvas.getByRole('button', { name: 'Home' });
     await waitFor(() => expect(home).toHaveFocus());
 
     await userEvent.tab();
     await userEvent.tab();
-    const analytics = canvas.getByRole('button', { name: 'Analiticas' });
+    const analytics = canvas.getByRole('button', { name: 'Analytics' });
     await waitFor(() => expect(analytics).toHaveFocus());
 
     await userEvent.keyboard('{Enter}');
 
     await waitFor(() =>
-      expect(canvas.getByText('Seccion activa: Analiticas')).toBeTruthy(),
+      expect(canvas.getByText('Active section: Analytics')).toBeTruthy(),
     );
   },
 };

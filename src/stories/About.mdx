@@ -2,38 +2,38 @@ import { Meta } from '@storybook/addon-docs/blocks';
 
 <Meta title="About" />
 
-# ng-comps: Guia rapida de uso
+# ng-comps: Quick Start Guide
 
-[ng-comps](https://www.npmjs.com/package/ng-comps) es una libreria de componentes Angular con estilo propio sobre Angular Material.
+[ng-comps](https://www.npmjs.com/package/ng-comps) is an Angular component library with a custom design layer built on top of Angular Material.
 
-La librería fue creada por [Manuel Ferrer](https://manuelferrer.vercel.app/).
+The library was created by [Manuel Ferrer](https://manuelferrer.vercel.app/).
 
 <div style={{ border: '1px solid #e5e7eb', borderRadius: '8px', padding: '12px', display: 'flex', gap: '12px', alignItems: 'center', maxWidth: '560px' }}>
 	<div style={{ flex: '0 0 64px', height: '64px', background: '#f3f4f6', borderRadius: '6px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, color: '#111827' }}>PE</div>
 	<div>
 		<a href="https://preguntas-entrevista.vercel.app/" target="_blank" rel="noreferrer" style={{ fontWeight: 600, color: '#111827', textDecoration: 'none' }}>preguntas-entrevista</a>
-		<div style={{ color: '#6b7280', fontSize: '0.9rem' }}>Proyecto de ejemplo que utiliza ng-comps.</div>
+		<div style={{ color: '#6b7280', fontSize: '0.9rem' }}>Sample project built with ng-comps.</div>
 	</div>
 </div>
 
-## 1) Instalacion
+## 1) Install
 
 ```bash
 npm i ng-comps
 ```
 
-## 2) Cargar estilos globales
+## 2) Load global styles
 
-En el archivo global de estilos de tu app (por ejemplo `src/styles.css`), importa:
+In your app global stylesheet, for example `src/styles.css`, import:
 
 ```css
 @import 'ng-comps/theme/tokens.css';
 @import 'ng-comps/styles.css';
 ```
 
-## 3) Usar componentes (Standalone)
+## 3) Use components (Standalone)
 
-Importa solo los componentes que realmente uses para maximizar tree-shaking:
+Import only the components you actually use to maximize tree-shaking:
 
 ```ts
 import { Component } from '@angular/core';
@@ -44,29 +44,29 @@ import { MfButtonComponent, MfInputComponent } from 'ng-comps';
 	imports: [MfButtonComponent, MfInputComponent],
 	template: `
 		<mf-input label="Email" placeholder="you@company.com" />
-		<mf-button label="Guardar" variant="filled" />
+		<mf-button label="Save" variant="filled" />
 	`,
 })
 export class ExampleComponent {}
 ```
 
-## 4) Requisitos del proyecto consumidor
+## 4) Consumer project requirements
 
-`ng-comps` usa `peerDependencies`, por lo que tu proyecto debe tener Angular y RxJS instalados.
+`ng-comps` uses `peerDependencies`, so your project must have Angular and RxJS installed.
 
-Recomendado:
+Recommended:
 
 - Angular `^21`
 - RxJS `~7.8`
 
-## 5) Buenas practicas de integracion
+## 5) Integration best practices
 
-- Importa componentes puntualmente desde `ng-comps`.
-- Mantén tus estilos globales con los `tokens.css` de la libreria.
-- Usa Storybook como referencia visual y de API para cada componente.
+- Import components directly from `ng-comps` as needed.
+- Keep your global styles aligned with the library `tokens.css`.
+- Use Storybook as the visual and API reference for each component.
 
-## Referencias utiles dentro de este repo
+## Useful references in this repo
 
-- Tokens de diseño: `src/theme/tokens.css`
-- Tema Material: `src/theme/material-theme.scss`
-- Ejemplo base: `src/app/components/button/mf-button.component.ts`
+- Design tokens: `src/theme/tokens.css`
+- Material theme: `src/theme/material-theme.scss`
+- Base example: `src/app/components/button/mf-button.component.ts`

@@ -40,10 +40,10 @@ describe('MfProgressBarComponent', () => {
   });
 
   it('should render label when provided', () => {
-    fixture.componentRef.setInput('label', 'Cargando...');
+    fixture.componentRef.setInput('label', 'Loading...');
     fixture.detectChanges();
     const label = fixture.nativeElement.querySelector('.mf-progress-bar__label');
-    expect(label?.textContent).toContain('Cargando...');
+    expect(label?.textContent).toContain('Loading...');
   });
 
   it('should show percentage when showValue is true and mode is determinate', () => {

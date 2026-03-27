@@ -12,28 +12,28 @@ const meta: Meta<MfToolbarComponent> = {
     docs: {
       description: {
         component: `
-**MfToolbar** es la barra de herramientas de la librería ng-comps.
-Usa Angular Material \`mat-toolbar\` por debajo pero con estilo propio: minimalista y elegante.
+**MfToolbar** is the toolbar component from the ng-comps library.
+It uses Angular Material \`mat-toolbar\` under the hood with a clean, minimal presentation.
 
-| Variante       | Cuándo usarla                                  |
-|----------------|------------------------------------------------|
-| \`surface\`      | Toolbar por defecto, fondo blanco              |
-| \`brand\`        | Toolbar con color de marca                     |
-| \`transparent\`  | Sobre fondos con imagen o gradiente            |
+| Variant        | When to use it                     |
+|----------------|------------------------------------|
+| \`surface\`      | Default toolbar on a light surface |
+| \`brand\`        | Toolbar using brand color          |
+| \`transparent\`  | Over images or gradient backgrounds |
         `,
       },
     },
   },
   argTypes: {
-    title: { control: 'text', description: 'Título de la toolbar' },
+    title: { control: 'text', description: 'Toolbar title' },
     variant: {
       control: 'select',
       options: ['surface', 'brand', 'transparent'],
-      description: 'Variante visual',
+      description: 'Visual variant',
     },
-    bordered: { control: 'boolean', description: 'Borde inferior' },
-    sticky: { control: 'boolean', description: 'Posición fija' },
-    elevated: { control: 'boolean', description: 'Sombra sutil' },
+    bordered: { control: 'boolean', description: 'Bottom border' },
+    sticky: { control: 'boolean', description: 'Sticky position' },
+    elevated: { control: 'boolean', description: 'Subtle shadow' },
   },
 };
 
@@ -45,8 +45,8 @@ export const Surface: Story = {
     props: args,
     template: `
       <mf-toolbar [title]="title" [variant]="variant" [bordered]="bordered">
-        <mf-button mfToolbarEnd label="Iniciar sesión" variant="outlined" size="sm" />
-        <mf-button mfToolbarEnd label="Registrarse" variant="filled" size="sm" />
+        <mf-button mfToolbarEnd label="Sign in" variant="outlined" size="sm" />
+        <mf-button mfToolbarEnd label="Register" variant="filled" size="sm" />
       </mf-toolbar>
     `,
     moduleMetadata: { imports: [MfToolbarComponent, MfButtonComponent] },
@@ -64,7 +64,7 @@ export const Brand: Story = {
     template: `
       <mf-toolbar [title]="title" variant="brand" [bordered]="bordered">
         <mf-button mfToolbarEnd label="Dashboard" variant="text" size="sm" />
-        <mf-button mfToolbarEnd label="Configuración" variant="text" size="sm" />
+        <mf-button mfToolbarEnd label="Settings" variant="text" size="sm" />
       </mf-toolbar>
     `,
     moduleMetadata: { imports: [MfToolbarComponent, MfButtonComponent] },
@@ -76,10 +76,10 @@ export const Brand: Story = {
 };
 
 export const WithIcons: Story = {
-  name: 'Con iconos',
+  name: 'With icons',
   render: () => ({
     template: `
-      <mf-toolbar title="Mi Aplicación" variant="surface" [bordered]="true" [elevated]="true">
+      <mf-toolbar title="My App" variant="surface" [bordered]="true" [elevated]="true">
         <mf-icon mfToolbarEnd name="notifications" color="muted" />
         <mf-icon mfToolbarEnd name="settings" color="muted" />
         <mf-icon mfToolbarEnd name="account_circle" size="lg" color="brand" />
@@ -92,8 +92,8 @@ export const WithIcons: Story = {
 export const Elevated: Story = {
   render: () => ({
     template: `
-      <mf-toolbar title="Con elevación" [elevated]="true" [bordered]="false">
-        <mf-button mfToolbarEnd label="Acción" variant="filled" size="sm" />
+      <mf-toolbar title="Elevated" [elevated]="true" [bordered]="false">
+        <mf-button mfToolbarEnd label="Action" variant="filled" size="sm" />
       </mf-toolbar>
     `,
     moduleMetadata: { imports: [MfToolbarComponent, MfButtonComponent] },
@@ -104,7 +104,7 @@ export const Transparent: Story = {
   render: () => ({
     template: `
       <div style="background: linear-gradient(135deg, var(--mf-color-primary-700), var(--mf-color-primary-900)); padding: 0; border-radius: var(--mf-radius-lg);">
-        <mf-toolbar title="Sobre gradiente" variant="transparent" [bordered]="false" />
+        <mf-toolbar title="On gradient" variant="transparent" [bordered]="false" />
       </div>
     `,
     moduleMetadata: { imports: [MfToolbarComponent] },

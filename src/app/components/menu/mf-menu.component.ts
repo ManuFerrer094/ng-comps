@@ -57,7 +57,7 @@ export class MfMenuComponent {
   /** Icono del trigger */
   readonly triggerIcon = input<string>('more_vert');
   /** Label accesible del trigger */
-  readonly triggerLabel = input<string>('Abrir menú');
+  readonly triggerLabel = input<string>('Open menu');
 
   readonly mfItemClick = output<string>();
 

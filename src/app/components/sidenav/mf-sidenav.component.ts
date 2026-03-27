@@ -74,7 +74,7 @@ export interface MfSidenavNavItem {
                   <mat-icon class="mf-sidenav__item-icon" aria-hidden="true">{{ item.icon }}</mat-icon>
                   <span class="mf-sidenav__item-label">{{ item.label }}</span>
                   @if (item.badge && item.badge > 0) {
-                    <span class="mf-sidenav__item-badge" aria-label="{{ item.badge }} notificaciones">
+                    <span class="mf-sidenav__item-badge" aria-label="{{ item.badge }} notifications">
                       {{ item.badge > 99 ? '99+' : item.badge }}
                     </span>
                   }
@@ -112,7 +112,7 @@ export class MfSidenavComponent {
   /** Icono Material de la cabecera */
   readonly headerIcon = input<string | undefined>(undefined);
   /** Aria-label del elemento nav */
-  readonly navAriaLabel = input('Navegación principal');
+  readonly navAriaLabel = input('Primary navigation');
 
   readonly mfOpenedChange = output<boolean>();
   /** Emite el ítem de navegación pulsado */

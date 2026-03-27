@@ -31,7 +31,7 @@ export type MfChipColor = 'brand' | 'accent' | 'error' | 'neutral';
           <mat-icon matChipAvatar aria-hidden="true">{{ leadingIcon() }}</mat-icon>
         }
         {{ label() }}
-        <button matChipRemove [attr.aria-label]="'Eliminar ' + label()">
+        <button matChipRemove [attr.aria-label]="'Remove ' + label()">
           <mat-icon>cancel</mat-icon>
         </button>
       </mat-chip>

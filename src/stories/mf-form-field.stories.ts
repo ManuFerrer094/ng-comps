@@ -12,20 +12,20 @@ const meta: Meta<MfFormFieldComponent> = {
     docs: {
       description: {
         component: `
-**MfFormField** es el contenedor de campo de formulario de la librería ng-comps.
-Proporciona layout consistente con label, contenido proyectado y mensajes opcionales.
+**MfFormField** is the form field wrapper from the ng-comps library.
+It provides a consistent layout with label, projected content, and optional helper or error messages.
 
-Usar como wrapper de \`mf-input\`, \`mf-checkbox\` u otros controles para estructura uniforme.
+Use it as a wrapper for \`mf-input\`, \`mf-checkbox\`, or other controls when you want a uniform structure.
         `,
       },
     },
   },
   argTypes: {
-    label: { control: 'text', description: 'Etiqueta del campo' },
-    fieldId: { control: 'text', description: 'ID para accesibilidad' },
-    hint: { control: 'text', description: 'Texto de ayuda' },
-    error: { control: 'text', description: 'Mensaje de error' },
-    required: { control: 'boolean', description: 'Campo requerido' },
+    label: { control: 'text', description: 'Field label' },
+    fieldId: { control: 'text', description: 'Accessibility id' },
+    hint: { control: 'text', description: 'Helper text' },
+    error: { control: 'text', description: 'Error message' },
+    required: { control: 'boolean', description: 'Required field' },
   },
 };
 
@@ -33,49 +33,49 @@ export default meta;
 type Story = StoryObj<MfFormFieldComponent>;
 
 export const WithInput: Story = {
-  name: 'Con input',
+  name: 'With input',
   render: (args) => ({
     props: args,
     template: `
       <mf-form-field [label]="label" [hint]="hint" [required]="required">
-        <mf-input placeholder="Escribe tu nombre..." [fullWidth]="true" />
+        <mf-input placeholder="Type your name..." [fullWidth]="true" />
       </mf-form-field>
     `,
     moduleMetadata: { imports: [MfFormFieldComponent, MfInputComponent] },
   }),
   args: {
-    label: 'Nombre completo',
-    hint: 'Nombre y apellidos',
+    label: 'Full name',
+    hint: 'First and last name',
     required: true,
   },
 };
 
 export const WithError: Story = {
-  name: 'Con error',
+  name: 'With error',
   render: (args) => ({
     props: args,
     template: `
       <mf-form-field [label]="label" [error]="error" [required]="required">
-        <mf-input placeholder="nombre@ejemplo.com" [fullWidth]="true" />
+        <mf-input placeholder="name@example.com" [fullWidth]="true" />
       </mf-form-field>
     `,
     moduleMetadata: { imports: [MfFormFieldComponent, MfInputComponent] },
   }),
   args: {
-    label: 'Correo electrónico',
-    error: 'Este campo es obligatorio',
+    label: 'Email address',
+    error: 'This field is required',
     required: true,
   },
 };
 
 export const WithCheckbox: Story = {
-  name: 'Con checkbox',
+  name: 'With checkbox',
   render: () => ({
     template: `
-      <mf-form-field label="Preferencias de notificación" hint="Selecciona las que desees">
+      <mf-form-field label="Notification preferences" hint="Choose the ones you want">
         <div style="display: flex; flex-direction: column; gap: 8px; padding-top: 4px;">
-          <mf-checkbox label="Notificaciones por email" />
-          <mf-checkbox label="Notificaciones push" />
+          <mf-checkbox label="Email notifications" />
+          <mf-checkbox label="Push notifications" />
           <mf-checkbox label="SMS" />
         </div>
       </mf-form-field>
@@ -85,21 +85,21 @@ export const WithCheckbox: Story = {
 };
 
 export const FormExample: Story = {
-  name: 'Ejemplo de formulario',
+  name: 'Form example',
   render: () => ({
     template: `
       <div style="display: flex; flex-direction: column; gap: 20px; max-width: 400px;">
-        <mf-form-field label="Nombre" [required]="true">
-          <mf-input placeholder="Tu nombre..." [fullWidth]="true" />
+        <mf-form-field label="Name" [required]="true">
+          <mf-input placeholder="Your name..." [fullWidth]="true" />
         </mf-form-field>
-        <mf-form-field label="Email" [required]="true" hint="Usaremos este email para contactarte">
-          <mf-input placeholder="nombre@ejemplo.com" type="email" [fullWidth]="true" />
+        <mf-form-field label="Email" [required]="true" hint="We will use this email to contact you">
+          <mf-input placeholder="name@example.com" type="email" [fullWidth]="true" />
         </mf-form-field>
-        <mf-form-field label="Contraseña" [required]="true" hint="Mínimo 8 caracteres">
+        <mf-form-field label="Password" [required]="true" hint="Minimum 8 characters">
           <mf-input type="password" [fullWidth]="true" />
         </mf-form-field>
         <mf-form-field>
-          <mf-checkbox label="Acepto los términos y condiciones" />
+          <mf-checkbox label="I accept the terms and conditions" />
         </mf-form-field>
       </div>
     `,

@@ -3,10 +3,10 @@ import type { Meta, StoryObj } from '@storybook/angular';
 import { MfMenuComponent } from '../app/components/menu';
 
 const MENU_ITEMS = [
-  { value: 'edit', label: 'Editar', icon: 'edit' },
-  { value: 'duplicate', label: 'Duplicar', icon: 'content_copy' },
-  { value: 'archive', label: 'Archivar', icon: 'archive' },
-  { value: 'delete', label: 'Eliminar', icon: 'delete' },
+  { value: 'edit', label: 'Edit', icon: 'edit' },
+  { value: 'duplicate', label: 'Duplicate', icon: 'content_copy' },
+  { value: 'archive', label: 'Archive', icon: 'archive' },
+  { value: 'delete', label: 'Delete', icon: 'delete' },
 ];
 
 const meta: Meta<MfMenuComponent> = {
@@ -41,7 +41,7 @@ type Story = StoryObj<MfMenuComponent>;
 export const Default: Story = {
   args: {
     items: MENU_ITEMS,
-    triggerLabel: 'Abrir acciones del registro',
+    triggerLabel: 'Open record actions',
   },
 };
 
@@ -49,7 +49,7 @@ export const CorrectUsage: Story = {
   name: 'Correct Usage',
   args: {
     items: MENU_ITEMS,
-    triggerLabel: 'Abrir acciones del proyecto',
+    triggerLabel: 'Open project actions',
   },
 };
 
@@ -58,11 +58,11 @@ export const IncorrectUsage: Story = {
   render: () => ({
     template: `
       <section style="max-width: 720px; border: 1px solid var(--mf-color-border); border-radius: 16px; padding: 20px; background: var(--mf-color-surface);">
-        <h2 style="margin: 0 0 12px; font-size: 1rem;">Anti-patrones</h2>
+        <h2 style="margin: 0 0 12px; font-size: 1rem;">Anti-patterns</h2>
         <ul style="margin: 0 0 16px; padding-left: 18px;">
-          <li>Trigger icon-only sin nombre accesible.</li>
-          <li>Usar elementos del menu como navegacion visual sin accion real.</li>
-          <li>Bloquear Escape o el retorno de foco al trigger.</li>
+          <li>Icon-only trigger with no accessible name.</li>
+          <li>Using menu items as visual navigation with no real action.</li>
+          <li>Blocking Escape or preventing focus from returning to the trigger.</li>
         </ul>
         <pre style="margin: 0; padding: 16px; border-radius: 12px; background: #111827; color: #f9fafb; overflow: auto;"><code>&lt;mf-menu [items]="items" triggerLabel="" /&gt;</code></pre>
       </section>

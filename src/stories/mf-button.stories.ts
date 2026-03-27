@@ -10,14 +10,14 @@ const meta: Meta<MfButtonComponent> = {
     docs: {
       description: {
         component: `
-**MfButton** es el botón de la librería ng-comps.
-Usa Angular Material por debajo pero expone una API uniforme con el look and feel de marca.
+**MfButton** is the button component from the ng-comps library.
+It uses Angular Material under the hood while exposing a consistent branded API.
 
-| Variante   | Cuándo usarla                                       |
-|------------|-----------------------------------------------------|
-| \`filled\`   | Acción principal — una sola por sección              |
-| \`outlined\` | Acción secundaria o destructiva suave                |
-| \`text\`     | Acción terciaria, navegación interna o links         |
+| Variant    | When to use it                                |
+|------------|-----------------------------------------------|
+| \`filled\`   | Primary action, usually one per section       |
+| \`outlined\` | Secondary action or soft destructive action   |
+| \`text\`     | Tertiary action, internal navigation, or link |
         `,
       },
     },
@@ -26,12 +26,12 @@ Usa Angular Material por debajo pero expone una API uniforme con el look and fee
     variant: {
       control: 'select',
       options: ['filled', 'outlined', 'text'],
-      description: 'Variante visual del botón',
+      description: 'Visual button variant',
     },
     size: {
       control: 'select',
       options: ['sm', 'md', 'lg'],
-      description: 'Tamaño del botón',
+      description: 'Button size',
     },
     type: {
       control: 'select',
@@ -39,8 +39,14 @@ Usa Angular Material por debajo pero expone una API uniforme con el look and fee
     },
     disabled: { control: 'boolean' },
     fullWidth: { control: 'boolean' },
-    leadingIcon: { control: 'text', description: 'Nombre de icono Material antes del texto' },
-    trailingIcon: { control: 'text', description: 'Nombre de icono Material después del texto' },
+    leadingIcon: {
+      control: 'text',
+      description: 'Material icon name shown before the label',
+    },
+    trailingIcon: {
+      control: 'text',
+      description: 'Material icon name shown after the label',
+    },
     mfClick: { action: 'mfClick' },
   },
 };
@@ -48,34 +54,30 @@ Usa Angular Material por debajo pero expone una API uniforme con el look and fee
 export default meta;
 type Story = StoryObj<MfButtonComponent>;
 
-// ── Stories básicas ───────────────────────────────────────────────────────────
-
 export const Filled: Story = {
   args: {
-    label: 'Guardar cambios',
+    label: 'Save changes',
     variant: 'filled',
   },
 };
 
 export const Outlined: Story = {
   args: {
-    label: 'Cancelar',
+    label: 'Cancel',
     variant: 'outlined',
   },
 };
 
 export const Text: Story = {
   args: {
-    label: 'Ver más detalles',
+    label: 'View details',
     variant: 'text',
   },
 };
 
-// ── Tamaños ───────────────────────────────────────────────────────────────────
-
 export const Small: Story = {
   args: {
-    label: 'Pequeño',
+    label: 'Small',
     variant: 'filled',
     size: 'sm',
   },
@@ -83,7 +85,7 @@ export const Small: Story = {
 
 export const Medium: Story = {
   args: {
-    label: 'Mediano',
+    label: 'Medium',
     variant: 'filled',
     size: 'md',
   },
@@ -91,46 +93,42 @@ export const Medium: Story = {
 
 export const Large: Story = {
   args: {
-    label: 'Grande',
+    label: 'Large',
     variant: 'filled',
     size: 'lg',
   },
 };
 
-// ── Con iconos ────────────────────────────────────────────────────────────────
-
 export const WithLeadingIcon: Story = {
-  name: 'Con icono al inicio',
+  name: 'With leading icon',
   args: {
-    label: 'Crear nuevo',
+    label: 'Create new',
     variant: 'filled',
     leadingIcon: 'add',
   },
 };
 
 export const WithTrailingIcon: Story = {
-  name: 'Con icono al final',
+  name: 'With trailing icon',
   args: {
-    label: 'Siguiente',
+    label: 'Next',
     variant: 'filled',
     trailingIcon: 'arrow_forward',
   },
 };
 
-// ── Estados ───────────────────────────────────────────────────────────────────
-
 export const Disabled: Story = {
   args: {
-    label: 'Deshabilitado',
+    label: 'Disabled',
     variant: 'filled',
     disabled: true,
   },
 };
 
 export const FullWidth: Story = {
-  name: 'Ancho completo',
+  name: 'Full width',
   args: {
-    label: 'Iniciar sesión',
+    label: 'Sign in',
     variant: 'filled',
     fullWidth: true,
   },
@@ -139,10 +137,8 @@ export const FullWidth: Story = {
   },
 };
 
-// ── Comparativa de variantes ──────────────────────────────────────────────────
-
 export const AllVariants: Story = {
-  name: 'Todas las variantes',
+  name: 'All variants',
   render: () => ({
     template: `
       <div style="display: flex; gap: 12px; flex-wrap: wrap; align-items: center;">

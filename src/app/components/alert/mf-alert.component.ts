@@ -30,7 +30,7 @@ export type MfAlertSeverity = 'info' | 'success' | 'warning' | 'error';
         <button
           class="mf-alert__close"
           (click)="mfDismiss.emit()"
-          [attr.aria-label]="'Cerrar alerta'"
+          [attr.aria-label]="'Close alert'"
         >
           <mat-icon aria-hidden="true">close</mat-icon>
         </button>

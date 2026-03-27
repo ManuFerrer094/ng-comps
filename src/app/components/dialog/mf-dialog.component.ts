@@ -113,7 +113,7 @@ export class MfDialogComponent {
   /** Rol del diÃ¡logo */
   readonly role = input<'dialog' | 'alertdialog'>('dialog');
   /** Etiqueta accesible del botÃ³n de cierre */
-  readonly closeButtonLabel = input('Cerrar diÃ¡logo');
+  readonly closeButtonLabel = input('Close dialog');
 
   readonly mfClose = output<void>();
 

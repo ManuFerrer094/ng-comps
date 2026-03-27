@@ -10,23 +10,23 @@ const meta: Meta<MfInputComponent> = {
     docs: {
       description: {
         component: `
-**MfInput** es el campo de texto de la librería ng-comps.
-Usa Angular Material \`mat-form-field\` por debajo pero expone una API uniforme con look and feel de marca.
+**MfInput** is the text field component from the ng-comps library.
+It uses Angular Material \`mat-form-field\` under the hood while exposing a consistent branded API.
 
-| Propiedad     | Descripción                              |
-|---------------|------------------------------------------|
-| \`label\`       | Etiqueta flotante del campo              |
-| \`placeholder\` | Texto de placeholder                     |
-| \`hint\`        | Texto de ayuda debajo del campo          |
-| \`error\`       | Mensaje de error                         |
-| \`leadingIcon\` | Icono al inicio del campo                |
-| \`trailingIcon\`| Icono al final del campo                 |
+| Property       | Description                   |
+|----------------|-------------------------------|
+| \`label\`        | Floating field label          |
+| \`placeholder\`  | Placeholder text              |
+| \`hint\`         | Helper text below the field   |
+| \`error\`        | Error message                 |
+| \`leadingIcon\`  | Icon shown at the start       |
+| \`trailingIcon\` | Icon shown at the end         |
         `,
       },
     },
   },
   argTypes: {
-    label: { control: 'text', description: 'Etiqueta flotante' },
+    label: { control: 'text', description: 'Floating label' },
     placeholder: { control: 'text', description: 'Placeholder' },
     type: {
       control: 'select',
@@ -35,13 +35,13 @@ Usa Angular Material \`mat-form-field\` por debajo pero expone una API uniforme 
     size: {
       control: 'select',
       options: ['sm', 'md', 'lg'],
-      description: 'Tamaño del campo',
+      description: 'Field size',
     },
     value: { control: 'text' },
     disabled: { control: 'boolean' },
     readonly: { control: 'boolean' },
-    hint: { control: 'text', description: 'Texto de ayuda' },
-    error: { control: 'text', description: 'Mensaje de error' },
+    hint: { control: 'text', description: 'Helper text' },
+    error: { control: 'text', description: 'Error message' },
     leadingIcon: { control: 'text' },
     trailingIcon: { control: 'text' },
     fullWidth: { control: 'boolean' },
@@ -55,85 +55,85 @@ type Story = StoryObj<MfInputComponent>;
 
 export const Default: Story = {
   args: {
-    label: 'Correo electrónico',
-    placeholder: 'nombre@ejemplo.com',
+    label: 'Email address',
+    placeholder: 'name@example.com',
   },
 };
 
 export const WithHint: Story = {
-  name: 'Con texto de ayuda',
+  name: 'With helper text',
   args: {
-    label: 'Contraseña',
+    label: 'Password',
     type: 'password',
-    hint: 'Mínimo 8 caracteres',
+    hint: 'Minimum 8 characters',
   },
 };
 
 export const WithError: Story = {
-  name: 'Con error',
+  name: 'With error',
   args: {
     label: 'Email',
-    value: 'correo-invalido',
-    error: 'Introduce un email válido',
+    value: 'invalid-email',
+    error: 'Enter a valid email address',
   },
 };
 
 export const WithLeadingIcon: Story = {
-  name: 'Con icono al inicio',
+  name: 'With leading icon',
   args: {
-    label: 'Buscar',
-    placeholder: 'Buscar...',
+    label: 'Search',
+    placeholder: 'Search...',
     leadingIcon: 'search',
   },
 };
 
 export const WithTrailingIcon: Story = {
-  name: 'Con icono al final',
+  name: 'With trailing icon',
   args: {
-    label: 'Correo',
-    placeholder: 'nombre@ejemplo.com',
+    label: 'Email',
+    placeholder: 'name@example.com',
     trailingIcon: 'mail',
   },
 };
 
 export const Disabled: Story = {
   args: {
-    label: 'Campo deshabilitado',
-    value: 'No editable',
+    label: 'Disabled field',
+    value: 'Not editable',
     disabled: true,
   },
 };
 
 export const Readonly: Story = {
-  name: 'Solo lectura',
+  name: 'Read only',
   args: {
-    label: 'Solo lectura',
-    value: 'Valor fijo',
+    label: 'Read only',
+    value: 'Fixed value',
     readonly: true,
   },
 };
 
 export const Small: Story = {
   args: {
-    label: 'Pequeño',
-    placeholder: 'Texto...',
+    label: 'Small',
+    placeholder: 'Text...',
     size: 'sm',
   },
 };
 
 export const Large: Story = {
   args: {
-    label: 'Grande',
-    placeholder: 'Texto...',
+    label: 'Large',
+    placeholder: 'Text...',
     size: 'lg',
   },
 };
 
 export const FullWidth: Story = {
-  name: 'Ancho completo',
+  name: 'Full width',
   args: {
-    label: 'Nombre completo',
-    placeholder: 'Juan Pérez',
+    label: 'Full name',
+    placeholder: 'Jane Doe',
     fullWidth: true,
   },
   parameters: {
@@ -142,15 +142,15 @@ export const FullWidth: Story = {
 };
 
 export const AllVariants: Story = {
-  name: 'Todas las variantes',
+  name: 'All variants',
   render: () => ({
     template: `
       <div style="display: flex; flex-direction: column; gap: 16px; max-width: 360px;">
-        <mf-input label="Normal" placeholder="Escribe aquí..." />
-        <mf-input label="Con ayuda" hint="Este es un texto de ayuda" />
-        <mf-input label="Con error" value="mal" error="Este campo es obligatorio" />
-        <mf-input label="Búsqueda" leadingIcon="search" placeholder="Buscar..." />
-        <mf-input label="Deshabilitado" value="No editable" [disabled]="true" />
+        <mf-input label="Default" placeholder="Type here..." />
+        <mf-input label="With help" hint="This is helper text" />
+        <mf-input label="With error" value="bad" error="This field is required" />
+        <mf-input label="Search" leadingIcon="search" placeholder="Search..." />
+        <mf-input label="Disabled" value="Not editable" [disabled]="true" />
       </div>
     `,
     moduleMetadata: { imports: [MfInputComponent] },
