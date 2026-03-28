@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MfTableComponent } from './mf-table.component';
+import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MfTableComponent } from './mf-table.component';
 
 describe('MfTableComponent', () => {
   let fixture: ComponentFixture<MfTableComponent>;
@@ -14,6 +15,7 @@ describe('MfTableComponent', () => {
   const testData = [
     { name: 'John', email: 'john@test.com' },
     { name: 'Jane', email: 'jane@test.com' },
+    { name: 'Marta', email: 'marta@test.com' },
   ];
 
   beforeEach(async () => {
@@ -36,7 +38,7 @@ describe('MfTableComponent', () => {
     expect(component.displayedColumns()).toEqual(['name', 'email']);
   });
 
-  it('should render table', () => {
+  it('should render the table', () => {
     const table = fixture.nativeElement.querySelector('table');
     expect(table).toBeTruthy();
   });
@@ -48,14 +50,14 @@ describe('MfTableComponent', () => {
 
   it('should render data rows', () => {
     const rows = fixture.nativeElement.querySelectorAll('tr.mat-mdc-row');
-    expect(rows.length).toBe(2);
+    expect(rows.length).toBe(3);
   });
 
-  it('should apply default variant', () => {
+  it('should apply the default variant', () => {
     expect(component.hostClasses()).toContain('mf-table--default');
   });
 
-  it('should expose per-row aria labels for explicit actions', () => {
+  it('should expose per-row aria labels for legacy actions', () => {
     fixture.componentRef.setInput('rowActionLabel', 'Ver detalle');
     fixture.componentRef.setInput(
       'rowActionAriaLabel',
@@ -72,5 +74,113 @@ describe('MfTableComponent', () => {
     expect(actionButtons[1].getAttribute('aria-label')).toBe(
       'Ver detalle de Jane',
     );
+  });
+
+  it('should filter rows using the search model', () => {
+    fixture.componentRef.setInput('showSearch', true);
+    fixture.detectChanges();
+
+    component.onSearchChange('Jane');
+    fixture.detectChanges();
+
+    const rows = fixture.nativeElement.querySelectorAll('tr.mat-mdc-row');
+    expect(rows.length).toBe(1);
+    expect(rows[0].textContent).toContain('Jane');
+  });
+
+  it('should paginate data client-side', () => {
+    fixture.componentRef.setInput('showPaginator', true);
+    fixture.componentRef.setInput('pageSize', 1);
+    fixture.detectChanges();
+
+    let rows = fixture.nativeElement.querySelectorAll('tr.mat-mdc-row');
+    expect(rows.length).toBe(1);
+    expect(rows[0].textContent).toContain('John');
+
+    component.onPageChange({
+      pageIndex: 1,
+      previousPageIndex: 0,
+      pageSize: 1,
+      length: testData.length,
+    });
+    fixture.detectChanges();
+
+    rows = fixture.nativeElement.querySelectorAll('tr.mat-mdc-row');
+    expect(rows.length).toBe(1);
+    expect(rows[0].textContent).toContain('Jane');
+  });
+
+  it('should render badge cells with mapped tones', () => {
+    fixture.componentRef.setInput('columns', [
+      { key: 'name', header: 'Name' },
+      {
+        key: 'status',
+        header: 'Status',
+        type: 'badge',
+        badgeTones: { Active: 'success', Pending: 'warning' },
+      },
+    ]);
+    fixture.componentRef.setInput('data', [
+      { name: 'John', status: 'Active' },
+      { name: 'Jane', status: 'Pending' },
+    ]);
+    fixture.detectChanges();
+
+    const badges = fixture.nativeElement.querySelectorAll('.mf-table__badge');
+    expect(badges[0].className).toContain('mf-table__badge--success');
+    expect(badges[1].className).toContain('mf-table__badge--warning');
+  });
+
+  it('should emit structured row actions', () => {
+    fixture.componentRef.setInput('columns', [
+      { key: 'name', header: 'Name' },
+      { key: 'status', header: 'Status' },
+    ]);
+    fixture.componentRef.setInput('data', [{ name: 'John', status: 'Active' }]);
+    fixture.componentRef.setInput('rowActions', [
+      { key: 'edit', label: 'Edit', icon: 'edit', tone: 'primary' },
+    ]);
+
+    const emitted: Array<{
+      action: { key: string; label: string; icon?: string; tone?: string };
+      row: Record<string, unknown>;
+    }> = [];
+    component.mfAction.subscribe((event) => emitted.push(event));
+    fixture.detectChanges();
+
+    const actionButton = fixture.debugElement.query(
+      By.css('.mf-table__action'),
+    ).nativeElement as HTMLButtonElement;
+
+    actionButton.click();
+    fixture.detectChanges();
+
+    expect(emitted).toEqual([
+      {
+        action: { key: 'edit', label: 'Edit', icon: 'edit', tone: 'primary' },
+        row: { name: 'John', status: 'Active' },
+      },
+    ]);
+  });
+
+  it('should render an overflow menu when there is more than one action', () => {
+    fixture.componentRef.setInput('columns', [
+      { key: 'name', header: 'Name' },
+      { key: 'status', header: 'Status' },
+    ]);
+    fixture.componentRef.setInput('data', [{ name: 'John', status: 'Active' }]);
+    fixture.componentRef.setInput('rowActions', [
+      { key: 'open', label: 'Open', icon: 'open_in_new', tone: 'primary' },
+      { key: 'escalate', label: 'Escalate', icon: 'priority_high', tone: 'danger' },
+    ]);
+    fixture.detectChanges();
+
+    const trigger = fixture.debugElement.query(
+      By.css('.mf-table__action-menu-trigger'),
+    );
+    const inlineAction = fixture.debugElement.query(By.css('.mf-table__action'));
+
+    expect(trigger).toBeTruthy();
+    expect(inlineAction).toBeNull();
   });
 });

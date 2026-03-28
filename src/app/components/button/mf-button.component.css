@@ -27,6 +27,14 @@
   border-radius: var(--mf-radius-full) !important;
 }
 
+.mf-btn--icon.mat-mdc-icon-button {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  vertical-align: middle;
+}
+
 /* ── Filled ────────────────────────────────────────────────────── */
 .mf-btn--filled.mdc-button,
 .mf-btn--filled.mat-mdc-unelevated-button {
@@ -133,4 +141,11 @@
   width: 1.1em;
   vertical-align: middle;
   line-height: 1;
+}
+
+.mf-btn--icon .mat-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
 }

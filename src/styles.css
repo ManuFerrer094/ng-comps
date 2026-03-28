@@ -38,6 +38,24 @@ body {
   outline-offset: var(--mf-focus-ring-offset);
 }
 
+.mat-mdc-form-field :where(
+  .mat-mdc-input-element,
+  textarea.mat-mdc-input-element,
+  .mdc-text-field__input,
+  .mat-mdc-select,
+  .mat-mdc-select-trigger
+):focus,
+.mat-mdc-form-field :where(
+  .mat-mdc-input-element,
+  textarea.mat-mdc-input-element,
+  .mdc-text-field__input,
+  .mat-mdc-select,
+  .mat-mdc-select-trigger
+):focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
 .mat-mdc-option.mdc-list-item--focused,
 .mat-mdc-option.mat-mdc-option-active,
 .mat-mdc-menu-item.cdk-keyboard-focused,
@@ -205,6 +223,42 @@ body {
   background-color: var(--mf-color-brand-light) !important;
   color: var(--mf-color-brand) !important;
   font-weight: var(--mf-weight-medium) !important;
+}
+
+.mf-table__action-menu.mat-mdc-menu-panel {
+  border: 1px solid var(--mf-color-border);
+  border-radius: var(--mf-radius-md) !important;
+  box-shadow: var(--mf-shadow-lg) !important;
+  background-color: var(--mf-color-surface) !important;
+}
+
+.mf-table__action-menu .mat-mdc-menu-item {
+  min-height: 40px;
+  font-family: var(--mf-font-base) !important;
+  font-size: var(--mf-text-sm) !important;
+  color: var(--mf-color-on-surface) !important;
+}
+
+.mf-table__action-menu .mat-mdc-menu-item:hover:not([disabled]) {
+  background-color: var(--mf-color-brand-light) !important;
+}
+
+.mf-table__action-menu .mat-icon {
+  color: var(--mf-color-neutral-400) !important;
+}
+
+.sbdocs .docblock-source,
+.sbdocs .docblock-source pre,
+.sbdocs .docblock-source pre.prismjs,
+.sbdocs .docblock-source code {
+  white-space: pre-wrap !important;
+  word-break: break-word !important;
+  overflow-wrap: anywhere !important;
+}
+
+.sbdocs .docblock-source pre,
+.sbdocs .docblock-source pre.prismjs {
+  overflow-x: hidden !important;
 }
 
 .mf-input__error,
