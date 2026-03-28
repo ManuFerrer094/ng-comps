@@ -88,6 +88,18 @@ describe('MfTableComponent', () => {
     expect(rows[0].textContent).toContain('Jane');
   });
 
+  it('should render the search input as full width inside the toolbar', () => {
+    fixture.componentRef.setInput('showSearch', true);
+    fixture.detectChanges();
+
+    const searchInputHost = fixture.nativeElement.querySelector(
+      '.mf-table__search mf-input',
+    ) as HTMLElement;
+
+    expect(searchInputHost).toBeTruthy();
+    expect(getComputedStyle(searchInputHost).display).toBe('block');
+  });
+
   it('should paginate data client-side', () => {
     fixture.componentRef.setInput('showPaginator', true);
     fixture.componentRef.setInput('pageSize', 1);
@@ -182,5 +194,24 @@ describe('MfTableComponent', () => {
 
     expect(trigger).toBeTruthy();
     expect(inlineAction).toBeNull();
+  });
+
+  it('should use the vertical overflow icon for row action menus', () => {
+    fixture.componentRef.setInput('columns', [
+      { key: 'name', header: 'Name' },
+      { key: 'status', header: 'Status' },
+    ]);
+    fixture.componentRef.setInput('data', [{ name: 'John', status: 'Active' }]);
+    fixture.componentRef.setInput('rowActions', [
+      { key: 'open', label: 'Open', icon: 'open_in_new', tone: 'primary' },
+      { key: 'escalate', label: 'Escalate', icon: 'priority_high', tone: 'danger' },
+    ]);
+    fixture.detectChanges();
+
+    const triggerIcon = fixture.debugElement.query(
+      By.css('.mf-table__action-menu-trigger mat-icon'),
+    ).nativeElement as HTMLElement;
+
+    expect(triggerIcon.textContent?.trim()).toBe('more_vert');
   });
 });
