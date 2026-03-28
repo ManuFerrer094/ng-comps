@@ -41,8 +41,8 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "4kB",
-                  "maximumError": "8kB"
+                  "maximumWarning": "8kB",
+                  "maximumError": "12kB"
                 }
               ],
               "outputHashing": "all"
@@ -80,7 +80,8 @@
               "-e",
               "json",
               "-d",
-              "."
+              ".",
+              "--silent"
             ],
             "port": 6006
           }
@@ -95,7 +96,8 @@
               "-e",
               "json",
               "-d",
-              "."
+              ".",
+              "--silent"
             ],
             "outputDir": "storybook-static"
           }

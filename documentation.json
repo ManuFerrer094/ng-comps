@@ -417,6 +417,33 @@
             "extends": []
         },
         {
+            "name": "MfResolvedTableAction",
+            "id": "interface-MfResolvedTableAction-ae123738c4591c9fe92920dc9c7815d44a5d28aef68a459dff7859846b69ca85c24f803a3dabe863f30ccb79e150e3e947be06fb31648d53b309c60cfa873466",
+            "file": "src/app/components/table/mf-table.component.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "import {\n  ChangeDetectionStrategy,\n  Component,\n  computed,\n  effect,\n  input,\n  output,\n  signal,\n} from '@angular/core';\nimport { MatButtonModule } from '@angular/material/button';\nimport { PageEvent } from '@angular/material/paginator';\nimport { MatIconModule } from '@angular/material/icon';\nimport { MatMenuModule } from '@angular/material/menu';\nimport { MatSortModule, Sort } from '@angular/material/sort';\nimport { MatTableModule } from '@angular/material/table';\nimport { MfInputComponent } from '../input';\nimport { MfPaginatorComponent } from '../paginator';\n\nexport type MfTableCellType = 'text' | 'number' | 'date' | 'badge';\nexport type MfTableAlign = 'start' | 'center' | 'end';\nexport type MfTableVariant = 'default' | 'striped' | 'bordered';\nexport type MfTableDensity = 'compact' | 'comfortable' | 'spacious';\nexport type MfTableBadgeTone =\n  | 'brand'\n  | 'success'\n  | 'warning'\n  | 'error'\n  | 'neutral';\nexport type MfTableActionTone = 'primary' | 'neutral' | 'danger';\n\nexport interface MfTableColumn {\n  key: string;\n  header: string;\n  sortable?: boolean;\n  type?: MfTableCellType;\n  align?: MfTableAlign;\n  width?: string;\n  hidden?: boolean;\n  truncate?: boolean;\n  searchable?: boolean;\n  emptyValue?: string;\n  formatter?: (value: unknown, row: Record<string, unknown>) => string;\n  sortAccessor?: (row: Record<string, unknown>) => unknown;\n  searchAccessor?: (row: Record<string, unknown>) => string;\n  badgeTone?:\n    | MfTableBadgeTone\n    | ((value: unknown, row: Record<string, unknown>) => MfTableBadgeTone);\n  badgeTones?: Record<string, MfTableBadgeTone>;\n}\n\nexport interface MfTableRowAction {\n  key: string;\n  label: string;\n  icon?: string;\n  tone?: MfTableActionTone;\n  disabled?: boolean | ((row: Record<string, unknown>) => boolean);\n  ariaLabel?: (row: Record<string, unknown>) => string;\n}\n\ninterface MfResolvedTableAction extends MfTableRowAction {\n  legacy?: boolean;\n}\n\n/**\n * Enterprise-oriented table component with optional search, pagination,\n * badges, explicit row actions and client-side sorting.\n */\n@Component({\n  selector: 'mf-table',\n  imports: [\n    MatTableModule,\n    MatSortModule,\n    MatButtonModule,\n    MatIconModule,\n    MatMenuModule,\n    MfInputComponent,\n    MfPaginatorComponent,\n  ],\n  template: `\n    <section [class]=\"hostClasses()\">\n      @if (showsToolbar()) {\n        <header class=\"mf-table__toolbar\">\n          <div class=\"mf-table__intro\">\n            @if (title()) {\n              <h2 class=\"mf-table__title\">{{ title() }}</h2>\n            }\n            @if (description()) {\n              <p class=\"mf-table__description\">{{ description() }}</p>\n            }\n            <div class=\"mf-table__meta\">\n              <span class=\"mf-table__metric\">{{ resultSummary() }}</span>\n              @if (searchTerm()) {\n                <span class=\"mf-table__metric mf-table__metric--accent\">\n                  Filter active\n                </span>\n              }\n              @if (sortState().direction) {\n                <span class=\"mf-table__metric\">\n                  Sorted by {{ sortState().active }}\n                </span>\n              }\n            </div>\n          </div>\n\n          @if (showSearch()) {\n            <div class=\"mf-table__search\">\n              <mf-input\n                [label]=\"searchLabel()\"\n                [ariaLabel]=\"searchLabel()\"\n                [placeholder]=\"searchPlaceholder()\"\n                [value]=\"localSearchTerm()\"\n                [type]=\"'search'\"\n                [leadingIcon]=\"'search'\"\n                [fullWidth]=\"true\"\n                (mfInput)=\"onSearchChange($event)\"\n              />\n            </div>\n          }\n        </header>\n      }\n\n      @if (filteredRows().length > 0) {\n        <div class=\"mf-table__surface\">\n          <div class=\"mf-table__wrapper\">\n            <table\n              mat-table\n              [dataSource]=\"paginatedRows()\"\n              matSort\n              [matSortActive]=\"sortState().active\"\n              [matSortDirection]=\"sortState().direction\"\n              class=\"mf-table__table\"\n              (matSortChange)=\"onSortChange($event)\"\n            >\n              @for (column of visibleColumns(); track column.key) {\n                <ng-container [matColumnDef]=\"column.key\">\n                  @if (column.sortable) {\n                    <th\n                      mat-header-cell\n                      *matHeaderCellDef\n                      mat-sort-header\n                      [style.width]=\"column.width || null\"\n                      [class]=\"headerCellClasses(column)\"\n                    >\n                      {{ column.header }}\n                    </th>\n                  } @else {\n                    <th\n                      mat-header-cell\n                      *matHeaderCellDef\n                      [style.width]=\"column.width || null\"\n                      [class]=\"headerCellClasses(column)\"\n                    >\n                      {{ column.header }}\n                    </th>\n                  }\n\n                  <td\n                    mat-cell\n                    *matCellDef=\"let row\"\n                    [style.width]=\"column.width || null\"\n                    [class]=\"cellClasses(column)\"\n                  >\n                    @if (column.type === 'badge') {\n                      <span [class]=\"badgeClasses(column, row)\">\n                        {{ renderCell(column, row) }}\n                      </span>\n                    } @else {\n                      <span class=\"mf-table__cell-text\">\n                        {{ renderCell(column, row) }}\n                      </span>\n                    }\n                  </td>\n                </ng-container>\n              }\n\n              @if (hasActions()) {\n                <ng-container [matColumnDef]=\"actionColumnKey\">\n                  <th\n                    mat-header-cell\n                    *matHeaderCellDef\n                    class=\"mf-table__actions-header\"\n                  >\n                    {{ resolvedActionHeader() }}\n                  </th>\n                  <td\n                    mat-cell\n                    *matCellDef=\"let row\"\n                    class=\"mf-table__actions-cell\"\n                  >\n                    @if (usesActionMenu()) {\n                      <button\n                        mat-icon-button\n                        type=\"button\"\n                        class=\"mf-table__action-menu-trigger\"\n                        [matMenuTriggerFor]=\"actionMenu\"\n                        [attr.aria-label]=\"getRowMenuAriaLabel(row)\"\n                      >\n                        <mat-icon aria-hidden=\"true\">more_horiz</mat-icon>\n                      </button>\n                      <mat-menu\n                        #actionMenu=\"matMenu\"\n                        xPosition=\"before\"\n                        class=\"mf-table__action-menu\"\n                      >\n                        @for (action of resolvedActions(); track action.key) {\n                          <button\n                            mat-menu-item\n                            [disabled]=\"isActionDisabled(action, row)\"\n                            [attr.aria-label]=\"getActionAriaLabel(action, row)\"\n                            (click)=\"onActionClick(action, row)\"\n                          >\n                            @if (action.icon) {\n                              <mat-icon aria-hidden=\"true\">{{ action.icon }}</mat-icon>\n                            }\n                            <span>{{ action.label }}</span>\n                          </button>\n                        }\n                      </mat-menu>\n                    } @else {\n                      <div class=\"mf-table__action-group\">\n                        @for (action of resolvedActions(); track action.key) {\n                          <button\n                            mat-stroked-button\n                            type=\"button\"\n                            [class]=\"actionClasses(action)\"\n                            [disabled]=\"isActionDisabled(action, row)\"\n                            [attr.aria-label]=\"getActionAriaLabel(action, row)\"\n                            (click)=\"onActionClick(action, row)\"\n                          >\n                            @if (action.icon) {\n                              <mat-icon aria-hidden=\"true\">{{ action.icon }}</mat-icon>\n                            }\n                            <span>{{ action.label }}</span>\n                          </button>\n                        }\n                      </div>\n                    }\n                  </td>\n                </ng-container>\n              }\n\n              <tr\n                mat-header-row\n                *matHeaderRowDef=\"displayedColumns(); sticky: stickyHeader()\"\n              ></tr>\n              <tr\n                mat-row\n                *matRowDef=\"let row; columns: displayedColumns()\"\n                class=\"mf-table__row\"\n              ></tr>\n            </table>\n          </div>\n\n          @if (showPaginator()) {\n            <footer class=\"mf-table__footer\">\n              <mf-paginator\n                [length]=\"filteredRows().length\"\n                [pageSize]=\"localPageSize()\"\n                [pageIndex]=\"localPageIndex()\"\n                [pageSizeOptions]=\"pageSizeOptions()\"\n                [showFirstLastButtons]=\"showFirstLastButtons()\"\n                [hidePageSize]=\"hidePageSize()\"\n                (mfPageChange)=\"onPageChange($event)\"\n              />\n            </footer>\n          }\n        </div>\n      } @else {\n        <div class=\"mf-table__empty\">\n          <div class=\"mf-table__empty-icon\">\n            <mat-icon aria-hidden=\"true\">table_rows</mat-icon>\n          </div>\n          <h3 class=\"mf-table__empty-title\">{{ emptyTitle() }}</h3>\n          <p class=\"mf-table__empty-description\">{{ emptyDescriptionText() }}</p>\n        </div>\n      }\n    </section>\n  `,\n  styleUrl: './mf-table.component.css',\n  changeDetection: ChangeDetectionStrategy.OnPush,\n})\nexport class MfTableComponent {\n  protected readonly localSearchTerm = signal('');\n  protected readonly localPageIndex = signal(0);\n  protected readonly localPageSize = signal(10);\n  protected readonly sortState = signal<Sort>({ active: '', direction: '' });\n  protected readonly actionColumnKey = 'mf-row-action';\n\n  readonly columns = input<MfTableColumn[]>([]);\n  readonly data = input<Record<string, unknown>[]>([]);\n  readonly variant = input<MfTableVariant>('default');\n  readonly density = input<MfTableDensity>('comfortable');\n  readonly title = input<string | undefined>(undefined);\n  readonly description = input<string | undefined>(undefined);\n  readonly showSearch = input(false);\n  readonly searchLabel = input('Search');\n  readonly searchPlaceholder = input('Search records');\n  readonly searchValue = input('');\n  readonly showPaginator = input(false);\n  readonly pageSize = input(10);\n  readonly pageIndex = input(0);\n  readonly pageSizeOptions = input<number[]>([10, 25, 50, 100]);\n  readonly showFirstLastButtons = input(true);\n  readonly hidePageSize = input(false);\n  readonly stickyHeader = input(false);\n  readonly emptyTitle = input('No records found');\n  readonly emptyDescription = input(\n    'This dataset has no rows yet. Connect data or add records to populate the table.',\n  );\n\n  readonly rowActionLabel = input<string | undefined>(undefined);\n  readonly rowActionHeader = input('Actions');\n  readonly rowActionAriaLabel = input<\n    ((row: Record<string, unknown>) => string) | undefined\n  >(undefined);\n  readonly rowActions = input<MfTableRowAction[]>([]);\n\n  readonly mfSortChange = output<Sort>();\n  readonly mfSearchChange = output<string>();\n  readonly mfPageChange = output<PageEvent>();\n  readonly mfAction = output<{\n    action: MfTableRowAction;\n    row: Record<string, unknown>;\n  }>();\n  readonly mfRowAction = output<Record<string, unknown>>();\n  readonly mfRowClick = output<Record<string, unknown>>();\n\n  constructor() {\n    effect(() => {\n      this.localSearchTerm.set(this.searchValue());\n    });\n\n    effect(() => {\n      this.localPageIndex.set(this.pageIndex());\n    });\n\n    effect(() => {\n      this.localPageSize.set(this.pageSize());\n    });\n\n    effect(() => {\n      const totalRows = this.filteredRows().length;\n      const pageSize = Math.max(this.localPageSize(), 1);\n      const maxPageIndex = Math.max(Math.ceil(totalRows / pageSize) - 1, 0);\n\n      if (this.localPageIndex() > maxPageIndex) {\n        this.localPageIndex.set(maxPageIndex);\n      }\n    });\n  }\n\n  protected readonly visibleColumns = computed(() =>\n    this.columns().filter((column) => !column.hidden),\n  );\n\n  protected readonly searchTerm = computed(() => this.localSearchTerm().trim());\n  protected readonly showsToolbar = computed(\n    () => Boolean(this.title() || this.description() || this.showSearch()),\n  );\n  protected readonly resolvedActionHeader = computed(() => this.rowActionHeader());\n\n  protected readonly resolvedActions = computed<MfResolvedTableAction[]>(() => {\n    const actions: MfResolvedTableAction[] = [...this.rowActions()];\n\n    if (this.rowActionLabel()) {\n      actions.unshift({\n        key: 'legacy-action',\n        label: this.rowActionLabel() as string,\n        tone: 'neutral',\n        ariaLabel: this.rowActionAriaLabel(),\n        legacy: true,\n      });\n    }\n\n    return actions;\n  });\n\n  protected readonly hasActions = computed(() => this.resolvedActions().length > 0);\n  protected readonly usesActionMenu = computed(\n    () => this.resolvedActions().length > 1,\n  );\n\n  readonly displayedColumns = computed(() => {\n    const columns = this.visibleColumns().map((column) => column.key);\n\n    if (this.hasActions()) {\n      columns.push(this.actionColumnKey);\n    }\n\n    return columns;\n  });\n\n  protected readonly filteredRows = computed(() => {\n    const query = this.searchTerm().toLowerCase();\n    const rows = this.data();\n\n    if (!query) {\n      return rows;\n    }\n\n    const searchableColumns = this.visibleColumns().filter(\n      (column) => column.searchable !== false,\n    );\n\n    return rows.filter((row) =>\n      searchableColumns.some((column) =>\n        this.getSearchValue(column, row).toLowerCase().includes(query),\n      ),\n    );\n  });\n\n  protected readonly sortedRows = computed(() => {\n    const rows = [...this.filteredRows()];\n    const { active, direction } = this.sortState();\n\n    if (!active || !direction) {\n      return rows;\n    }\n\n    const column = this.visibleColumns().find((item) => item.key === active);\n    if (!column) {\n      return rows;\n    }\n\n    return rows.sort((left, right) => {\n      const leftValue = this.normalizeSortValue(column, left);\n      const rightValue = this.normalizeSortValue(column, right);\n\n      if (leftValue < rightValue) {\n        return direction === 'asc' ? -1 : 1;\n      }\n\n      if (leftValue > rightValue) {\n        return direction === 'asc' ? 1 : -1;\n      }\n\n      return 0;\n    });\n  });\n\n  protected readonly paginatedRows = computed(() => {\n    if (!this.showPaginator()) {\n      return this.sortedRows();\n    }\n\n    const size = Math.max(this.localPageSize(), 1);\n    const start = this.localPageIndex() * size;\n    return this.sortedRows().slice(start, start + size);\n  });\n\n  protected readonly resultSummary = computed(() => {\n    const filtered = this.filteredRows().length;\n    const total = this.data().length;\n\n    if (filtered === total) {\n      return `${total} records`;\n    }\n\n    return `${filtered} of ${total} records`;\n  });\n\n  onSearchChange(value: string): void {\n    this.localSearchTerm.set(value);\n    this.localPageIndex.set(0);\n    this.mfSearchChange.emit(value);\n  }\n\n  onSortChange(sort: Sort): void {\n    this.sortState.set(sort);\n    this.localPageIndex.set(0);\n    this.mfSortChange.emit(sort);\n  }\n\n  onPageChange(event: PageEvent): void {\n    this.localPageIndex.set(event.pageIndex);\n    this.localPageSize.set(event.pageSize);\n    this.mfPageChange.emit(event);\n  }\n\n  onActionClick(action: MfResolvedTableAction, row: Record<string, unknown>): void {\n    if (action.legacy) {\n      this.mfRowAction.emit(row);\n      this.mfRowClick.emit(row);\n    }\n\n    this.mfAction.emit({ action, row });\n  }\n\n  renderCell(column: MfTableColumn, row: Record<string, unknown>): string {\n    const value = this.getRawValue(column, row);\n\n    if (column.formatter) {\n      return column.formatter(value, row);\n    }\n\n    if (value === null || value === undefined || value === '') {\n      return column.emptyValue ?? '-';\n    }\n\n    if (column.type === 'number' && typeof value === 'number') {\n      return new Intl.NumberFormat('es-ES').format(value);\n    }\n\n    if (column.type === 'date') {\n      const date = value instanceof Date ? value : new Date(String(value));\n      if (!Number.isNaN(date.getTime())) {\n        return new Intl.DateTimeFormat('es-ES').format(date);\n      }\n    }\n\n    return String(value);\n  }\n\n  headerCellClasses(column: MfTableColumn): string {\n    return [\n      'mf-table__header-cell',\n      `mf-table__cell--align-${column.align ?? 'start'}`,\n    ].join(' ');\n  }\n\n  cellClasses(column: MfTableColumn): string {\n    const classes = [\n      'mf-table__cell',\n      `mf-table__cell--align-${column.align ?? 'start'}`,\n    ];\n\n    if (column.truncate) {\n      classes.push('mf-table__cell--truncate');\n    }\n\n    return classes.join(' ');\n  }\n\n  badgeClasses(column: MfTableColumn, row: Record<string, unknown>): string {\n    return [\n      'mf-table__badge',\n      `mf-table__badge--${this.resolveBadgeTone(column, row)}`,\n    ].join(' ');\n  }\n\n  actionClasses(action: MfResolvedTableAction): string {\n    return [\n      'mf-table__action',\n      `mf-table__action--${action.tone ?? 'neutral'}`,\n    ].join(' ');\n  }\n\n  isActionDisabled(\n    action: MfResolvedTableAction,\n    row: Record<string, unknown>,\n  ): boolean {\n    return typeof action.disabled === 'function'\n      ? action.disabled(row)\n      : Boolean(action.disabled);\n  }\n\n  getActionAriaLabel(\n    action: MfResolvedTableAction,\n    row: Record<string, unknown>,\n  ): string | null {\n    return action.ariaLabel?.(row) ?? action.label ?? null;\n  }\n\n  getRowMenuAriaLabel(row: Record<string, unknown>): string {\n    const primaryColumn = this.visibleColumns()[0];\n    const primaryLabel = primaryColumn\n      ? this.renderCell(primaryColumn, row)\n      : 'this row';\n\n    return `Open actions for ${primaryLabel}`;\n  }\n\n  emptyDescriptionText(): string {\n    if (this.searchTerm()) {\n      return 'No rows match the current search. Try a broader query or clear the filter.';\n    }\n\n    return this.emptyDescription();\n  }\n\n  readonly hostClasses = computed(() =>\n    ['mf-table', `mf-table--${this.variant()}`, `mf-table--${this.density()}`].join(\n      ' ',\n    ),\n  );\n\n  private getCellValue(\n    column: MfTableColumn,\n    row: Record<string, unknown>,\n  ): unknown {\n    return column.sortAccessor ? column.sortAccessor(row) : this.getRawValue(column, row);\n  }\n\n  private getRawValue(\n    column: MfTableColumn,\n    row: Record<string, unknown>,\n  ): unknown {\n    return row[column.key];\n  }\n\n  private getSearchValue(\n    column: MfTableColumn,\n    row: Record<string, unknown>,\n  ): string {\n    if (column.searchAccessor) {\n      return column.searchAccessor(row);\n    }\n\n    return this.renderCell(column, row);\n  }\n\n  private normalizeSortValue(\n    column: MfTableColumn,\n    row: Record<string, unknown>,\n  ): number | string {\n    const value = this.getCellValue(column, row);\n\n    if (value === null || value === undefined || value === '') {\n      return '';\n    }\n\n    if (column.type === 'number') {\n      return typeof value === 'number' ? value : Number(value);\n    }\n\n    if (column.type === 'date') {\n      const date = value instanceof Date ? value : new Date(String(value));\n      return Number.isNaN(date.getTime()) ? '' : date.getTime();\n    }\n\n    if (typeof value === 'number') {\n      return value;\n    }\n\n    return String(value).toLocaleLowerCase();\n  }\n\n  private resolveBadgeTone(\n    column: MfTableColumn,\n    row: Record<string, unknown>,\n  ): MfTableBadgeTone {\n    const value = row[column.key];\n\n    if (typeof column.badgeTone === 'function') {\n      return column.badgeTone(value, row);\n    }\n\n    if (column.badgeTone) {\n      return column.badgeTone;\n    }\n\n    return column.badgeTones?.[String(value)] ?? 'neutral';\n  }\n}\n",
+            "properties": [
+                {
+                    "name": "legacy",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "boolean",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 61
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 172,
+            "methods": [],
+            "extends": [
+                "MfTableRowAction"
+            ]
+        },
+        {
             "name": "MfSelectOption",
             "id": "interface-MfSelectOption-59207b6856c6846b6d42fde8f0f6c1a5e8a11ac5e69c30e8661ef705f71cb980078042b4479ab3a6c3c7cbf861354d78899924848369d73115bd51bff43119f4",
             "file": "src/app/components/select/mf-select.component.ts",
@@ -684,13 +711,63 @@
         },
         {
             "name": "MfTableColumn",
-            "id": "interface-MfTableColumn-6369889e22ebd32d501cc29b2a48c86342cf5122bc6a7b5fb94a8c5cc889322854baedf9b1fbf52341440e0aad32cfe087081a9a49f2693ba78edd481bec963c",
+            "id": "interface-MfTableColumn-ae123738c4591c9fe92920dc9c7815d44a5d28aef68a459dff7859846b69ca85c24f803a3dabe863f30ccb79e150e3e947be06fb31648d53b309c60cfa873466",
             "file": "src/app/components/table/mf-table.component.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "interface",
-            "sourceCode": "import {\n  ChangeDetectionStrategy,\n  Component,\n  computed,\n  input,\n  output,\n} from '@angular/core';\nimport { MatButtonModule } from '@angular/material/button';\nimport { MatIconModule } from '@angular/material/icon';\nimport { MatSortModule, Sort } from '@angular/material/sort';\nimport { MatTableModule } from '@angular/material/table';\n\nexport interface MfTableColumn {\n  key: string;\n  header: string;\n  sortable?: boolean;\n}\n\nexport type MfTableVariant = 'default' | 'striped' | 'bordered';\n\n/**\n * Table de la librerÃ­a ng-comps.\n * Envuelve Angular Material `mat-table` y expone una API uniforme\n * con look and feel de marca. Ideal para dashboards y paneles de datos.\n */\n@Component({\n  selector: 'mf-table',\n  imports: [MatTableModule, MatSortModule, MatButtonModule, MatIconModule],\n  template: `\n    <div class=\"mf-table__wrapper\" [class]=\"hostClasses()\">\n      <table\n        mat-table\n        [dataSource]=\"data()\"\n        matSort\n        (matSortChange)=\"mfSortChange.emit($event)\"\n      >\n        @for (col of columns(); track col.key) {\n          <ng-container [matColumnDef]=\"col.key\">\n            @if (col.sortable) {\n              <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ col.header }}</th>\n            } @else {\n              <th mat-header-cell *matHeaderCellDef>{{ col.header }}</th>\n            }\n            <td mat-cell *matCellDef=\"let row\">{{ row[col.key] }}</td>\n          </ng-container>\n        }\n\n        @if (rowActionLabel()) {\n          <ng-container [matColumnDef]=\"actionColumnKey\">\n            <th mat-header-cell *matHeaderCellDef class=\"mf-table__actions-header\">\n              {{ rowActionHeader() }}\n            </th>\n            <td mat-cell *matCellDef=\"let row\" class=\"mf-table__actions-cell\">\n              <button\n                mat-button\n                type=\"button\"\n                class=\"mf-table__action\"\n                [attr.aria-label]=\"getRowActionAriaLabel(row)\"\n                (click)=\"emitRowAction(row)\"\n              >\n                {{ rowActionLabel() }}\n              </button>\n            </td>\n          </ng-container>\n        }\n\n        <tr mat-header-row *matHeaderRowDef=\"displayedColumns()\"></tr>\n        <tr mat-row *matRowDef=\"let row; columns: displayedColumns()\"></tr>\n      </table>\n    </div>\n  `,\n  styleUrl: './mf-table.component.css',\n  changeDetection: ChangeDetectionStrategy.OnPush,\n})\nexport class MfTableComponent {\n  protected readonly actionColumnKey = 'mf-row-action';\n\n  /** Columnas de la tabla */\n  readonly columns = input.required<MfTableColumn[]>();\n  /** Datos de la tabla */\n  readonly data = input.required<Record<string, unknown>[]>();\n  /** Variante visual */\n  readonly variant = input<MfTableVariant>('default');\n  /** Texto visible del botÃ³n de acciÃ³n por fila */\n  readonly rowActionLabel = input<string | undefined>(undefined);\n  /** Cabecera visible de la columna de acciÃ³n */\n  readonly rowActionHeader = input('Actions');\n  readonly rowActionAriaLabel = input<\n    ((row: Record<string, unknown>) => string) | undefined\n  >(undefined);\n\n  readonly mfSortChange = output<Sort>();\n  readonly mfRowAction = output<Record<string, unknown>>();\n  /** @deprecated usa `mfRowAction` para interacciones explÃ­citas por fila */\n  readonly mfRowClick = output<Record<string, unknown>>();\n\n  readonly displayedColumns = computed(() => {\n    const columns = this.columns().map((column) => column.key);\n    if (this.rowActionLabel()) {\n      columns.push(this.actionColumnKey);\n    }\n    return columns;\n  });\n\n  readonly hostClasses = computed(() => {\n    return ['mf-table', `mf-table--${this.variant()}`].join(' ');\n  });\n\n  emitRowAction(row: Record<string, unknown>): void {\n    this.mfRowAction.emit(row);\n    this.mfRowClick.emit(row);\n  }\n\n  getRowActionAriaLabel(row: Record<string, unknown>): string | null {\n    return this.rowActionAriaLabel()?.(row) ?? this.rowActionLabel() ?? null;\n  }\n}\n",
+            "sourceCode": "import {\n  ChangeDetectionStrategy,\n  Component,\n  computed,\n  effect,\n  input,\n  output,\n  signal,\n} from '@angular/core';\nimport { MatButtonModule } from '@angular/material/button';\nimport { PageEvent } from '@angular/material/paginator';\nimport { MatIconModule } from '@angular/material/icon';\nimport { MatMenuModule } from '@angular/material/menu';\nimport { MatSortModule, Sort } from '@angular/material/sort';\nimport { MatTableModule } from '@angular/material/table';\nimport { MfInputComponent } from '../input';\nimport { MfPaginatorComponent } from '../paginator';\n\nexport type MfTableCellType = 'text' | 'number' | 'date' | 'badge';\nexport type MfTableAlign = 'start' | 'center' | 'end';\nexport type MfTableVariant = 'default' | 'striped' | 'bordered';\nexport type MfTableDensity = 'compact' | 'comfortable' | 'spacious';\nexport type MfTableBadgeTone =\n  | 'brand'\n  | 'success'\n  | 'warning'\n  | 'error'\n  | 'neutral';\nexport type MfTableActionTone = 'primary' | 'neutral' | 'danger';\n\nexport interface MfTableColumn {\n  key: string;\n  header: string;\n  sortable?: boolean;\n  type?: MfTableCellType;\n  align?: MfTableAlign;\n  width?: string;\n  hidden?: boolean;\n  truncate?: boolean;\n  searchable?: boolean;\n  emptyValue?: string;\n  formatter?: (value: unknown, row: Record<string, unknown>) => string;\n  sortAccessor?: (row: Record<string, unknown>) => unknown;\n  searchAccessor?: (row: Record<string, unknown>) => string;\n  badgeTone?:\n    | MfTableBadgeTone\n    | ((value: unknown, row: Record<string, unknown>) => MfTableBadgeTone);\n  badgeTones?: Record<string, MfTableBadgeTone>;\n}\n\nexport interface MfTableRowAction {\n  key: string;\n  label: string;\n  icon?: string;\n  tone?: MfTableActionTone;\n  disabled?: boolean | ((row: Record<string, unknown>) => boolean);\n  ariaLabel?: (row: Record<string, unknown>) => string;\n}\n\ninterface MfResolvedTableAction extends MfTableRowAction {\n  legacy?: boolean;\n}\n\n/**\n * Enterprise-oriented table component with optional search, pagination,\n * badges, explicit row actions and client-side sorting.\n */\n@Component({\n  selector: 'mf-table',\n  imports: [\n    MatTableModule,\n    MatSortModule,\n    MatButtonModule,\n    MatIconModule,\n    MatMenuModule,\n    MfInputComponent,\n    MfPaginatorComponent,\n  ],\n  template: `\n    <section [class]=\"hostClasses()\">\n      @if (showsToolbar()) {\n        <header class=\"mf-table__toolbar\">\n          <div class=\"mf-table__intro\">\n            @if (title()) {\n              <h2 class=\"mf-table__title\">{{ title() }}</h2>\n            }\n            @if (description()) {\n              <p class=\"mf-table__description\">{{ description() }}</p>\n            }\n            <div class=\"mf-table__meta\">\n              <span class=\"mf-table__metric\">{{ resultSummary() }}</span>\n              @if (searchTerm()) {\n                <span class=\"mf-table__metric mf-table__metric--accent\">\n                  Filter active\n                </span>\n              }\n              @if (sortState().direction) {\n                <span class=\"mf-table__metric\">\n                  Sorted by {{ sortState().active }}\n                </span>\n              }\n            </div>\n          </div>\n\n          @if (showSearch()) {\n            <div class=\"mf-table__search\">\n              <mf-input\n                [label]=\"searchLabel()\"\n                [ariaLabel]=\"searchLabel()\"\n                [placeholder]=\"searchPlaceholder()\"\n                [value]=\"localSearchTerm()\"\n                [type]=\"'search'\"\n                [leadingIcon]=\"'search'\"\n                [fullWidth]=\"true\"\n                (mfInput)=\"onSearchChange($event)\"\n              />\n            </div>\n          }\n        </header>\n      }\n\n      @if (filteredRows().length > 0) {\n        <div class=\"mf-table__surface\">\n          <div class=\"mf-table__wrapper\">\n            <table\n              mat-table\n              [dataSource]=\"paginatedRows()\"\n              matSort\n              [matSortActive]=\"sortState().active\"\n              [matSortDirection]=\"sortState().direction\"\n              class=\"mf-table__table\"\n              (matSortChange)=\"onSortChange($event)\"\n            >\n              @for (column of visibleColumns(); track column.key) {\n                <ng-container [matColumnDef]=\"column.key\">\n                  @if (column.sortable) {\n                    <th\n                      mat-header-cell\n                      *matHeaderCellDef\n                      mat-sort-header\n                      [style.width]=\"column.width || null\"\n                      [class]=\"headerCellClasses(column)\"\n                    >\n                      {{ column.header }}\n                    </th>\n                  } @else {\n                    <th\n                      mat-header-cell\n                      *matHeaderCellDef\n                      [style.width]=\"column.width || null\"\n                      [class]=\"headerCellClasses(column)\"\n                    >\n                      {{ column.header }}\n                    </th>\n                  }\n\n                  <td\n                    mat-cell\n                    *matCellDef=\"let row\"\n                    [style.width]=\"column.width || null\"\n                    [class]=\"cellClasses(column)\"\n                  >\n                    @if (column.type === 'badge') {\n                      <span [class]=\"badgeClasses(column, row)\">\n                        {{ renderCell(column, row) }}\n                      </span>\n                    } @else {\n                      <span class=\"mf-table__cell-text\">\n                        {{ renderCell(column, row) }}\n                      </span>\n                    }\n                  </td>\n                </ng-container>\n              }\n\n              @if (hasActions()) {\n                <ng-container [matColumnDef]=\"actionColumnKey\">\n                  <th\n                    mat-header-cell\n                    *matHeaderCellDef\n                    class=\"mf-table__actions-header\"\n                  >\n                    {{ resolvedActionHeader() }}\n                  </th>\n                  <td\n                    mat-cell\n                    *matCellDef=\"let row\"\n                    class=\"mf-table__actions-cell\"\n                  >\n                    @if (usesActionMenu()) {\n                      <button\n                        mat-icon-button\n                        type=\"button\"\n                        class=\"mf-table__action-menu-trigger\"\n                        [matMenuTriggerFor]=\"actionMenu\"\n                        [attr.aria-label]=\"getRowMenuAriaLabel(row)\"\n                      >\n                        <mat-icon aria-hidden=\"true\">more_horiz</mat-icon>\n                      </button>\n                      <mat-menu\n                        #actionMenu=\"matMenu\"\n                        xPosition=\"before\"\n                        class=\"mf-table__action-menu\"\n                      >\n                        @for (action of resolvedActions(); track action.key) {\n                          <button\n                            mat-menu-item\n                            [disabled]=\"isActionDisabled(action, row)\"\n                            [attr.aria-label]=\"getActionAriaLabel(action, row)\"\n                            (click)=\"onActionClick(action, row)\"\n                          >\n                            @if (action.icon) {\n                              <mat-icon aria-hidden=\"true\">{{ action.icon }}</mat-icon>\n                            }\n                            <span>{{ action.label }}</span>\n                          </button>\n                        }\n                      </mat-menu>\n                    } @else {\n                      <div class=\"mf-table__action-group\">\n                        @for (action of resolvedActions(); track action.key) {\n                          <button\n                            mat-stroked-button\n                            type=\"button\"\n                            [class]=\"actionClasses(action)\"\n                            [disabled]=\"isActionDisabled(action, row)\"\n                            [attr.aria-label]=\"getActionAriaLabel(action, row)\"\n                            (click)=\"onActionClick(action, row)\"\n                          >\n                            @if (action.icon) {\n                              <mat-icon aria-hidden=\"true\">{{ action.icon }}</mat-icon>\n                            }\n                            <span>{{ action.label }}</span>\n                          </button>\n                        }\n                      </div>\n                    }\n                  </td>\n                </ng-container>\n              }\n\n              <tr\n                mat-header-row\n                *matHeaderRowDef=\"displayedColumns(); sticky: stickyHeader()\"\n              ></tr>\n              <tr\n                mat-row\n                *matRowDef=\"let row; columns: displayedColumns()\"\n                class=\"mf-table__row\"\n              ></tr>\n            </table>\n          </div>\n\n          @if (showPaginator()) {\n            <footer class=\"mf-table__footer\">\n              <mf-paginator\n                [length]=\"filteredRows().length\"\n                [pageSize]=\"localPageSize()\"\n                [pageIndex]=\"localPageIndex()\"\n                [pageSizeOptions]=\"pageSizeOptions()\"\n                [showFirstLastButtons]=\"showFirstLastButtons()\"\n                [hidePageSize]=\"hidePageSize()\"\n                (mfPageChange)=\"onPageChange($event)\"\n              />\n            </footer>\n          }\n        </div>\n      } @else {\n        <div class=\"mf-table__empty\">\n          <div class=\"mf-table__empty-icon\">\n            <mat-icon aria-hidden=\"true\">table_rows</mat-icon>\n          </div>\n          <h3 class=\"mf-table__empty-title\">{{ emptyTitle() }}</h3>\n          <p class=\"mf-table__empty-description\">{{ emptyDescriptionText() }}</p>\n        </div>\n      }\n    </section>\n  `,\n  styleUrl: './mf-table.component.css',\n  changeDetection: ChangeDetectionStrategy.OnPush,\n})\nexport class MfTableComponent {\n  protected readonly localSearchTerm = signal('');\n  protected readonly localPageIndex = signal(0);\n  protected readonly localPageSize = signal(10);\n  protected readonly sortState = signal<Sort>({ active: '', direction: '' });\n  protected readonly actionColumnKey = 'mf-row-action';\n\n  readonly columns = input<MfTableColumn[]>([]);\n  readonly data = input<Record<string, unknown>[]>([]);\n  readonly variant = input<MfTableVariant>('default');\n  readonly density = input<MfTableDensity>('comfortable');\n  readonly title = input<string | undefined>(undefined);\n  readonly description = input<string | undefined>(undefined);\n  readonly showSearch = input(false);\n  readonly searchLabel = input('Search');\n  readonly searchPlaceholder = input('Search records');\n  readonly searchValue = input('');\n  readonly showPaginator = input(false);\n  readonly pageSize = input(10);\n  readonly pageIndex = input(0);\n  readonly pageSizeOptions = input<number[]>([10, 25, 50, 100]);\n  readonly showFirstLastButtons = input(true);\n  readonly hidePageSize = input(false);\n  readonly stickyHeader = input(false);\n  readonly emptyTitle = input('No records found');\n  readonly emptyDescription = input(\n    'This dataset has no rows yet. Connect data or add records to populate the table.',\n  );\n\n  readonly rowActionLabel = input<string | undefined>(undefined);\n  readonly rowActionHeader = input('Actions');\n  readonly rowActionAriaLabel = input<\n    ((row: Record<string, unknown>) => string) | undefined\n  >(undefined);\n  readonly rowActions = input<MfTableRowAction[]>([]);\n\n  readonly mfSortChange = output<Sort>();\n  readonly mfSearchChange = output<string>();\n  readonly mfPageChange = output<PageEvent>();\n  readonly mfAction = output<{\n    action: MfTableRowAction;\n    row: Record<string, unknown>;\n  }>();\n  readonly mfRowAction = output<Record<string, unknown>>();\n  readonly mfRowClick = output<Record<string, unknown>>();\n\n  constructor() {\n    effect(() => {\n      this.localSearchTerm.set(this.searchValue());\n    });\n\n    effect(() => {\n      this.localPageIndex.set(this.pageIndex());\n    });\n\n    effect(() => {\n      this.localPageSize.set(this.pageSize());\n    });\n\n    effect(() => {\n      const totalRows = this.filteredRows().length;\n      const pageSize = Math.max(this.localPageSize(), 1);\n      const maxPageIndex = Math.max(Math.ceil(totalRows / pageSize) - 1, 0);\n\n      if (this.localPageIndex() > maxPageIndex) {\n        this.localPageIndex.set(maxPageIndex);\n      }\n    });\n  }\n\n  protected readonly visibleColumns = computed(() =>\n    this.columns().filter((column) => !column.hidden),\n  );\n\n  protected readonly searchTerm = computed(() => this.localSearchTerm().trim());\n  protected readonly showsToolbar = computed(\n    () => Boolean(this.title() || this.description() || this.showSearch()),\n  );\n  protected readonly resolvedActionHeader = computed(() => this.rowActionHeader());\n\n  protected readonly resolvedActions = computed<MfResolvedTableAction[]>(() => {\n    const actions: MfResolvedTableAction[] = [...this.rowActions()];\n\n    if (this.rowActionLabel()) {\n      actions.unshift({\n        key: 'legacy-action',\n        label: this.rowActionLabel() as string,\n        tone: 'neutral',\n        ariaLabel: this.rowActionAriaLabel(),\n        legacy: true,\n      });\n    }\n\n    return actions;\n  });\n\n  protected readonly hasActions = computed(() => this.resolvedActions().length > 0);\n  protected readonly usesActionMenu = computed(\n    () => this.resolvedActions().length > 1,\n  );\n\n  readonly displayedColumns = computed(() => {\n    const columns = this.visibleColumns().map((column) => column.key);\n\n    if (this.hasActions()) {\n      columns.push(this.actionColumnKey);\n    }\n\n    return columns;\n  });\n\n  protected readonly filteredRows = computed(() => {\n    const query = this.searchTerm().toLowerCase();\n    const rows = this.data();\n\n    if (!query) {\n      return rows;\n    }\n\n    const searchableColumns = this.visibleColumns().filter(\n      (column) => column.searchable !== false,\n    );\n\n    return rows.filter((row) =>\n      searchableColumns.some((column) =>\n        this.getSearchValue(column, row).toLowerCase().includes(query),\n      ),\n    );\n  });\n\n  protected readonly sortedRows = computed(() => {\n    const rows = [...this.filteredRows()];\n    const { active, direction } = this.sortState();\n\n    if (!active || !direction) {\n      return rows;\n    }\n\n    const column = this.visibleColumns().find((item) => item.key === active);\n    if (!column) {\n      return rows;\n    }\n\n    return rows.sort((left, right) => {\n      const leftValue = this.normalizeSortValue(column, left);\n      const rightValue = this.normalizeSortValue(column, right);\n\n      if (leftValue < rightValue) {\n        return direction === 'asc' ? -1 : 1;\n      }\n\n      if (leftValue > rightValue) {\n        return direction === 'asc' ? 1 : -1;\n      }\n\n      return 0;\n    });\n  });\n\n  protected readonly paginatedRows = computed(() => {\n    if (!this.showPaginator()) {\n      return this.sortedRows();\n    }\n\n    const size = Math.max(this.localPageSize(), 1);\n    const start = this.localPageIndex() * size;\n    return this.sortedRows().slice(start, start + size);\n  });\n\n  protected readonly resultSummary = computed(() => {\n    const filtered = this.filteredRows().length;\n    const total = this.data().length;\n\n    if (filtered === total) {\n      return `${total} records`;\n    }\n\n    return `${filtered} of ${total} records`;\n  });\n\n  onSearchChange(value: string): void {\n    this.localSearchTerm.set(value);\n    this.localPageIndex.set(0);\n    this.mfSearchChange.emit(value);\n  }\n\n  onSortChange(sort: Sort): void {\n    this.sortState.set(sort);\n    this.localPageIndex.set(0);\n    this.mfSortChange.emit(sort);\n  }\n\n  onPageChange(event: PageEvent): void {\n    this.localPageIndex.set(event.pageIndex);\n    this.localPageSize.set(event.pageSize);\n    this.mfPageChange.emit(event);\n  }\n\n  onActionClick(action: MfResolvedTableAction, row: Record<string, unknown>): void {\n    if (action.legacy) {\n      this.mfRowAction.emit(row);\n      this.mfRowClick.emit(row);\n    }\n\n    this.mfAction.emit({ action, row });\n  }\n\n  renderCell(column: MfTableColumn, row: Record<string, unknown>): string {\n    const value = this.getRawValue(column, row);\n\n    if (column.formatter) {\n      return column.formatter(value, row);\n    }\n\n    if (value === null || value === undefined || value === '') {\n      return column.emptyValue ?? '-';\n    }\n\n    if (column.type === 'number' && typeof value === 'number') {\n      return new Intl.NumberFormat('es-ES').format(value);\n    }\n\n    if (column.type === 'date') {\n      const date = value instanceof Date ? value : new Date(String(value));\n      if (!Number.isNaN(date.getTime())) {\n        return new Intl.DateTimeFormat('es-ES').format(date);\n      }\n    }\n\n    return String(value);\n  }\n\n  headerCellClasses(column: MfTableColumn): string {\n    return [\n      'mf-table__header-cell',\n      `mf-table__cell--align-${column.align ?? 'start'}`,\n    ].join(' ');\n  }\n\n  cellClasses(column: MfTableColumn): string {\n    const classes = [\n      'mf-table__cell',\n      `mf-table__cell--align-${column.align ?? 'start'}`,\n    ];\n\n    if (column.truncate) {\n      classes.push('mf-table__cell--truncate');\n    }\n\n    return classes.join(' ');\n  }\n\n  badgeClasses(column: MfTableColumn, row: Record<string, unknown>): string {\n    return [\n      'mf-table__badge',\n      `mf-table__badge--${this.resolveBadgeTone(column, row)}`,\n    ].join(' ');\n  }\n\n  actionClasses(action: MfResolvedTableAction): string {\n    return [\n      'mf-table__action',\n      `mf-table__action--${action.tone ?? 'neutral'}`,\n    ].join(' ');\n  }\n\n  isActionDisabled(\n    action: MfResolvedTableAction,\n    row: Record<string, unknown>,\n  ): boolean {\n    return typeof action.disabled === 'function'\n      ? action.disabled(row)\n      : Boolean(action.disabled);\n  }\n\n  getActionAriaLabel(\n    action: MfResolvedTableAction,\n    row: Record<string, unknown>,\n  ): string | null {\n    return action.ariaLabel?.(row) ?? action.label ?? null;\n  }\n\n  getRowMenuAriaLabel(row: Record<string, unknown>): string {\n    const primaryColumn = this.visibleColumns()[0];\n    const primaryLabel = primaryColumn\n      ? this.renderCell(primaryColumn, row)\n      : 'this row';\n\n    return `Open actions for ${primaryLabel}`;\n  }\n\n  emptyDescriptionText(): string {\n    if (this.searchTerm()) {\n      return 'No rows match the current search. Try a broader query or clear the filter.';\n    }\n\n    return this.emptyDescription();\n  }\n\n  readonly hostClasses = computed(() =>\n    ['mf-table', `mf-table--${this.variant()}`, `mf-table--${this.density()}`].join(\n      ' ',\n    ),\n  );\n\n  private getCellValue(\n    column: MfTableColumn,\n    row: Record<string, unknown>,\n  ): unknown {\n    return column.sortAccessor ? column.sortAccessor(row) : this.getRawValue(column, row);\n  }\n\n  private getRawValue(\n    column: MfTableColumn,\n    row: Record<string, unknown>,\n  ): unknown {\n    return row[column.key];\n  }\n\n  private getSearchValue(\n    column: MfTableColumn,\n    row: Record<string, unknown>,\n  ): string {\n    if (column.searchAccessor) {\n      return column.searchAccessor(row);\n    }\n\n    return this.renderCell(column, row);\n  }\n\n  private normalizeSortValue(\n    column: MfTableColumn,\n    row: Record<string, unknown>,\n  ): number | string {\n    const value = this.getCellValue(column, row);\n\n    if (value === null || value === undefined || value === '') {\n      return '';\n    }\n\n    if (column.type === 'number') {\n      return typeof value === 'number' ? value : Number(value);\n    }\n\n    if (column.type === 'date') {\n      const date = value instanceof Date ? value : new Date(String(value));\n      return Number.isNaN(date.getTime()) ? '' : date.getTime();\n    }\n\n    if (typeof value === 'number') {\n      return value;\n    }\n\n    return String(value).toLocaleLowerCase();\n  }\n\n  private resolveBadgeTone(\n    column: MfTableColumn,\n    row: Record<string, unknown>,\n  ): MfTableBadgeTone {\n    const value = row[column.key];\n\n    if (typeof column.badgeTone === 'function') {\n      return column.badgeTone(value, row);\n    }\n\n    if (column.badgeTone) {\n      return column.badgeTone;\n    }\n\n    return column.badgeTones?.[String(value)] ?? 'neutral';\n  }\n}\n",
             "properties": [
+                {
+                    "name": "align",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "MfTableAlign",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 36
+                },
+                {
+                    "name": "badgeTone",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "MfTableBadgeTone | unknown",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 45
+                },
+                {
+                    "name": "badgeTones",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Record<string | MfTableBadgeTone>",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 48
+                },
+                {
+                    "name": "emptyValue",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 41
+                },
+                {
+                    "name": "formatter",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "function",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 42
+                },
                 {
                     "name": "header",
                     "deprecated": false,
@@ -699,7 +776,17 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 15
+                    "line": 33
+                },
+                {
+                    "name": "hidden",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "boolean",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 38
                 },
                 {
                     "name": "key",
@@ -709,7 +796,27 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 14
+                    "line": 32
+                },
+                {
+                    "name": "searchable",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "boolean",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 40
+                },
+                {
+                    "name": "searchAccessor",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "function",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 44
                 },
                 {
                     "name": "sortable",
@@ -719,7 +826,122 @@
                     "indexKey": "",
                     "optional": true,
                     "description": "",
-                    "line": 16
+                    "line": 34
+                },
+                {
+                    "name": "sortAccessor",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "function",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 43
+                },
+                {
+                    "name": "truncate",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "boolean",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 39
+                },
+                {
+                    "name": "type",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "MfTableCellType",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 35
+                },
+                {
+                    "name": "width",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 37
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 172,
+            "methods": [],
+            "extends": []
+        },
+        {
+            "name": "MfTableRowAction",
+            "id": "interface-MfTableRowAction-ae123738c4591c9fe92920dc9c7815d44a5d28aef68a459dff7859846b69ca85c24f803a3dabe863f30ccb79e150e3e947be06fb31648d53b309c60cfa873466",
+            "file": "src/app/components/table/mf-table.component.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "import {\n  ChangeDetectionStrategy,\n  Component,\n  computed,\n  effect,\n  input,\n  output,\n  signal,\n} from '@angular/core';\nimport { MatButtonModule } from '@angular/material/button';\nimport { PageEvent } from '@angular/material/paginator';\nimport { MatIconModule } from '@angular/material/icon';\nimport { MatMenuModule } from '@angular/material/menu';\nimport { MatSortModule, Sort } from '@angular/material/sort';\nimport { MatTableModule } from '@angular/material/table';\nimport { MfInputComponent } from '../input';\nimport { MfPaginatorComponent } from '../paginator';\n\nexport type MfTableCellType = 'text' | 'number' | 'date' | 'badge';\nexport type MfTableAlign = 'start' | 'center' | 'end';\nexport type MfTableVariant = 'default' | 'striped' | 'bordered';\nexport type MfTableDensity = 'compact' | 'comfortable' | 'spacious';\nexport type MfTableBadgeTone =\n  | 'brand'\n  | 'success'\n  | 'warning'\n  | 'error'\n  | 'neutral';\nexport type MfTableActionTone = 'primary' | 'neutral' | 'danger';\n\nexport interface MfTableColumn {\n  key: string;\n  header: string;\n  sortable?: boolean;\n  type?: MfTableCellType;\n  align?: MfTableAlign;\n  width?: string;\n  hidden?: boolean;\n  truncate?: boolean;\n  searchable?: boolean;\n  emptyValue?: string;\n  formatter?: (value: unknown, row: Record<string, unknown>) => string;\n  sortAccessor?: (row: Record<string, unknown>) => unknown;\n  searchAccessor?: (row: Record<string, unknown>) => string;\n  badgeTone?:\n    | MfTableBadgeTone\n    | ((value: unknown, row: Record<string, unknown>) => MfTableBadgeTone);\n  badgeTones?: Record<string, MfTableBadgeTone>;\n}\n\nexport interface MfTableRowAction {\n  key: string;\n  label: string;\n  icon?: string;\n  tone?: MfTableActionTone;\n  disabled?: boolean | ((row: Record<string, unknown>) => boolean);\n  ariaLabel?: (row: Record<string, unknown>) => string;\n}\n\ninterface MfResolvedTableAction extends MfTableRowAction {\n  legacy?: boolean;\n}\n\n/**\n * Enterprise-oriented table component with optional search, pagination,\n * badges, explicit row actions and client-side sorting.\n */\n@Component({\n  selector: 'mf-table',\n  imports: [\n    MatTableModule,\n    MatSortModule,\n    MatButtonModule,\n    MatIconModule,\n    MatMenuModule,\n    MfInputComponent,\n    MfPaginatorComponent,\n  ],\n  template: `\n    <section [class]=\"hostClasses()\">\n      @if (showsToolbar()) {\n        <header class=\"mf-table__toolbar\">\n          <div class=\"mf-table__intro\">\n            @if (title()) {\n              <h2 class=\"mf-table__title\">{{ title() }}</h2>\n            }\n            @if (description()) {\n              <p class=\"mf-table__description\">{{ description() }}</p>\n            }\n            <div class=\"mf-table__meta\">\n              <span class=\"mf-table__metric\">{{ resultSummary() }}</span>\n              @if (searchTerm()) {\n                <span class=\"mf-table__metric mf-table__metric--accent\">\n                  Filter active\n                </span>\n              }\n              @if (sortState().direction) {\n                <span class=\"mf-table__metric\">\n                  Sorted by {{ sortState().active }}\n                </span>\n              }\n            </div>\n          </div>\n\n          @if (showSearch()) {\n            <div class=\"mf-table__search\">\n              <mf-input\n                [label]=\"searchLabel()\"\n                [ariaLabel]=\"searchLabel()\"\n                [placeholder]=\"searchPlaceholder()\"\n                [value]=\"localSearchTerm()\"\n                [type]=\"'search'\"\n                [leadingIcon]=\"'search'\"\n                [fullWidth]=\"true\"\n                (mfInput)=\"onSearchChange($event)\"\n              />\n            </div>\n          }\n        </header>\n      }\n\n      @if (filteredRows().length > 0) {\n        <div class=\"mf-table__surface\">\n          <div class=\"mf-table__wrapper\">\n            <table\n              mat-table\n              [dataSource]=\"paginatedRows()\"\n              matSort\n              [matSortActive]=\"sortState().active\"\n              [matSortDirection]=\"sortState().direction\"\n              class=\"mf-table__table\"\n              (matSortChange)=\"onSortChange($event)\"\n            >\n              @for (column of visibleColumns(); track column.key) {\n                <ng-container [matColumnDef]=\"column.key\">\n                  @if (column.sortable) {\n                    <th\n                      mat-header-cell\n                      *matHeaderCellDef\n                      mat-sort-header\n                      [style.width]=\"column.width || null\"\n                      [class]=\"headerCellClasses(column)\"\n                    >\n                      {{ column.header }}\n                    </th>\n                  } @else {\n                    <th\n                      mat-header-cell\n                      *matHeaderCellDef\n                      [style.width]=\"column.width || null\"\n                      [class]=\"headerCellClasses(column)\"\n                    >\n                      {{ column.header }}\n                    </th>\n                  }\n\n                  <td\n                    mat-cell\n                    *matCellDef=\"let row\"\n                    [style.width]=\"column.width || null\"\n                    [class]=\"cellClasses(column)\"\n                  >\n                    @if (column.type === 'badge') {\n                      <span [class]=\"badgeClasses(column, row)\">\n                        {{ renderCell(column, row) }}\n                      </span>\n                    } @else {\n                      <span class=\"mf-table__cell-text\">\n                        {{ renderCell(column, row) }}\n                      </span>\n                    }\n                  </td>\n                </ng-container>\n              }\n\n              @if (hasActions()) {\n                <ng-container [matColumnDef]=\"actionColumnKey\">\n                  <th\n                    mat-header-cell\n                    *matHeaderCellDef\n                    class=\"mf-table__actions-header\"\n                  >\n                    {{ resolvedActionHeader() }}\n                  </th>\n                  <td\n                    mat-cell\n                    *matCellDef=\"let row\"\n                    class=\"mf-table__actions-cell\"\n                  >\n                    @if (usesActionMenu()) {\n                      <button\n                        mat-icon-button\n                        type=\"button\"\n                        class=\"mf-table__action-menu-trigger\"\n                        [matMenuTriggerFor]=\"actionMenu\"\n                        [attr.aria-label]=\"getRowMenuAriaLabel(row)\"\n                      >\n                        <mat-icon aria-hidden=\"true\">more_horiz</mat-icon>\n                      </button>\n                      <mat-menu\n                        #actionMenu=\"matMenu\"\n                        xPosition=\"before\"\n                        class=\"mf-table__action-menu\"\n                      >\n                        @for (action of resolvedActions(); track action.key) {\n                          <button\n                            mat-menu-item\n                            [disabled]=\"isActionDisabled(action, row)\"\n                            [attr.aria-label]=\"getActionAriaLabel(action, row)\"\n                            (click)=\"onActionClick(action, row)\"\n                          >\n                            @if (action.icon) {\n                              <mat-icon aria-hidden=\"true\">{{ action.icon }}</mat-icon>\n                            }\n                            <span>{{ action.label }}</span>\n                          </button>\n                        }\n                      </mat-menu>\n                    } @else {\n                      <div class=\"mf-table__action-group\">\n                        @for (action of resolvedActions(); track action.key) {\n                          <button\n                            mat-stroked-button\n                            type=\"button\"\n                            [class]=\"actionClasses(action)\"\n                            [disabled]=\"isActionDisabled(action, row)\"\n                            [attr.aria-label]=\"getActionAriaLabel(action, row)\"\n                            (click)=\"onActionClick(action, row)\"\n                          >\n                            @if (action.icon) {\n                              <mat-icon aria-hidden=\"true\">{{ action.icon }}</mat-icon>\n                            }\n                            <span>{{ action.label }}</span>\n                          </button>\n                        }\n                      </div>\n                    }\n                  </td>\n                </ng-container>\n              }\n\n              <tr\n                mat-header-row\n                *matHeaderRowDef=\"displayedColumns(); sticky: stickyHeader()\"\n              ></tr>\n              <tr\n                mat-row\n                *matRowDef=\"let row; columns: displayedColumns()\"\n                class=\"mf-table__row\"\n              ></tr>\n            </table>\n          </div>\n\n          @if (showPaginator()) {\n            <footer class=\"mf-table__footer\">\n              <mf-paginator\n                [length]=\"filteredRows().length\"\n                [pageSize]=\"localPageSize()\"\n                [pageIndex]=\"localPageIndex()\"\n                [pageSizeOptions]=\"pageSizeOptions()\"\n                [showFirstLastButtons]=\"showFirstLastButtons()\"\n                [hidePageSize]=\"hidePageSize()\"\n                (mfPageChange)=\"onPageChange($event)\"\n              />\n            </footer>\n          }\n        </div>\n      } @else {\n        <div class=\"mf-table__empty\">\n          <div class=\"mf-table__empty-icon\">\n            <mat-icon aria-hidden=\"true\">table_rows</mat-icon>\n          </div>\n          <h3 class=\"mf-table__empty-title\">{{ emptyTitle() }}</h3>\n          <p class=\"mf-table__empty-description\">{{ emptyDescriptionText() }}</p>\n        </div>\n      }\n    </section>\n  `,\n  styleUrl: './mf-table.component.css',\n  changeDetection: ChangeDetectionStrategy.OnPush,\n})\nexport class MfTableComponent {\n  protected readonly localSearchTerm = signal('');\n  protected readonly localPageIndex = signal(0);\n  protected readonly localPageSize = signal(10);\n  protected readonly sortState = signal<Sort>({ active: '', direction: '' });\n  protected readonly actionColumnKey = 'mf-row-action';\n\n  readonly columns = input<MfTableColumn[]>([]);\n  readonly data = input<Record<string, unknown>[]>([]);\n  readonly variant = input<MfTableVariant>('default');\n  readonly density = input<MfTableDensity>('comfortable');\n  readonly title = input<string | undefined>(undefined);\n  readonly description = input<string | undefined>(undefined);\n  readonly showSearch = input(false);\n  readonly searchLabel = input('Search');\n  readonly searchPlaceholder = input('Search records');\n  readonly searchValue = input('');\n  readonly showPaginator = input(false);\n  readonly pageSize = input(10);\n  readonly pageIndex = input(0);\n  readonly pageSizeOptions = input<number[]>([10, 25, 50, 100]);\n  readonly showFirstLastButtons = input(true);\n  readonly hidePageSize = input(false);\n  readonly stickyHeader = input(false);\n  readonly emptyTitle = input('No records found');\n  readonly emptyDescription = input(\n    'This dataset has no rows yet. Connect data or add records to populate the table.',\n  );\n\n  readonly rowActionLabel = input<string | undefined>(undefined);\n  readonly rowActionHeader = input('Actions');\n  readonly rowActionAriaLabel = input<\n    ((row: Record<string, unknown>) => string) | undefined\n  >(undefined);\n  readonly rowActions = input<MfTableRowAction[]>([]);\n\n  readonly mfSortChange = output<Sort>();\n  readonly mfSearchChange = output<string>();\n  readonly mfPageChange = output<PageEvent>();\n  readonly mfAction = output<{\n    action: MfTableRowAction;\n    row: Record<string, unknown>;\n  }>();\n  readonly mfRowAction = output<Record<string, unknown>>();\n  readonly mfRowClick = output<Record<string, unknown>>();\n\n  constructor() {\n    effect(() => {\n      this.localSearchTerm.set(this.searchValue());\n    });\n\n    effect(() => {\n      this.localPageIndex.set(this.pageIndex());\n    });\n\n    effect(() => {\n      this.localPageSize.set(this.pageSize());\n    });\n\n    effect(() => {\n      const totalRows = this.filteredRows().length;\n      const pageSize = Math.max(this.localPageSize(), 1);\n      const maxPageIndex = Math.max(Math.ceil(totalRows / pageSize) - 1, 0);\n\n      if (this.localPageIndex() > maxPageIndex) {\n        this.localPageIndex.set(maxPageIndex);\n      }\n    });\n  }\n\n  protected readonly visibleColumns = computed(() =>\n    this.columns().filter((column) => !column.hidden),\n  );\n\n  protected readonly searchTerm = computed(() => this.localSearchTerm().trim());\n  protected readonly showsToolbar = computed(\n    () => Boolean(this.title() || this.description() || this.showSearch()),\n  );\n  protected readonly resolvedActionHeader = computed(() => this.rowActionHeader());\n\n  protected readonly resolvedActions = computed<MfResolvedTableAction[]>(() => {\n    const actions: MfResolvedTableAction[] = [...this.rowActions()];\n\n    if (this.rowActionLabel()) {\n      actions.unshift({\n        key: 'legacy-action',\n        label: this.rowActionLabel() as string,\n        tone: 'neutral',\n        ariaLabel: this.rowActionAriaLabel(),\n        legacy: true,\n      });\n    }\n\n    return actions;\n  });\n\n  protected readonly hasActions = computed(() => this.resolvedActions().length > 0);\n  protected readonly usesActionMenu = computed(\n    () => this.resolvedActions().length > 1,\n  );\n\n  readonly displayedColumns = computed(() => {\n    const columns = this.visibleColumns().map((column) => column.key);\n\n    if (this.hasActions()) {\n      columns.push(this.actionColumnKey);\n    }\n\n    return columns;\n  });\n\n  protected readonly filteredRows = computed(() => {\n    const query = this.searchTerm().toLowerCase();\n    const rows = this.data();\n\n    if (!query) {\n      return rows;\n    }\n\n    const searchableColumns = this.visibleColumns().filter(\n      (column) => column.searchable !== false,\n    );\n\n    return rows.filter((row) =>\n      searchableColumns.some((column) =>\n        this.getSearchValue(column, row).toLowerCase().includes(query),\n      ),\n    );\n  });\n\n  protected readonly sortedRows = computed(() => {\n    const rows = [...this.filteredRows()];\n    const { active, direction } = this.sortState();\n\n    if (!active || !direction) {\n      return rows;\n    }\n\n    const column = this.visibleColumns().find((item) => item.key === active);\n    if (!column) {\n      return rows;\n    }\n\n    return rows.sort((left, right) => {\n      const leftValue = this.normalizeSortValue(column, left);\n      const rightValue = this.normalizeSortValue(column, right);\n\n      if (leftValue < rightValue) {\n        return direction === 'asc' ? -1 : 1;\n      }\n\n      if (leftValue > rightValue) {\n        return direction === 'asc' ? 1 : -1;\n      }\n\n      return 0;\n    });\n  });\n\n  protected readonly paginatedRows = computed(() => {\n    if (!this.showPaginator()) {\n      return this.sortedRows();\n    }\n\n    const size = Math.max(this.localPageSize(), 1);\n    const start = this.localPageIndex() * size;\n    return this.sortedRows().slice(start, start + size);\n  });\n\n  protected readonly resultSummary = computed(() => {\n    const filtered = this.filteredRows().length;\n    const total = this.data().length;\n\n    if (filtered === total) {\n      return `${total} records`;\n    }\n\n    return `${filtered} of ${total} records`;\n  });\n\n  onSearchChange(value: string): void {\n    this.localSearchTerm.set(value);\n    this.localPageIndex.set(0);\n    this.mfSearchChange.emit(value);\n  }\n\n  onSortChange(sort: Sort): void {\n    this.sortState.set(sort);\n    this.localPageIndex.set(0);\n    this.mfSortChange.emit(sort);\n  }\n\n  onPageChange(event: PageEvent): void {\n    this.localPageIndex.set(event.pageIndex);\n    this.localPageSize.set(event.pageSize);\n    this.mfPageChange.emit(event);\n  }\n\n  onActionClick(action: MfResolvedTableAction, row: Record<string, unknown>): void {\n    if (action.legacy) {\n      this.mfRowAction.emit(row);\n      this.mfRowClick.emit(row);\n    }\n\n    this.mfAction.emit({ action, row });\n  }\n\n  renderCell(column: MfTableColumn, row: Record<string, unknown>): string {\n    const value = this.getRawValue(column, row);\n\n    if (column.formatter) {\n      return column.formatter(value, row);\n    }\n\n    if (value === null || value === undefined || value === '') {\n      return column.emptyValue ?? '-';\n    }\n\n    if (column.type === 'number' && typeof value === 'number') {\n      return new Intl.NumberFormat('es-ES').format(value);\n    }\n\n    if (column.type === 'date') {\n      const date = value instanceof Date ? value : new Date(String(value));\n      if (!Number.isNaN(date.getTime())) {\n        return new Intl.DateTimeFormat('es-ES').format(date);\n      }\n    }\n\n    return String(value);\n  }\n\n  headerCellClasses(column: MfTableColumn): string {\n    return [\n      'mf-table__header-cell',\n      `mf-table__cell--align-${column.align ?? 'start'}`,\n    ].join(' ');\n  }\n\n  cellClasses(column: MfTableColumn): string {\n    const classes = [\n      'mf-table__cell',\n      `mf-table__cell--align-${column.align ?? 'start'}`,\n    ];\n\n    if (column.truncate) {\n      classes.push('mf-table__cell--truncate');\n    }\n\n    return classes.join(' ');\n  }\n\n  badgeClasses(column: MfTableColumn, row: Record<string, unknown>): string {\n    return [\n      'mf-table__badge',\n      `mf-table__badge--${this.resolveBadgeTone(column, row)}`,\n    ].join(' ');\n  }\n\n  actionClasses(action: MfResolvedTableAction): string {\n    return [\n      'mf-table__action',\n      `mf-table__action--${action.tone ?? 'neutral'}`,\n    ].join(' ');\n  }\n\n  isActionDisabled(\n    action: MfResolvedTableAction,\n    row: Record<string, unknown>,\n  ): boolean {\n    return typeof action.disabled === 'function'\n      ? action.disabled(row)\n      : Boolean(action.disabled);\n  }\n\n  getActionAriaLabel(\n    action: MfResolvedTableAction,\n    row: Record<string, unknown>,\n  ): string | null {\n    return action.ariaLabel?.(row) ?? action.label ?? null;\n  }\n\n  getRowMenuAriaLabel(row: Record<string, unknown>): string {\n    const primaryColumn = this.visibleColumns()[0];\n    const primaryLabel = primaryColumn\n      ? this.renderCell(primaryColumn, row)\n      : 'this row';\n\n    return `Open actions for ${primaryLabel}`;\n  }\n\n  emptyDescriptionText(): string {\n    if (this.searchTerm()) {\n      return 'No rows match the current search. Try a broader query or clear the filter.';\n    }\n\n    return this.emptyDescription();\n  }\n\n  readonly hostClasses = computed(() =>\n    ['mf-table', `mf-table--${this.variant()}`, `mf-table--${this.density()}`].join(\n      ' ',\n    ),\n  );\n\n  private getCellValue(\n    column: MfTableColumn,\n    row: Record<string, unknown>,\n  ): unknown {\n    return column.sortAccessor ? column.sortAccessor(row) : this.getRawValue(column, row);\n  }\n\n  private getRawValue(\n    column: MfTableColumn,\n    row: Record<string, unknown>,\n  ): unknown {\n    return row[column.key];\n  }\n\n  private getSearchValue(\n    column: MfTableColumn,\n    row: Record<string, unknown>,\n  ): string {\n    if (column.searchAccessor) {\n      return column.searchAccessor(row);\n    }\n\n    return this.renderCell(column, row);\n  }\n\n  private normalizeSortValue(\n    column: MfTableColumn,\n    row: Record<string, unknown>,\n  ): number | string {\n    const value = this.getCellValue(column, row);\n\n    if (value === null || value === undefined || value === '') {\n      return '';\n    }\n\n    if (column.type === 'number') {\n      return typeof value === 'number' ? value : Number(value);\n    }\n\n    if (column.type === 'date') {\n      const date = value instanceof Date ? value : new Date(String(value));\n      return Number.isNaN(date.getTime()) ? '' : date.getTime();\n    }\n\n    if (typeof value === 'number') {\n      return value;\n    }\n\n    return String(value).toLocaleLowerCase();\n  }\n\n  private resolveBadgeTone(\n    column: MfTableColumn,\n    row: Record<string, unknown>,\n  ): MfTableBadgeTone {\n    const value = row[column.key];\n\n    if (typeof column.badgeTone === 'function') {\n      return column.badgeTone(value, row);\n    }\n\n    if (column.badgeTone) {\n      return column.badgeTone;\n    }\n\n    return column.badgeTones?.[String(value)] ?? 'neutral';\n  }\n}\n",
+            "properties": [
+                {
+                    "name": "ariaLabel",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "function",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 57
+                },
+                {
+                    "name": "disabled",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "boolean | unknown",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 56
+                },
+                {
+                    "name": "icon",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 54
+                },
+                {
+                    "name": "key",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 52
+                },
+                {
+                    "name": "label",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 53
+                },
+                {
+                    "name": "tone",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "MfTableActionTone",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 55
                 }
             ],
             "indexSignatures": [],
@@ -9931,7 +10153,7 @@
         },
         {
             "name": "MfTableComponent",
-            "id": "component-MfTableComponent-6369889e22ebd32d501cc29b2a48c86342cf5122bc6a7b5fb94a8c5cc889322854baedf9b1fbf52341440e0aad32cfe087081a9a49f2693ba78edd481bec963c",
+            "id": "component-MfTableComponent-ae123738c4591c9fe92920dc9c7815d44a5d28aef68a459dff7859846b69ca85c24f803a3dabe863f30ccb79e150e3e947be06fb31648d53b309c60cfa873466",
             "file": "src/app/components/table/mf-table.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
@@ -9942,40 +10164,155 @@
             "selector": "mf-table",
             "styleUrls": [],
             "styles": [],
-            "template": "<div class=\"mf-table__wrapper\" [class]=\"hostClasses()\">\n  <table\n    mat-table\n    [dataSource]=\"data()\"\n    matSort\n    (matSortChange)=\"mfSortChange.emit($event)\"\n  >\n    @for (col of columns(); track col.key) {\n      <ng-container [matColumnDef]=\"col.key\">\n        @if (col.sortable) {\n          <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ col.header }}</th>\n        } @else {\n          <th mat-header-cell *matHeaderCellDef>{{ col.header }}</th>\n        }\n        <td mat-cell *matCellDef=\"let row\">{{ row[col.key] }}</td>\n      </ng-container>\n    }\n\n    @if (rowActionLabel()) {\n      <ng-container [matColumnDef]=\"actionColumnKey\">\n        <th mat-header-cell *matHeaderCellDef class=\"mf-table__actions-header\">\n          {{ rowActionHeader() }}\n        </th>\n        <td mat-cell *matCellDef=\"let row\" class=\"mf-table__actions-cell\">\n          <button\n            mat-button\n            type=\"button\"\n            class=\"mf-table__action\"\n            [attr.aria-label]=\"getRowActionAriaLabel(row)\"\n            (click)=\"emitRowAction(row)\"\n          >\n            {{ rowActionLabel() }}\n          </button>\n        </td>\n      </ng-container>\n    }\n\n    <tr mat-header-row *matHeaderRowDef=\"displayedColumns()\"></tr>\n    <tr mat-row *matRowDef=\"let row; columns: displayedColumns()\"></tr>\n  </table>\n</div>\n",
+            "template": "<section [class]=\"hostClasses()\">\n  @if (showsToolbar()) {\n    <header class=\"mf-table__toolbar\">\n      <div class=\"mf-table__intro\">\n        @if (title()) {\n          <h2 class=\"mf-table__title\">{{ title() }}</h2>\n        }\n        @if (description()) {\n          <p class=\"mf-table__description\">{{ description() }}</p>\n        }\n        <div class=\"mf-table__meta\">\n          <span class=\"mf-table__metric\">{{ resultSummary() }}</span>\n          @if (searchTerm()) {\n            <span class=\"mf-table__metric mf-table__metric--accent\">\n              Filter active\n            </span>\n          }\n          @if (sortState().direction) {\n            <span class=\"mf-table__metric\">\n              Sorted by {{ sortState().active }}\n            </span>\n          }\n        </div>\n      </div>\n\n      @if (showSearch()) {\n        <div class=\"mf-table__search\">\n          <mf-input\n            [label]=\"searchLabel()\"\n            [ariaLabel]=\"searchLabel()\"\n            [placeholder]=\"searchPlaceholder()\"\n            [value]=\"localSearchTerm()\"\n            [type]=\"'search'\"\n            [leadingIcon]=\"'search'\"\n            [fullWidth]=\"true\"\n            (mfInput)=\"onSearchChange($event)\"\n          />\n        </div>\n      }\n    </header>\n  }\n\n  @if (filteredRows().length > 0) {\n    <div class=\"mf-table__surface\">\n      <div class=\"mf-table__wrapper\">\n        <table\n          mat-table\n          [dataSource]=\"paginatedRows()\"\n          matSort\n          [matSortActive]=\"sortState().active\"\n          [matSortDirection]=\"sortState().direction\"\n          class=\"mf-table__table\"\n          (matSortChange)=\"onSortChange($event)\"\n        >\n          @for (column of visibleColumns(); track column.key) {\n            <ng-container [matColumnDef]=\"column.key\">\n              @if (column.sortable) {\n                <th\n                  mat-header-cell\n                  *matHeaderCellDef\n                  mat-sort-header\n                  [style.width]=\"column.width || null\"\n                  [class]=\"headerCellClasses(column)\"\n                >\n                  {{ column.header }}\n                </th>\n              } @else {\n                <th\n                  mat-header-cell\n                  *matHeaderCellDef\n                  [style.width]=\"column.width || null\"\n                  [class]=\"headerCellClasses(column)\"\n                >\n                  {{ column.header }}\n                </th>\n              }\n\n              <td\n                mat-cell\n                *matCellDef=\"let row\"\n                [style.width]=\"column.width || null\"\n                [class]=\"cellClasses(column)\"\n              >\n                @if (column.type === 'badge') {\n                  <span [class]=\"badgeClasses(column, row)\">\n                    {{ renderCell(column, row) }}\n                  </span>\n                } @else {\n                  <span class=\"mf-table__cell-text\">\n                    {{ renderCell(column, row) }}\n                  </span>\n                }\n              </td>\n            </ng-container>\n          }\n\n          @if (hasActions()) {\n            <ng-container [matColumnDef]=\"actionColumnKey\">\n              <th\n                mat-header-cell\n                *matHeaderCellDef\n                class=\"mf-table__actions-header\"\n              >\n                {{ resolvedActionHeader() }}\n              </th>\n              <td\n                mat-cell\n                *matCellDef=\"let row\"\n                class=\"mf-table__actions-cell\"\n              >\n                @if (usesActionMenu()) {\n                  <button\n                    mat-icon-button\n                    type=\"button\"\n                    class=\"mf-table__action-menu-trigger\"\n                    [matMenuTriggerFor]=\"actionMenu\"\n                    [attr.aria-label]=\"getRowMenuAriaLabel(row)\"\n                  >\n                    <mat-icon aria-hidden=\"true\">more_horiz</mat-icon>\n                  </button>\n                  <mat-menu\n                    #actionMenu=\"matMenu\"\n                    xPosition=\"before\"\n                    class=\"mf-table__action-menu\"\n                  >\n                    @for (action of resolvedActions(); track action.key) {\n                      <button\n                        mat-menu-item\n                        [disabled]=\"isActionDisabled(action, row)\"\n                        [attr.aria-label]=\"getActionAriaLabel(action, row)\"\n                        (click)=\"onActionClick(action, row)\"\n                      >\n                        @if (action.icon) {\n                          <mat-icon aria-hidden=\"true\">{{ action.icon }}</mat-icon>\n                        }\n                        <span>{{ action.label }}</span>\n                      </button>\n                    }\n                  </mat-menu>\n                } @else {\n                  <div class=\"mf-table__action-group\">\n                    @for (action of resolvedActions(); track action.key) {\n                      <button\n                        mat-stroked-button\n                        type=\"button\"\n                        [class]=\"actionClasses(action)\"\n                        [disabled]=\"isActionDisabled(action, row)\"\n                        [attr.aria-label]=\"getActionAriaLabel(action, row)\"\n                        (click)=\"onActionClick(action, row)\"\n                      >\n                        @if (action.icon) {\n                          <mat-icon aria-hidden=\"true\">{{ action.icon }}</mat-icon>\n                        }\n                        <span>{{ action.label }}</span>\n                      </button>\n                    }\n                  </div>\n                }\n              </td>\n            </ng-container>\n          }\n\n          <tr\n            mat-header-row\n            *matHeaderRowDef=\"displayedColumns(); sticky: stickyHeader()\"\n          ></tr>\n          <tr\n            mat-row\n            *matRowDef=\"let row; columns: displayedColumns()\"\n            class=\"mf-table__row\"\n          ></tr>\n        </table>\n      </div>\n\n      @if (showPaginator()) {\n        <footer class=\"mf-table__footer\">\n          <mf-paginator\n            [length]=\"filteredRows().length\"\n            [pageSize]=\"localPageSize()\"\n            [pageIndex]=\"localPageIndex()\"\n            [pageSizeOptions]=\"pageSizeOptions()\"\n            [showFirstLastButtons]=\"showFirstLastButtons()\"\n            [hidePageSize]=\"hidePageSize()\"\n            (mfPageChange)=\"onPageChange($event)\"\n          />\n        </footer>\n      }\n    </div>\n  } @else {\n    <div class=\"mf-table__empty\">\n      <div class=\"mf-table__empty-icon\">\n        <mat-icon aria-hidden=\"true\">table_rows</mat-icon>\n      </div>\n      <h3 class=\"mf-table__empty-title\">{{ emptyTitle() }}</h3>\n      <p class=\"mf-table__empty-description\">{{ emptyDescriptionText() }}</p>\n    </div>\n  }\n</section>\n",
             "templateUrl": [],
             "viewProviders": [],
             "hostDirectives": [],
             "inputsClass": [
                 {
                     "name": "columns",
+                    "defaultValue": "[]",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "MfTableColumn[]",
                     "indexKey": "",
                     "optional": false,
-                    "description": "<p>Columnas de la tabla</p>\n",
-                    "line": 79,
-                    "rawdescription": "\nColumnas de la tabla",
+                    "description": "",
+                    "line": 289,
                     "modifierKind": [
                         148
                     ],
-                    "required": true
+                    "required": false
                 },
                 {
                     "name": "data",
+                    "defaultValue": "[]",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Record<string, unknown>[]",
                     "indexKey": "",
                     "optional": false,
-                    "description": "<p>Datos de la tabla</p>\n",
-                    "line": 81,
-                    "rawdescription": "\nDatos de la tabla",
+                    "description": "",
+                    "line": 290,
                     "modifierKind": [
                         148
                     ],
-                    "required": true
+                    "required": false
+                },
+                {
+                    "name": "density",
+                    "defaultValue": "'comfortable'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "MfTableDensity",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 292,
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "description",
+                    "defaultValue": "undefined",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string | undefined",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 294,
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "emptyDescription",
+                    "defaultValue": "    'This dataset has no rows yet. Connect data or add records to populate the table.',  ",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 307,
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "emptyTitle",
+                    "defaultValue": "'No records found'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 306,
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "hidePageSize",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 304,
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "pageIndex",
+                    "defaultValue": "0",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 301,
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "pageSize",
+                    "defaultValue": "10",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 300,
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "pageSizeOptions",
+                    "defaultValue": "[10, 25, 50, 100]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number[]",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 302,
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
                 },
                 {
                     "name": "rowActionHeader",
@@ -9984,9 +10321,8 @@
                     "deprecationMessage": "",
                     "indexKey": "",
                     "optional": false,
-                    "description": "<p>Cabecera visible de la columna de acciÃ³n</p>\n",
-                    "line": 87,
-                    "rawdescription": "\nCabecera visible de la columna de acciÃ³n",
+                    "description": "",
+                    "line": 312,
                     "modifierKind": [
                         148
                     ],
@@ -10000,9 +10336,136 @@
                     "type": "string | undefined",
                     "indexKey": "",
                     "optional": false,
-                    "description": "<p>Texto visible del botÃ³n de acciÃ³n por fila</p>\n",
-                    "line": 85,
-                    "rawdescription": "\nTexto visible del botÃ³n de acciÃ³n por fila",
+                    "description": "",
+                    "line": 311,
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "rowActions",
+                    "defaultValue": "[]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "MfTableRowAction[]",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 316,
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "searchLabel",
+                    "defaultValue": "'Search'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 296,
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "searchPlaceholder",
+                    "defaultValue": "'Search records'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 297,
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "searchValue",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 298,
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "showFirstLastButtons",
+                    "defaultValue": "true",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 303,
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "showPaginator",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 299,
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "showSearch",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 295,
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "stickyHeader",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 305,
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "title",
+                    "defaultValue": "undefined",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string | undefined",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 293,
                     "modifierKind": [
                         148
                     ],
@@ -10016,9 +10479,8 @@
                     "type": "MfTableVariant",
                     "indexKey": "",
                     "optional": false,
-                    "description": "<p>Variante visual</p>\n",
-                    "line": 83,
-                    "rawdescription": "\nVariante visual",
+                    "description": "",
+                    "line": 291,
                     "modifierKind": [
                         148
                     ],
@@ -10027,6 +10489,34 @@
             ],
             "outputsClass": [
                 {
+                    "name": "mfAction",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "{    action: MfTableRowAction;    row: Record<string, unknown>;  }",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 321,
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "mfPageChange",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "PageEvent",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 320,
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
                     "name": "mfRowAction",
                     "deprecated": false,
                     "deprecationMessage": "",
@@ -10034,7 +10524,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 93,
+                    "line": 325,
                     "modifierKind": [
                         148
                     ],
@@ -10042,37 +10532,29 @@
                 },
                 {
                     "name": "mfRowClick",
-                    "deprecated": true,
-                    "deprecationMessage": "usa `mfRowAction` para interacciones explÃ­citas por fila",
+                    "deprecated": false,
+                    "deprecationMessage": "",
                     "type": "Record<string, unknown>",
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 95,
-                    "rawdescription": "",
+                    "line": 326,
                     "modifierKind": [
                         148
                     ],
-                    "jsdoctags": [
-                        {
-                            "pos": 3175,
-                            "end": 3245,
-                            "kind": 332,
-                            "id": 0,
-                            "flags": 16842752,
-                            "modifierFlagsCache": 0,
-                            "transformFlags": 0,
-                            "tagName": {
-                                "pos": 3176,
-                                "end": 3186,
-                                "kind": 80,
-                                "id": 0,
-                                "flags": 16842752,
-                                "transformFlags": 0,
-                                "escapedText": "deprecated"
-                            },
-                            "comment": "<p>usa <code>mfRowAction</code> para interacciones explÃ­citas por fila</p>\n"
-                        }
+                    "required": false
+                },
+                {
+                    "name": "mfSearchChange",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 319,
+                    "modifierKind": [
+                        148
                     ],
                     "required": false
                 },
@@ -10084,7 +10566,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 92,
+                    "line": 318,
                     "modifierKind": [
                         148
                     ],
@@ -10101,7 +10583,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 76,
+                    "line": 287,
                     "modifierKind": [
                         124,
                         148
@@ -10109,29 +10591,164 @@
                 },
                 {
                     "name": "displayedColumns",
-                    "defaultValue": "computed(() => {\n    const columns = this.columns().map((column) => column.key);\n    if (this.rowActionLabel()) {\n      columns.push(this.actionColumnKey);\n    }\n    return columns;\n  })",
+                    "defaultValue": "computed(() => {\n    const columns = this.visibleColumns().map((column) => column.key);\n\n    if (this.hasActions()) {\n      columns.push(this.actionColumnKey);\n    }\n\n    return columns;\n  })",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "unknown",
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 97,
+                    "line": 383,
                     "modifierKind": [
                         148
                     ]
                 },
                 {
-                    "name": "hostClasses",
-                    "defaultValue": "computed(() => {\n    return ['mf-table', `mf-table--${this.variant()}`].join(' ');\n  })",
+                    "name": "filteredRows",
+                    "defaultValue": "computed(() => {\n    const query = this.searchTerm().toLowerCase();\n    const rows = this.data();\n\n    if (!query) {\n      return rows;\n    }\n\n    const searchableColumns = this.visibleColumns().filter(\n      (column) => column.searchable !== false,\n    );\n\n    return rows.filter((row) =>\n      searchableColumns.some((column) =>\n        this.getSearchValue(column, row).toLowerCase().includes(query),\n      ),\n    );\n  })",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "unknown",
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 105,
+                    "line": 393,
                     "modifierKind": [
+                        124,
+                        148
+                    ]
+                },
+                {
+                    "name": "hasActions",
+                    "defaultValue": "computed(() => this.resolvedActions().length > 0)",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 378,
+                    "modifierKind": [
+                        124,
+                        148
+                    ]
+                },
+                {
+                    "name": "hostClasses",
+                    "defaultValue": "computed(() =>\n    ['mf-table', `mf-table--${this.variant()}`, `mf-table--${this.density()}`].join(\n      ' ',\n    ),\n  )",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 581,
+                    "modifierKind": [
+                        148
+                    ]
+                },
+                {
+                    "name": "localPageIndex",
+                    "defaultValue": "signal(0)",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 284,
+                    "modifierKind": [
+                        124,
+                        148
+                    ]
+                },
+                {
+                    "name": "localPageSize",
+                    "defaultValue": "signal(10)",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 285,
+                    "modifierKind": [
+                        124,
+                        148
+                    ]
+                },
+                {
+                    "name": "localSearchTerm",
+                    "defaultValue": "signal('')",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 283,
+                    "modifierKind": [
+                        124,
+                        148
+                    ]
+                },
+                {
+                    "name": "paginatedRows",
+                    "defaultValue": "computed(() => {\n    if (!this.showPaginator()) {\n      return this.sortedRows();\n    }\n\n    const size = Math.max(this.localPageSize(), 1);\n    const start = this.localPageIndex() * size;\n    return this.sortedRows().slice(start, start + size);\n  })",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 441,
+                    "modifierKind": [
+                        124,
+                        148
+                    ]
+                },
+                {
+                    "name": "resolvedActionHeader",
+                    "defaultValue": "computed(() => this.rowActionHeader())",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 360,
+                    "modifierKind": [
+                        124,
+                        148
+                    ]
+                },
+                {
+                    "name": "resolvedActions",
+                    "defaultValue": "computed<MfResolvedTableAction[]>(() => {\n    const actions: MfResolvedTableAction[] = [...this.rowActions()];\n\n    if (this.rowActionLabel()) {\n      actions.unshift({\n        key: 'legacy-action',\n        label: this.rowActionLabel() as string,\n        tone: 'neutral',\n        ariaLabel: this.rowActionAriaLabel(),\n        legacy: true,\n      });\n    }\n\n    return actions;\n  })",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 362,
+                    "modifierKind": [
+                        124,
+                        148
+                    ]
+                },
+                {
+                    "name": "resultSummary",
+                    "defaultValue": "computed(() => {\n    const filtered = this.filteredRows().length;\n    const total = this.data().length;\n\n    if (filtered === total) {\n      return `${total} records`;\n    }\n\n    return `${filtered} of ${total} records`;\n  })",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 451,
+                    "modifierKind": [
+                        124,
                         148
                     ]
                 },
@@ -10144,15 +10761,389 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 88,
+                    "line": 313,
                     "modifierKind": [
+                        148
+                    ]
+                },
+                {
+                    "name": "searchTerm",
+                    "defaultValue": "computed(() => this.localSearchTerm().trim())",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 356,
+                    "modifierKind": [
+                        124,
+                        148
+                    ]
+                },
+                {
+                    "name": "showsToolbar",
+                    "defaultValue": "computed(\n    () => Boolean(this.title() || this.description() || this.showSearch()),\n  )",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 357,
+                    "modifierKind": [
+                        124,
+                        148
+                    ]
+                },
+                {
+                    "name": "sortedRows",
+                    "defaultValue": "computed(() => {\n    const rows = [...this.filteredRows()];\n    const { active, direction } = this.sortState();\n\n    if (!active || !direction) {\n      return rows;\n    }\n\n    const column = this.visibleColumns().find((item) => item.key === active);\n    if (!column) {\n      return rows;\n    }\n\n    return rows.sort((left, right) => {\n      const leftValue = this.normalizeSortValue(column, left);\n      const rightValue = this.normalizeSortValue(column, right);\n\n      if (leftValue < rightValue) {\n        return direction === 'asc' ? -1 : 1;\n      }\n\n      if (leftValue > rightValue) {\n        return direction === 'asc' ? 1 : -1;\n      }\n\n      return 0;\n    });\n  })",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 412,
+                    "modifierKind": [
+                        124,
+                        148
+                    ]
+                },
+                {
+                    "name": "sortState",
+                    "defaultValue": "signal<Sort>({ active: '', direction: '' })",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 286,
+                    "modifierKind": [
+                        124,
+                        148
+                    ]
+                },
+                {
+                    "name": "usesActionMenu",
+                    "defaultValue": "computed(\n    () => this.resolvedActions().length > 1,\n  )",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 379,
+                    "modifierKind": [
+                        124,
+                        148
+                    ]
+                },
+                {
+                    "name": "visibleColumns",
+                    "defaultValue": "computed(() =>\n    this.columns().filter((column) => !column.hidden),\n  )",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 352,
+                    "modifierKind": [
+                        124,
                         148
                     ]
                 }
             ],
             "methodsClass": [
                 {
-                    "name": "emitRowAction",
+                    "name": "actionClasses",
+                    "args": [
+                        {
+                            "name": "action",
+                            "type": "MfResolvedTableAction",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "string",
+                    "typeParameters": [],
+                    "line": 541,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "action",
+                            "type": "MfResolvedTableAction",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "badgeClasses",
+                    "args": [
+                        {
+                            "name": "column",
+                            "type": "MfTableColumn",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "row",
+                            "type": "Record<string | unknown>",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "string",
+                    "typeParameters": [],
+                    "line": 534,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "column",
+                            "type": "MfTableColumn",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "row",
+                            "type": "Record<string | unknown>",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "cellClasses",
+                    "args": [
+                        {
+                            "name": "column",
+                            "type": "MfTableColumn",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "string",
+                    "typeParameters": [],
+                    "line": 521,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "column",
+                            "type": "MfTableColumn",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "emptyDescriptionText",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "string",
+                    "typeParameters": [],
+                    "line": 573,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "getActionAriaLabel",
+                    "args": [
+                        {
+                            "name": "action",
+                            "type": "MfResolvedTableAction",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "row",
+                            "type": "Record<string | unknown>",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "string | null",
+                    "typeParameters": [],
+                    "line": 557,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "action",
+                            "type": "MfResolvedTableAction",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "row",
+                            "type": "Record<string | unknown>",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "getCellValue",
+                    "args": [
+                        {
+                            "name": "column",
+                            "type": "MfTableColumn",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "row",
+                            "type": "Record<string | unknown>",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "unknown",
+                    "typeParameters": [],
+                    "line": 587,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        123
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "column",
+                            "type": "MfTableColumn",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "row",
+                            "type": "Record<string | unknown>",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "getRawValue",
+                    "args": [
+                        {
+                            "name": "column",
+                            "type": "MfTableColumn",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "row",
+                            "type": "Record<string | unknown>",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "unknown",
+                    "typeParameters": [],
+                    "line": 594,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        123
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "column",
+                            "type": "MfTableColumn",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "row",
+                            "type": "Record<string | unknown>",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "getRowMenuAriaLabel",
                     "args": [
                         {
                             "name": "row",
@@ -10164,9 +11155,9 @@
                         }
                     ],
                     "optional": false,
-                    "returnType": "void",
+                    "returnType": "string",
                     "typeParameters": [],
-                    "line": 109,
+                    "line": 564,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -10184,8 +11175,16 @@
                     ]
                 },
                 {
-                    "name": "getRowActionAriaLabel",
+                    "name": "getSearchValue",
                     "args": [
+                        {
+                            "name": "column",
+                            "type": "MfTableColumn",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
                         {
                             "name": "row",
                             "type": "Record<string | unknown>",
@@ -10196,12 +11195,415 @@
                         }
                     ],
                     "optional": false,
-                    "returnType": "string | null",
+                    "returnType": "string",
                     "typeParameters": [],
-                    "line": 114,
+                    "line": 601,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        123
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "column",
+                            "type": "MfTableColumn",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "row",
+                            "type": "Record<string | unknown>",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "headerCellClasses",
+                    "args": [
+                        {
+                            "name": "column",
+                            "type": "MfTableColumn",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "string",
+                    "typeParameters": [],
+                    "line": 514,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
+                        {
+                            "name": "column",
+                            "type": "MfTableColumn",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "isActionDisabled",
+                    "args": [
+                        {
+                            "name": "action",
+                            "type": "MfResolvedTableAction",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "row",
+                            "type": "Record<string | unknown>",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "boolean",
+                    "typeParameters": [],
+                    "line": 548,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "action",
+                            "type": "MfResolvedTableAction",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "row",
+                            "type": "Record<string | unknown>",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "normalizeSortValue",
+                    "args": [
+                        {
+                            "name": "column",
+                            "type": "MfTableColumn",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "row",
+                            "type": "Record<string | unknown>",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "number | string",
+                    "typeParameters": [],
+                    "line": 612,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        123
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "column",
+                            "type": "MfTableColumn",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "row",
+                            "type": "Record<string | unknown>",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "onActionClick",
+                    "args": [
+                        {
+                            "name": "action",
+                            "type": "MfResolvedTableAction",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "row",
+                            "type": "Record<string | unknown>",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 480,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "action",
+                            "type": "MfResolvedTableAction",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "row",
+                            "type": "Record<string | unknown>",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "onPageChange",
+                    "args": [
+                        {
+                            "name": "event",
+                            "type": "PageEvent",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 474,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "event",
+                            "type": "PageEvent",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "onSearchChange",
+                    "args": [
+                        {
+                            "name": "value",
+                            "type": "string",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 462,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "value",
+                            "type": "string",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "onSortChange",
+                    "args": [
+                        {
+                            "name": "sort",
+                            "type": "Sort",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 468,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "sort",
+                            "type": "Sort",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "renderCell",
+                    "args": [
+                        {
+                            "name": "column",
+                            "type": "MfTableColumn",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "row",
+                            "type": "Record<string | unknown>",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "string",
+                    "typeParameters": [],
+                    "line": 489,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "column",
+                            "type": "MfTableColumn",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "row",
+                            "type": "Record<string | unknown>",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "resolveBadgeTone",
+                    "args": [
+                        {
+                            "name": "column",
+                            "type": "MfTableColumn",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "row",
+                            "type": "Record<string | unknown>",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "MfTableBadgeTone",
+                    "typeParameters": [],
+                    "line": 638,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        123
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "column",
+                            "type": "MfTableColumn",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
                         {
                             "name": "row",
                             "type": "Record<string | unknown>",
@@ -10237,16 +11639,36 @@
                 {
                     "name": "MatIconModule",
                     "type": "module"
+                },
+                {
+                    "name": "MatMenuModule",
+                    "type": "module"
+                },
+                {
+                    "name": "MfInputComponent",
+                    "type": "component"
+                },
+                {
+                    "name": "MfPaginatorComponent",
+                    "type": "component"
                 }
             ],
-            "description": "<p>Table de la librerÃ­a ng-comps.\nEnvuelve Angular Material <code>mat-table</code> y expone una API uniforme\ncon look and feel de marca. Ideal para dashboards y paneles de datos.</p>\n",
-            "rawdescription": "\n\nTable de la librerÃ­a ng-comps.\nEnvuelve Angular Material `mat-table` y expone una API uniforme\ncon look and feel de marca. Ideal para dashboards y paneles de datos.\n",
+            "description": "<p>Enterprise-oriented table component with optional search, pagination,\nbadges, explicit row actions and client-side sorting.</p>\n",
+            "rawdescription": "\n\nEnterprise-oriented table component with optional search, pagination,\nbadges, explicit row actions and client-side sorting.\n",
             "type": "component",
-            "sourceCode": "import {\n  ChangeDetectionStrategy,\n  Component,\n  computed,\n  input,\n  output,\n} from '@angular/core';\nimport { MatButtonModule } from '@angular/material/button';\nimport { MatIconModule } from '@angular/material/icon';\nimport { MatSortModule, Sort } from '@angular/material/sort';\nimport { MatTableModule } from '@angular/material/table';\n\nexport interface MfTableColumn {\n  key: string;\n  header: string;\n  sortable?: boolean;\n}\n\nexport type MfTableVariant = 'default' | 'striped' | 'bordered';\n\n/**\n * Table de la librerÃ­a ng-comps.\n * Envuelve Angular Material `mat-table` y expone una API uniforme\n * con look and feel de marca. Ideal para dashboards y paneles de datos.\n */\n@Component({\n  selector: 'mf-table',\n  imports: [MatTableModule, MatSortModule, MatButtonModule, MatIconModule],\n  template: `\n    <div class=\"mf-table__wrapper\" [class]=\"hostClasses()\">\n      <table\n        mat-table\n        [dataSource]=\"data()\"\n        matSort\n        (matSortChange)=\"mfSortChange.emit($event)\"\n      >\n        @for (col of columns(); track col.key) {\n          <ng-container [matColumnDef]=\"col.key\">\n            @if (col.sortable) {\n              <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ col.header }}</th>\n            } @else {\n              <th mat-header-cell *matHeaderCellDef>{{ col.header }}</th>\n            }\n            <td mat-cell *matCellDef=\"let row\">{{ row[col.key] }}</td>\n          </ng-container>\n        }\n\n        @if (rowActionLabel()) {\n          <ng-container [matColumnDef]=\"actionColumnKey\">\n            <th mat-header-cell *matHeaderCellDef class=\"mf-table__actions-header\">\n              {{ rowActionHeader() }}\n            </th>\n            <td mat-cell *matCellDef=\"let row\" class=\"mf-table__actions-cell\">\n              <button\n                mat-button\n                type=\"button\"\n                class=\"mf-table__action\"\n                [attr.aria-label]=\"getRowActionAriaLabel(row)\"\n                (click)=\"emitRowAction(row)\"\n              >\n                {{ rowActionLabel() }}\n              </button>\n            </td>\n          </ng-container>\n        }\n\n        <tr mat-header-row *matHeaderRowDef=\"displayedColumns()\"></tr>\n        <tr mat-row *matRowDef=\"let row; columns: displayedColumns()\"></tr>\n      </table>\n    </div>\n  `,\n  styleUrl: './mf-table.component.css',\n  changeDetection: ChangeDetectionStrategy.OnPush,\n})\nexport class MfTableComponent {\n  protected readonly actionColumnKey = 'mf-row-action';\n\n  /** Columnas de la tabla */\n  readonly columns = input.required<MfTableColumn[]>();\n  /** Datos de la tabla */\n  readonly data = input.required<Record<string, unknown>[]>();\n  /** Variante visual */\n  readonly variant = input<MfTableVariant>('default');\n  /** Texto visible del botÃ³n de acciÃ³n por fila */\n  readonly rowActionLabel = input<string | undefined>(undefined);\n  /** Cabecera visible de la columna de acciÃ³n */\n  readonly rowActionHeader = input('Actions');\n  readonly rowActionAriaLabel = input<\n    ((row: Record<string, unknown>) => string) | undefined\n  >(undefined);\n\n  readonly mfSortChange = output<Sort>();\n  readonly mfRowAction = output<Record<string, unknown>>();\n  /** @deprecated usa `mfRowAction` para interacciones explÃ­citas por fila */\n  readonly mfRowClick = output<Record<string, unknown>>();\n\n  readonly displayedColumns = computed(() => {\n    const columns = this.columns().map((column) => column.key);\n    if (this.rowActionLabel()) {\n      columns.push(this.actionColumnKey);\n    }\n    return columns;\n  });\n\n  readonly hostClasses = computed(() => {\n    return ['mf-table', `mf-table--${this.variant()}`].join(' ');\n  });\n\n  emitRowAction(row: Record<string, unknown>): void {\n    this.mfRowAction.emit(row);\n    this.mfRowClick.emit(row);\n  }\n\n  getRowActionAriaLabel(row: Record<string, unknown>): string | null {\n    return this.rowActionAriaLabel()?.(row) ?? this.rowActionLabel() ?? null;\n  }\n}\n",
+            "sourceCode": "import {\n  ChangeDetectionStrategy,\n  Component,\n  computed,\n  effect,\n  input,\n  output,\n  signal,\n} from '@angular/core';\nimport { MatButtonModule } from '@angular/material/button';\nimport { PageEvent } from '@angular/material/paginator';\nimport { MatIconModule } from '@angular/material/icon';\nimport { MatMenuModule } from '@angular/material/menu';\nimport { MatSortModule, Sort } from '@angular/material/sort';\nimport { MatTableModule } from '@angular/material/table';\nimport { MfInputComponent } from '../input';\nimport { MfPaginatorComponent } from '../paginator';\n\nexport type MfTableCellType = 'text' | 'number' | 'date' | 'badge';\nexport type MfTableAlign = 'start' | 'center' | 'end';\nexport type MfTableVariant = 'default' | 'striped' | 'bordered';\nexport type MfTableDensity = 'compact' | 'comfortable' | 'spacious';\nexport type MfTableBadgeTone =\n  | 'brand'\n  | 'success'\n  | 'warning'\n  | 'error'\n  | 'neutral';\nexport type MfTableActionTone = 'primary' | 'neutral' | 'danger';\n\nexport interface MfTableColumn {\n  key: string;\n  header: string;\n  sortable?: boolean;\n  type?: MfTableCellType;\n  align?: MfTableAlign;\n  width?: string;\n  hidden?: boolean;\n  truncate?: boolean;\n  searchable?: boolean;\n  emptyValue?: string;\n  formatter?: (value: unknown, row: Record<string, unknown>) => string;\n  sortAccessor?: (row: Record<string, unknown>) => unknown;\n  searchAccessor?: (row: Record<string, unknown>) => string;\n  badgeTone?:\n    | MfTableBadgeTone\n    | ((value: unknown, row: Record<string, unknown>) => MfTableBadgeTone);\n  badgeTones?: Record<string, MfTableBadgeTone>;\n}\n\nexport interface MfTableRowAction {\n  key: string;\n  label: string;\n  icon?: string;\n  tone?: MfTableActionTone;\n  disabled?: boolean | ((row: Record<string, unknown>) => boolean);\n  ariaLabel?: (row: Record<string, unknown>) => string;\n}\n\ninterface MfResolvedTableAction extends MfTableRowAction {\n  legacy?: boolean;\n}\n\n/**\n * Enterprise-oriented table component with optional search, pagination,\n * badges, explicit row actions and client-side sorting.\n */\n@Component({\n  selector: 'mf-table',\n  imports: [\n    MatTableModule,\n    MatSortModule,\n    MatButtonModule,\n    MatIconModule,\n    MatMenuModule,\n    MfInputComponent,\n    MfPaginatorComponent,\n  ],\n  template: `\n    <section [class]=\"hostClasses()\">\n      @if (showsToolbar()) {\n        <header class=\"mf-table__toolbar\">\n          <div class=\"mf-table__intro\">\n            @if (title()) {\n              <h2 class=\"mf-table__title\">{{ title() }}</h2>\n            }\n            @if (description()) {\n              <p class=\"mf-table__description\">{{ description() }}</p>\n            }\n            <div class=\"mf-table__meta\">\n              <span class=\"mf-table__metric\">{{ resultSummary() }}</span>\n              @if (searchTerm()) {\n                <span class=\"mf-table__metric mf-table__metric--accent\">\n                  Filter active\n                </span>\n              }\n              @if (sortState().direction) {\n                <span class=\"mf-table__metric\">\n                  Sorted by {{ sortState().active }}\n                </span>\n              }\n            </div>\n          </div>\n\n          @if (showSearch()) {\n            <div class=\"mf-table__search\">\n              <mf-input\n                [label]=\"searchLabel()\"\n                [ariaLabel]=\"searchLabel()\"\n                [placeholder]=\"searchPlaceholder()\"\n                [value]=\"localSearchTerm()\"\n                [type]=\"'search'\"\n                [leadingIcon]=\"'search'\"\n                [fullWidth]=\"true\"\n                (mfInput)=\"onSearchChange($event)\"\n              />\n            </div>\n          }\n        </header>\n      }\n\n      @if (filteredRows().length > 0) {\n        <div class=\"mf-table__surface\">\n          <div class=\"mf-table__wrapper\">\n            <table\n              mat-table\n              [dataSource]=\"paginatedRows()\"\n              matSort\n              [matSortActive]=\"sortState().active\"\n              [matSortDirection]=\"sortState().direction\"\n              class=\"mf-table__table\"\n              (matSortChange)=\"onSortChange($event)\"\n            >\n              @for (column of visibleColumns(); track column.key) {\n                <ng-container [matColumnDef]=\"column.key\">\n                  @if (column.sortable) {\n                    <th\n                      mat-header-cell\n                      *matHeaderCellDef\n                      mat-sort-header\n                      [style.width]=\"column.width || null\"\n                      [class]=\"headerCellClasses(column)\"\n                    >\n                      {{ column.header }}\n                    </th>\n                  } @else {\n                    <th\n                      mat-header-cell\n                      *matHeaderCellDef\n                      [style.width]=\"column.width || null\"\n                      [class]=\"headerCellClasses(column)\"\n                    >\n                      {{ column.header }}\n                    </th>\n                  }\n\n                  <td\n                    mat-cell\n                    *matCellDef=\"let row\"\n                    [style.width]=\"column.width || null\"\n                    [class]=\"cellClasses(column)\"\n                  >\n                    @if (column.type === 'badge') {\n                      <span [class]=\"badgeClasses(column, row)\">\n                        {{ renderCell(column, row) }}\n                      </span>\n                    } @else {\n                      <span class=\"mf-table__cell-text\">\n                        {{ renderCell(column, row) }}\n                      </span>\n                    }\n                  </td>\n                </ng-container>\n              }\n\n              @if (hasActions()) {\n                <ng-container [matColumnDef]=\"actionColumnKey\">\n                  <th\n                    mat-header-cell\n                    *matHeaderCellDef\n                    class=\"mf-table__actions-header\"\n                  >\n                    {{ resolvedActionHeader() }}\n                  </th>\n                  <td\n                    mat-cell\n                    *matCellDef=\"let row\"\n                    class=\"mf-table__actions-cell\"\n                  >\n                    @if (usesActionMenu()) {\n                      <button\n                        mat-icon-button\n                        type=\"button\"\n                        class=\"mf-table__action-menu-trigger\"\n                        [matMenuTriggerFor]=\"actionMenu\"\n                        [attr.aria-label]=\"getRowMenuAriaLabel(row)\"\n                      >\n                        <mat-icon aria-hidden=\"true\">more_horiz</mat-icon>\n                      </button>\n                      <mat-menu\n                        #actionMenu=\"matMenu\"\n                        xPosition=\"before\"\n                        class=\"mf-table__action-menu\"\n                      >\n                        @for (action of resolvedActions(); track action.key) {\n                          <button\n                            mat-menu-item\n                            [disabled]=\"isActionDisabled(action, row)\"\n                            [attr.aria-label]=\"getActionAriaLabel(action, row)\"\n                            (click)=\"onActionClick(action, row)\"\n                          >\n                            @if (action.icon) {\n                              <mat-icon aria-hidden=\"true\">{{ action.icon }}</mat-icon>\n                            }\n                            <span>{{ action.label }}</span>\n                          </button>\n                        }\n                      </mat-menu>\n                    } @else {\n                      <div class=\"mf-table__action-group\">\n                        @for (action of resolvedActions(); track action.key) {\n                          <button\n                            mat-stroked-button\n                            type=\"button\"\n                            [class]=\"actionClasses(action)\"\n                            [disabled]=\"isActionDisabled(action, row)\"\n                            [attr.aria-label]=\"getActionAriaLabel(action, row)\"\n                            (click)=\"onActionClick(action, row)\"\n                          >\n                            @if (action.icon) {\n                              <mat-icon aria-hidden=\"true\">{{ action.icon }}</mat-icon>\n                            }\n                            <span>{{ action.label }}</span>\n                          </button>\n                        }\n                      </div>\n                    }\n                  </td>\n                </ng-container>\n              }\n\n              <tr\n                mat-header-row\n                *matHeaderRowDef=\"displayedColumns(); sticky: stickyHeader()\"\n              ></tr>\n              <tr\n                mat-row\n                *matRowDef=\"let row; columns: displayedColumns()\"\n                class=\"mf-table__row\"\n              ></tr>\n            </table>\n          </div>\n\n          @if (showPaginator()) {\n            <footer class=\"mf-table__footer\">\n              <mf-paginator\n                [length]=\"filteredRows().length\"\n                [pageSize]=\"localPageSize()\"\n                [pageIndex]=\"localPageIndex()\"\n                [pageSizeOptions]=\"pageSizeOptions()\"\n                [showFirstLastButtons]=\"showFirstLastButtons()\"\n                [hidePageSize]=\"hidePageSize()\"\n                (mfPageChange)=\"onPageChange($event)\"\n              />\n            </footer>\n          }\n        </div>\n      } @else {\n        <div class=\"mf-table__empty\">\n          <div class=\"mf-table__empty-icon\">\n            <mat-icon aria-hidden=\"true\">table_rows</mat-icon>\n          </div>\n          <h3 class=\"mf-table__empty-title\">{{ emptyTitle() }}</h3>\n          <p class=\"mf-table__empty-description\">{{ emptyDescriptionText() }}</p>\n        </div>\n      }\n    </section>\n  `,\n  styleUrl: './mf-table.component.css',\n  changeDetection: ChangeDetectionStrategy.OnPush,\n})\nexport class MfTableComponent {\n  protected readonly localSearchTerm = signal('');\n  protected readonly localPageIndex = signal(0);\n  protected readonly localPageSize = signal(10);\n  protected readonly sortState = signal<Sort>({ active: '', direction: '' });\n  protected readonly actionColumnKey = 'mf-row-action';\n\n  readonly columns = input<MfTableColumn[]>([]);\n  readonly data = input<Record<string, unknown>[]>([]);\n  readonly variant = input<MfTableVariant>('default');\n  readonly density = input<MfTableDensity>('comfortable');\n  readonly title = input<string | undefined>(undefined);\n  readonly description = input<string | undefined>(undefined);\n  readonly showSearch = input(false);\n  readonly searchLabel = input('Search');\n  readonly searchPlaceholder = input('Search records');\n  readonly searchValue = input('');\n  readonly showPaginator = input(false);\n  readonly pageSize = input(10);\n  readonly pageIndex = input(0);\n  readonly pageSizeOptions = input<number[]>([10, 25, 50, 100]);\n  readonly showFirstLastButtons = input(true);\n  readonly hidePageSize = input(false);\n  readonly stickyHeader = input(false);\n  readonly emptyTitle = input('No records found');\n  readonly emptyDescription = input(\n    'This dataset has no rows yet. Connect data or add records to populate the table.',\n  );\n\n  readonly rowActionLabel = input<string | undefined>(undefined);\n  readonly rowActionHeader = input('Actions');\n  readonly rowActionAriaLabel = input<\n    ((row: Record<string, unknown>) => string) | undefined\n  >(undefined);\n  readonly rowActions = input<MfTableRowAction[]>([]);\n\n  readonly mfSortChange = output<Sort>();\n  readonly mfSearchChange = output<string>();\n  readonly mfPageChange = output<PageEvent>();\n  readonly mfAction = output<{\n    action: MfTableRowAction;\n    row: Record<string, unknown>;\n  }>();\n  readonly mfRowAction = output<Record<string, unknown>>();\n  readonly mfRowClick = output<Record<string, unknown>>();\n\n  constructor() {\n    effect(() => {\n      this.localSearchTerm.set(this.searchValue());\n    });\n\n    effect(() => {\n      this.localPageIndex.set(this.pageIndex());\n    });\n\n    effect(() => {\n      this.localPageSize.set(this.pageSize());\n    });\n\n    effect(() => {\n      const totalRows = this.filteredRows().length;\n      const pageSize = Math.max(this.localPageSize(), 1);\n      const maxPageIndex = Math.max(Math.ceil(totalRows / pageSize) - 1, 0);\n\n      if (this.localPageIndex() > maxPageIndex) {\n        this.localPageIndex.set(maxPageIndex);\n      }\n    });\n  }\n\n  protected readonly visibleColumns = computed(() =>\n    this.columns().filter((column) => !column.hidden),\n  );\n\n  protected readonly searchTerm = computed(() => this.localSearchTerm().trim());\n  protected readonly showsToolbar = computed(\n    () => Boolean(this.title() || this.description() || this.showSearch()),\n  );\n  protected readonly resolvedActionHeader = computed(() => this.rowActionHeader());\n\n  protected readonly resolvedActions = computed<MfResolvedTableAction[]>(() => {\n    const actions: MfResolvedTableAction[] = [...this.rowActions()];\n\n    if (this.rowActionLabel()) {\n      actions.unshift({\n        key: 'legacy-action',\n        label: this.rowActionLabel() as string,\n        tone: 'neutral',\n        ariaLabel: this.rowActionAriaLabel(),\n        legacy: true,\n      });\n    }\n\n    return actions;\n  });\n\n  protected readonly hasActions = computed(() => this.resolvedActions().length > 0);\n  protected readonly usesActionMenu = computed(\n    () => this.resolvedActions().length > 1,\n  );\n\n  readonly displayedColumns = computed(() => {\n    const columns = this.visibleColumns().map((column) => column.key);\n\n    if (this.hasActions()) {\n      columns.push(this.actionColumnKey);\n    }\n\n    return columns;\n  });\n\n  protected readonly filteredRows = computed(() => {\n    const query = this.searchTerm().toLowerCase();\n    const rows = this.data();\n\n    if (!query) {\n      return rows;\n    }\n\n    const searchableColumns = this.visibleColumns().filter(\n      (column) => column.searchable !== false,\n    );\n\n    return rows.filter((row) =>\n      searchableColumns.some((column) =>\n        this.getSearchValue(column, row).toLowerCase().includes(query),\n      ),\n    );\n  });\n\n  protected readonly sortedRows = computed(() => {\n    const rows = [...this.filteredRows()];\n    const { active, direction } = this.sortState();\n\n    if (!active || !direction) {\n      return rows;\n    }\n\n    const column = this.visibleColumns().find((item) => item.key === active);\n    if (!column) {\n      return rows;\n    }\n\n    return rows.sort((left, right) => {\n      const leftValue = this.normalizeSortValue(column, left);\n      const rightValue = this.normalizeSortValue(column, right);\n\n      if (leftValue < rightValue) {\n        return direction === 'asc' ? -1 : 1;\n      }\n\n      if (leftValue > rightValue) {\n        return direction === 'asc' ? 1 : -1;\n      }\n\n      return 0;\n    });\n  });\n\n  protected readonly paginatedRows = computed(() => {\n    if (!this.showPaginator()) {\n      return this.sortedRows();\n    }\n\n    const size = Math.max(this.localPageSize(), 1);\n    const start = this.localPageIndex() * size;\n    return this.sortedRows().slice(start, start + size);\n  });\n\n  protected readonly resultSummary = computed(() => {\n    const filtered = this.filteredRows().length;\n    const total = this.data().length;\n\n    if (filtered === total) {\n      return `${total} records`;\n    }\n\n    return `${filtered} of ${total} records`;\n  });\n\n  onSearchChange(value: string): void {\n    this.localSearchTerm.set(value);\n    this.localPageIndex.set(0);\n    this.mfSearchChange.emit(value);\n  }\n\n  onSortChange(sort: Sort): void {\n    this.sortState.set(sort);\n    this.localPageIndex.set(0);\n    this.mfSortChange.emit(sort);\n  }\n\n  onPageChange(event: PageEvent): void {\n    this.localPageIndex.set(event.pageIndex);\n    this.localPageSize.set(event.pageSize);\n    this.mfPageChange.emit(event);\n  }\n\n  onActionClick(action: MfResolvedTableAction, row: Record<string, unknown>): void {\n    if (action.legacy) {\n      this.mfRowAction.emit(row);\n      this.mfRowClick.emit(row);\n    }\n\n    this.mfAction.emit({ action, row });\n  }\n\n  renderCell(column: MfTableColumn, row: Record<string, unknown>): string {\n    const value = this.getRawValue(column, row);\n\n    if (column.formatter) {\n      return column.formatter(value, row);\n    }\n\n    if (value === null || value === undefined || value === '') {\n      return column.emptyValue ?? '-';\n    }\n\n    if (column.type === 'number' && typeof value === 'number') {\n      return new Intl.NumberFormat('es-ES').format(value);\n    }\n\n    if (column.type === 'date') {\n      const date = value instanceof Date ? value : new Date(String(value));\n      if (!Number.isNaN(date.getTime())) {\n        return new Intl.DateTimeFormat('es-ES').format(date);\n      }\n    }\n\n    return String(value);\n  }\n\n  headerCellClasses(column: MfTableColumn): string {\n    return [\n      'mf-table__header-cell',\n      `mf-table__cell--align-${column.align ?? 'start'}`,\n    ].join(' ');\n  }\n\n  cellClasses(column: MfTableColumn): string {\n    const classes = [\n      'mf-table__cell',\n      `mf-table__cell--align-${column.align ?? 'start'}`,\n    ];\n\n    if (column.truncate) {\n      classes.push('mf-table__cell--truncate');\n    }\n\n    return classes.join(' ');\n  }\n\n  badgeClasses(column: MfTableColumn, row: Record<string, unknown>): string {\n    return [\n      'mf-table__badge',\n      `mf-table__badge--${this.resolveBadgeTone(column, row)}`,\n    ].join(' ');\n  }\n\n  actionClasses(action: MfResolvedTableAction): string {\n    return [\n      'mf-table__action',\n      `mf-table__action--${action.tone ?? 'neutral'}`,\n    ].join(' ');\n  }\n\n  isActionDisabled(\n    action: MfResolvedTableAction,\n    row: Record<string, unknown>,\n  ): boolean {\n    return typeof action.disabled === 'function'\n      ? action.disabled(row)\n      : Boolean(action.disabled);\n  }\n\n  getActionAriaLabel(\n    action: MfResolvedTableAction,\n    row: Record<string, unknown>,\n  ): string | null {\n    return action.ariaLabel?.(row) ?? action.label ?? null;\n  }\n\n  getRowMenuAriaLabel(row: Record<string, unknown>): string {\n    const primaryColumn = this.visibleColumns()[0];\n    const primaryLabel = primaryColumn\n      ? this.renderCell(primaryColumn, row)\n      : 'this row';\n\n    return `Open actions for ${primaryLabel}`;\n  }\n\n  emptyDescriptionText(): string {\n    if (this.searchTerm()) {\n      return 'No rows match the current search. Try a broader query or clear the filter.';\n    }\n\n    return this.emptyDescription();\n  }\n\n  readonly hostClasses = computed(() =>\n    ['mf-table', `mf-table--${this.variant()}`, `mf-table--${this.density()}`].join(\n      ' ',\n    ),\n  );\n\n  private getCellValue(\n    column: MfTableColumn,\n    row: Record<string, unknown>,\n  ): unknown {\n    return column.sortAccessor ? column.sortAccessor(row) : this.getRawValue(column, row);\n  }\n\n  private getRawValue(\n    column: MfTableColumn,\n    row: Record<string, unknown>,\n  ): unknown {\n    return row[column.key];\n  }\n\n  private getSearchValue(\n    column: MfTableColumn,\n    row: Record<string, unknown>,\n  ): string {\n    if (column.searchAccessor) {\n      return column.searchAccessor(row);\n    }\n\n    return this.renderCell(column, row);\n  }\n\n  private normalizeSortValue(\n    column: MfTableColumn,\n    row: Record<string, unknown>,\n  ): number | string {\n    const value = this.getCellValue(column, row);\n\n    if (value === null || value === undefined || value === '') {\n      return '';\n    }\n\n    if (column.type === 'number') {\n      return typeof value === 'number' ? value : Number(value);\n    }\n\n    if (column.type === 'date') {\n      const date = value instanceof Date ? value : new Date(String(value));\n      return Number.isNaN(date.getTime()) ? '' : date.getTime();\n    }\n\n    if (typeof value === 'number') {\n      return value;\n    }\n\n    return String(value).toLocaleLowerCase();\n  }\n\n  private resolveBadgeTone(\n    column: MfTableColumn,\n    row: Record<string, unknown>,\n  ): MfTableBadgeTone {\n    const value = row[column.key];\n\n    if (typeof column.badgeTone === 'function') {\n      return column.badgeTone(value, row);\n    }\n\n    if (column.badgeTone) {\n      return column.badgeTone;\n    }\n\n    return column.badgeTones?.[String(value)] ?? 'neutral';\n  }\n}\n",
             "styleUrl": "./mf-table.component.css",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [],
+                "line": 326
+            },
             "extends": []
         },
         {
@@ -11897,6 +13319,61 @@
                 "kind": 193
             },
             {
+                "name": "MfTableActionTone",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "\"primary\" | \"neutral\" | \"danger\"",
+                "file": "src/app/components/table/mf-table.component.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 193
+            },
+            {
+                "name": "MfTableAlign",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "\"start\" | \"center\" | \"end\"",
+                "file": "src/app/components/table/mf-table.component.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 193
+            },
+            {
+                "name": "MfTableBadgeTone",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "\"brand\" | \"success\" | \"warning\" | \"error\" | \"neutral\"",
+                "file": "src/app/components/table/mf-table.component.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 193
+            },
+            {
+                "name": "MfTableCellType",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "\"text\" | \"number\" | \"date\" | \"badge\"",
+                "file": "src/app/components/table/mf-table.component.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 193
+            },
+            {
+                "name": "MfTableDensity",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "\"compact\" | \"comfortable\" | \"spacious\"",
+                "file": "src/app/components/table/mf-table.component.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 193
+            },
+            {
                 "name": "MfTableVariant",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
@@ -12471,6 +13948,61 @@
             ],
             "src/app/components/table/mf-table.component.ts": [
                 {
+                    "name": "MfTableActionTone",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "\"primary\" | \"neutral\" | \"danger\"",
+                    "file": "src/app/components/table/mf-table.component.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 193
+                },
+                {
+                    "name": "MfTableAlign",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "\"start\" | \"center\" | \"end\"",
+                    "file": "src/app/components/table/mf-table.component.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 193
+                },
+                {
+                    "name": "MfTableBadgeTone",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "\"brand\" | \"success\" | \"warning\" | \"error\" | \"neutral\"",
+                    "file": "src/app/components/table/mf-table.component.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 193
+                },
+                {
+                    "name": "MfTableCellType",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "\"text\" | \"number\" | \"date\" | \"badge\"",
+                    "file": "src/app/components/table/mf-table.component.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 193
+                },
+                {
+                    "name": "MfTableDensity",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "\"compact\" | \"comfortable\" | \"spacious\"",
+                    "file": "src/app/components/table/mf-table.component.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 193
+                },
+                {
                     "name": "MfTableVariant",
                     "ctype": "miscellaneous",
                     "subtype": "typealias",
@@ -12553,7 +14085,7 @@
         "children": []
     },
     "coverage": {
-        "count": 22,
+        "count": 20,
         "status": "low",
         "files": [
             {
@@ -13253,9 +14785,18 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "MfTableComponent",
-                "coveragePercent": 40,
-                "coverageCount": "6/15",
-                "status": "medium"
+                "coveragePercent": 1,
+                "coverageCount": "1/67",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/table/mf-table.component.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "MfResolvedTableAction",
+                "coveragePercent": 0,
+                "coverageCount": "0/2",
+                "status": "low"
             },
             {
                 "filePath": "src/app/components/table/mf-table.component.ts",
@@ -13263,7 +14804,66 @@
                 "linktype": "interface",
                 "name": "MfTableColumn",
                 "coveragePercent": 0,
-                "coverageCount": "0/4",
+                "coverageCount": "0/16",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/table/mf-table.component.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "MfTableRowAction",
+                "coveragePercent": 0,
+                "coverageCount": "0/7",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/table/mf-table.component.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "MfTableActionTone",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/table/mf-table.component.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "MfTableAlign",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/table/mf-table.component.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "MfTableBadgeTone",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/table/mf-table.component.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "MfTableCellType",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/table/mf-table.component.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "MfTableDensity",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
                 "status": "low"
             },
             {
