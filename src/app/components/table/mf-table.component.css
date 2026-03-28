@@ -71,6 +71,11 @@
   max-width: none;
 }
 
+.mf-table__search mf-input {
+  display: block;
+  width: 100%;
+}
+
 .mf-table__surface {
   display: grid;
   gap: var(--mf-space-4);

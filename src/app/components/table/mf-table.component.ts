@@ -195,7 +195,7 @@ interface MfResolvedTableAction extends MfTableRowAction {
                         [matMenuTriggerFor]="actionMenu"
                         [attr.aria-label]="getRowMenuAriaLabel(row)"
                       >
-                        <mat-icon aria-hidden="true">more_horiz</mat-icon>
+                        <mat-icon aria-hidden="true">more_vert</mat-icon>
                       </button>
                       <mat-menu
                         #actionMenu="matMenu"
