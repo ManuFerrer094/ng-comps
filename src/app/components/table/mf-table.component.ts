@@ -251,6 +251,107 @@ interface MfResolvedTableAction extends MfTableRowAction {
             </table>
           </div>
 
+          <div class="mf-table__mobile-list">
+            @for (row of paginatedRows(); track row) {
+              <article class="mf-table__mobile-card">
+                <div class="mf-table__mobile-card-header">
+                  <div class="mf-table__mobile-card-intro">
+                    @if (mobileTitleColumn(); as primaryColumn) {
+                      <p class="mf-table__mobile-card-label">
+                        {{ primaryColumn.header }}
+                      </p>
+                      @if (primaryColumn.type === 'badge') {
+                        <span [class]="badgeClasses(primaryColumn, row)">
+                          {{ renderCell(primaryColumn, row) }}
+                        </span>
+                      } @else {
+                        <h3 class="mf-table__mobile-card-title">
+                          {{ renderCell(primaryColumn, row) }}
+                        </h3>
+                      }
+                    }
+                  </div>
+
+                  @if (hasActions()) {
+                    <div class="mf-table__mobile-card-actions">
+                      @if (usesActionMenu()) {
+                        <button
+                          mat-icon-button
+                          type="button"
+                          class="mf-table__action-menu-trigger"
+                          [matMenuTriggerFor]="mobileActionMenu"
+                          [attr.aria-label]="getRowMenuAriaLabel(row)"
+                        >
+                          <mat-icon aria-hidden="true">more_vert</mat-icon>
+                        </button>
+                        <mat-menu
+                          #mobileActionMenu="matMenu"
+                          xPosition="before"
+                          class="mf-table__action-menu"
+                        >
+                          @for (action of resolvedActions(); track action.key) {
+                            <button
+                              mat-menu-item
+                              [disabled]="isActionDisabled(action, row)"
+                              [attr.aria-label]="getActionAriaLabel(action, row)"
+                              (click)="onActionClick(action, row)"
+                            >
+                              @if (action.icon) {
+                                <mat-icon aria-hidden="true">{{ action.icon }}</mat-icon>
+                              }
+                              <span>{{ action.label }}</span>
+                            </button>
+                          }
+                        </mat-menu>
+                      } @else {
+                        <div class="mf-table__action-group">
+                          @for (action of resolvedActions(); track action.key) {
+                            <button
+                              mat-stroked-button
+                              type="button"
+                              [class]="actionClasses(action)"
+                              [disabled]="isActionDisabled(action, row)"
+                              [attr.aria-label]="getActionAriaLabel(action, row)"
+                              (click)="onActionClick(action, row)"
+                            >
+                              @if (action.icon) {
+                                <mat-icon aria-hidden="true">{{ action.icon }}</mat-icon>
+                              }
+                              <span>{{ action.label }}</span>
+                            </button>
+                          }
+                        </div>
+                      }
+                    </div>
+                  }
+                </div>
+
+                @if (mobileDetailColumns().length > 0) {
+                  <dl class="mf-table__mobile-grid">
+                    @for (column of mobileDetailColumns(); track column.key) {
+                      <div class="mf-table__mobile-item">
+                        <dt class="mf-table__mobile-item-label">
+                          {{ column.header }}
+                        </dt>
+                        <dd class="mf-table__mobile-item-value">
+                          @if (column.type === 'badge') {
+                            <span [class]="badgeClasses(column, row)">
+                              {{ renderCell(column, row) }}
+                            </span>
+                          } @else {
+                            <span class="mf-table__mobile-item-text">
+                              {{ renderCell(column, row) }}
+                            </span>
+                          }
+                        </dd>
+                      </div>
+                    }
+                  </dl>
+                }
+              </article>
+            }
+          </div>
+
           @if (showPaginator()) {
             <footer class="mf-table__footer">
               <mf-paginator
@@ -389,6 +490,14 @@ export class MfTableComponent {
 
     return columns;
   });
+
+  protected readonly mobileTitleColumn = computed(
+    () => this.visibleColumns()[0] ?? null,
+  );
+
+  protected readonly mobileDetailColumns = computed(() =>
+    this.visibleColumns().slice(1),
+  );
 
   protected readonly filteredRows = computed(() => {
     const query = this.searchTerm().toLowerCase();
