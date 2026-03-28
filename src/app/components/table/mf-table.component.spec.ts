@@ -122,6 +122,30 @@ describe('MfTableComponent', () => {
     expect(rows[0].textContent).toContain('Jane');
   });
 
+  it('should render a dedicated mobile table view with row details', () => {
+    fixture.componentRef.setInput('columns', [
+      { key: 'name', header: 'Name' },
+      { key: 'email', header: 'Email' },
+      { key: 'status', header: 'Status', type: 'badge', badgeTones: { Active: 'success' } },
+    ]);
+    fixture.componentRef.setInput('data', [
+      { name: 'John', email: 'john@test.com', status: 'Active' },
+    ]);
+    fixture.detectChanges();
+
+    const mobileCard = fixture.nativeElement.querySelector(
+      '.mf-table__mobile-card',
+    ) as HTMLElement;
+    const detailLabels = Array.from<HTMLElement, string | undefined>(
+      fixture.nativeElement.querySelectorAll('.mf-table__mobile-item-label'),
+      (item) => item.textContent?.trim(),
+    );
+
+    expect(mobileCard).toBeTruthy();
+    expect(mobileCard.textContent).toContain('John');
+    expect(detailLabels).toEqual(['Email', 'Status']);
+  });
+
   it('should render badge cells with mapped tones', () => {
     fixture.componentRef.setInput('columns', [
       { key: 'name', header: 'Name' },
