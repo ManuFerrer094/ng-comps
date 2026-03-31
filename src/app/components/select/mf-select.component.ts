@@ -6,6 +6,7 @@ import {
   effect,
   forwardRef,
   inject,
+  Injector,
   input,
   output,
   signal,
@@ -98,7 +99,10 @@ export type MfSelectSize = 'sm' | 'md' | 'lg';
 })
 export class MfSelectComponent implements ControlValueAccessor {
   private readonly cdr = inject(ChangeDetectorRef);
-  private readonly ngControl = inject(NgControl, { self: true, optional: true });
+  private readonly injector = inject(Injector);
+  private get ngControl(): NgControl | null {
+    return this.injector.get(NgControl, null, { self: true, optional: true });
+  }
   private readonly generatedId = createUniqueId('mf-select');
   private readonly disabledFromForm = signal(false);
   protected readonly internalValue = signal<

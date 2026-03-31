@@ -6,6 +6,7 @@ import {
   effect,
   forwardRef,
   inject,
+  Injector,
   input,
   output,
   signal,
@@ -85,7 +86,10 @@ export type MfTextareaResize = 'none' | 'vertical' | 'horizontal' | 'both';
 })
 export class MfTextareaComponent implements ControlValueAccessor {
   private readonly cdr = inject(ChangeDetectorRef);
-  private readonly ngControl = inject(NgControl, { self: true, optional: true });
+  private readonly injector = inject(Injector);
+  private get ngControl(): NgControl | null {
+    return this.injector.get(NgControl, null, { self: true, optional: true });
+  }
   private readonly generatedId = createUniqueId('mf-textarea');
   private readonly disabledFromForm = signal(false);
   protected readonly internalValue = signal('');

@@ -6,6 +6,7 @@ import {
   effect,
   forwardRef,
   inject,
+  Injector,
   input,
   output,
   signal,
@@ -100,7 +101,10 @@ export type MfRadioDirection = 'horizontal' | 'vertical';
 })
 export class MfRadioButtonComponent implements ControlValueAccessor {
   private readonly cdr = inject(ChangeDetectorRef);
-  private readonly ngControl = inject(NgControl, { self: true, optional: true });
+  private readonly injector = inject(Injector);
+  private get ngControl(): NgControl | null {
+    return this.injector.get(NgControl, null, { self: true, optional: true });
+  }
   private readonly generatedId = createUniqueId('mf-radio');
   private readonly disabledFromForm = signal(false);
   protected readonly internalValue = signal<string | undefined>(undefined);
