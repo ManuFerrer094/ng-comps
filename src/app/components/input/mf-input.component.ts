@@ -6,6 +6,7 @@ import {
   effect,
   forwardRef,
   inject,
+  Injector,
   input,
   output,
   signal,
@@ -24,11 +25,6 @@ import {
 
 export type MfInputSize = 'sm' | 'md' | 'lg';
 
-/**
- * Campo de texto de la librería ng-comps.
- * Envuelve Angular Material `mat-form-field` + `matInput`
- * y expone una API uniforme con look and feel de marca.
- */
 @Component({
   selector: 'mf-input',
   imports: [MatFormFieldModule, MatInputModule, MatIconModule],
@@ -81,12 +77,14 @@ export type MfInputSize = 'sm' | 'md' | 'lg';
 })
 export class MfInputComponent implements ControlValueAccessor {
   private readonly cdr = inject(ChangeDetectorRef);
-  private readonly ngControl = inject(NgControl, { self: true, optional: true });
+  private readonly injector = inject(Injector);
+
   private readonly generatedId = createUniqueId('mf-input');
   private readonly disabledFromForm = signal(false);
   protected readonly internalValue = signal('');
   private onControlChange: (value: string) => void = () => undefined;
   private onControlTouched: () => void = () => undefined;
+
   readonly errorStateMatcher: ErrorStateMatcher = {
     isErrorState: (control) =>
       Boolean(
@@ -94,45 +92,32 @@ export class MfInputComponent implements ControlValueAccessor {
       ),
   };
 
-  /** ID del control */
   readonly id = input<string | undefined>(undefined);
-  /** Etiqueta flotante del campo */
   readonly label = input<string | undefined>(undefined);
-  /** Etiqueta accesible alternativa cuando no existe label visible */
   readonly ariaLabel = input<string | undefined>(undefined);
-  /** Referencia externa a elementos que etiquetan el control */
   readonly ariaLabelledby = input<string | undefined>(undefined);
-  /** Referencia externa a elementos descriptivos adicionales */
   readonly ariaDescribedby = input<string | undefined>(undefined);
-  /** Placeholder del input */
   readonly placeholder = input('');
-  /** Tipo de input HTML */
   readonly type = input<
     'text' | 'email' | 'password' | 'number' | 'search' | 'tel' | 'url'
   >('text');
-  /** Tamaño del campo */
   readonly size = input<MfInputSize>('md');
-  /** Valor actual del campo */
   readonly value = input('');
-  /** Deshabilitado */
   readonly disabled = input(false);
-  /** Solo lectura */
   readonly readonly = input(false);
-  /** Requerido */
   readonly required = input(false);
-  /** Texto de ayuda debajo del campo */
   readonly hint = input<string | undefined>(undefined);
-  /** Mensaje de error */
   readonly error = input<string | undefined>(undefined);
-  /** Icono al inicio */
   readonly leadingIcon = input<string | undefined>(undefined);
-  /** Icono al final */
   readonly trailingIcon = input<string | undefined>(undefined);
-  /** Ancho completo */
   readonly fullWidth = input(false);
 
   readonly mfInput = output<string>();
   readonly mfBlur = output<void>();
+
+  private get ngControl(): NgControl | null {
+    return this.injector.get(NgControl, null, { self: true, optional: true });
+  }
 
   constructor() {
     effect(() => {
